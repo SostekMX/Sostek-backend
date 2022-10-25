@@ -1,54 +1,64 @@
-'use strict';
+import { Request, Response } from "express";
 
-import { NextFunction, Request, Response } from "express";
+const express = require("express");
+const jsonWebToken = require("jsonwebtoken");
+const bodyParser = require("body-parser");
+const bcryptJs = require("bcryptjs");
 
-var express = require('express'),
-  app = express(),
-  port = process.env.PORT || 3000,
+const dbSchema = require("./models/authModel")
+
+const PORT = process.env.PORT || 8080;
+const JWT_CODE = process.env.JWT_CODE || "afj2oj9fj2fkjlasdmmwwleqioeuxzvx";
+
+const app = express()
+app.use(bodyParser.json())
 
 
-  User = require('./models/authModel'),
-  bodyParser = require('body-parser'),
-  jsonwebtoken = require("jsonwebtoken");
-
-const mongoose = require('mongoose');
-const option = {
-    socketTimeoutMS: 30000,
-    keepAlive: true,
-    reconnectTries: 30000
-};
-
-const mongoURI = process.env.MONGODB_URI;
-mongoose.connect('mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb', option).then(function(){
-    //connected successfully
-}, function(err: any) {
-    //err handle
-});
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.use(function(req: any, res: Response, next: NextFunction) {
-  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function(err: any, decode: any) {
-      if (err) req.user = undefined;
-      req.user = decode;
-      next();
-    });
-  } else {
-    req.user = undefined;
-    next();
+app.post("/user/signup", (req: Request, res: Response) => {
+  if(!req.body.email || !req.body.password || !req.body.name || !req.body.surname) {
+    res.json({ success: false, error: "Required params missing" });
+    return;
   }
+
+  dbSchema.User.create({
+    name: req.body.name,
+    surname: req.body.surname,
+    email: req.body.email,
+    password: bcryptJs.hashSync(req.body.password, 10)
+  }).then((user: any) => {
+    const token = jsonWebToken.sign({ id: user._id, email: user.email }, JWT_CODE);
+    res.json({ success: true, token: token });
+  }).catch((err: any) => {
+    res.json({ success: false, error: err });
+  });
 });
-var routes = require('./routes/authRoutes');
-routes(app);
 
-app.use(function(req: Request, res: Response) {
-  res.status(404).send({ url: req.originalUrl + ' not found' })
+
+app.post("/user/login", (req: Request, res: Response) => {
+  if(!req.body.email || !req.body.password) {
+    res.json({ success: false, error: "Required params missing" });
+    return;
+  }
+
+  dbSchema.User.findOne({ email: req.body.email })
+    .then((user: any) => {
+      if(!user) {
+        res.json({ success: false, error: "User doesn't exist" });
+      } else {
+        if(!bcryptJs.compareSync(req.body.password, user.password)) {
+          res.json({ success: false, error: "Wrong password for given user" });
+        } else {
+          const token = jsonWebToken.sign({ id: user._id, email: user.email }, JWT_CODE);
+          res.json({ success: true, token: token });
+        }
+      }
+    })
+    .catch((err: any) => {
+      res.json({ success: false, error: err });
+    });
 });
 
-app.listen(port);
 
-console.log(' RESTful API server started on: ' + port);
-
-module.exports = app;
+app.listen(PORT, ()=> {
+  console.log("Backend running on port " + PORT);
+})
