@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const DB_URL = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb";
+const DB_IP = process.env.DB_IP || "127.0.0.1";
+const DB_PORT = process.env.DB_PORT || "27017";
+const DB_URL = "mongodb://" + DB_IP + ":" + DB_PORT +"/SostekDB";
 
 mongoose.connect(DB_URL, { useNewUrlParser: true });
 
@@ -24,7 +26,9 @@ var UserSchema = new mongoose.Schema({
     required: true
   },
   password: {
-    type: String
+    type: String,
+    trim: true,
+    required: true
   },
 
   // These are the non-required values
