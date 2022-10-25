@@ -1,39 +1,55 @@
-'use strict';
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var express = require('express'), app = express(), port = process.env.PORT || 3000, User = require('./models/authModel'), bodyParser = require('body-parser'), jsonwebtoken = require("jsonwebtoken");
-const mongoose = require('mongoose');
-const option = {
-    socketTimeoutMS: 30000,
-    keepAlive: true,
-    reconnectTries: 30000
-};
-const mongoURI = process.env.MONGODB_URI;
-mongoose.connect('mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb', option).then(function () {
-    //connected successfully
-}, function (err) {
-    //err handle
-});
-app.use(bodyParser.urlencoded({ extended: true }));
+const express = require("express");
+const jsonWebToken = require("jsonwebtoken");
+const bodyParser = require("body-parser");
+const bcryptJs = require("bcryptjs");
+const dbSchema = require("./models/authModel");
+const PORT = process.env.PORT || 8080;
+const JWT_CODE = process.env.JWT_CODE || "tcjAU[xqQ]px9x&X(()KQhpAg=@P=cbJRJ7DZ$,:ZhW8gD#N@)r;S6TH$5u==nDaMjWd%:Jn.rS,QqkCyV*}v,UArB!_V7.+-mKZehZwCMbY/Dj69X.YKL$#byG7b.4%_tJjjG6=AeTLVinW2iGDuF*jeRX;a(S,/6]#*?3d:xT-/E2L6S$=j_,[6;(uy7cJz+]_9K5RTJd6re9e[@k@BxK,W#=ZRbT)/A2J,vfee2a%+Sc4!BW73Wdyn/r@na3?:FiL?D,nN%9Q7;H_H3!Fg.(i;bTJywEK-GXikn#(+U*}";
+const app = express();
 app.use(bodyParser.json());
-app.use(function (req, res, next) {
-    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-        jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function (err, decode) {
-            if (err)
-                req.user = undefined;
-            req.user = decode;
-            next();
-        });
+app.post("/user/signup", (req, res) => {
+    if (!req.body.email || !req.body.password || !req.body.name || !req.body.surname) {
+        res.json({ success: false, error: "Required params missing" });
+        return;
     }
-    else {
-        req.user = undefined;
-        next();
+    dbSchema.User.create({
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
+        password: bcryptJs.hashSync(req.body.password, 10)
+    }).then((user) => {
+        const token = jsonWebToken.sign({ id: user._id, email: user.email }, JWT_CODE);
+        res.json({ success: true, token: token });
+    }).catch((err) => {
+        res.json({ success: false, error: err });
+    });
+});
+app.post("/user/login", (req, res) => {
+    if (!req.body.email || !req.body.password) {
+        res.json({ success: false, error: "Required params missing" });
+        return;
     }
+    dbSchema.User.findOne({ email: req.body.email })
+        .then((user) => {
+        if (!user) {
+            res.json({ success: false, error: "User doesn't exist" });
+        }
+        else {
+            if (!bcryptJs.compareSync(req.body.password, user.password)) {
+                res.json({ success: false, error: "Wrong password for given user" });
+            }
+            else {
+                const token = jsonWebToken.sign({ id: user._id, email: user.email }, JWT_CODE);
+                res.json({ success: true, token: token });
+            }
+        }
+    })
+        .catch((err) => {
+        res.json({ success: false, error: err });
+    });
 });
-var routes = require('./routes/authRoutes');
-routes(app);
-app.use(function (req, res) {
-    res.status(404).send({ url: req.originalUrl + ' not found' });
+app.listen(PORT, () => {
+    console.log("Backend running on port " + PORT);
 });
-app.listen(port);
-console.log(' RESTful API server started on: ' + port);
-module.exports = app;
