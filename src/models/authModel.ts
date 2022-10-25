@@ -1,20 +1,11 @@
-'use strict';
+const mongoose = require('mongoose');
 
-var mongoose = require('mongoose');
-//var uuidv4 = require('uuidv4');
-var bcrypt = require('bcrypt');
-var Schema = mongoose.Schema;
+const DB_URL = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb";
 
-// UUID type creation to add ID to each user
-//require('mongoose-uuid')(mongoose);
-//var UUID = mongoose.Types.UUID;
+mongoose.connect(DB_URL, { useNewUrlParser: true });
 
 // Schema that defines the user register to validate login and signin
-var UserSchema = new Schema({
-  /*_id: {
-    type: UUID,
-    default: uuidv4
-  },*/
+var UserSchema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
@@ -32,7 +23,7 @@ var UserSchema = new Schema({
     trim: true,
     required: true
   },
-  hash_password: {
+  password: {
     type: String
   },
 
@@ -57,10 +48,6 @@ var UserSchema = new Schema({
     type: String,
     required: false
   }
-});
+}, { collection: "users" });
 
-UserSchema.methods.comparePassword = function(password: string) {
-  return bcrypt.compareSync(password, this.hash_password);
-};
-
-mongoose.model('User', UserSchema);
+exports.User = mongoose.model('User', UserSchema);
