@@ -28,9 +28,8 @@ var UserSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    // These are the non-required values
     birth_date: {
-        type: Date,
+        type: String,
         required: false
     },
     occupation: {
