@@ -16,34 +16,60 @@ app.use(cors({origin: 'http://localhost:3000'})); //! Necesario para probar en l
 app.use(bodyParser.json());
 app.post("/user/signup", (req, res) => {
     if (!req.body.email || !req.body.password || !req.body.name || !req.body.surname) {
-        res.json({ success: false, error: "Required params missing" });
+        res.json({ success: false, error: "Faltan campos por completar" });
         return;
     }
+    console.log(req.body)
     dbSchema.User.create({
         name: req.body.name,
         surname: req.body.surname,
         email: req.body.email,
-        password: bcryptJs.hashSync(req.body.password, 10)
+        password: bcryptJs.hashSync(req.body.password, 10),
+        birth_date: req.body.birth_date,
+        occupation: req.body.occupation,
+        gender: req.body.gender
     }).then((user) => {
         const token = jsonWebToken.sign({ id: user._id, email: user.email }, JWT_CODE);
         res.json({ success: true, token: token });
     }).catch((err) => {
-        res.json({ success: false, error: err });
+        let error_msg = "Error al crear cuenta";
+        if(err.code == 11000){
+            error_msg = "Correo ingresado está ya registrado en la plataforma";
+        }
+        res.json({ success: false, error: error_msgz });
+    });
+});
+app.post("/user/edit", (req, res) => {
+    if (!req.body.email || !req.body.name || !req.body.surname) {
+        res.json({ success: false, error: "Falta correo" });
+        return;
+    }
+
+    dbSchema.User.findOneAndUpdate({email: req.body.email } , 
+        {name: req.body.name, surname: req.body.surname }, null, function (err, docs) {
+        if (err){
+            res.json({ success: false, message: "No se pudo actualizar información del usuario" });
+            return;
+        }
+        else{
+            res.json({ success: true, message: "Usuario actualizado" });
+            return;
+        }
     });
 });
 app.post("/user/login", (req, res) => {
     if (!req.body.email || !req.body.password) {
-        res.json({ success: false, error: "Required params missing" });
+        res.json({ success: false, error: "Correo y/o contraseña incorrectos" });
         return;
     }
     dbSchema.User.findOne({ email: req.body.email })
         .then((user) => {
         if (!user) {
-            res.json({ success: false, error: "User doesn't exist" });
+            res.json({ success: false, error: "Cuenta no registrada" });
         }
         else {
             if (!bcryptJs.compareSync(req.body.password, user.password)) {
-                res.json({ success: false, error: "Wrong password for given user" });
+                res.json({ success: false, error: "Contraseña incorrecta" });
             }
             else {
                 const token = jsonWebToken.sign({ id: user._id, email: user.email }, JWT_CODE);
