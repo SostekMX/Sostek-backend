@@ -38,11 +38,13 @@ var UserSchema = new mongoose.Schema({
     },
     score_test: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
     },
     score_game: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
     },
     gender: {
         type: String,

@@ -33,7 +33,7 @@ var UserSchema = new mongoose.Schema({
 
   // These are the non-required values
   birth_date: {
-    type: Date,
+    type: String,
     required: false
   },
   occupation: {
@@ -42,11 +42,13 @@ var UserSchema = new mongoose.Schema({
   },
   score_test: {
     type: Number,
-    required: false
+    required: false,
+    default: 0
   },
   score_game: {
     type: Number,
-    required: false
+    required: false,
+    default: 0
   },
   gender: {
     type: String,
