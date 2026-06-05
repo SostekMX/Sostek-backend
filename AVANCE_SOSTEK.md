@@ -1,8 +1,25 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-05-29 (revisado contra código real)
+> Última actualización: 2026-06-04
 > Rama activa: `main`
 > Stack: Node.js + Express + TypeScript + MongoDB
+
+---
+
+## Tech Stack
+
+| Capa | Tecnología |
+|------|-----------|
+| Runtime | Node.js |
+| Framework | Express 4 |
+| Lenguaje | TypeScript (fuente `src/*.ts`, compilado `src/*.js`) |
+| Base de datos | MongoDB 6 via Mongoose |
+| Autenticación | JWT (`jsonwebtoken`) — expira en 7 días |
+| Hashing | bcryptjs (salt 10) |
+| Validación | express-validator |
+| Rate limiting | express-rate-limit |
+| Variables de entorno | dotenv |
+| Desarrollo | nodemon (`npm run dev:js`) |
 
 ---
 
@@ -24,6 +41,8 @@ No contiene lógica de contenido (artículos, evaluaciones, presentaciones) — 
 | `GET` | `/user/profile` | Obtener datos del perfil | JWT requerido |
 | `POST` | `/user/score` | Actualizar score_test y/o score_game | JWT requerido |
 | `DELETE` | `/user` | Eliminar cuenta del usuario | JWT requerido |
+| `POST` | `/user/forgot-password` | Generar token de recuperación de contraseña | Ninguna (pública) |
+| `POST` | `/user/reset-password` | Resetear contraseña con token válido | Ninguna (pública) |
 
 ---
 
@@ -37,6 +56,8 @@ No contiene lógica de contenido (artículos, evaluaciones, presentaciones) — 
 - **`GET /user/profile`** — retorna datos del usuario (sin password); protegido con JWT
 - **`POST /user/score`** — actualiza `score_test` y/o `score_game`; acepta uno o ambos campos opcionalmente
 - **`DELETE /user`** — elimina la cuenta del usuario autenticado
+- **`POST /user/forgot-password`** — recibe email, genera token seguro (64 hex chars) con 1h de expiración, lo guarda en el usuario en DB, retorna `{ success: true, reset_token: "..." }`; limitado por rate limit
+- **`POST /user/reset-password`** — recibe `token` + `new_password`, valida que el token exista y no esté expirado, hashea la nueva contraseña con bcrypt y limpia los campos de reset en el documento
 - **Middleware `verifyToken`** — valida JWT en header `Authorization: Bearer <token>` antes de rutas protegidas
 - **Rate limiting** — `/user/signup` y `/user/login` limitados a 10 requests cada 15 minutos
 - **Validación de inputs** — `express-validator` activo en todos los endpoints con body
@@ -62,7 +83,7 @@ No contiene lógica de contenido (artículos, evaluaciones, presentaciones) — 
 
 ### ❌ NO IMPLEMENTADO
 
-- Recuperación de contraseña
+*(No hay ítems sin implementar)*
 
 ---
 
@@ -94,8 +115,10 @@ MongoDB (SostekDB)
     ├── birth_date    (String, optional)
     ├── occupation    (String, optional)
     ├── gender        (String, optional)
-    ├── score_test    (Number, optional, default: 0)
-    └── score_game    (Number, optional, default: 0)
+    ├── score_test          (Number, optional, default: 0)
+    ├── score_game          (Number, optional, default: 0)
+    ├── reset_token         (String, optional — se llena al pedir recuperación)
+    └── reset_token_expiry  (Date, optional — expiración 1h desde la generación)
 ```
 
 **Variables de entorno** (archivo `.env` en raíz, no incluido en el repo):
@@ -106,6 +129,18 @@ MongoDB (SostekDB)
 | `DB_IP` | `127.0.0.1` | IP de MongoDB |
 | `DB_PORT` | `27017` | Puerto de MongoDB |
 | `JWT_CODE` | — | Secret para firmar tokens JWT (requerido, sin default) |
+
+---
+
+## Archivos clave
+
+| Archivo | Responsabilidad |
+|---------|----------------|
+| `src/index.ts` | Todos los endpoints y middleware (fuente TypeScript) |
+| `src/index.js` | Ídem compilado — debe mantenerse sincronizado con `.ts` |
+| `src/models/authModel.ts` | Schema de Mongoose + conexión a MongoDB (fuente) |
+| `src/models/authModel.js` | Ídem compilado |
+| `.env` | Variables de entorno locales (no en repo) |
 
 ---
 
