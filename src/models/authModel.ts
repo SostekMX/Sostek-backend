@@ -53,6 +53,14 @@ var UserSchema = new mongoose.Schema({
   gender: {
     type: String,
     required: false
+  },
+  reset_token: {
+    type: String,
+    required: false
+  },
+  reset_token_expiry: {
+    type: Date,
+    required: false
   }
 }, { collection: "users" });
 
