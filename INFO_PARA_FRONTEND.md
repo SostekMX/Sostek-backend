@@ -2,7 +2,7 @@
 
 > Para el equipo de frontend. Describe qué cambió, qué falta y cómo llamar cada endpoint.
 > Backend corre en: `http://localhost:8080`
-> Última actualización: 2026-06-04
+> Última actualización: 2026-06-05
 
 ---
 
@@ -10,6 +10,8 @@
 
 | Fecha | Qué cambió | Qué necesita saber el frontend |
 |-------|-----------|-------------------------------|
+| 2026-06-05 | Endpoints de contenido: `GET /evaluations`, `/evaluations/:id`, `/articles`, `/articles/:id`, `/presentations` | El frontend ya NO necesita Google APIs para cargar contenido. Reemplazar todas las llamadas a `gapi.client` con axios al backend. |
+| 2026-06-05 | Evaluaciones, artículos y presentaciones migrados a MongoDB Atlas | Las 6 evaluaciones (3 Arquitectura + 3 Diseño Industrial), 26 artículos y 2 presentaciones ya están en la base de datos. |
 | 2026-06-04 | Nuevos endpoints `POST /user/forgot-password` y `POST /user/reset-password` | Ya se puede implementar la pantalla de recuperación de contraseña. Ver contratos en sección 3. |
 | 2026-06-04 | El modelo de usuario tiene dos campos nuevos: `reset_token` y `reset_token_expiry` | Campos internos — el frontend no los recibe ni los envía directamente. |
 | 2026-05-29 | `POST /user/score` implementado | Listo para integrarse en `FinalScoreEvaluation.tsx` al terminar una evaluación. |
@@ -19,11 +21,13 @@
 
 ## 2. Lo que falta implementar
 
-| Endpoint | Por qué lo necesita el frontend | Estado |
-|----------|---------------------------------|--------|
-| `POST /user/favorites` (o similar) | El menú lateral muestra "Favoritos" pero no hay endpoint para guardar artículos favoritos | ❌ No existe todavía — pendiente definir contrato |
+| Elemento | Por qué lo necesita el frontend | Estado |
+|----------|--------------------------------|--------|
+| `POST /user/favorites` (o similar) | El menú lateral muestra "Favoritos" pero no hay endpoint para guardar artículos favoritos | ❌ No existe — pendiente definir contrato |
+| Reemplazar `gapi.client` con axios | El frontend actualmente llama a Google Sheets directamente; esas llamadas deben apuntar al backend | ⚠️ Pendiente en frontend |
 
-> Todo lo demás ya está implementado en el backend. Los ítems pendientes del lado frontend son:
+> Lo que falta hacer en el **frontend** (el backend ya está listo):
+> - Reemplazar todas las llamadas a Google APIs por llamadas a los endpoints de contenido del backend
 > - Integrar `POST /user/score` al terminar una evaluación (`FinalScoreEvaluation.tsx`)
 > - Integrar `DELETE /user` en la UI (opción "Eliminar cuenta")
 > - Integrar `POST /user/forgot-password` y `POST /user/reset-password` en la pantalla de login
@@ -273,6 +277,119 @@ Authorization: Bearer <token>
 | `"Token requerido"` | Header ausente |
 | `"Token inválido o expirado"` | JWT vencido |
 | `"Usuario no encontrado"` | El usuario ya no existe en DB |
+
+---
+
+### GET `/evaluations`
+Lista todas las evaluaciones **sin** las preguntas (solo `name`, `career` y `_id`).
+
+**Respuesta exitosa — 200**
+```json
+{
+  "success": true,
+  "evaluations": [
+    { "_id": "...", "name": "Arquitectura Nivel 1", "career": "Arquitectura" },
+    { "_id": "...", "name": "Diseño Industrial Nivel 1", "career": "Diseño Industrial" }
+  ]
+}
+```
+
+---
+
+### GET `/evaluations/:id`
+Retorna una evaluación completa con todas sus preguntas, opciones y valores.
+
+**Respuesta exitosa — 200**
+```json
+{
+  "success": true,
+  "evaluation": {
+    "_id": "...",
+    "name": "Arquitectura Nivel 1",
+    "career": "Arquitectura",
+    "questions": [
+      {
+        "category": "ECOSISTEMA",
+        "text": "En tu análisis de sitio, ¿cuáles de los siguientes factores consideraste?",
+        "options": [
+          { "text": "Recorrido del sol", "value": 1 },
+          { "text": "Impacto de vientos", "value": 1 }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Errores posibles**
+| `error` | Causa |
+|---------|-------|
+| `"Evaluación no encontrada"` | El `_id` no existe |
+
+---
+
+### GET `/articles`
+Lista todos los artículos.
+
+**Respuesta exitosa — 200**
+```json
+{
+  "success": true,
+  "articles": [
+    {
+      "_id": "...",
+      "title": "Título del artículo",
+      "subtitle": "...",
+      "type": "article",
+      "body": "...",
+      "image": "https://url-imagen.com/img.jpg",
+      "author": "Nombre Autor",
+      "author_image": "https://...",
+      "page_image": "https://...",
+      "category": "...",
+      "tags": ["tag1", "tag2"],
+      "bibliography": "..."
+    }
+  ]
+}
+```
+
+---
+
+### GET `/articles/:id`
+Retorna un artículo por su `_id`.
+
+**Respuesta exitosa — 200**
+```json
+{ "success": true, "article": { ...mismo esquema que arriba... } }
+```
+
+**Errores posibles**
+| `error` | Causa |
+|---------|-------|
+| `"Artículo no encontrado"` | El `_id` no existe |
+
+---
+
+### GET `/presentations`
+Lista todas las presentaciones con las URLs de cada slide.
+
+**Respuesta exitosa — 200**
+```json
+{
+  "success": true,
+  "presentations": [
+    {
+      "_id": "...",
+      "name": "Is Sustainable Innovation an Oxymoron",
+      "slides": [
+        "https://res.cloudinary.com/.../slide1.jpg",
+        "https://res.cloudinary.com/.../slide2.jpg"
+      ]
+    }
+  ]
+}
+```
 
 ---
 
