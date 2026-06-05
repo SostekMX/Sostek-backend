@@ -4,6 +4,7 @@ const express = require("express");
 const jsonWebToken = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const bcryptJs = require("bcryptjs");
+const crypto = require("crypto");
 const { body, validationResult } = require("express-validator");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
@@ -170,6 +171,75 @@ app.post("/user/score", verifyToken, [
     }
     res.json({ success: true, message: "Puntaje actualizado" });
   });
+});
+
+
+app.post("/user/forgot-password", authLimiter, [
+  body('email').isEmail().withMessage('Correo inválido').normalizeEmail(),
+], (req: Request, res: Response) => {
+  if (!validate(req, res)) return;
+
+  dbSchema.User.findOne({ email: req.body.email })
+    .then((user: any) => {
+      if (!user) {
+        res.json({ success: false, error: "Correo no registrado" });
+        return;
+      }
+      const token = crypto.randomBytes(32).toString('hex');
+      const expiry = new Date(Date.now() + 60 * 60 * 1000);
+
+      dbSchema.User.findOneAndUpdate(
+        { email: req.body.email },
+        { reset_token: token, reset_token_expiry: expiry },
+        null,
+        function (err: any) {
+          if (err) {
+            res.json({ success: false, error: "Error al generar token" });
+            return;
+          }
+          res.json({ success: true, reset_token: token });
+        }
+      );
+    })
+    .catch((err: any) => {
+      res.json({ success: false, error: "Error interno" });
+    });
+});
+
+
+app.post("/user/reset-password", [
+  body('token').notEmpty().withMessage('El token es requerido'),
+  body('new_password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
+], (req: Request, res: Response) => {
+  if (!validate(req, res)) return;
+
+  dbSchema.User.findOne({ reset_token: req.body.token })
+    .then((user: any) => {
+      if (!user) {
+        res.json({ success: false, error: "Token inválido" });
+        return;
+      }
+      if (user.reset_token_expiry < new Date()) {
+        res.json({ success: false, error: "Token expirado" });
+        return;
+      }
+      const hashedPassword = bcryptJs.hashSync(req.body.new_password, 10);
+      dbSchema.User.findOneAndUpdate(
+        { reset_token: req.body.token },
+        { password: hashedPassword, reset_token: null, reset_token_expiry: null },
+        null,
+        function (err: any) {
+          if (err) {
+            res.json({ success: false, error: "Error al actualizar contraseña" });
+            return;
+          }
+          res.json({ success: true, message: "Contraseña actualizada" });
+        }
+      );
+    })
+    .catch((err: any) => {
+      res.json({ success: false, error: "Error interno" });
+    });
 });
 
 
