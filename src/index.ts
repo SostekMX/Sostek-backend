@@ -10,6 +10,7 @@ const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 
 const dbSchema = require("./models/authModel");
+const contentSchema = require("./models/contentModel");
 
 const PORT = process.env.PORT || 8080;
 const JWT_CODE = process.env.JWT_CODE;
@@ -254,6 +255,69 @@ app.delete("/user", verifyToken, (req: any, res: Response) => {
     })
     .catch((err: any) => {
       res.json({ success: false, error: "No se pudo eliminar la cuenta" });
+    });
+});
+
+
+app.get("/evaluations", (req: Request, res: Response) => {
+  contentSchema.Evaluation.find({}, { questions: 0 })
+    .then((evaluations: any) => {
+      res.json({ success: true, evaluations });
+    })
+    .catch(() => {
+      res.json({ success: false, error: "Error al obtener evaluaciones" });
+    });
+});
+
+
+app.get("/evaluations/:id", (req: Request, res: Response) => {
+  contentSchema.Evaluation.findById(req.params.id)
+    .then((evaluation: any) => {
+      if (!evaluation) {
+        res.json({ success: false, error: "Evaluación no encontrada" });
+        return;
+      }
+      res.json({ success: true, evaluation });
+    })
+    .catch(() => {
+      res.json({ success: false, error: "Error al obtener evaluación" });
+    });
+});
+
+
+app.get("/articles", (req: Request, res: Response) => {
+  contentSchema.Article.find({})
+    .then((articles: any) => {
+      res.json({ success: true, articles });
+    })
+    .catch(() => {
+      res.json({ success: false, error: "Error al obtener artículos" });
+    });
+});
+
+
+app.get("/articles/:id", (req: Request, res: Response) => {
+  contentSchema.Article.findById(req.params.id)
+    .then((article: any) => {
+      if (!article) {
+        res.json({ success: false, error: "Artículo no encontrado" });
+        return;
+      }
+      res.json({ success: true, article });
+    })
+    .catch(() => {
+      res.json({ success: false, error: "Error al obtener artículo" });
+    });
+});
+
+
+app.get("/presentations", (req: Request, res: Response) => {
+  contentSchema.Presentation.find({})
+    .then((presentations: any) => {
+      res.json({ success: true, presentations });
+    })
+    .catch(() => {
+      res.json({ success: false, error: "Error al obtener presentaciones" });
     });
 });
 

@@ -8,6 +8,7 @@ const crypto = require("crypto");
 const { body, validationResult } = require("express-validator");
 const rateLimit = require("express-rate-limit");
 const dbSchema = require("./models/authModel");
+const contentSchema = require("./models/contentModel");
 
 const PORT = process.env.PORT || 8080;
 const JWT_CODE = process.env.JWT_CODE;
@@ -247,6 +248,69 @@ app.delete("/user", verifyToken, (req, res) => {
         })
         .catch((err) => {
             res.json({ success: false, error: "No se pudo eliminar la cuenta" });
+        });
+});
+
+
+app.get("/evaluations", (req, res) => {
+    contentSchema.Evaluation.find({}, { questions: 0 })
+        .then((evaluations) => {
+            res.json({ success: true, evaluations });
+        })
+        .catch(() => {
+            res.json({ success: false, error: "Error al obtener evaluaciones" });
+        });
+});
+
+
+app.get("/evaluations/:id", (req, res) => {
+    contentSchema.Evaluation.findById(req.params.id)
+        .then((evaluation) => {
+            if (!evaluation) {
+                res.json({ success: false, error: "Evaluación no encontrada" });
+                return;
+            }
+            res.json({ success: true, evaluation });
+        })
+        .catch(() => {
+            res.json({ success: false, error: "Error al obtener evaluación" });
+        });
+});
+
+
+app.get("/articles", (req, res) => {
+    contentSchema.Article.find({})
+        .then((articles) => {
+            res.json({ success: true, articles });
+        })
+        .catch(() => {
+            res.json({ success: false, error: "Error al obtener artículos" });
+        });
+});
+
+
+app.get("/articles/:id", (req, res) => {
+    contentSchema.Article.findById(req.params.id)
+        .then((article) => {
+            if (!article) {
+                res.json({ success: false, error: "Artículo no encontrado" });
+                return;
+            }
+            res.json({ success: true, article });
+        })
+        .catch(() => {
+            res.json({ success: false, error: "Error al obtener artículo" });
+        });
+});
+
+
+app.get("/presentations", (req, res) => {
+    contentSchema.Presentation.find({})
+        .then((presentations) => {
+            res.json({ success: true, presentations });
+        })
+        .catch(() => {
+            res.json({ success: false, error: "Error al obtener presentaciones" });
         });
 });
 
