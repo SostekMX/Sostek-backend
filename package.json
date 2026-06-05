@@ -8,7 +8,10 @@
     "build": "tsc",
     "dev:js": "nodemon -r dotenv/config src/index.js",
     "start": "node -r dotenv/config src/index.js",
-    "build-start": "tsc && node -r dotenv/config src/index.js"
+    "build-start": "tsc && node -r dotenv/config src/index.js",
+    "seed:articles": "node -r dotenv/config seed/seedArticles.js",
+    "seed:presentations": "node -r dotenv/config seed/seedPresentations.js",
+    "seed:evaluations": "node -r dotenv/config seed/seedEvaluations.js"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +29,9 @@
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
+    "cloudinary": "^2.10.0",
     "cors": "^2.8.5",
+    "csv-parse": "^6.2.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-rate-limit": "^8.5.2",
