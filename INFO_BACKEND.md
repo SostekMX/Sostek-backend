@@ -2,7 +2,7 @@
 
 > Documento de comunicación frontend → backend.
 > Se actualiza cada vez que hay un cambio en el frontend que afecta la integración.
-> Última actualización: 2026-06-05
+> Última actualización: 2026-06-05 (migración a MongoDB completada)
 > Backend corre en: `http://localhost:8080`
 
 ---
@@ -11,21 +11,92 @@
 
 | Fecha | Cambio | Qué necesita el backend |
 |-------|--------|------------------------|
-| 2026-06-05 | El frontend debe migrar de Google APIs al backend para cargar contenido | Los endpoints `GET /evaluations`, `/articles`, `/presentations` ya están listos |
-| 2026-05-29 | Perfil ahora carga datos al entrar via `GET /user/profile` con JWT | Endpoint debe devolver todos los campos del usuario excepto `password` |
-| 2026-05-29 | `POST /user/edit` ahora envía header `Authorization: Bearer <token>` | Endpoint debe validar el token y leer el usuario del token, no del body |
-| 2026-05-29 | Login y signup ahora guardan el token en `localStorage` | El token debe llegar en `response.data.token` en ambos endpoints |
+| 2026-06-05 | Migración completa — frontend ya no usa Google APIs para nada de contenido | `GET /articles`, `GET /articles/:id`, `GET /evaluations`, `GET /evaluations/:id`, `GET /presentations` en producción |
+| 2026-06-05 | Logout ahora elimina el token de `localStorage` | Sin cambios en backend |
+| 2026-06-05 | Signup valida contraseña ≥ 6 chars antes de llamar al backend | Sin cambios en backend |
+| 2026-05-29 | Perfil carga datos al entrar via `GET /user/profile` con JWT | ✅ Ya implementado |
+| 2026-05-29 | `POST /user/edit` envía header `Authorization: Bearer <token>` | ✅ Ya implementado |
+| 2026-05-29 | Login y signup guardan el token en `localStorage` | ✅ Ya implementado |
 
 ---
 
-## Lo que el frontend necesita que el backend implemente
+## Estado de endpoints de contenido
 
-| Endpoint | Estado | Cuándo lo usa el frontend |
-|----------|--------|--------------------------|
-| `POST /user/score` | ✅ Implementado (frontend aún no lo llama) | Al terminar una evaluación en Tab 3 |
-| `DELETE /user` | ✅ Implementado (pantalla no implementada aún) | Opción "Eliminar cuenta" en perfil |
-| `POST /user/forgot-password` | ✅ Implementado (frontend aún no lo llama) | Pantalla de recuperación de contraseña |
-| `POST /user/reset-password` | ✅ Implementado (frontend aún no lo llama) | Pantalla de recuperación de contraseña |
+| Endpoint | Estado |
+|----------|--------|
+| `GET /evaluations` | ✅ Integrado en frontend |
+| `GET /evaluations/:id` | ✅ Integrado en frontend |
+| `GET /articles` | ✅ Integrado en frontend |
+| `GET /articles/:id` | ✅ Integrado en frontend |
+| `GET /presentations` | ✅ Integrado en frontend |
+| `POST /user/score` | ⚠️ Backend listo — frontend pendiente (`FinalScoreEvaluation.tsx`) |
+| `DELETE /user` | ⚠️ Backend listo — frontend pendiente (UI en perfil) |
+| `POST /user/forgot-password` | ⚠️ Backend listo — frontend pendiente (nueva pantalla) |
+| `POST /user/reset-password` | ⚠️ Backend listo — frontend pendiente (nueva pantalla) |
+
+---
+
+## Migración de contenido: Google Drive/Sheets → MongoDB
+
+**Decisión tomada:** eliminar la dependencia de Google API key y Drive IDs. Todo el contenido pasa a MongoDB.
+
+### Contexto actual del frontend
+
+El frontend hoy carga contenido así (todo via `gapi.client` con API key de Google):
+
+| Contenido | Fuente actual | Hook actual |
+|-----------|--------------|-------------|
+| Artículos | Google Sheets (ID hardcodeado en `Tab1.tsx`) | `useGetSingleExcelAllData` |
+| Presentaciones | Carpeta de Google Drive | `useGetPresentations` + `useGetPresentationImages` |
+| Evaluaciones | Carpeta de Google Drive (cada evaluación = un Sheets con 3 pestañas) | `useGetDocuments` + `useGetEvaluationData` |
+| Tutorial | Carpeta de Google Drive | `useGetDocuments` |
+
+Una vez que el backend tenga los endpoints, el frontend reemplaza todos esos hooks por llamadas Axios. No hay más `gapi.client`, no hay más API key, no hay más IDs de Drive en el `.env`.
+
+### Modelos necesarios en MongoDB
+
+**Article:**
+```js
+{
+  titulo,       // String
+  subtitulo,    // String
+  tipo,         // String — 'articulo' o 'presentacion'
+  cuerpo,       // String
+  imagen,       // String (URL)
+  autor,        // String
+  categoria,    // String (se usa para filtrar artículos recomendados al terminar evaluación)
+  autorImagen,  // String (URL)
+  paginaImagen  // String (URL)
+}
+```
+
+**Evaluation:**
+```js
+{
+  nombre,    // String — nombre de la evaluación
+  carrera,   // String — 'arquitectura', 'disenio', 'otros'
+  preguntas: [{
+    categoria,  // String
+    texto,      // String
+    opciones: [{ texto: String, puntos: Number }]  // hasta 6 opciones
+  }]
+}
+```
+
+**Presentation:**
+```js
+{
+  nombre,   // String
+  imagenes  // Array de URLs (slides en orden)
+}
+```
+
+### Orden sugerido de implementación
+
+1. **Evaluaciones** — más urgente, no tenemos el Drive configurado, empezamos de cero
+2. **Artículos** — migrar desde el Sheets actual
+3. **Presentaciones** — migrar listado; las imágenes pueden seguir en Drive como URLs directas
+4. **Tutorial** — puede quedar para el final o hardcodearse en el frontend
 
 ---
 
@@ -104,17 +175,15 @@ app.use(cors({
 |--------|------|------|--------|
 | `POST` | `/user/signup` | No | ✅ Implementado |
 | `POST` | `/user/login` | No | ✅ Implementado |
-| `POST` | `/user/forgot-password` | No | ✅ Implementado |
-| `POST` | `/user/reset-password` | No | ✅ Implementado |
 | `GET` | `/user/profile` | JWT | ✅ Implementado |
 | `POST` | `/user/edit` | JWT | ✅ Implementado |
-| `POST` | `/user/score` | JWT | ✅ Implementado |
-| `DELETE` | `/user` | JWT | ✅ Implementado |
-| `GET` | `/evaluations` | No | ✅ Implementado |
-| `GET` | `/evaluations/:id` | No | ✅ Implementado |
-| `GET` | `/articles` | No | ✅ Implementado |
-| `GET` | `/articles/:id` | No | ✅ Implementado |
-| `GET` | `/presentations` | No | ✅ Implementado |
+| `POST` | `/user/score` | JWT | ❌ Pendiente |
+| `DELETE` | `/user` | JWT | ❌ Pendiente |
+| `GET` | `/evaluations` | No | ❌ Pendiente |
+| `GET` | `/evaluations/:id` | No | ❌ Pendiente |
+| `GET` | `/articles` | No | ❌ Pendiente |
+| `GET` | `/articles/:id` | No | ❌ Pendiente |
+| `GET` | `/presentations` | No | ❌ Pendiente |
 
 ---
 
@@ -240,53 +309,7 @@ app.use(cors({
 
 ---
 
-### `POST /user/forgot-password` — público
-
-**Body:**
-```json
-{ "email": "usuario@ejemplo.com" }
-```
-
-**Respuesta exitosa:**
-```json
-{ "success": true, "reset_token": "<64-char-hex-string>" }
-```
-
-**Errores:**
-```json
-{ "success": false, "error": "Correo inválido" }
-{ "success": false, "error": "Correo no registrado" }
-```
-
-> El token es válido por 1 hora. El frontend debe enviárselo al usuario para que lo use en `/user/reset-password`.
-
----
-
-### `POST /user/reset-password` — público
-
-**Body:**
-```json
-{ "token": "<reset_token>", "new_password": "nuevacontraseña" }
-```
-
-**Respuesta exitosa:**
-```json
-{ "success": true, "message": "Contraseña actualizada" }
-```
-
-**Errores:**
-```json
-{ "success": false, "error": "El token es requerido" }
-{ "success": false, "error": "La contraseña debe tener al menos 6 caracteres" }
-{ "success": false, "error": "Token inválido" }
-{ "success": false, "error": "Token expirado" }
-```
-
-> El token se invalida tras usarse — no se puede reutilizar.
-
----
-
-### `POST /user/score` — requiere JWT
+### `POST /user/score` — requiere JWT ❌ Pendiente
 
 **Header:** `Authorization: Bearer <token>`
 
@@ -311,7 +334,7 @@ app.use(cors({
 
 ---
 
-### `DELETE /user` — requiere JWT
+### `DELETE /user` — requiere JWT ❌ Pendiente
 
 **Header:** `Authorization: Bearer <token>`
 
