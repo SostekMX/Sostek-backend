@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
-const DB_IP = process.env.DB_IP || "127.0.0.1";
-const DB_PORT = process.env.DB_PORT || "27017";
-const DB_URL = "mongodb://" + DB_IP + ":" + DB_PORT +"/SostekDB";
+const DB_URL = process.env.DB_URL ||
+  ("mongodb://" + (process.env.DB_IP || "127.0.0.1") + ":" + (process.env.DB_PORT || "27017") + "/SostekDB");
 
 mongoose.connect(DB_URL, { useNewUrlParser: true });
 
