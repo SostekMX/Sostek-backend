@@ -21,8 +21,10 @@
 
 | Endpoint | Estado | Cuándo lo usa el frontend |
 |----------|--------|--------------------------|
-| `POST /user/score` | ❌ Pendiente (frontend aún no lo llama) | Al terminar una evaluación en Tab 3 |
-| `DELETE /user` | ❌ Pendiente (pantalla no implementada aún) | Opción "Eliminar cuenta" en perfil |
+| `POST /user/score` | ✅ Implementado (frontend aún no lo llama) | Al terminar una evaluación en Tab 3 |
+| `DELETE /user` | ✅ Implementado (pantalla no implementada aún) | Opción "Eliminar cuenta" en perfil |
+| `POST /user/forgot-password` | ✅ Implementado (frontend aún no lo llama) | Pantalla de recuperación de contraseña |
+| `POST /user/reset-password` | ✅ Implementado (frontend aún no lo llama) | Pantalla de recuperación de contraseña |
 
 ---
 
@@ -101,10 +103,12 @@ app.use(cors({
 |--------|------|------|--------|
 | `POST` | `/user/signup` | No | ✅ Implementado |
 | `POST` | `/user/login` | No | ✅ Implementado |
+| `POST` | `/user/forgot-password` | No | ✅ Implementado |
+| `POST` | `/user/reset-password` | No | ✅ Implementado |
 | `GET` | `/user/profile` | JWT | ✅ Implementado |
 | `POST` | `/user/edit` | JWT | ✅ Implementado |
-| `POST` | `/user/score` | JWT | ❌ Pendiente |
-| `DELETE` | `/user` | JWT | ❌ Pendiente |
+| `POST` | `/user/score` | JWT | ✅ Implementado |
+| `DELETE` | `/user` | JWT | ✅ Implementado |
 
 ---
 
@@ -230,7 +234,53 @@ app.use(cors({
 
 ---
 
-### `POST /user/score` — requiere JWT ❌ Pendiente
+### `POST /user/forgot-password` — público
+
+**Body:**
+```json
+{ "email": "usuario@ejemplo.com" }
+```
+
+**Respuesta exitosa:**
+```json
+{ "success": true, "reset_token": "<64-char-hex-string>" }
+```
+
+**Errores:**
+```json
+{ "success": false, "error": "Correo inválido" }
+{ "success": false, "error": "Correo no registrado" }
+```
+
+> El token es válido por 1 hora. El frontend debe enviárselo al usuario para que lo use en `/user/reset-password`.
+
+---
+
+### `POST /user/reset-password` — público
+
+**Body:**
+```json
+{ "token": "<reset_token>", "new_password": "nuevacontraseña" }
+```
+
+**Respuesta exitosa:**
+```json
+{ "success": true, "message": "Contraseña actualizada" }
+```
+
+**Errores:**
+```json
+{ "success": false, "error": "El token es requerido" }
+{ "success": false, "error": "La contraseña debe tener al menos 6 caracteres" }
+{ "success": false, "error": "Token inválido" }
+{ "success": false, "error": "Token expirado" }
+```
+
+> El token se invalida tras usarse — no se puede reutilizar.
+
+---
+
+### `POST /user/score` — requiere JWT
 
 **Header:** `Authorization: Bearer <token>`
 
@@ -255,7 +305,7 @@ app.use(cors({
 
 ---
 
-### `DELETE /user` — requiere JWT ❌ Pendiente
+### `DELETE /user` — requiere JWT
 
 **Header:** `Authorization: Bearer <token>`
 

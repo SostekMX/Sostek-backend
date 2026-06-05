@@ -12,6 +12,8 @@
 |-------|-----------|-------------------------------|
 | 2026-06-04 | Nuevos endpoints `POST /user/forgot-password` y `POST /user/reset-password` | Ya se puede implementar la pantalla de recuperación de contraseña. Ver contratos en sección 3. |
 | 2026-06-04 | El modelo de usuario tiene dos campos nuevos: `reset_token` y `reset_token_expiry` | Campos internos — el frontend no los recibe ni los envía directamente. |
+| 2026-05-29 | `POST /user/score` implementado | Listo para integrarse en `FinalScoreEvaluation.tsx` al terminar una evaluación. |
+| 2026-05-29 | `DELETE /user` implementado | Listo para integrarse en la UI de perfil como opción "Eliminar cuenta". |
 
 ---
 
