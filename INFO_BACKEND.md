@@ -2,7 +2,7 @@
 
 > Documento de comunicación frontend → backend.
 > Se actualiza cada vez que hay un cambio en el frontend que afecta la integración.
-> Última actualización: 2026-06-04
+> Última actualización: 2026-06-05
 > Backend corre en: `http://localhost:8080`
 
 ---
@@ -11,6 +11,7 @@
 
 | Fecha | Cambio | Qué necesita el backend |
 |-------|--------|------------------------|
+| 2026-06-05 | El frontend debe migrar de Google APIs al backend para cargar contenido | Los endpoints `GET /evaluations`, `/articles`, `/presentations` ya están listos |
 | 2026-05-29 | Perfil ahora carga datos al entrar via `GET /user/profile` con JWT | Endpoint debe devolver todos los campos del usuario excepto `password` |
 | 2026-05-29 | `POST /user/edit` ahora envía header `Authorization: Bearer <token>` | Endpoint debe validar el token y leer el usuario del token, no del body |
 | 2026-05-29 | Login y signup ahora guardan el token en `localStorage` | El token debe llegar en `response.data.token` en ambos endpoints |
@@ -109,6 +110,11 @@ app.use(cors({
 | `POST` | `/user/edit` | JWT | ✅ Implementado |
 | `POST` | `/user/score` | JWT | ✅ Implementado |
 | `DELETE` | `/user` | JWT | ✅ Implementado |
+| `GET` | `/evaluations` | No | ✅ Implementado |
+| `GET` | `/evaluations/:id` | No | ✅ Implementado |
+| `GET` | `/articles` | No | ✅ Implementado |
+| `GET` | `/articles/:id` | No | ✅ Implementado |
+| `GET` | `/presentations` | No | ✅ Implementado |
 
 ---
 
