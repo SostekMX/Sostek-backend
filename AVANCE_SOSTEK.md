@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-04
+> Última actualización: 2026-06-05
 > Rama activa: `main`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -27,7 +27,7 @@
 
 El **servidor de usuarios de SOSTEK**: maneja el registro, login y edición de perfil de los usuarios de la plataforma. Corre en `http://localhost:8080` y es consumido por el frontend (Ionic React en `:3000`).
 
-No contiene lógica de contenido (artículos, evaluaciones, presentaciones) — eso viene de Google APIs directamente al frontend.
+Contiene también los endpoints de contenido: evaluaciones, artículos y presentaciones, almacenados en MongoDB Atlas. El contenido se carga con los scripts de seed en `seed/`.
 
 ---
 
@@ -43,6 +43,11 @@ No contiene lógica de contenido (artículos, evaluaciones, presentaciones) — 
 | `DELETE` | `/user` | Eliminar cuenta del usuario | JWT requerido |
 | `POST` | `/user/forgot-password` | Generar token de recuperación de contraseña | Ninguna (pública) |
 | `POST` | `/user/reset-password` | Resetear contraseña con token válido | Ninguna (pública) |
+| `GET` | `/evaluations` | Lista de evaluaciones (sin preguntas) | Ninguna (pública) |
+| `GET` | `/evaluations/:id` | Detalle completo de una evaluación | Ninguna (pública) |
+| `GET` | `/articles` | Lista de todos los artículos | Ninguna (pública) |
+| `GET` | `/articles/:id` | Detalle de un artículo | Ninguna (pública) |
+| `GET` | `/presentations` | Lista de presentaciones con slides | Ninguna (pública) |
 
 ---
 
@@ -58,6 +63,11 @@ No contiene lógica de contenido (artículos, evaluaciones, presentaciones) — 
 - **`DELETE /user`** — elimina la cuenta del usuario autenticado
 - **`POST /user/forgot-password`** — recibe email, genera token seguro (64 hex chars) con 1h de expiración, lo guarda en el usuario en DB, retorna `{ success: true, reset_token: "..." }`; limitado por rate limit
 - **`POST /user/reset-password`** — recibe `token` + `new_password`, valida que el token exista y no esté expirado, hashea la nueva contraseña con bcrypt y limpia los campos de reset en el documento
+- **`GET /evaluations`** — retorna lista de evaluaciones sin el campo `questions` (solo `name` y `career`)
+- **`GET /evaluations/:id`** — retorna evaluación completa con preguntas, opciones y valores numéricos
+- **`GET /articles`** — retorna lista completa de artículos
+- **`GET /articles/:id`** — retorna un artículo por ID
+- **`GET /presentations`** — retorna lista de presentaciones con sus URLs de slides
 - **Middleware `verifyToken`** — valida JWT en header `Authorization: Bearer <token>` antes de rutas protegidas
 - **Rate limiting** — `/user/signup` y `/user/login` limitados a 10 requests cada 15 minutos
 - **Validación de inputs** — `express-validator` activo en todos los endpoints con body
@@ -119,6 +129,21 @@ MongoDB (SostekDB)
     ├── score_game          (Number, optional, default: 0)
     ├── reset_token         (String, optional — se llena al pedir recuperación)
     └── reset_token_expiry  (Date, optional — expiración 1h desde la generación)
+
+colección: evaluations
+    ├── name      (String, required)
+    ├── career    (String, required — enum: 'Arquitectura' | 'Diseño Industrial' | 'Otros')
+    └── questions (Array de { category, text, options: [{ text, value }] })
+
+colección: articles
+    ├── title, subtitle, type, body  (String)
+    ├── image, author, author_image, page_image  (String — URLs)
+    ├── category  (String)
+    └── tags      (Array de String)
+
+colección: presentations
+    ├── name    (String, required)
+    └── slides  (Array de String — URLs de imágenes)
 ```
 
 **Variables de entorno** (archivo `.env` en raíz, no incluido en el repo):
@@ -129,6 +154,10 @@ MongoDB (SostekDB)
 | `DB_IP` | `127.0.0.1` | IP de MongoDB |
 | `DB_PORT` | `27017` | Puerto de MongoDB |
 | `JWT_CODE` | — | Secret para firmar tokens JWT (requerido, sin default) |
+| `DB_URL` | — | Connection string completo de MongoDB Atlas (si se usa, ignora DB_IP y DB_PORT) |
+| `CLOUDINARY_CLOUD_NAME` | — | Nombre del cloud en Cloudinary (para seed de presentaciones) |
+| `CLOUDINARY_API_KEY` | — | API key de Cloudinary |
+| `CLOUDINARY_API_SECRET` | — | API secret de Cloudinary |
 
 ---
 
@@ -138,8 +167,13 @@ MongoDB (SostekDB)
 |---------|----------------|
 | `src/index.ts` | Todos los endpoints y middleware (fuente TypeScript) |
 | `src/index.js` | Ídem compilado — debe mantenerse sincronizado con `.ts` |
-| `src/models/authModel.ts` | Schema de Mongoose + conexión a MongoDB (fuente) |
+| `src/models/authModel.ts` | Schema de usuario + conexión a MongoDB (fuente) |
 | `src/models/authModel.js` | Ídem compilado |
+| `src/models/contentModel.ts` | Schemas de Evaluation, Article y Presentation (fuente) |
+| `src/models/contentModel.js` | Ídem compilado |
+| `seed/seedArticles.js` | Importa artículos desde CSV a MongoDB. Uso: `npm run seed:articles "ruta/al/archivo.csv"` |
+| `seed/seedPresentations.js` | Sube imágenes locales a Cloudinary y guarda URLs en MongoDB. Uso: `npm run seed:presentations "Nombre" "ruta/carpeta"` |
+| `seed/seedEvaluations.js` | Descarga las 6 evaluaciones desde Google Sheets y las inserta en MongoDB. Uso: `npm run seed:evaluations` |
 | `.env` | Variables de entorno locales (no en repo) |
 
 ---
