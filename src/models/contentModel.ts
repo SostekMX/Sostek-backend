@@ -36,6 +36,24 @@ var PresentationSchema = new mongoose.Schema({
   slides: { type: [String], default: [] }
 }, { collection: 'presentations' });
 
+var TutorialCardSchema = new mongoose.Schema({
+  name:        { type: String, required: true },
+  description: { type: String, required: true },
+  type:        { type: String, required: true, enum: ['scenario', 'solution'] },
+  resources: {
+    ambiental: { type: Number, default: 0 },
+    economico:  { type: Number, default: 0 },
+    social:     { type: Number, default: 0 }
+  }
+}, { _id: false });
+
+var TutorialSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  rules: { type: String, required: true },
+  cards: { type: [TutorialCardSchema], default: [] }
+}, { collection: 'tutorial' });
+
 exports.Evaluation  = mongoose.model('Evaluation',  EvaluationSchema);
 exports.Article     = mongoose.model('Article',     ArticleSchema);
 exports.Presentation = mongoose.model('Presentation', PresentationSchema);
+exports.Tutorial    = mongoose.model('Tutorial',    TutorialSchema);
