@@ -322,6 +322,21 @@ app.get("/presentations", (req: Request, res: Response) => {
 });
 
 
+app.get("/tutorial", (req: Request, res: Response) => {
+  contentSchema.Tutorial.findOne({})
+    .then((tutorial: any) => {
+      if (!tutorial) {
+        res.json({ success: false, error: "Tutorial no encontrado" });
+        return;
+      }
+      res.json({ success: true, tutorial });
+    })
+    .catch(() => {
+      res.json({ success: false, error: "Error al obtener el tutorial" });
+    });
+});
+
+
 app.post("/user/favorites", verifyToken, [
   body('content_id').notEmpty().withMessage('El ID del contenido es requerido'),
   body('type').isIn(['article', 'presentation']).withMessage('El tipo debe ser article o presentation'),
