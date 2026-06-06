@@ -2,7 +2,7 @@
 
 > Documento de comunicación frontend → backend.
 > Se actualiza cada vez que hay un cambio en el frontend que afecta la integración.
-> Última actualización: 2026-06-05 (migración a MongoDB completada)
+> Última actualización: 2026-06-06
 > Backend corre en: `http://localhost:8080`
 
 ---
@@ -11,92 +11,67 @@
 
 | Fecha | Cambio | Qué necesita el backend |
 |-------|--------|------------------------|
-| 2026-06-05 | Migración completa — frontend ya no usa Google APIs para nada de contenido | `GET /articles`, `GET /articles/:id`, `GET /evaluations`, `GET /evaluations/:id`, `GET /presentations` en producción |
-| 2026-06-05 | Logout ahora elimina el token de `localStorage` | Sin cambios en backend |
+| 2026-06-06 | Pantallas de recuperación de contraseña implementadas (`/ForgotPassword`, `/ResetPassword`) | `POST /user/forgot-password` y `POST /user/reset-password` — ya implementados ✅ |
+| 2026-06-06 | Botón "Eliminar cuenta" implementado en `Profile.tsx` | `DELETE /user` — ya implementado ✅ |
+| 2026-06-06 | Puntaje enviado al backend al terminar evaluación | `POST /user/score` — ya implementado ✅ |
+| 2026-06-05 | Migración completa — frontend ya no usa Google APIs para nada de contenido | `GET /articles`, `GET /articles/:id`, `GET /evaluations`, `GET /evaluations/:id`, `GET /presentations` — ya implementados ✅ |
+| 2026-06-05 | Logout elimina el token de `localStorage` | Sin cambios en backend |
 | 2026-06-05 | Signup valida contraseña ≥ 6 chars antes de llamar al backend | Sin cambios en backend |
-| 2026-05-29 | Perfil carga datos al entrar via `GET /user/profile` con JWT | ✅ Ya implementado |
-| 2026-05-29 | `POST /user/edit` envía header `Authorization: Bearer <token>` | ✅ Ya implementado |
-| 2026-05-29 | Login y signup guardan el token en `localStorage` | ✅ Ya implementado |
 
 ---
 
-## Estado de endpoints de contenido
+## Estado de endpoints
 
-| Endpoint | Estado |
-|----------|--------|
-| `GET /evaluations` | ✅ Integrado en frontend |
-| `GET /evaluations/:id` | ✅ Integrado en frontend |
-| `GET /articles` | ✅ Integrado en frontend |
-| `GET /articles/:id` | ✅ Integrado en frontend |
-| `GET /presentations` | ✅ Integrado en frontend |
-| `POST /user/score` | ⚠️ Backend listo — frontend pendiente (`FinalScoreEvaluation.tsx`) |
-| `DELETE /user` | ⚠️ Backend listo — frontend pendiente (UI en perfil) |
-| `POST /user/forgot-password` | ⚠️ Backend listo — frontend pendiente (nueva pantalla) |
-| `POST /user/reset-password` | ⚠️ Backend listo — frontend pendiente (nueva pantalla) |
+| Endpoint | Estado frontend | Estado backend |
+|----------|----------------|----------------|
+| `POST /user/signup` | ✅ Integrado | ✅ Implementado |
+| `POST /user/login` | ✅ Integrado | ✅ Implementado |
+| `GET /user/profile` | ✅ Integrado | ✅ Implementado |
+| `POST /user/edit` | ✅ Integrado | ✅ Implementado |
+| `POST /user/score` | ✅ Integrado | ✅ Implementado |
+| `DELETE /user` | ✅ Integrado | ✅ Implementado |
+| `POST /user/forgot-password` | ✅ Integrado | ✅ Implementado |
+| `POST /user/reset-password` | ✅ Integrado | ✅ Implementado |
+| `GET /evaluations` | ✅ Integrado | ✅ Implementado |
+| `GET /evaluations/:id` | ✅ Integrado | ✅ Implementado |
+| `GET /articles` | ✅ Integrado | ✅ Implementado |
+| `GET /articles/:id` | ✅ Integrado | ✅ Implementado |
+| `GET /presentations` | ✅ Integrado | ✅ Implementado |
+| `POST /user/favorites` | ❌ Sin integrar | ❌ Sin endpoint — pendiente definir |
 
 ---
 
-## Migración de contenido: Google Drive/Sheets → MongoDB
+## Lo que falta por definir
 
-**Decisión tomada:** eliminar la dependencia de Google API key y Drive IDs. Todo el contenido pasa a MongoDB.
+| Elemento | Situación |
+|----------|-----------|
+| **Favoritos** | El menú lateral muestra la opción pero no hay endpoint ni contrato definido. Necesitamos definir qué datos guardar (array de IDs de artículos en el usuario, o colección separada) |
+| **Tutorial desde backend** | Actualmente el tutorial aún carga desde Google Drive. Pendiente definir si se migra igual que artículos o se hardcodea en el frontend |
 
-### Contexto actual del frontend
+---
 
-El frontend hoy carga contenido así (todo via `gapi.client` con API key de Google):
+## Comportamiento del frontend en recuperación de contraseña
 
-| Contenido | Fuente actual | Hook actual |
-|-----------|--------------|-------------|
-| Artículos | Google Sheets (ID hardcodeado en `Tab1.tsx`) | `useGetSingleExcelAllData` |
-| Presentaciones | Carpeta de Google Drive | `useGetPresentations` + `useGetPresentationImages` |
-| Evaluaciones | Carpeta de Google Drive (cada evaluación = un Sheets con 3 pestañas) | `useGetDocuments` + `useGetEvaluationData` |
-| Tutorial | Carpeta de Google Drive | `useGetDocuments` |
+El flujo de recuperación funciona así:
 
-Una vez que el backend tenga los endpoints, el frontend reemplaza todos esos hooks por llamadas Axios. No hay más `gapi.client`, no hay más API key, no hay más IDs de Drive en el `.env`.
+1. El usuario ingresa su email en `/ForgotPassword`
+2. El frontend llama a `POST /user/forgot-password` con `{ email }`
+3. El backend responde con `{ success: true, reset_token: "<token>" }`
+4. El frontend guarda el token en `sessionStorage` con la clave `reset_token` y navega a `/ResetPassword`
+5. En `/ResetPassword`, el usuario ve el token precargado (editable) y escribe su nueva contraseña
+6. El frontend llama a `POST /user/reset-password` con `{ token, new_password }`
+7. Al éxito, el frontend borra el token de `sessionStorage` y redirige a login
 
-### Modelos necesarios en MongoDB
+> Nota: El frontend muestra el token directamente al usuario para que lo copie/use. No hay envío de email desde el frontend.
 
-**Article:**
-```js
-{
-  titulo,       // String
-  subtitulo,    // String
-  tipo,         // String — 'articulo' o 'presentacion'
-  cuerpo,       // String
-  imagen,       // String (URL)
-  autor,        // String
-  categoria,    // String (se usa para filtrar artículos recomendados al terminar evaluación)
-  autorImagen,  // String (URL)
-  paginaImagen  // String (URL)
-}
-```
+---
 
-**Evaluation:**
-```js
-{
-  nombre,    // String — nombre de la evaluación
-  carrera,   // String — 'arquitectura', 'disenio', 'otros'
-  preguntas: [{
-    categoria,  // String
-    texto,      // String
-    opciones: [{ texto: String, puntos: Number }]  // hasta 6 opciones
-  }]
-}
-```
+## Comportamiento del frontend en puntaje
 
-**Presentation:**
-```js
-{
-  nombre,   // String
-  imagenes  // Array de URLs (slides en orden)
-}
-```
-
-### Orden sugerido de implementación
-
-1. **Evaluaciones** — más urgente, no tenemos el Drive configurado, empezamos de cero
-2. **Artículos** — migrar desde el Sheets actual
-3. **Presentaciones** — migrar listado; las imágenes pueden seguir en Drive como URLs directas
-4. **Tutorial** — puede quedar para el final o hardcodearse en el frontend
+Cuando el usuario termina una evaluación:
+- Si hay token en `localStorage` (usuario logueado), se llama `POST /user/score` con `{ score_test: <número> }`
+- Si es invitado (sin token), no se hace ninguna llamada
+- El puntaje enviado es el total acumulado de la evaluación
 
 ---
 
@@ -125,9 +100,11 @@ Una vez que el backend tenga los endpoints, el frontend reemplaza todos esos hoo
   surname,        // String, requerido
   birth_date,     // Date, opcional
   occupation,     // String, opcional
-  gender,         // String, opcional — el frontend envía 'masculino' o 'femenino'
+  gender,         // String, opcional
   score_test,     // Number, default 0
   score_game,     // Number, default 0
+  reset_token,    // String, interno — no devolver en respuestas
+  reset_token_expiry // Date, interno — no devolver en respuestas
 }
 ```
 
@@ -138,7 +115,7 @@ Una vez que el backend tenga los endpoints, el frontend reemplaza todos esos hoo
 - Payload del token: `{ id: usuario._id, email: usuario.email }`
 - El frontend guarda el token en `localStorage` con la clave `'token'`
 - Los endpoints protegidos deben leer el header `Authorization: Bearer <token>`
-- Expiración recomendada: 7 días
+- Expiración: 7 días
 
 **Middleware de autenticación:**
 ```js
@@ -175,15 +152,17 @@ app.use(cors({
 |--------|------|------|--------|
 | `POST` | `/user/signup` | No | ✅ Implementado |
 | `POST` | `/user/login` | No | ✅ Implementado |
+| `POST` | `/user/forgot-password` | No | ✅ Implementado |
+| `POST` | `/user/reset-password` | No | ✅ Implementado |
 | `GET` | `/user/profile` | JWT | ✅ Implementado |
 | `POST` | `/user/edit` | JWT | ✅ Implementado |
-| `POST` | `/user/score` | JWT | ❌ Pendiente |
-| `DELETE` | `/user` | JWT | ❌ Pendiente |
-| `GET` | `/evaluations` | No | ❌ Pendiente |
-| `GET` | `/evaluations/:id` | No | ❌ Pendiente |
-| `GET` | `/articles` | No | ❌ Pendiente |
-| `GET` | `/articles/:id` | No | ❌ Pendiente |
-| `GET` | `/presentations` | No | ❌ Pendiente |
+| `POST` | `/user/score` | JWT | ✅ Implementado |
+| `DELETE` | `/user` | JWT | ✅ Implementado |
+| `GET` | `/evaluations` | No | ✅ Implementado |
+| `GET` | `/evaluations/:id` | No | ✅ Implementado |
+| `GET` | `/articles` | No | ✅ Implementado |
+| `GET` | `/articles/:id` | No | ✅ Implementado |
+| `GET` | `/presentations` | No | ✅ Implementado |
 
 ---
 
@@ -203,11 +182,7 @@ app.use(cors({
   "gender": "femenino"
 }
 ```
-
-**Validaciones requeridas:**
-- `email`: formato válido, no registrado previamente
-- `password`: mínimo 6 caracteres
-- `name` y `surname`: requeridos
+> `birth_date`, `occupation` y `gender` son opcionales.
 
 **Respuesta exitosa:**
 ```json
@@ -221,6 +196,7 @@ app.use(cors({
 { "success": false, "error": "El nombre es requerido" }
 { "success": false, "error": "El apellido es requerido" }
 { "success": false, "error": "Correo ingresado está ya registrado en la plataforma" }
+{ "success": false, "error": "Demasiados intentos, intenta más tarde" }
 ```
 
 ---
@@ -241,6 +217,53 @@ app.use(cors({
 ```json
 { "success": false, "error": "Cuenta no registrada" }
 { "success": false, "error": "Contraseña incorrecta" }
+{ "success": false, "error": "Demasiados intentos, intenta más tarde" }
+```
+
+---
+
+### `POST /user/forgot-password` — público
+
+**Body:**
+```json
+{ "email": "usuario@ejemplo.com" }
+```
+
+**Respuesta exitosa:**
+```json
+{ "success": true, "reset_token": "<64-char-hex>" }
+```
+> El token es válido por 1 hora. El frontend lo muestra directamente al usuario.
+
+**Errores:**
+```json
+{ "success": false, "error": "Correo inválido" }
+{ "success": false, "error": "Correo no registrado" }
+{ "success": false, "error": "Error al generar token" }
+{ "success": false, "error": "Demasiados intentos, intenta más tarde" }
+```
+
+---
+
+### `POST /user/reset-password` — público
+
+**Body:**
+```json
+{ "token": "<reset_token>", "new_password": "nuevacontraseña" }
+```
+
+**Respuesta exitosa:**
+```json
+{ "success": true, "message": "Contraseña actualizada" }
+```
+> El token se invalida tras usarse una vez.
+
+**Errores:**
+```json
+{ "success": false, "error": "El token es requerido" }
+{ "success": false, "error": "La contraseña debe tener al menos 6 caracteres" }
+{ "success": false, "error": "Token inválido" }
+{ "success": false, "error": "Token expirado" }
 ```
 
 ---
@@ -266,8 +289,7 @@ app.use(cors({
   }
 }
 ```
-
-> `password` **nunca** debe incluirse en la respuesta.
+> `password`, `reset_token` y `reset_token_expiry` **nunca** deben incluirse en la respuesta.
 
 **Errores:**
 ```json
@@ -292,7 +314,6 @@ app.use(cors({
   "gender": "masculino"
 }
 ```
-
 > El campo `email` puede llegar en el body pero debe **ignorarse** — el usuario se identifica por el token.
 
 **Respuesta exitosa:**
@@ -309,7 +330,7 @@ app.use(cors({
 
 ---
 
-### `POST /user/score` — requiere JWT ❌ Pendiente
+### `POST /user/score` — requiere JWT
 
 **Header:** `Authorization: Bearer <token>`
 
@@ -318,8 +339,7 @@ app.use(cors({
 { "score_test": 130 }
 { "score_game": 75 }
 ```
-
-**Comportamiento:** Actualizar solo los campos que lleguen en el body.
+> Actualizar solo los campos que lleguen en el body, sin tocar el otro.
 
 **Respuesta exitosa:**
 ```json
@@ -329,12 +349,15 @@ app.use(cors({
 **Errores:**
 ```json
 { "success": false, "error": "Token requerido" }
+{ "success": false, "error": "Token inválido o expirado" }
 { "success": false, "error": "Se requiere al menos score_test o score_game" }
+{ "success": false, "error": "El puntaje del test debe ser un número" }
+{ "success": false, "error": "El puntaje del juego debe ser un número" }
 ```
 
 ---
 
-### `DELETE /user` — requiere JWT ❌ Pendiente
+### `DELETE /user` — requiere JWT
 
 **Header:** `Authorization: Bearer <token>`
 
@@ -348,14 +371,15 @@ Sin body. Elimina permanentemente la cuenta del usuario identificado por el toke
 **Errores:**
 ```json
 { "success": false, "error": "Token requerido" }
+{ "success": false, "error": "Token inválido o expirado" }
 { "success": false, "error": "Usuario no encontrado" }
 ```
 
 ---
 
-## Rate limiting recomendado
+## Rate limiting
 
-Aplicar a `/user/signup` y `/user/login`: 10 requests por IP cada 15 minutos.
+Aplicar a `/user/signup`, `/user/login` y `/user/forgot-password`: 10 requests por IP cada 15 minutos.
 
 ```json
 { "success": false, "error": "Demasiados intentos, intenta más tarde" }
