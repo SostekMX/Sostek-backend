@@ -51,6 +51,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos y present
 | `POST` | `/user/favorites` | Agregar artículo o presentación a favoritos | JWT requerido |
 | `GET` | `/user/favorites` | Obtener lista de favoritos del usuario | JWT requerido |
 | `DELETE` | `/user/favorites/:content_id` | Eliminar un favorito por ID de contenido | JWT requerido |
+| `GET` | `/tutorial` | Obtener instructivo del juego (reglas + tarjetas) | Ninguna (pública) |
 
 ---
 
@@ -74,6 +75,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos y present
 - **`POST /user/favorites`** — agrega un artículo o presentación a favoritos; valida `content_id` y `type` (`article` | `presentation`); rechaza duplicados
 - **`GET /user/favorites`** — retorna el array `favorites` del usuario autenticado
 - **`DELETE /user/favorites/:content_id`** — elimina el favorito con ese `content_id` usando `$pull` de MongoDB
+- **`GET /tutorial`** — retorna el documento único de tutorial con `title`, `rules` y `cards[]` (16 tarjetas de escenario + 32 de solución); cada tarjeta tiene `name`, `description`, `type` y `resources` (ambiental/economico/social)
 - **Middleware `verifyToken`** — valida JWT en header `Authorization: Bearer <token>` antes de rutas protegidas
 - **Rate limiting** — `/user/signup` y `/user/login` limitados a 10 requests cada 15 minutos
 - **Validación de inputs** — `express-validator` activo en todos los endpoints con body
@@ -99,9 +101,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos y present
 
 ### ❌ NO IMPLEMENTADO
 
-| Elemento | Descripción |
-|----------|-------------|
-| Tutorial (Google Drive → MongoDB) | El frontend carga el tutorial desde Google Drive via `useGetDocuments`. Falta modelo en MongoDB, seed script y endpoint `GET /tutorial` para migrar esta dependencia igual que artículos y presentaciones |
+*(No hay ítems sin implementar)*
 
 ---
 
@@ -117,9 +117,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos y present
 
 ### 🟢 Backlog (funcionalidades nuevas)
 
-| Tarea | Detalle |
-|-------|---------|
-| Tutorial (Google Drive → MongoDB) | Crear modelo `Tutorial` en MongoDB, seed script para importar el contenido, y endpoint `GET /tutorial`. El frontend actualmente usa `useGetDocuments` con Google Drive |
+*(No hay ítems de backlog pendientes)*
 
 ---
 
@@ -155,6 +153,11 @@ colección: articles
 colección: presentations
     ├── name    (String, required)
     └── slides  (Array de String — URLs de imágenes)
+
+colección: tutorial  (documento único)
+    ├── title   (String, required — "Instructivo SOSTEK")
+    ├── rules   (String, required — texto de reglas del juego)
+    └── cards   (Array de { name, description, type: 'scenario'|'solution', resources: { ambiental, economico, social } })
 ```
 
 **Variables de entorno** (archivo `.env` en raíz, no incluido en el repo):
@@ -185,6 +188,8 @@ colección: presentations
 | `seed/seedArticles.js` | Importa artículos desde CSV a MongoDB. Uso: `npm run seed:articles "ruta/al/archivo.csv"` |
 | `seed/seedPresentations.js` | Sube imágenes locales a Cloudinary y guarda URLs en MongoDB. Uso: `npm run seed:presentations "Nombre" "ruta/carpeta"` |
 | `seed/seedEvaluations.js` | Descarga las 6 evaluaciones desde Google Sheets y las inserta en MongoDB. Uso: `npm run seed:evaluations` |
+| `seed/seedTutorial.js` | Inserta el instructivo del juego en MongoDB desde `seed/tutorial_data.json`. Uso: `npm run seed:tutorial` |
+| `seed/tutorial_data.json` | Contenido completo del instructivo: reglas + 48 tarjetas (16 escenario, 32 solución) extraídas del PDF original |
 | `.env` | Variables de entorno locales (no en repo) |
 
 ---
