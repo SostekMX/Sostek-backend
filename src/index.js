@@ -315,6 +315,77 @@ app.get("/presentations", (req, res) => {
 });
 
 
+app.post("/user/favorites", verifyToken, [
+    body('content_id').notEmpty().withMessage('El ID del contenido es requerido'),
+    body('type').isIn(['article', 'presentation']).withMessage('El tipo debe ser article o presentation'),
+], (req, res) => {
+    if (!validate(req, res)) return;
+
+    dbSchema.User.findOne({ email: req.user.email })
+        .then((user) => {
+            if (!user) {
+                res.json({ success: false, error: "Usuario no encontrado" });
+                return;
+            }
+            const alreadyFavorite = user.favorites.some((f) => f.content_id === req.body.content_id);
+            if (alreadyFavorite) {
+                res.json({ success: false, error: "Ya está en favoritos" });
+                return;
+            }
+            dbSchema.User.findOneAndUpdate(
+                { email: req.user.email },
+                { $push: { favorites: { content_id: req.body.content_id, type: req.body.type } } },
+                null,
+                function (err) {
+                    if (err) {
+                        res.json({ success: false, error: "No se pudo agregar a favoritos" });
+                        return;
+                    }
+                    res.json({ success: true, message: "Favorito agregado" });
+                }
+            );
+        })
+        .catch(() => {
+            res.json({ success: false, error: "Error interno" });
+        });
+});
+
+
+app.get("/user/favorites", verifyToken, (req, res) => {
+    dbSchema.User.findOne({ email: req.user.email }, { favorites: 1 })
+        .then((user) => {
+            if (!user) {
+                res.json({ success: false, error: "Usuario no encontrado" });
+                return;
+            }
+            res.json({ success: true, favorites: user.favorites });
+        })
+        .catch(() => {
+            res.json({ success: false, error: "Error interno" });
+        });
+});
+
+
+app.delete("/user/favorites/:content_id", verifyToken, (req, res) => {
+    dbSchema.User.findOneAndUpdate(
+        { email: req.user.email },
+        { $pull: { favorites: { content_id: req.params.content_id } } },
+        null,
+        function (err, user) {
+            if (err) {
+                res.json({ success: false, error: "No se pudo eliminar el favorito" });
+                return;
+            }
+            if (!user) {
+                res.json({ success: false, error: "Usuario no encontrado" });
+                return;
+            }
+            res.json({ success: true, message: "Favorito eliminado" });
+        }
+    );
+});
+
+
 app.listen(PORT, () => {
     console.log("Backend running on port " + PORT);
 });
