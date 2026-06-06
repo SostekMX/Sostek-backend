@@ -58,6 +58,10 @@ var UserSchema = new mongoose.Schema({
     reset_token_expiry: {
         type: Date,
         required: false
-    }
+    },
+    favorites: [{
+        content_id: { type: String, required: true },
+        type: { type: String, enum: ['article', 'presentation'], required: true }
+    }]
 }, { collection: "users" });
 exports.User = mongoose.model('User', UserSchema);
