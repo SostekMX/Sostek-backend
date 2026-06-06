@@ -1,7 +1,7 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-05
-> Rama activa: `main`
+> Última actualización: 2026-06-06
+> Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
 ---
@@ -27,7 +27,7 @@
 
 El **servidor de usuarios de SOSTEK**: maneja el registro, login y edición de perfil de los usuarios de la plataforma. Corre en `http://localhost:8080` y es consumido por el frontend (Ionic React en `:3000`).
 
-Contiene también los endpoints de contenido: evaluaciones, artículos y presentaciones, almacenados en MongoDB Atlas. El contenido se carga con los scripts de seed en `seed/`.
+Contiene también los endpoints de contenido: evaluaciones, artículos, presentaciones y el tutorial del juego, almacenados en MongoDB Atlas. El contenido se carga con los scripts de seed en `seed/`.
 
 ---
 
