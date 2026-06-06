@@ -48,6 +48,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos y present
 | `GET` | `/articles` | Lista de todos los artículos | Ninguna (pública) |
 | `GET` | `/articles/:id` | Detalle de un artículo | Ninguna (pública) |
 | `GET` | `/presentations` | Lista de presentaciones con slides | Ninguna (pública) |
+| `POST` | `/user/favorites` | Agregar artículo o presentación a favoritos | JWT requerido |
+| `GET` | `/user/favorites` | Obtener lista de favoritos del usuario | JWT requerido |
+| `DELETE` | `/user/favorites/:content_id` | Eliminar un favorito por ID de contenido | JWT requerido |
 
 ---
 
@@ -68,6 +71,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos y present
 - **`GET /articles`** — retorna lista completa de artículos
 - **`GET /articles/:id`** — retorna un artículo por ID
 - **`GET /presentations`** — retorna lista de presentaciones con sus URLs de slides
+- **`POST /user/favorites`** — agrega un artículo o presentación a favoritos; valida `content_id` y `type` (`article` | `presentation`); rechaza duplicados
+- **`GET /user/favorites`** — retorna el array `favorites` del usuario autenticado
+- **`DELETE /user/favorites/:content_id`** — elimina el favorito con ese `content_id` usando `$pull` de MongoDB
 - **Middleware `verifyToken`** — valida JWT en header `Authorization: Bearer <token>` antes de rutas protegidas
 - **Rate limiting** — `/user/signup` y `/user/login` limitados a 10 requests cada 15 minutos
 - **Validación de inputs** — `express-validator` activo en todos los endpoints con body
@@ -93,7 +99,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos y present
 
 ### ❌ NO IMPLEMENTADO
 
-*(No hay ítems sin implementar)*
+| Elemento | Descripción |
+|----------|-------------|
+| Tutorial (Google Drive → MongoDB) | El frontend carga el tutorial desde Google Drive via `useGetDocuments`. Falta modelo en MongoDB, seed script y endpoint `GET /tutorial` para migrar esta dependencia igual que artículos y presentaciones |
 
 ---
 
@@ -109,7 +117,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos y present
 
 ### 🟢 Backlog (funcionalidades nuevas)
 
-*(No hay ítems de backlog pendientes)*
+| Tarea | Detalle |
+|-------|---------|
+| Tutorial (Google Drive → MongoDB) | Crear modelo `Tutorial` en MongoDB, seed script para importar el contenido, y endpoint `GET /tutorial`. El frontend actualmente usa `useGetDocuments` con Google Drive |
 
 ---
 
@@ -128,7 +138,8 @@ MongoDB (SostekDB)
     ├── score_test          (Number, optional, default: 0)
     ├── score_game          (Number, optional, default: 0)
     ├── reset_token         (String, optional — se llena al pedir recuperación)
-    └── reset_token_expiry  (Date, optional — expiración 1h desde la generación)
+    ├── reset_token_expiry  (Date, optional — expiración 1h desde la generación)
+    └── favorites           (Array de { content_id: String, type: 'article'|'presentation' })
 
 colección: evaluations
     ├── name      (String, required)
