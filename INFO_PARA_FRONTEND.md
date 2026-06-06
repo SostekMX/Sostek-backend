@@ -2,7 +2,7 @@
 
 > Para el equipo de frontend. Describe qué cambió, qué falta y cómo llamar cada endpoint.
 > Backend corre en: `http://localhost:8080`
-> Última actualización: 2026-06-05
+> Última actualización: 2026-06-06
 
 ---
 
@@ -10,27 +10,29 @@
 
 | Fecha | Qué cambió | Qué necesita saber el frontend |
 |-------|-----------|-------------------------------|
+| 2026-06-06 | `GET /tutorial` implementado | El frontend ya NO necesita Google Drive para el tutorial. Reemplazar `useGetDocuments` con axios al backend. El instructivo tiene reglas del juego + 48 tarjetas (escenario y solución) con sus valores de recursos. |
+| 2026-06-06 | Endpoints de favoritos: `POST /user/favorites`, `GET /user/favorites`, `DELETE /user/favorites/:content_id` | Ya se puede implementar el guardado de artículos y presentaciones favoritas. Requieren JWT. Ver contratos en sección 3. |
+| 2026-06-06 | Campo `favorites` agregado al modelo de usuario | Array de `{ content_id, type }` — el frontend no lo recibe en `GET /user/profile`, se obtiene aparte con `GET /user/favorites`. |
 | 2026-06-05 | Endpoints de contenido: `GET /evaluations`, `/evaluations/:id`, `/articles`, `/articles/:id`, `/presentations` | El frontend ya NO necesita Google APIs para cargar contenido. Reemplazar todas las llamadas a `gapi.client` con axios al backend. |
 | 2026-06-05 | Evaluaciones, artículos y presentaciones migrados a MongoDB Atlas | Las 6 evaluaciones (3 Arquitectura + 3 Diseño Industrial), 26 artículos y 2 presentaciones ya están en la base de datos. |
 | 2026-06-04 | Nuevos endpoints `POST /user/forgot-password` y `POST /user/reset-password` | Ya se puede implementar la pantalla de recuperación de contraseña. Ver contratos en sección 3. |
-| 2026-06-04 | El modelo de usuario tiene dos campos nuevos: `reset_token` y `reset_token_expiry` | Campos internos — el frontend no los recibe ni los envía directamente. |
 | 2026-05-29 | `POST /user/score` implementado | Listo para integrarse en `FinalScoreEvaluation.tsx` al terminar una evaluación. |
 | 2026-05-29 | `DELETE /user` implementado | Listo para integrarse en la UI de perfil como opción "Eliminar cuenta". |
 
 ---
 
-## 2. Lo que falta implementar
+## 2. Lo que falta integrar en el frontend
 
-| Elemento | Por qué lo necesita el frontend | Estado |
-|----------|--------------------------------|--------|
-| `POST /user/favorites` (o similar) | El menú lateral muestra "Favoritos" pero no hay endpoint para guardar artículos favoritos | ❌ No existe — pendiente definir contrato |
-| Reemplazar `gapi.client` con axios | El frontend actualmente llama a Google Sheets directamente; esas llamadas deben apuntar al backend | ⚠️ Pendiente en frontend |
+> El backend tiene todo implementado. Lo pendiente es solo trabajo del frontend.
 
-> Lo que falta hacer en el **frontend** (el backend ya está listo):
-> - Reemplazar todas las llamadas a Google APIs por llamadas a los endpoints de contenido del backend
-> - Integrar `POST /user/score` al terminar una evaluación (`FinalScoreEvaluation.tsx`)
-> - Integrar `DELETE /user` en la UI (opción "Eliminar cuenta")
-> - Integrar `POST /user/forgot-password` y `POST /user/reset-password` en la pantalla de login
+| Elemento | Dónde integrarlo | Estado |
+|----------|-----------------|--------|
+| Reemplazar `useGetDocuments` (tutorial) | Hook del tutorial — apuntar a `GET /tutorial` | ⚠️ Pendiente en frontend |
+| Reemplazar `gapi.client` con axios | Todas las pantallas que cargan evaluaciones, artículos y presentaciones | ⚠️ Pendiente en frontend |
+| Integrar favoritos | Menú lateral / pantalla de favoritos — usar los 3 endpoints de `/user/favorites` | ⚠️ Pendiente en frontend |
+| Integrar `POST /user/score` | `FinalScoreEvaluation.tsx` al terminar una evaluación | ⚠️ Pendiente en frontend |
+| Integrar `DELETE /user` | UI de perfil — opción "Eliminar cuenta" | ⚠️ Pendiente en frontend |
+| Integrar `POST /user/forgot-password` y `POST /user/reset-password` | Pantalla de login / recuperación de contraseña | ⚠️ Pendiente en frontend |
 
 ---
 
@@ -116,7 +118,7 @@ Genera un token de recuperación válido por **1 hora** y lo retorna en la respu
 ```json
 { "success": true, "reset_token": "<64-char-hex-string>" }
 ```
-> El frontend debe guardar este token y enviárselo al usuario (por la vía que corresponda) para que pueda usarlo en `/user/reset-password`.
+> El frontend debe guardar este token y enviárselo al usuario para que pueda usarlo en `/user/reset-password`.
 
 **Errores posibles**
 | `error` | Causa |
@@ -179,6 +181,7 @@ Authorization: Bearer <token>
   }
 }
 ```
+> El campo `favorites` **no** viene en esta respuesta — usar `GET /user/favorites` para obtenerlos.
 
 **Errores posibles**
 | `error` | Causa |
@@ -277,6 +280,93 @@ Authorization: Bearer <token>
 | `"Token requerido"` | Header ausente |
 | `"Token inválido o expirado"` | JWT vencido |
 | `"Usuario no encontrado"` | El usuario ya no existe en DB |
+
+---
+
+### POST `/user/favorites`
+Agrega un artículo o presentación a la lista de favoritos del usuario.
+
+**Headers requeridos**
+```
+Authorization: Bearer <token>
+```
+
+**Body**
+```json
+{
+  "content_id": "<_id del artículo o presentación>",
+  "type": "article"
+}
+```
+> `type` acepta solo `"article"` o `"presentation"`.
+
+**Respuesta exitosa — 200**
+```json
+{ "success": true, "message": "Favorito agregado" }
+```
+
+**Errores posibles**
+| `error` | Causa |
+|---------|-------|
+| `"Token requerido"` | Header ausente |
+| `"El ID del contenido es requerido"` | `content_id` vacío o ausente |
+| `"El tipo debe ser article o presentation"` | `type` con valor inválido |
+| `"Ya está en favoritos"` | El `content_id` ya está en la lista del usuario |
+| `"Usuario no encontrado"` | El usuario del token ya no existe en DB |
+
+---
+
+### GET `/user/favorites`
+Retorna la lista completa de favoritos del usuario autenticado.
+
+**Headers requeridos**
+```
+Authorization: Bearer <token>
+```
+
+**Respuesta exitosa — 200**
+```json
+{
+  "success": true,
+  "favorites": [
+    { "content_id": "664abc...", "type": "article" },
+    { "content_id": "664def...", "type": "presentation" }
+  ]
+}
+```
+
+**Errores posibles**
+| `error` | Causa |
+|---------|-------|
+| `"Token requerido"` | Header ausente |
+| `"Usuario no encontrado"` | El usuario del token ya no existe en DB |
+
+---
+
+### DELETE `/user/favorites/:content_id`
+Elimina un favorito de la lista del usuario por su `content_id`.
+
+**Headers requeridos**
+```
+Authorization: Bearer <token>
+```
+
+**Parámetro de URL**
+```
+/user/favorites/664abc123def456...
+```
+
+**Respuesta exitosa — 200**
+```json
+{ "success": true, "message": "Favorito eliminado" }
+```
+
+**Errores posibles**
+| `error` | Causa |
+|---------|-------|
+| `"Token requerido"` | Header ausente |
+| `"Usuario no encontrado"` | El usuario del token ya no existe en DB |
+| `"No se pudo eliminar el favorito"` | Error interno de DB |
 
 ---
 
@@ -390,6 +480,47 @@ Lista todas las presentaciones con las URLs de cada slide.
   ]
 }
 ```
+
+---
+
+### GET `/tutorial`
+Retorna el instructivo completo del juego SOSTEK: reglas + 48 tarjetas.
+
+**Respuesta exitosa — 200**
+```json
+{
+  "success": true,
+  "tutorial": {
+    "_id": "...",
+    "title": "Instructivo SOSTEK",
+    "rules": "Recursos del pueblo: 20 fichas de c/u...",
+    "cards": [
+      {
+        "name": "ALIANZA ESTRATÉGICA",
+        "description": "Un reconocido grupo farmacéutico...",
+        "type": "scenario",
+        "resources": { "ambiental": 0, "economico": 0, "social": 0 }
+      },
+      {
+        "name": "APICULTORES",
+        "description": "Implementaste un programa de rescate...",
+        "type": "solution",
+        "resources": { "ambiental": 2, "economico": -2, "social": 0 }
+      }
+    ]
+  }
+}
+```
+
+> - `type: "scenario"` = tarjeta de escenario (problema), se coloca al centro de la mesa
+> - `type: "solution"` = tarjeta de propuesta (solución), la juegan los participantes
+> - `resources` tiene 3 valores numéricos: `ambiental` (verde), `economico` (naranja), `social` (azul)
+> - Hay 16 tarjetas de escenario y 32 de solución
+
+**Errores posibles**
+| `error` | Causa |
+|---------|-------|
+| `"Tutorial no encontrado"` | La colección `tutorial` está vacía — correr `npm run seed:tutorial` |
 
 ---
 
