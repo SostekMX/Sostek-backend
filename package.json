@@ -11,7 +11,8 @@
     "build-start": "tsc && node -r dotenv/config src/index.js",
     "seed:articles": "node -r dotenv/config seed/seedArticles.js",
     "seed:presentations": "node -r dotenv/config seed/seedPresentations.js",
-    "seed:evaluations": "node -r dotenv/config seed/seedEvaluations.js"
+    "seed:evaluations": "node -r dotenv/config seed/seedEvaluations.js",
+    "seed:tutorial": "node -r dotenv/config seed/seedTutorial.js"
   },
   "keywords": [],
   "author": "",

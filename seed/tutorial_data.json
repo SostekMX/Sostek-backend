@@ -1,0 +1,294 @@
+{
+  "title": "Instructivo SOSTEK",
+  "rules": "Recursos del pueblo: 20 fichas de c/u (ambiental, económico y social).\n\nExisten periodicazos, los cuales pueden anular un victory point recién ganado. Cada jugador tiene derecho a usar uno durante el juego.\n\nExisten 4 tipos de tarjetas. Las tarjetas de escenario presentan una problemática relacionada al desarrollo sustentable — colocarlas al centro. Las tarjetas de propuesta sugieren posibles soluciones a las problemáticas de escenario dependiendo su categoría — revolverlas por montículos.\n\nTodos los jugadores inician con 5 cartas y deberán mantenerse así todo el juego. Si usa una deberá tomar otra.\n\nEn cada ronda un jugador es el alcalde y los demás son secretarios. El alcalde toma una tarjeta escenario y la lee.\n\nLos participantes proponen una carta como solución al escenario presentado y el alcalde decide quién es el ganador del victory point. Gana quien llega a diez victory points.\n\nNo hay solución perfecta a las cartas escenario. Se tienen que completar los recursos faltantes con recursos del pueblo en caso de no cumplir con los valores de cada tarjeta sobre la de escenario.\n\nRecursos: Naranja = Económico | Verde = Ambiental | Azul = Social",
+  "cards": [
+    {
+      "name": "ALIANZA ESTRATÉGICA",
+      "description": "Un reconocido grupo farmacéutico al que tu localidad dio apoyo, duplicó su beneficio neto anual gracias a los requerimientos de salud relacionados con el Covid-19. Recientemente se prueba que sus procesos de producción están generando daños al medio ambiente.",
+      "type": "scenario",
+      "resources": { "ambiental": 0, "economico": 0, "social": 0 }
+    },
+    {
+      "name": "EDUCACIÓN DE CALIDAD",
+      "description": "Es de gran importancia promover la educación e investigación de calidad en temas de desarrollo sostenible que permitan formular nuevas estrategias y soluciones ante este problema urgente de la humanidad. Pero es muy poco el presupuesto disponible para estos fines.",
+      "type": "scenario",
+      "resources": { "ambiental": -2, "economico": -1, "social": 0 }
+    },
+    {
+      "name": "INSECTOS COMESTIBLES",
+      "description": "Entre las especies de insectos comestibles, están los grillos (Acheta domesticus), larvas de mosca soldado (Hermetia illucens) y gusanos (Tenebrio molitor). El cambio climático está reduciendo estas poblaciones de insectos a ritmo acelerado.",
+      "type": "scenario",
+      "resources": { "ambiental": -2, "economico": -2, "social": -2 }
+    },
+    {
+      "name": "PESCA FINITA",
+      "description": "Tus pobladores son dueños de buques pesqueros, estás terminando con los peces de una región de pesca altamente demandada. Un estudio confirma que estás poniendo en riesgo una cadena de pesca y amenazando las especies del mar. Necesitas encontrar una solución que regule y regenere la pesca sin poner en riesgo la capacidad económica de tu región.",
+      "type": "scenario",
+      "resources": { "ambiental": -5, "economico": 0, "social": 0 }
+    },
+    {
+      "name": "COMPUTADORA PLANETARIA",
+      "description": "Una nueva plataforma informática masiva, la computadora planetaria, ha sido lanzada. Esta reunirá billones de puntos de datos sobre la naturaleza y brindará a las organizaciones de conservación nuevas herramientas para analizar rápidamente esa información mientras se apresuran a resolver la crisis de biodiversidad mundial. Sólo que su costo es elevado.",
+      "type": "scenario",
+      "resources": { "ambiental": -2, "economico": -2, "social": -2 }
+    },
+    {
+      "name": "HAMBRE POR MICROORGANISMOS",
+      "description": "Las plantas, animales y microorganismos que son la base de la producción de alimentos están en declive. Si estas especies críticas se pierden, la situación se agrava aún más. Los cambios en el uso de suelo, la contaminación y el cambio climático están causando esta pérdida de biodiversidad.",
+      "type": "scenario",
+      "resources": { "ambiental": 2, "economico": -3, "social": 0 }
+    },
+    {
+      "name": "BLANQUEAMIENTO CORAL",
+      "description": "Investigaciones recientes muestran que un fenómeno meteorológico global, que normalmente mantendría más bajas las temperaturas del océano en la Gran Barrera de Coral, puede no ser suficiente para detener otro blanqueamiento masivo de corales el próximo verano, según el científico jefe del parque marino.",
+      "type": "scenario",
+      "resources": { "ambiental": -2, "economico": -3, "social": -1 }
+    },
+    {
+      "name": "CONSUMO VS BIODIVERSIDAD",
+      "description": "Nuevas investigaciones confirman que el aumento del consumo de recursos y las emisiones contaminantes como resultado del crecimiento económico afecta directamente a la biodiversidad. Tu localidad ha visto disminuidas las poblaciones de diversas especies de plantas y animales por temas de contaminación.",
+      "type": "scenario",
+      "resources": { "ambiental": 0, "economico": 0, "social": 0 }
+    },
+    {
+      "name": "SESGOS AMBIENTALES",
+      "description": "Eres mujer y estás a punto de lanzar un programa que ayudará a reducir las emisiones de CO2, sin embargo, la persona que tiene que aprobarlo es un hombre y no le parece que una mujer esté a cargo de dicha iniciativa tan importante, aún sabiendo que en la actualidad es vital para aumentar la visión climática en cada país y así sumar un esfuerzo colectivo.",
+      "type": "scenario",
+      "resources": { "ambiental": -2, "economico": -2, "social": -2 }
+    },
+    {
+      "name": "CONSUMO ELECTRÓNICO",
+      "description": "El creciente auge por el E-Commerce amenaza con derivar en escenarios negativos por la creciente necesidad de transporte de mercancías y la reducción del comercio local.",
+      "type": "scenario",
+      "resources": { "ambiental": -2, "economico": 0, "social": -2 }
+    },
+    {
+      "name": "PAGO POR EMISIONES",
+      "description": "Surge un sistema nacional de fijación de precios por emisiones de carbono. Este nuevo sistema supone un escenario desfavorable para tu ciudad al ser una zona industrial, donde el 60% de los empleos son generados por fábricas que emiten dicho gas; pero sin duda alguna trae beneficios en términos medioambientales.",
+      "type": "scenario",
+      "resources": { "ambiental": 2, "economico": -3, "social": -2 }
+    },
+    {
+      "name": "HAMBRE DE SEQUÍAS",
+      "description": "El hambre mundial está aumentando debido a todos los cambios climáticos, principalmente las sequías, lo cual está provocando niveles de desnutrición. Esta problemática no solo afecta la salud e integridad de las personas, sino que también ralentiza el progreso en áreas de desarrollo como la educación y el empleo.",
+      "type": "scenario",
+      "resources": { "ambiental": 0, "economico": 0, "social": 0 }
+    },
+    {
+      "name": "RARAS PROHIBICIONES",
+      "description": "Un nuevo impuesto a medios alternos de transporte como los vehículos eléctricos amenaza con mitigar el desarrollo de nuevas estrategias de transporte para reducir las emisiones de GEI.",
+      "type": "scenario",
+      "resources": { "ambiental": 0, "economico": 0, "social": 0 }
+    },
+    {
+      "name": "ÚLTIMO MINUTO",
+      "description": "Perdimos la carrera. El cambio climático ha llegado a límites extremos y es momento de parar la producción en el mundo para lograr la recuperación ambiental.",
+      "type": "scenario",
+      "resources": { "ambiental": -10, "economico": 0, "social": 0 }
+    },
+    {
+      "name": "PARADOJA ELÉCTRICA",
+      "description": "Implementaste un programa para incentivar el uso de automóviles eléctricos, sin embargo, ahora el gasto energético de tus ciudades ha aumentado. ¿Qué harás?",
+      "type": "scenario",
+      "resources": { "ambiental": -2, "economico": 1, "social": 1 }
+    },
+    {
+      "name": "ACIDEZ OCEÁNICA",
+      "description": "Desde la Revolución Industrial la acidez de las aguas oceánicas superficiales ha aumentado un 30%. El océano ha absorbido entre el 20% y el 30% del total de las emisiones antropogénicas de dióxido de carbono en los últimos decenios (7.200 a 10.800 millones de toneladas métricas por año). Debes restaurar tus ecosistemas acuáticos y leyes de protección para disminuir el impacto de las consecuencias.",
+      "type": "scenario",
+      "resources": { "ambiental": -2, "economico": -1, "social": -1 }
+    },
+    {
+      "name": "APICULTORES",
+      "description": "Implementaste un programa de rescate de tus apicultores usando tecnologías de la información que ayudó a disminuir la pérdida de polinizadores (abejas). Requieres recursos económicos para su continuidad.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": -2, "social": 0 }
+    },
+    {
+      "name": "CÓDIGO DE PLAGAS",
+      "description": "Después de hacer una investigación, desarrollaste un código sobre la gestión de plaguicidas, creando un control integral de plagas que no mata a los polinizadores.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": -1, "social": 0 }
+    },
+    {
+      "name": "CONSECUENCIAS DE INTERÉS",
+      "description": "Tu antecesor prefirió basar sus decisiones de crecimiento en beneficiar los intereses particulares sobre los sociales. Los últimos proyectos de impacto ambiental deterioran el ambiente y sólo generan ganancias para pocos. Tu población tiene la factura. Pero tú propones una nueva estrategia para apoyar los intereses sociales que habían sido descuidados.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": -1, "social": 3 }
+    },
+    {
+      "name": "DECLARACIONES QUE VUELAN",
+      "description": "Te uniste a la declaración de la Convención para la protección de especies migratorias para proteger a las aves en migración, y vas a ayudar a generar áreas de conectividad para las especies migratorias.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": -2, "social": 0 }
+    },
+    {
+      "name": "DÍA DE LOS PUEBLOS",
+      "description": "Apoyas activamente como voluntario en la logística del Día Internacional de los Pueblos Indígenas, que busca reconocer formalmente los derechos y roles de los Pueblos Indígenas y las comunidades locales en los acuerdos ambientales internacionales y revisar radicalmente el enfoque de conservación.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": 0, "social": 2 }
+    },
+    {
+      "name": "REVOLUCIÓN AGRÍCOLA",
+      "description": "Apoyaste un proyecto en Madagascar, el cual es liderado por adolescentes de la isla, quienes han iniciado una revolución agrícola, trabajando para evitar que la producción de alimentos destruya la rica selva tropical de la isla.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": -1, "social": 1 }
+    },
+    {
+      "name": "EL MAR LLEGÓ",
+      "description": "Los niveles de los océanos están aumentando más rápido de lo esperado, poniendo en riesgo tu localidad, ubicada junto al mar. Decides apoyar un emprendimiento social que está desarrollando una solución para abordar esta problemática.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": -2, "social": 2 }
+    },
+    {
+      "name": "EQUIDAD Y CAMBIO",
+      "description": "Sabiendo la importancia que tienen las mujeres en la toma de decisiones sobre el cambio climático, se abre un programa de talleres para integrar el género en las políticas, planes y acciones nacionales por el clima. Es importante considerar las diferencias sociales/género porque enfrentan esta problemática con impactos diferenciados.",
+      "type": "solution",
+      "resources": { "ambiental": 0, "economico": -1, "social": 2 }
+    },
+    {
+      "name": "COPAS MENSTRUALES PARA TODAS",
+      "description": "Los productos de menstruación en México generan alrededor de 210 mil toneladas de basura y tardan en degradarse entre 500 y 800 años. Diriges una iniciativa para ofrecer copas menstruales gratuitas, para reducir esas cifras; además mejoraría la calidad de vida de las niñas y mujeres que no tienen acceso a estos productos.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": -1, "social": 2 }
+    },
+    {
+      "name": "ADIÓS AUTOMÓVILES",
+      "description": "Implementas un nuevo sistema de sectores libres de tráfico vehicular, favoreciendo el desarrollo de nuevos espacios públicos en la ciudad al mismo tiempo que fomenta el uso de sistemas de transporte colectivo, aminorando la concentración de GEI producidos.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": 1, "social": 1 }
+    },
+    {
+      "name": "RECICLAJE INDÍGENA",
+      "description": "Desarrollas una solución de reciclaje innovador para beneficio de personas indígenas en la ciudad. La mala organización de desechos en la ciudad es factor para el cambio climático. Muchos indígenas en la ciudad podrían aprender a beneficiarse y al mismo tiempo estarían haciendo una aportación para abordar el cambio climático.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": 1, "social": 2 }
+    },
+    {
+      "name": "HUELLA DE CARBONO: LIVE",
+      "description": "Desarrollas un nuevo sistema para calcular la huella de carbono de los consumidores en tiempo real. Esto permite establecer un límite de bienes semanales adquiridos por ciudadano con base en los lineamientos, generando así una reducción en la contaminación por GEI y por desechos producidos.",
+      "type": "solution",
+      "resources": { "ambiental": 3, "economico": 1, "social": 0 }
+    },
+    {
+      "name": "EARTH NOW",
+      "description": "Dedicas un gran recurso para participar en el proyecto Earth Now para poder crear soluciones basadas en la información abierta, la participación y cooperación internacional. La investigación puede darte frutos, o tal vez no.",
+      "type": "solution",
+      "resources": { "ambiental": 0, "economico": -3, "social": 2 }
+    },
+    {
+      "name": "DIETA POR EL PLANETA",
+      "description": "Tu población comienza a cambiar sus hábitos alimenticios basándose en una dieta por el Planeta, en donde se busca producir alimentos de una forma más sostenible. Sin embargo, está comprobado que en nuestro país comer saludablemente es más caro; los alimentos chatarra, por su parte, son muy económicos.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": -2, "social": 1 }
+    },
+    {
+      "name": "BIG U",
+      "description": "Debido a la prospectiva del crecimiento de los niveles de los océanos realizas un proyecto que protegerá a la ciudad de posibles inundaciones. Sin embargo, esto representa un gran costo.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": -3, "social": 1 }
+    },
+    {
+      "name": "CONSUMO INTERNO",
+      "description": "Haces una ley para que tu población únicamente consuma las especies de tu territorio, evitando la propagación de especies exóticas que son introducidas al ecosistema de forma artificial.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": -1, "social": 1 }
+    },
+    {
+      "name": "SARS-COV-5",
+      "description": "Consigues recursos para vacunar contra el Covid-19 también a los niños menores de 12 años sin comorbilidades.",
+      "type": "solution",
+      "resources": { "ambiental": 0, "economico": 2, "social": 2 }
+    },
+    {
+      "name": "DECRECIMIENTO DE INSECTO",
+      "description": "El impacto del crecimiento económico ha reducido la cantidad de insectos en el mundo. Este año en particular promueves una campaña de recuperación que apoya a rescatar una importante fuente de alimentación.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": 1, "social": 1 }
+    },
+    {
+      "name": "CRISIS VERDE",
+      "description": "La tendencia es que la inversión en empresas sostenibles disminuirá por la crisis global. Diseñas estrategias ingeniosas y eficientes para contrarrestar este efecto en tu localidad.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": 2, "social": 1 }
+    },
+    {
+      "name": "CRÉDITO ECOLÓGICO",
+      "description": "Creas un nuevo prestamista ecológico que se produce en medio de crecientes llamamientos de defensores del clima, economistas y académicos para invertir en infraestructuras ecológicas que ayuden a revivir la economía de tu territorio y que contribuyan a cumplir sus objetivos en la lucha del cambio climático.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": 1, "social": 1 }
+    },
+    {
+      "name": "AZOTEAS VERDES",
+      "description": "Promueves con éxito un programa de azoteas verdes, con la intención de generar anillos verdes que sirvan de pulmones para la ciudad, reteniendo polvo y partículas suspendidas en el ambiente, filtrando el aire, regulando la humedad de la zona y creando microclimas.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": -1, "social": 1 }
+    },
+    {
+      "name": "ECOBICI YA!",
+      "description": "Haces el lanzamiento de ECOBICI, una herramienta de movilidad respetuosa del medio ambiente que permite a la gente desplazarse con mayor rapidez de un medio de transporte público a otro, o acercarse a sus destinos finales o intermedios.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": -1, "social": 1 }
+    },
+    {
+      "name": "VIVIENDA SUSTENTABLE",
+      "description": "Lanzamiento del programa 'Vivienda Sustentable'. Entre las tecnologías incorporadas se encuentran los calentadores solares de agua, lámparas ahorradoras de energía, ahorradores de agua, celdas fotovoltaicas para el alumbrado exterior, el tratamiento de agua para reutilización y la captación de agua de lluvia.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": 0, "social": 1 }
+    },
+    {
+      "name": "PRO/CON DEL PUERTO",
+      "description": "La ampliación de operaciones de un puerto local dará ingresos económicos y empleos derivados del aumento de capacidad de carga, pero su visión de desarrollo es claramente de corto plazo e ignora los beneficios sociales y ambientales que el Sistema Arrecifal de la zona ha brindado y puede seguir brindando por mucho más de 20 años.",
+      "type": "solution",
+      "resources": { "ambiental": -4, "economico": 4, "social": -2 }
+    },
+    {
+      "name": "CONSUMO IRRACIONAL",
+      "description": "Descubres que ciertas tecnologías con enfoque en reducir el daño al medio ambiente sólo ayudan a paliar problemas más urgentes. La raíz del problema en relación al consumo irracional de los recursos naturales es un problema de cambio de la conducta humana. Diseñas una campaña de concientización en este sentido.",
+      "type": "solution",
+      "resources": { "ambiental": 3, "economico": 0, "social": 2 }
+    },
+    {
+      "name": "NUEVAS POLÍTICAS",
+      "description": "Desarrollas una investigación que demuestra que sigue existiendo la necesidad de políticas y acciones más sólidas que cambien efectivamente la trayectoria de las emisiones. Para la mayoría de los países desarrollados, los datos económicos y de emisiones sugieren una disociación entre las emisiones y el crecimiento económico.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": 1, "social": 1 }
+    },
+    {
+      "name": "EXPLOTACIÓN DE RESERVAS",
+      "description": "Creas un programa para vigilar a las 20 empresas que más explotan las reservas mundiales de petróleo, gas y carbón, siendo responsables de más de un tercio de todas las emisiones de gases de efecto invernadero. Con esto impulsas la emergencia climática que amenaza el futuro de la humanidad.",
+      "type": "solution",
+      "resources": { "ambiental": 3, "economico": 1, "social": 1 }
+    },
+    {
+      "name": "ECONOMÍA AMBIENTAL",
+      "description": "El desarrollo turístico en ciertas zonas del país ha experimentado desde los años 70 un acelerado crecimiento en la infraestructura turística. El ecosistema ha resentido las repercusiones de este proceso. Creas un programa enfocado en privilegiar la protección del medio ambiente por encima de lo económico.",
+      "type": "solution",
+      "resources": { "ambiental": 3, "economico": -3, "social": 0 }
+    },
+    {
+      "name": "IMPULSO ESTUDIANTIL",
+      "description": "Brindas apoyo para impulsar a la comunidad estudiantil y científica para la investigación, en donde uno de los principales objetivos es salvar al río altamente contaminado que cruza en tu territorio.",
+      "type": "solution",
+      "resources": { "ambiental": 1, "economico": -1, "social": 1 }
+    },
+    {
+      "name": "PAGO DE SERVICIOS AMBIENTALES",
+      "description": "A través del Programa de Retribución por la Conservación de Servicios Ambientales en Reservas Ecológicas Comunitarias y Áreas Comunitarias de Conservación Ecológica, recompensas a los dueños de los territorios en Suelo de Conservación por la protección y conservación que le dan a los recursos naturales.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": -2, "social": 3 }
+    },
+    {
+      "name": "PLANTA NUCLEAR",
+      "description": "Abres una nueva planta nuclear para generación de energía. Se ha demostrado que la energía nuclear es la forma de generación más sustentable y que la energía es de gran relevancia para poder cumplir los ODS.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": 2, "social": 2 }
+    },
+    {
+      "name": "EDUCACIÓN",
+      "description": "Recibiste una beca para estudiar una maestría en la cual el tema central de investigación será el desarrollo sostenible.",
+      "type": "solution",
+      "resources": { "ambiental": 2, "economico": 1, "social": 2 }
+    }
+  ]
+}
