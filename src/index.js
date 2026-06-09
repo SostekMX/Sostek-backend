@@ -8,6 +8,7 @@ const crypto = require("crypto");
 const { body, validationResult } = require("express-validator");
 const rateLimit = require("express-rate-limit");
 const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
 const fileType = require('file-type');
 const nodemailer = require('nodemailer');
 const cloudinary = require('cloudinary').v2;
@@ -22,6 +23,7 @@ const app = express();
 var cors = require('cors');
 
 app.use(helmet());
+app.use(mongoSanitize());
 app.use(cors({
     origin: ['http://localhost:3000', 'http://localhost:8100'],
     methods: ['GET', 'POST', 'DELETE'],

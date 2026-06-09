@@ -10,6 +10,7 @@ const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 
 const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
 const fileType = require('file-type');
 const nodemailer = require('nodemailer');
 const cloudinary = require('cloudinary').v2;
@@ -25,6 +26,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(helmet());
+app.use(mongoSanitize());
 app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:8100'],
   methods: ['GET', 'POST', 'DELETE'],
