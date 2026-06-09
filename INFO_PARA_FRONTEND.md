@@ -10,7 +10,11 @@
 
 | Fecha | Qué cambió | Qué necesita saber el frontend |
 |-------|-----------|-------------------------------|
-| 2026-06-09 | **Contraseña mínima subida a 8 caracteres** | En `/user/signup` y `/user/reset-password` el backend ahora rechaza contraseñas menores a 8 caracteres. El mensaje de error cambió a `"La contraseña debe tener al menos 8 caracteres"`. Actualizar validación en los formularios si no lo hicieron ya. |
+| 2026-06-09 | **BS1 ✅ Sin secretos hardcodeados** | Confirmado — todos los secrets (JWT, DB, Cloudinary, Email) se leen de variables de entorno. Ninguno está hardcodeado en el código. |
+| 2026-06-09 | **BS2 ✅ express-validator + helmet + express-mongo-sanitize** | Los tres están activos. `express-validator` valida y sanitiza todos los inputs. `helmet` activa headers de seguridad HTTP. `express-mongo-sanitize` bloquea NoSQL injection en todos los endpoints. |
+| 2026-06-09 | **BS4 ✅ Contraseña mínima 8 caracteres** | En `/user/signup` y `/user/reset-password` el backend ahora rechaza contraseñas menores a 8 caracteres. Mensaje: `"La contraseña debe tener al menos 8 caracteres"`. |
+| 2026-06-09 | **✅ `description` en evaluaciones** | `GET /evaluations` ya incluye `description` en cada evaluación desde hace varios días. Las 6 evaluaciones tienen texto cargado. |
+| 2026-06-09 | **Imágenes rotas en 3 artículos — pendiente de datos** | Este es un fix de datos en MongoDB, no de código. Hay que correr los `updateOne` directamente en la base. Ver sección de pendientes abajo. |
 | 2026-06-09 | **`POST /user/forgot-password` — flujo cambiado** | Ya no retorna `reset_token` en la respuesta. Ahora envía un **email** al usuario con el link y el token. Ver nuevo contrato abajo. **El frontend necesita actualizar las pantallas ForgotPassword y ResetPassword.** |
 | 2026-06-09 | **`POST /user/login` — mensajes de error unificados** | Ya no distingue entre "correo no registrado" y "contraseña incorrecta". Ahora ambos casos devuelven `"Correo o contraseña incorrectos"`. Actualizar cualquier lógica que compare el mensaje de error. |
 | 2026-06-08 | `POST /user/avatar` implementado | Nueva pantalla o botón para subir foto de perfil. Enviar `multipart/form-data` con el campo `avatar`. Formatos aceptados: jpg, png, webp (máx 5MB). La URL del avatar queda disponible en `GET /user/profile` como `avatar`. Ver contrato en sección 3. |
@@ -39,6 +43,29 @@
 | **Actualizar `ResetPassword.tsx`** | Leer el token del query param `?token=` de la URL. El link del email llega como `…/ResetPassword?token=<token>`. Código: `new URLSearchParams(useLocation().search).get('token')` | 🔴 Roto sin este cambio |
 | Revisar validación de contraseña | El backend ahora rechaza contraseñas menores a 8 chars. Si el frontend ya valida 8, sin cambios. Si valida 6, subir a 8. | 🟡 Sin impacto visual — solo coherencia |
 | Revisar mensajes de error en login | Los strings `"Cuenta no registrada"` y `"Contraseña incorrecta"` ya no existen. Ahora es `"Correo o contraseña incorrectos"`. | 🟡 Solo si se comparan strings de error |
+
+---
+
+### Pendiente de datos — imágenes rotas en 3 artículos
+
+Este no es un bug de código — son 3 URLs rotas en la colección `articles` de MongoDB. Correr estos comandos directamente en la base:
+
+```js
+db.articles.updateOne(
+  { title: "Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales" },
+  { $set: { image: "https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg" } }
+)
+db.articles.updateOne(
+  { title: "El impacto del cine en el medio ambiente" },
+  { $set: { image: "https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png" } }
+)
+db.articles.updateOne(
+  { title: "Muebles en Abuela" },
+  { $set: { image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s" } }
+)
+```
+
+> El frontend ya muestra un placeholder cuando la imagen falla — esto solo mejora la experiencia visual.
 
 ---
 
