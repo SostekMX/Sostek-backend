@@ -33,6 +33,7 @@ var ArticleSchema = new mongoose.Schema({
 
 var PresentationSchema = new mongoose.Schema({
   name:   { type: String, required: true },
+  cover:  { type: String, default: '' },
   slides: { type: [String], default: [] }
 }, { collection: 'presentations' });
 
