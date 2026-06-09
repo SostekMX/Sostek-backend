@@ -10,6 +10,7 @@ const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 
 const helmet = require('helmet');
+const fileType = require('file-type');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 
@@ -458,6 +459,12 @@ app.post("/user/avatar", verifyToken, (req: any, res: Response, next: NextFuncti
 }, async (req: any, res: Response) => {
   if (!req.file) return res.json({ success: false, error: 'La imagen es requerida' });
   try {
+    let detected;
+    try { detected = await fileType.fromBuffer(req.file.buffer); } catch { detected = null; }
+    const allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!detected || !allowedMimes.includes(detected.mime)) {
+      return res.json({ success: false, error: 'Formato no válido. Solo jpg, png o webp' });
+    }
     const result = await uploadToCloudinary(req.file.buffer);
     await dbSchema.User.findOneAndUpdate({ email: req.user.email }, { avatar: result.secure_url });
     res.json({ success: true, avatar_url: result.secure_url });

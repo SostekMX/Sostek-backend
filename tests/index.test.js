@@ -370,7 +370,7 @@ describe('POST /user/avatar', () => {
   });
 
   test('sube imagen y retorna avatar_url', async () => {
-    const fakeImage = Buffer.from('fake-image-data');
+    const fakeImage = Buffer.from([0xFF,0xD8,0xFF,0xE0,0x00,0x10,0x4A,0x46,0x49,0x46,0x00,0x01,0x01,0x00,0x00,0x01,0x00,0x01,0x00,0x00,0xFF,0xD9]);
     const res = await request(app)
       .post('/user/avatar')
       .set('Authorization', `Bearer ${token}`)
@@ -407,11 +407,11 @@ describe('POST /user/avatar', () => {
   });
 
   test('avatar queda guardado en el perfil del usuario', async () => {
-    const fakeImage = Buffer.from('fake-image-data');
+    const fakeImage = Buffer.from([0xFF,0xD8,0xFF,0xE0,0x00,0x10,0x4A,0x46,0x49,0x46,0x00,0x01,0x01,0x00,0x00,0x01,0x00,0x01,0x00,0x00,0xFF,0xD9]);
     await request(app)
       .post('/user/avatar')
       .set('Authorization', `Bearer ${token}`)
-      .attach('avatar', fakeImage, { filename: 'foto.png', contentType: 'image/png' });
+      .attach('avatar', fakeImage, { filename: 'foto.jpg', contentType: 'image/jpeg' });
     const profileRes = await request(app)
       .get('/user/profile')
       .set('Authorization', `Bearer ${token}`);
