@@ -24,11 +24,13 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 10,
-  message: { success: false, error: "Demasiados intentos, intenta más tarde" }
-});
+const authLimiter = process.env.NODE_ENV === 'test'
+  ? (_req: any, _res: any, next: NextFunction) => next()
+  : rateLimit({
+      windowMs: 15 * 60 * 1000,
+      limit: 10,
+      message: { success: false, error: "Demasiados intentos, intenta más tarde" }
+    });
 
 function verifyToken(req: any, res: Response, next: NextFunction) {
   const authHeader = req.headers['authorization'];
@@ -56,10 +58,13 @@ function validate(req: Request, res: Response): boolean {
 
 
 app.post("/user/signup", authLimiter, [
-  body('email').isEmail().withMessage('Correo inválido').normalizeEmail(),
-  body('password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
-  body('name').notEmpty().trim().withMessage('El nombre es requerido'),
-  body('surname').notEmpty().trim().withMessage('El apellido es requerido'),
+  body('email').isEmail().withMessage('Correo inválido').normalizeEmail().isLength({ max: 100 }).withMessage('Correo demasiado largo'),
+  body('password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres').isLength({ max: 128 }).withMessage('Contraseña demasiado larga'),
+  body('name').notEmpty().trim().withMessage('El nombre es requerido').isLength({ max: 50 }).withMessage('El nombre es demasiado largo'),
+  body('surname').notEmpty().trim().withMessage('El apellido es requerido').isLength({ max: 50 }).withMessage('El apellido es demasiado largo'),
+  body('birth_date').optional({ nullable: true }).isString().trim().isLength({ max: 20 }).withMessage('Fecha de nacimiento inválida'),
+  body('occupation').optional({ nullable: true }).isString().trim().isLength({ max: 100 }).withMessage('Ocupación demasiado larga'),
+  body('gender').optional({ nullable: true }).isString().trim().isLength({ max: 20 }).withMessage('Género inválido'),
 ], (req: Request, res: Response) => {
   if (!validate(req, res)) return;
 
@@ -85,8 +90,8 @@ app.post("/user/signup", authLimiter, [
 
 
 app.post("/user/login", authLimiter, [
-  body('email').isEmail().withMessage('Correo inválido').normalizeEmail(),
-  body('password').notEmpty().withMessage('La contraseña es requerida'),
+  body('email').isEmail().withMessage('Correo inválido').normalizeEmail().isLength({ max: 100 }).withMessage('Correo demasiado largo'),
+  body('password').notEmpty().withMessage('La contraseña es requerida').isLength({ max: 128 }).withMessage('Contraseña demasiado larga'),
 ], (req: Request, res: Response) => {
   if (!validate(req, res)) return;
 
@@ -110,8 +115,11 @@ app.post("/user/login", authLimiter, [
 
 
 app.post("/user/edit", verifyToken, [
-  body('name').notEmpty().trim().withMessage('El nombre es requerido'),
-  body('surname').notEmpty().trim().withMessage('El apellido es requerido'),
+  body('name').notEmpty().trim().withMessage('El nombre es requerido').isLength({ max: 50 }).withMessage('El nombre es demasiado largo'),
+  body('surname').notEmpty().trim().withMessage('El apellido es requerido').isLength({ max: 50 }).withMessage('El apellido es demasiado largo'),
+  body('birth_date').optional({ nullable: true }).isString().trim().isLength({ max: 20 }).withMessage('Fecha de nacimiento inválida'),
+  body('occupation').optional({ nullable: true }).isString().trim().isLength({ max: 100 }).withMessage('Ocupación demasiado larga'),
+  body('gender').optional({ nullable: true }).isString().trim().isLength({ max: 20 }).withMessage('Género inválido'),
 ], (req: any, res: Response) => {
   if (!validate(req, res)) return;
 
@@ -151,8 +159,8 @@ app.get("/user/profile", verifyToken, (req: any, res: Response) => {
 
 
 app.post("/user/score", verifyToken, [
-  body('score_test').optional().isNumeric().withMessage('El puntaje del test debe ser un número'),
-  body('score_game').optional().isNumeric().withMessage('El puntaje del juego debe ser un número'),
+  body('score_test').optional().isFloat({ min: 0 }).withMessage('El puntaje del test debe ser un número'),
+  body('score_game').optional().isFloat({ min: 0 }).withMessage('El puntaje del juego debe ser un número'),
 ], (req: any, res: Response) => {
   if (!validate(req, res)) return;
 
@@ -176,7 +184,7 @@ app.post("/user/score", verifyToken, [
 
 
 app.post("/user/forgot-password", authLimiter, [
-  body('email').isEmail().withMessage('Correo inválido').normalizeEmail(),
+  body('email').isEmail().withMessage('Correo inválido').normalizeEmail().isLength({ max: 100 }).withMessage('Correo demasiado largo'),
 ], (req: Request, res: Response) => {
   if (!validate(req, res)) return;
 
@@ -209,8 +217,8 @@ app.post("/user/forgot-password", authLimiter, [
 
 
 app.post("/user/reset-password", [
-  body('token').notEmpty().withMessage('El token es requerido'),
-  body('new_password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
+  body('token').notEmpty().isString().isLength({ max: 200 }).withMessage('El token es requerido'),
+  body('new_password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres').isLength({ max: 128 }).withMessage('Contraseña demasiado larga'),
 ], (req: Request, res: Response) => {
   if (!validate(req, res)) return;
 
@@ -338,7 +346,7 @@ app.get("/tutorial", (req: Request, res: Response) => {
 
 
 app.post("/user/favorites", verifyToken, [
-  body('content_id').notEmpty().withMessage('El ID del contenido es requerido'),
+  body('content_id').notEmpty().isString().isLength({ max: 100 }).withMessage('El ID del contenido es requerido'),
   body('type').isIn(['article', 'presentation']).withMessage('El tipo debe ser article o presentation'),
 ], (req: any, res: Response) => {
   if (!validate(req, res)) return;
@@ -408,6 +416,10 @@ app.delete("/user/favorites/:content_id", verifyToken, (req: any, res: Response)
 });
 
 
-app.listen(PORT, () => {
-  console.log("Backend running on port " + PORT);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log("Backend running on port " + PORT);
+  });
+}
+
+module.exports = app;
