@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-08
+> Última actualización: 2026-06-09
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -52,6 +52,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 | `GET` | `/user/favorites` | Obtener lista de favoritos del usuario | JWT requerido |
 | `DELETE` | `/user/favorites/:content_id` | Eliminar un favorito por ID de contenido | JWT requerido |
 | `GET` | `/tutorial` | Obtener instructivo del juego (reglas + tarjetas) | Ninguna (pública) |
+| `POST` | `/user/avatar` | Subir foto de perfil a Cloudinary y guardar URL | JWT requerido |
 
 ---
 
@@ -78,7 +79,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **`GET /tutorial`** — retorna el documento único de tutorial con `title`, `rules` y `cards[]` (16 tarjetas de escenario + 32 de solución); cada tarjeta tiene `name`, `description`, `type` y `resources` (ambiental/economico/social)
 - **Middleware `verifyToken`** — valida JWT en header `Authorization: Bearer <token>` antes de rutas protegidas
 - **Rate limiting** — `/user/signup` y `/user/login` limitados a 10 requests cada 15 minutos
-- **Validación de inputs** — `express-validator` activo en todos los endpoints con body
+- **Validación y sanitización de inputs** — `express-validator` en todos los endpoints con body; incluye longitudes máximas (name/surname 50, email 100, password 128, occupation 100), tipos correctos (`isFloat` en scores, `isString` en opcionales), y sanitización (`.trim()`, `.normalizeEmail()`)
+- **Unit tests** — Jest + Supertest + mongodb-memory-server; 28 tests cubriendo signup, login, JWT, score, recuperación de password y favoritos (`npm test`)
+- **CI/CD** — GitHub Actions corre `npm test` automáticamente en cada push a `main`/`development` y en PRs a `main`
 - **Modelo de usuario** — esquema Mongoose completo con todos los campos (ver sección de arquitectura)
 - **CORS** — configurado para `http://localhost:3000` y `http://localhost:8100` (Ionic), con `methods` y `allowedHeaders` explícitos
 - **JWT** — secret leído desde variable de entorno `JWT_CODE`; tokens expiran en 7 días
@@ -101,7 +104,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 
 ### ❌ NO IMPLEMENTADO
 
-*(No hay ítems sin implementar)*
+| Endpoint | Descripción |
+|----------|-------------|
+| `POST /user/avatar` | Subir imagen de perfil a Cloudinary, guardar URL en usuario, devolver en `GET /user/profile` |
 
 ---
 
@@ -117,7 +122,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 
 ### 🟢 Backlog (funcionalidades nuevas)
 
-*(No hay ítems de backlog pendientes)*
+- **`POST /user/avatar`** — endpoint nuevo con multer + Cloudinary; requiere campo `avatar` en modelo de usuario
 
 ---
 
@@ -137,7 +142,8 @@ MongoDB (SostekDB)
     ├── score_game          (Number, optional, default: 0)
     ├── reset_token         (String, optional — se llena al pedir recuperación)
     ├── reset_token_expiry  (Date, optional — expiración 1h desde la generación)
-    └── favorites           (Array de { content_id: String, type: 'article'|'presentation' })
+    ├── favorites           (Array de { content_id: String, type: 'article'|'presentation' })
+    └── avatar              (String, optional, default: '' — URL de foto de perfil en Cloudinary)
 
 colección: evaluations
     ├── name        (String, required)
@@ -194,6 +200,9 @@ colección: tutorial  (documento único)
 | `seed/tutorial_data.json` | Contenido completo del instructivo: reglas + 48 tarjetas (16 escenario, 32 solución) extraídas del PDF original |
 | `.env` | Variables de entorno locales (no en repo) |
 | `.env.example` | Plantilla de variables de entorno — copiar a `.env` y completar valores |
+| `tests/index.test.js` | 28 unit tests con Jest + Supertest — correr con `npm test` |
+| `jest.config.js` | Configuración de Jest |
+| `.github/workflows/test.yml` | GitHub Actions — corre tests en cada push/PR |
 
 ---
 
@@ -206,6 +215,7 @@ npm install
 npm run dev:js       # desarrollo con nodemon (recarga automática)
 npm start            # producción (node directo)
 npm run build-start  # compila TypeScript y arranca
+npm test             # corre los 28 unit tests (no necesita MongoDB)
 ```
 
 El frontend debe correr por separado en `http://localhost:3000`.
