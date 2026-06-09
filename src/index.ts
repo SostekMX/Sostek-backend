@@ -129,16 +129,12 @@ app.post("/user/login", authLimiter, [
 
   dbSchema.User.findOne({ email: req.body.email })
     .then((user: any) => {
-      if (!user) {
-        res.json({ success: false, error: "Cuenta no registrada" });
-      } else {
-        if (!bcryptJs.compareSync(req.body.password, user.password)) {
-          res.json({ success: false, error: "Contraseña incorrecta" });
-        } else {
-          const token = jsonWebToken.sign({ id: user._id, email: user.email }, JWT_CODE, { expiresIn: '7d' });
-          res.json({ success: true, token: token });
-        }
+      if (!user || !bcryptJs.compareSync(req.body.password, user.password)) {
+        res.json({ success: false, error: "Correo o contraseña incorrectos" });
+        return;
       }
+      const token = jsonWebToken.sign({ id: user._id, email: user.email }, JWT_CODE, { expiresIn: '7d' });
+      res.json({ success: true, token: token });
     })
     .catch(() => {
       res.json({ success: false, error: "Error interno" });
@@ -223,7 +219,7 @@ app.post("/user/forgot-password", authLimiter, [
   dbSchema.User.findOne({ email: req.body.email })
     .then((user: any) => {
       if (!user) {
-        res.json({ success: false, error: "Correo no registrado" });
+        res.json({ success: false, error: "Si el correo está registrado, recibirás instrucciones" });
         return;
       }
       const token = crypto.randomBytes(32).toString('hex');

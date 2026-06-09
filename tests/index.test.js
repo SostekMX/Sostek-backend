@@ -137,7 +137,7 @@ describe('POST /user/login', () => {
       .post('/user/login')
       .send({ email: 'test@ejemplo.com', password: 'wrongpassword' });
     expect(res.body.success).toBe(false);
-    expect(res.body.error).toBe('Contraseña incorrecta');
+    expect(res.body.error).toBe('Correo o contraseña incorrectos');
   });
 
   test('email no registrado retorna error', async () => {
@@ -145,7 +145,7 @@ describe('POST /user/login', () => {
       .post('/user/login')
       .send({ email: 'noexiste@ejemplo.com', password: 'password123' });
     expect(res.body.success).toBe(false);
-    expect(res.body.error).toBe('Cuenta no registrada');
+    expect(res.body.error).toBe('Correo o contraseña incorrectos');
   });
 
   test('email invalido retorna error', async () => {
@@ -261,7 +261,7 @@ describe('POST /user/forgot-password y reset-password', () => {
       .post('/user/forgot-password')
       .send({ email: 'noexiste@ejemplo.com' });
     expect(res.body.success).toBe(false);
-    expect(res.body.error).toBe('Correo no registrado');
+    expect(res.body.error).toBe('Si el correo está registrado, recibirás instrucciones');
   });
 
   test('reset-password con token valido cambia la password', async () => {
