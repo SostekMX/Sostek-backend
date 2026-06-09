@@ -11,10 +11,10 @@
 
 | Fecha | Cambio | Qué necesita el backend |
 |-------|--------|------------------------|
-| 2026-06-09 | **Token JWT movido a `sessionStorage`** | Sin cambios en backend — el frontend ya no usa `localStorage` para el token. |
-| 2026-06-09 | **Contraseña mínima subida a 8 caracteres** | ✅ Backend actualizado — `/user/signup` y `/user/reset-password` ya validan mínimo 8 caracteres. |
+| 2026-06-09 | **Token JWT movido a `sessionStorage`** | Sin cambios en backend — el frontend ya no usa `localStorage` para el token ni el flag de sesión. Si el backend alguna vez implementa HttpOnly cookies, avisar para eliminar el manejo manual del token en el frontend. |
+| 2026-06-09 | **Contraseña mínima subida a 8 caracteres** | El frontend ahora valida mínimo 8 caracteres en signup y reset-password. **El backend debe actualizar su validación de 6 → 8 caracteres** en `/user/signup` y `/user/reset-password`, y actualizar el mensaje de error a `"La contraseña debe tener al menos 8 caracteres"`. |
 | 2026-06-09 | **Guardias de ruta implementadas** | Sin cambios en backend — `/Profile` y `/Favorites` redirigen automáticamente a `/` si no hay sesión. |
-| 2026-06-09 | **Email removido del body de `POST /user/edit`** | ✅ Confirmado — el backend usa solo el email del JWT, ignora cualquier `email` en el body. |
+| 2026-06-09 | **Email removido del body de `POST /user/edit`** | Confirmar que el backend ya ignora el campo `email` en el body y usa solo el del JWT (según el contrato ya documentado). No enviar email desde frontend era un bug — ya corregido. |
 | 2026-06-08 | **Avatar upload — frontend ✅ completo** | ✅ Ya implementado según `INFO_FRONTEND.md` — `POST /user/avatar` activo. |
 | 2026-06-08 | Avatar mostrado en header (`AppBarPopOver`) | Sin cambios en backend — el frontend lee `avatar` de `GET /user/profile` y lo guarda en `localStorage` (es URL pública, no sensible). |
 | 2026-06-08 | Carrusel usa campo `cover` de presentaciones | Si el backend envía `cover` en `GET /presentations`, el frontend lo usa como portada; si no, cae en `slides[0]` — el campo es opcional |
@@ -47,8 +47,8 @@
 | `POST /user/edit` | ✅ Integrado | ✅ Implementado |
 | `POST /user/score` | ✅ Integrado | ✅ Implementado |
 | `DELETE /user` | ✅ Integrado | ✅ Implementado |
-| `POST /user/forgot-password` | ⚠️ Flujo cambiado — requiere actualizar frontend | ✅ Implementado (envía email) |
-| `POST /user/reset-password` | ⚠️ Flujo cambiado — leer token de URL | ✅ Implementado |
+| `POST /user/forgot-password` | ✅ Integrado | ✅ Implementado |
+| `POST /user/reset-password` | ✅ Integrado | ✅ Implementado |
 | `GET /evaluations` | ✅ Integrado | ✅ Implementado |
 | `GET /evaluations/:id` | ✅ Integrado | ✅ Implementado |
 | `GET /articles` | ✅ Integrado | ✅ Implementado |
@@ -66,25 +66,26 @@
 
 | Elemento | Frontend | Backend |
 |----------|----------|---------|
-| **Flujo forgot-password** | ⚠️ Actualizar `ForgotPassword.tsx` y `ResetPassword.tsx` — ver sección de comportamiento abajo | ✅ Email implementado con nodemailer |
+| Foto de perfil | ✅ Frontend completo (upload + crop + reposición + header) | Implementar `POST /user/avatar` + campo `avatar` en modelo |
+| Imágenes rotas en 3 artículos | ✅ Muestra placeholder cuando imagen falla | Actualizar URLs en MongoDB |
+| Párrafos en artículos | ✅ Divide `body` por `\n` | Agregar saltos de línea en datos de MongoDB |
+| `description` en evaluaciones | ✅ Listo para recibirlo | Agregar campo al schema + seed |
 
 ---
 
 ## Comportamiento del frontend en recuperación de contraseña
 
-⚠️ **El flujo cambió — el frontend necesita actualizar `ForgotPassword.tsx` y `ResetPassword.tsx`.**
-
-El flujo nuevo es:
+El flujo de recuperación funciona así:
 
 1. El usuario ingresa su email en `/ForgotPassword`
 2. El frontend llama a `POST /user/forgot-password` con `{ email }`
-3. El backend responde `{ success: true, message: "Si el correo está registrado, recibirás instrucciones en tu bandeja de entrada" }` — siempre el mismo mensaje, sin importar si el email existe
-4. El frontend muestra el mensaje y no hace nada más (no guarda ningún token)
-5. El usuario recibe un email con el link: `http://localhost:3000/ResetPassword?token=<token>`
-6. El usuario hace clic → llega a `/ResetPassword?token=<token>`
-7. El frontend lee el token del query param: `new URLSearchParams(window.location.search).get('token')`
-8. El usuario escribe su nueva contraseña → frontend llama `POST /user/reset-password` con `{ token, new_password }`
-9. Al éxito, redirigir a login
+3. El backend responde con `{ success: true, reset_token: "<token>" }`
+4. El frontend guarda el token en `sessionStorage` con la clave `reset_token` y navega a `/ResetPassword`
+5. En `/ResetPassword`, el usuario ve el token precargado (editable) y escribe su nueva contraseña
+6. El frontend llama a `POST /user/reset-password` con `{ token, new_password }`
+7. Al éxito, el frontend borra el token de `sessionStorage` y redirige a login
+
+> Nota: El frontend muestra el token directamente al usuario para que lo copie/use. No hay envío de email desde el frontend.
 
 ---
 
@@ -107,8 +108,6 @@ Cuando el usuario termina una evaluación:
 | Hash de contraseñas | `bcrypt` |
 | Base de datos | MongoDB |
 | Rate limiting | `express-rate-limit` |
-| Headers de seguridad | `helmet` |
-| Email | `nodemailer` (Gmail SMTP) |
 | CORS | Habilitado para `http://localhost:3000` y `http://localhost:8100` |
 
 ---
@@ -925,3 +924,4 @@ Testear lógica crítica del backend:
 - Lógica de puntaje (`POST /user/score`)
 
 Herramienta recomendada: `jest` + `supertest` + `mongodb-memory-server` para base de datos de test en memoria.
+  
