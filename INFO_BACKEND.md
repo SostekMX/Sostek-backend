@@ -16,7 +16,7 @@
 | 2026-06-08 | Artículos con imágenes rotas detectados | ✅ URLs actualizadas en MongoDB |
 | 2026-06-08 | Párrafos en artículos — frontend ya divide `body` por `\n` | ✅ Saltos de línea agregados en MongoDB |
 | 2026-06-08 | Evaluaciones — frontend listo para recibir `description` | ✅ Campo `description` agregado al schema y seed |
-| 2026-06-08 | Foto de perfil — UI pendiente de implementar | ❌ Pendiente: `POST /user/avatar` + campo `avatar` en modelo |
+| 2026-06-08 | Foto de perfil — UI pendiente de implementar | ✅ `POST /user/avatar` implementado + campo `avatar` en modelo |
 | 2026-06-08 | Rediseño completo dark theme en toda la app | Sin cambios en backend |
 | 2026-06-08 | IonToast para errores, IonAlert para confirmaciones destructivas | Sin cambios en backend |
 | 2026-06-06 | Tutorial integrado en `Tab2.tsx` — ✅ | `GET /tutorial` — integrado en ambos lados |
@@ -49,7 +49,7 @@
 | `POST /user/favorites` | ✅ Integrado | ✅ Implementado |
 | `GET /user/favorites` | ✅ Integrado | ✅ Implementado |
 | `DELETE /user/favorites/:id` | ✅ Integrado | ✅ Implementado |
-| `POST /user/avatar` | ⚠️ Pendiente frontend (espera endpoint) | ❌ Pendiente backend |
+| `POST /user/avatar` | ⚠️ Pendiente frontend | ✅ Implementado |
 
 ---
 
@@ -57,7 +57,7 @@
 
 | Elemento | Frontend | Backend |
 |----------|----------|---------|
-| Foto de perfil | ⚠️ UI pendiente (espera endpoint) | ❌ Implementar `POST /user/avatar` + campo `avatar` en modelo |
+| Foto de perfil | ⚠️ UI pendiente | ✅ `POST /user/avatar` implementado, `avatar` en modelo y en `GET /user/profile` |
 | Imágenes rotas en 3 artículos | ✅ Muestra placeholder cuando imagen falla | ✅ URLs actualizadas en MongoDB |
 | Párrafos en artículos | ✅ Divide `body` por `\n` | ✅ Saltos de línea agregados en MongoDB |
 | `description` en evaluaciones | ✅ Listo para recibirlo | ✅ Campo en schema + datos cargados |
