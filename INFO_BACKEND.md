@@ -2,7 +2,7 @@
 
 > Documento de comunicación frontend → backend.
 > Se actualiza cada vez que hay un cambio en el frontend que afecta la integración.
-> Última actualización: 2026-06-08 (backend actualizado 2026-06-08)
+> Última actualización: 2026-06-09
 > Backend corre en: `http://localhost:8080`
 
 ---
@@ -11,13 +11,17 @@
 
 | Fecha | Cambio | Qué necesita el backend |
 |-------|--------|------------------------|
-| 2026-06-08 | **Avatar upload — frontend ✅ completo** | ✅ `POST /user/avatar` implementado con multer + Cloudinary; campo `avatar` en modelo; retorna `{ success: true, avatar_url: "..." }` |
-| 2026-06-08 | Avatar mostrado en header (`AppBarPopOver`) | Sin cambios en backend — el frontend lee `avatar` de `GET /user/profile` y lo guarda en `localStorage` |
+| 2026-06-09 | **Token JWT movido a `sessionStorage`** | Sin cambios en backend — el frontend ya no usa `localStorage` para el token. |
+| 2026-06-09 | **Contraseña mínima subida a 8 caracteres** | ✅ Backend actualizado — `/user/signup` y `/user/reset-password` ya validan mínimo 8 caracteres. |
+| 2026-06-09 | **Guardias de ruta implementadas** | Sin cambios en backend — `/Profile` y `/Favorites` redirigen automáticamente a `/` si no hay sesión. |
+| 2026-06-09 | **Email removido del body de `POST /user/edit`** | ✅ Confirmado — el backend usa solo el email del JWT, ignora cualquier `email` en el body. |
+| 2026-06-08 | **Avatar upload — frontend ✅ completo** | ✅ Ya implementado según `INFO_FRONTEND.md` — `POST /user/avatar` activo. |
+| 2026-06-08 | Avatar mostrado en header (`AppBarPopOver`) | Sin cambios en backend — el frontend lee `avatar` de `GET /user/profile` y lo guarda en `localStorage` (es URL pública, no sensible). |
 | 2026-06-08 | Carrusel usa campo `cover` de presentaciones | Si el backend envía `cover` en `GET /presentations`, el frontend lo usa como portada; si no, cae en `slides[0]` — el campo es opcional |
 | 2026-06-08 | `bibliography` ya se muestra en `Documents.tsx` | El campo ya llega en `GET /articles/:id` — el frontend lo renderiza automáticamente si existe |
 | 2026-06-09 | Unit tests frontend completados (23 tests) | Sin cambios en backend — solo información |
 | 2026-06-09 | Error boundary global agregado | Sin cambios en backend |
-| 2026-06-09 | `description` en evaluaciones — **aún no llega del backend** | ✅ Campo en schema + seed re-corrido el 2026-06-08; `GET /evaluations` ya devuelve `description` con texto para las 6 evaluaciones |
+| 2026-06-09 | `description` en evaluaciones — **aún no llega del backend** | `GET /evaluations` devuelve solo `_id`, `name`, `career` — falta agregar `description` al schema y al seed |
 | 2026-06-09 | `REACT_APP_BACKEND_URL` ya está implementado | La nota en INFO_FRONTEND.md está obsoleta — el frontend ya usa variable de entorno desde `src/config.ts` |
 | 2026-06-08 | Artículos con imágenes rotas detectados | Actualizar `image` en MongoDB para 3 artículos — ver sección "Pendientes de datos" |
 | 2026-06-08 | Párrafos en artículos — frontend ya divide `body` por `\n` | Agregar `\n` entre párrafos en los artículos que se ven como bloque continuo en MongoDB |
@@ -43,8 +47,8 @@
 | `POST /user/edit` | ✅ Integrado | ✅ Implementado |
 | `POST /user/score` | ✅ Integrado | ✅ Implementado |
 | `DELETE /user` | ✅ Integrado | ✅ Implementado |
-| `POST /user/forgot-password` | ✅ Integrado | ✅ Implementado |
-| `POST /user/reset-password` | ✅ Integrado | ✅ Implementado |
+| `POST /user/forgot-password` | ⚠️ Flujo cambiado — requiere actualizar frontend | ✅ Implementado (envía email) |
+| `POST /user/reset-password` | ⚠️ Flujo cambiado — leer token de URL | ✅ Implementado |
 | `GET /evaluations` | ✅ Integrado | ✅ Implementado |
 | `GET /evaluations/:id` | ✅ Integrado | ✅ Implementado |
 | `GET /articles` | ✅ Integrado | ✅ Implementado |
@@ -62,36 +66,32 @@
 
 | Elemento | Frontend | Backend |
 |----------|----------|---------|
-| Foto de perfil | ✅ Frontend completo (upload + crop + reposición + header) | ✅ `POST /user/avatar` implementado |
-| Imágenes rotas en 3 artículos | ✅ Muestra placeholder cuando imagen falla | ✅ URLs actualizadas en MongoDB |
-| Párrafos en artículos | ✅ Divide `body` por `\n` | ✅ Saltos de línea en datos de MongoDB |
-| `description` en evaluaciones | ✅ Listo para recibirlo | ✅ Campo en schema + seed re-corrido |
+| **Flujo forgot-password** | ⚠️ Actualizar `ForgotPassword.tsx` y `ResetPassword.tsx` — ver sección de comportamiento abajo | ✅ Email implementado con nodemailer |
 
 ---
 
 ## Comportamiento del frontend en recuperación de contraseña
 
-El flujo de recuperación funciona así:
+⚠️ **El flujo cambió — el frontend necesita actualizar `ForgotPassword.tsx` y `ResetPassword.tsx`.**
+
+El flujo nuevo es:
 
 1. El usuario ingresa su email en `/ForgotPassword`
 2. El frontend llama a `POST /user/forgot-password` con `{ email }`
-3. El backend responde con `{ success: true, message: "Si el correo está registrado, recibirás instrucciones en tu bandeja de entrada" }` — **siempre el mismo mensaje**, independientemente de si el email existe o no
-4. El backend envía un email al usuario con un link: `${FRONTEND_URL}/ResetPassword?token=<token>`
-5. El usuario abre el email, hace clic en el link (o copia el token)
-6. En `/ResetPassword`, el frontend lee el token del query param `?token=` de la URL
-7. El frontend llama a `POST /user/reset-password` con `{ token, new_password }`
-8. Al éxito, el frontend redirige a login
-
-> **Cambio respecto al flujo anterior:** el token ya no viene en la respuesta de la API — llega por email.
-> El frontend debe leer el token del query param de la URL en vez de `sessionStorage`.
-> Variables de entorno requeridas en backend: `EMAIL_USER`, `EMAIL_PASS`, `FRONTEND_URL` (ver `.env.example`).
+3. El backend responde `{ success: true, message: "Si el correo está registrado, recibirás instrucciones en tu bandeja de entrada" }` — siempre el mismo mensaje, sin importar si el email existe
+4. El frontend muestra el mensaje y no hace nada más (no guarda ningún token)
+5. El usuario recibe un email con el link: `http://localhost:3000/ResetPassword?token=<token>`
+6. El usuario hace clic → llega a `/ResetPassword?token=<token>`
+7. El frontend lee el token del query param: `new URLSearchParams(window.location.search).get('token')`
+8. El usuario escribe su nueva contraseña → frontend llama `POST /user/reset-password` con `{ token, new_password }`
+9. Al éxito, redirigir a login
 
 ---
 
 ## Comportamiento del frontend en puntaje
 
 Cuando el usuario termina una evaluación:
-- Si hay token en `localStorage` (usuario logueado), se llama `POST /user/score` con `{ score_test: <número> }`
+- Si hay token en `sessionStorage` (usuario logueado), se llama `POST /user/score` con `{ score_test: <número> }`
 - Si es invitado (sin token), no se hace ninguna llamada
 - El puntaje enviado es el total acumulado de la evaluación
 
@@ -107,6 +107,8 @@ Cuando el usuario termina una evaluación:
 | Hash de contraseñas | `bcrypt` |
 | Base de datos | MongoDB |
 | Rate limiting | `express-rate-limit` |
+| Headers de seguridad | `helmet` |
+| Email | `nodemailer` (Gmail SMTP) |
 | CORS | Habilitado para `http://localhost:3000` y `http://localhost:8100` |
 
 ---
@@ -136,7 +138,7 @@ Cuando el usuario termina una evaluación:
 ## Autenticación JWT
 
 - Payload del token: `{ id: usuario._id, email: usuario.email }`
-- El frontend guarda el token en `localStorage` con la clave `'token'`
+- El frontend guarda el token en `sessionStorage` con la clave `'token'` (migrado de localStorage para reducir exposición a XSS)
 - Los endpoints protegidos deben leer el header `Authorization: Bearer <token>`
 - Expiración: 7 días
 
@@ -639,6 +641,37 @@ Sin parámetros. Retorna el instructivo completo del juego con reglas y tarjetas
 
 ---
 
+## ⚠️ INFO_FRONTEND.md desactualizado — actualizar
+
+El backend mantiene `INFO_FRONTEND.md` para comunicarle cambios al frontend. Las siguientes secciones de ese archivo están desactualizadas y deben corregirse:
+
+### Sección 2 — "Lo que falta integrar en el frontend"
+**Todo lo que estaba listado ya fue integrado.** Actualizar todos los ítems a ✅:
+
+| Elemento | Estado real |
+|----------|-------------|
+| Reemplazar `useGetDocuments` (tutorial) | ✅ Integrado — `Tab2.tsx` usa `GET /tutorial` |
+| Reemplazar `gapi.client` con axios | ✅ Integrado — Google APIs eliminadas por completo |
+| Integrar favoritos | ✅ Integrado — `useFavorites.ts` + página `/Favorites` |
+| Integrar `POST /user/score` | ✅ Integrado — `FinalScoreEvaluation.tsx` |
+| Integrar `DELETE /user` | ✅ Integrado — `Profile.tsx` con confirmación |
+| Integrar `POST /user/forgot-password` y `POST /user/reset-password` | ✅ Integrado — pantallas `ForgotPassword.tsx` y `ResetPassword.tsx` |
+| Integrar `POST /user/avatar` | ✅ Integrado — `Profile.tsx` con crop y upload |
+| Mostrar `avatar` del usuario | ✅ Integrado — avatar en `Profile.tsx` y en header `AppBarPopOver.tsx` |
+| Mostrar `description` de evaluaciones | ✅ Frontend listo — falta que el backend agregue el campo al schema (ver BS — Pendientes de datos) |
+| Mostrar `cover` de presentaciones | ✅ Integrado — `Presentation.tsx` y carrusel usan `cover` si existe |
+
+### Errores de contraseña — mensaje desactualizado
+Los mensajes de error de `/user/signup` y `/user/reset-password` dicen `"La contraseña debe tener al menos 6 caracteres"`. Actualizar a `"La contraseña debe tener al menos 8 caracteres"` para ser consistente con la validación del frontend.
+
+### Sección 4 — Variables de entorno
+El pie de página de `INFO_FRONTEND.md` dice: *"Actualmente la URL del backend está hardcodeada en el frontend"*. Eso ya no es verdad — el frontend usa `REACT_APP_BACKEND_URL` desde `src/config.ts`. Eliminar esa nota.
+
+### CORS para producción
+Cuando se haga el deploy, agregar la URL de producción del frontend al array de `origin` en la configuración de CORS. Coordinar con frontend para saber la URL antes del deploy.
+
+---
+
 ## Rate limiting
 
 Aplicar a `/user/signup`, `/user/login` y `/user/forgot-password`: 10 requests por IP cada 15 minutos.
@@ -681,22 +714,6 @@ Agregar campo `description: { type: String, default: '' }` al schema de evaluaci
 | Diseño Industrial Nivel 2 | Mide cómo consideras la sostenibilidad en tu proceso de diseño y selección de materiales. |
 | Diseño Industrial Nivel 3 | Mide qué tan profundo integra tu proyecto criterios de sostenibilidad en todo su ciclo de vida. |
 
-### 4. Endpoint `POST /user/avatar` — nuevo
-Subir imagen de perfil a Cloudinary y guardar la URL en el usuario.
-
-**Headers:** `Authorization: Bearer <token>` + `Content-Type: multipart/form-data`
-
-**Body (form-data):** campo `avatar` (archivo jpg/png/webp, máx 5MB)
-
-**Respuesta exitosa:**
-```json
-{ "success": true, "avatar_url": "https://res.cloudinary.com/.../avatar.jpg" }
-```
-
-**Cambios en el modelo de usuario:**
-- Agregar campo `avatar: { type: String, default: '' }`
-- Incluir `avatar` en la respuesta de `GET /user/profile`
-
 ---
 
 ## Pendientes del backend — seguridad y calidad
@@ -704,12 +721,201 @@ Subir imagen de perfil a Cloudinary y guardar la URL en el usuario.
 ### BS1 — Variables de entorno
 Verificar que ningún secreto (API keys, connection strings, JWT secret) esté hardcodeado en el código. Documentar en un `.env.example` todas las variables requeridas.
 
-### BS2 — Sanitizar inputs
-Validar y rechazar inputs malformados en todos los endpoints. Casos mínimos:
-- Longitud máxima en strings (nombre, apellido, email, contraseña)
-- Tipos correctos (número donde se espera número)
-- Rechazar body vacío o campos `null`/`undefined` inesperados
-- Recomendado: `express-validator`
+### BS2 — Sanitizar inputs + prevenir NoSQL Injection
+
+MongoDB no tiene SQL, pero sí tiene **NoSQL injection**. Sin sanitización, un atacante puede enviar:
+
+```json
+POST /user/login
+{ "email": { "$ne": "" }, "password": { "$ne": "" } }
+```
+
+Esto en Mongoose significa "dame el primer usuario cuyo email no sea vacío y cuya contraseña no sea vacía" — acceso sin credenciales.
+
+**Implementar las dos capas siguientes:**
+
+---
+
+#### Capa 1 — Middleware global `express-mongo-sanitize` (una línea, protege todos los endpoints)
+
+```bash
+npm install express-mongo-sanitize
+```
+
+En `app.js` / `server.js`, después de `express.json()`:
+
+```js
+const mongoSanitize = require('express-mongo-sanitize');
+
+app.use(express.json());
+app.use(mongoSanitize()); // elimina claves que empiecen con $ o contengan . de req.body, req.params y req.query
+```
+
+---
+
+#### Capa 2 — Validación de tipos con `express-validator` en endpoints de auth
+
+```bash
+npm install express-validator
+```
+
+Crear el archivo `middleware/validate.js`:
+
+```js
+const { validationResult } = require('express-validator');
+
+function validate(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success: false, error: 'Datos inválidos' });
+  }
+  next();
+}
+
+module.exports = validate;
+```
+
+Aplicar en las rutas de usuario:
+
+```js
+const { body, param } = require('express-validator');
+const validate = require('../middleware/validate');
+
+// POST /user/login
+router.post('/user/login',
+  body('email').isString().isEmail(),
+  body('password').isString().isLength({ min: 8, max: 128 }),
+  validate,
+  loginController
+);
+
+// POST /user/signup
+router.post('/user/signup',
+  body('email').isString().isEmail(),
+  body('password').isString().isLength({ min: 8, max: 128 }),
+  body('name').isString().trim().isLength({ min: 1, max: 100 }),
+  body('surname').isString().trim().isLength({ min: 1, max: 100 }),
+  body('birth_date').optional().isISO8601(),
+  body('occupation').optional().isString().isLength({ max: 100 }),
+  body('gender').optional().isIn(['masculino', 'femenino']),
+  validate,
+  signupController
+);
+
+// POST /user/forgot-password
+router.post('/user/forgot-password',
+  body('email').isString().isEmail(),
+  validate,
+  forgotPasswordController
+);
+
+// POST /user/reset-password
+router.post('/user/reset-password',
+  body('token').isString().isLength({ min: 64, max: 64 }),
+  body('new_password').isString().isLength({ min: 8, max: 128 }),
+  validate,
+  resetPasswordController
+);
+
+// POST /user/edit
+router.post('/user/edit',
+  authMiddleware,
+  body('name').isString().trim().isLength({ min: 1, max: 100 }),
+  body('surname').isString().trim().isLength({ min: 1, max: 100 }),
+  body('birth_date').optional().isISO8601(),
+  body('occupation').optional().isString().isLength({ max: 100 }),
+  body('gender').optional().isIn(['masculino', 'femenino']),
+  validate,
+  editController
+);
+
+// POST /user/score
+router.post('/user/score',
+  authMiddleware,
+  body('score_test').optional().isNumeric(),
+  body('score_game').optional().isNumeric(),
+  validate,
+  scoreController
+);
+
+// POST /user/favorites
+router.post('/user/favorites',
+  authMiddleware,
+  body('content_id').isString().isMongoId(),
+  body('type').isIn(['article', 'presentation']),
+  validate,
+  addFavoriteController
+);
+
+// DELETE /user/favorites/:content_id
+router.delete('/user/favorites/:content_id',
+  authMiddleware,
+  param('content_id').isMongoId(),
+  validate,
+  removeFavoriteController
+);
+```
+
+---
+
+#### Capa 3 — Security headers con `helmet` (recomendado, 1 línea)
+
+```bash
+npm install helmet
+```
+
+```js
+const helmet = require('helmet');
+app.use(helmet()); // agrega X-Content-Type-Options, X-Frame-Options, HSTS, CSP básico, etc.
+```
+
+---
+
+**Casos mínimos que quedan cubiertos con estas tres capas:**
+- Operadores MongoDB (`$ne`, `$gt`, `$where`) en cualquier campo → bloqueados por `express-mongo-sanitize`
+- Tipos incorrectos (objeto donde se espera string) → bloqueados por `express-validator`
+- Strings excesivamente largos (DoS por procesamiento) → bloqueados por `isLength`
+- IDs de MongoDB malformados en parámetros de URL → bloqueados por `isMongoId()`
+- Headers HTTP inseguros → mitigados por `helmet`
+
+### BS3 — Mensajes de error genéricos (prevenir enumeración de usuarios)
+
+Actualmente los endpoints de login y forgot-password revelan si un email existe en la base de datos con mensajes distintos. Un atacante puede hacer un script y descubrir qué usuarios están registrados.
+
+**Endpoints afectados:**
+
+`POST /user/login` — cambiar:
+```js
+// ❌ Actual — revela si el email existe
+{ "success": false, "error": "Cuenta no registrada" }   // email no existe
+{ "success": false, "error": "Contraseña incorrecta" }  // email sí existe
+
+// ✅ Correcto — mismo mensaje en ambos casos
+{ "success": false, "error": "Correo o contraseña incorrectos" }
+```
+
+`POST /user/forgot-password` — cambiar:
+```js
+// ❌ Actual — revela si el email existe
+{ "success": false, "error": "Correo no registrado" }
+
+// ✅ Correcto — no revelar si existe o no
+{ "success": false, "error": "Si el correo está registrado, recibirás instrucciones pronto" }
+```
+> Nota: cuando el backend implemente el envío por email (Fix #1), el mensaje de éxito también debe ser el mismo independientemente de si el email existe o no, para no revelar el dato.
+
+---
+
+### BS4 — Contraseña mínima 8 caracteres
+
+El frontend ya valida mínimo 8 caracteres. El backend debe actualizar su validación para ser consistente:
+
+- En `/user/signup`: cambiar validación de `minlength: 6` → `minlength: 8`
+- En `/user/reset-password`: cambiar validación de `minlength: 6` → `minlength: 8`
+- Actualizar mensajes de error: `"La contraseña debe tener al menos 8 caracteres"`
+- El código de validación de BS2 ya usa `min: 8` — solo asegurarse de que la lógica del controller también valide 8
+
+---
 
 ### BT1 — Unit tests (Jest + Supertest)
 Testear lógica crítica del backend:
