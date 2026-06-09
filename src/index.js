@@ -7,6 +7,7 @@ const bcryptJs = require("bcryptjs");
 const crypto = require("crypto");
 const { body, validationResult } = require("express-validator");
 const rateLimit = require("express-rate-limit");
+const helmet = require('helmet');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 
@@ -18,6 +19,7 @@ const JWT_CODE = process.env.JWT_CODE;
 const app = express();
 var cors = require('cors');
 
+app.use(helmet());
 app.use(cors({
     origin: ['http://localhost:3000', 'http://localhost:8100'],
     methods: ['GET', 'POST', 'DELETE'],
