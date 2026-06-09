@@ -173,7 +173,7 @@ app.post("/user/edit", verifyToken, [
 
 
 app.get("/user/profile", verifyToken, (req: any, res: Response) => {
-  dbSchema.User.findOne({ email: req.user.email }, { password: 0 })
+  dbSchema.User.findOne({ email: req.user.email }, { password: 0, reset_token: 0, reset_token_expiry: 0 })
     .then((user: any) => {
       if (!user) {
         res.json({ success: false, error: "Usuario no encontrado" });

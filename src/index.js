@@ -166,7 +166,7 @@ app.post("/user/edit", verifyToken, [
 
 
 app.get("/user/profile", verifyToken, (req, res) => {
-    dbSchema.User.findOne({ email: req.user.email }, { password: 0 })
+    dbSchema.User.findOne({ email: req.user.email }, { password: 0, reset_token: 0, reset_token_expiry: 0 })
         .then((user) => {
             if (!user) {
                 res.json({ success: false, error: "Usuario no encontrado" });
