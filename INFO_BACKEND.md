@@ -118,6 +118,7 @@ Cuando el usuario termina una evaluación:
   score_test,         // Number, default 0
   score_game,         // Number, default 0
   favorites,          // Array de { content_id: String, type: "article" | "presentation" }
+  avatar,             // String, URL de Cloudinary — default '' si no tiene foto
   reset_token,        // String, interno — no devolver en respuestas
   reset_token_expiry  // Date, interno — no devolver en respuestas
 }
@@ -182,6 +183,7 @@ app.use(cors({
 | `GET` | `/articles/:id` | No | ✅ Implementado |
 | `GET` | `/presentations` | No | ✅ Implementado |
 | `GET` | `/tutorial` | No | ✅ Implementado |
+| `POST` | `/user/avatar` | JWT | ✅ Implementado |
 
 ---
 
@@ -640,73 +642,21 @@ Aplicar a `/user/signup`, `/user/login` y `/user/forgot-password`: 10 requests p
 
 ---
 
-## Pendientes del backend — datos
+## Historial de pendientes resueltos — datos
 
-### 1. Imágenes rotas en 3 artículos
-Actualizar el campo `image` en MongoDB para estos artículos:
-
-| Título | URL nueva |
-|--------|-----------|
-| `Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales` | `https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg` |
-| `El impacto del cine en el medio ambiente` | `https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png` |
-| `Muebles en Abuela` | `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s` |
-
-```js
-db.articles.updateOne({ title: "Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales" }, { $set: { image: "https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg" } })
-db.articles.updateOne({ title: "El impacto del cine en el medio ambiente" }, { $set: { image: "https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png" } })
-db.articles.updateOne({ title: "Muebles en Abuela" }, { $set: { image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s" } })
-```
-
-### 2. Párrafos en artículos
-El frontend ya divide el campo `body` por `\n` para mostrar párrafos separados. Los artículos que se ven como un bloque de texto continuo necesitan saltos de línea (`\n`) en su campo `body` en MongoDB.
-
-### 3. Campo `description` en evaluaciones
-Agregar campo `description: { type: String, default: '' }` al schema de evaluaciones e incluirlo en `GET /evaluations`. El frontend ya lo recibe y muestra automáticamente si existe.
-
-| Evaluación | Descripción sugerida |
-|------------|---------------------|
-| Arquitectura Nivel 1 | Mide si conoces y tomaste en cuenta los factores ambientales y sociales básicos en el análisis de tu proyecto. |
-| Arquitectura Nivel 2 | Mide cómo integras estrategias de sostenibilidad en el diseño y desarrollo de tu proyecto. |
-| Arquitectura Nivel 3 | Mide si tu proyecto plantea sistemas y programas de sostenibilidad a largo plazo. |
-| Diseño Industrial Nivel 1 | Mide tu conocimiento básico sobre impacto ambiental y sostenibilidad en el diseño de productos. |
-| Diseño Industrial Nivel 2 | Mide cómo consideras la sostenibilidad en tu proceso de diseño y selección de materiales. |
-| Diseño Industrial Nivel 3 | Mide qué tan profundo integra tu proyecto criterios de sostenibilidad en todo su ciclo de vida. |
-
-### 4. Endpoint `POST /user/avatar` — nuevo
-Subir imagen de perfil a Cloudinary y guardar la URL en el usuario.
-
-**Headers:** `Authorization: Bearer <token>` + `Content-Type: multipart/form-data`
-
-**Body (form-data):** campo `avatar` (archivo jpg/png/webp, máx 5MB)
-
-**Respuesta exitosa:**
-```json
-{ "success": true, "avatar_url": "https://res.cloudinary.com/.../avatar.jpg" }
-```
-
-**Cambios en el modelo de usuario:**
-- Agregar campo `avatar: { type: String, default: '' }`
-- Incluir `avatar` en la respuesta de `GET /user/profile`
+| Ítem | Estado | Fecha |
+|------|--------|-------|
+| Imágenes rotas en 3 artículos | ✅ URLs actualizadas en MongoDB | 2026-06-08 |
+| Párrafos en artículos (`\n` en `body`) | ✅ Saltos de línea agregados en MongoDB | 2026-06-08 |
+| Campo `description` en evaluaciones | ✅ En schema y en seed | 2026-06-08 |
+| `POST /user/avatar` + campo `avatar` en modelo | ✅ Implementado con multer + Cloudinary | 2026-06-08 |
 
 ---
 
-## Pendientes del backend — seguridad y calidad
+## Historial de pendientes resueltos — seguridad y calidad
 
-### BS1 — Variables de entorno
-Verificar que ningún secreto (API keys, connection strings, JWT secret) esté hardcodeado en el código. Documentar en un `.env.example` todas las variables requeridas.
-
-### BS2 — Sanitizar inputs
-Validar y rechazar inputs malformados en todos los endpoints. Casos mínimos:
-- Longitud máxima en strings (nombre, apellido, email, contraseña)
-- Tipos correctos (número donde se espera número)
-- Rechazar body vacío o campos `null`/`undefined` inesperados
-- Recomendado: `express-validator`
-
-### BT1 — Unit tests (Jest + Supertest)
-Testear lógica crítica del backend:
-- Validaciones de autenticación (login, signup, tokens)
-- Rate limiting activo
-- Respuestas de endpoints con datos inválidos
-- Lógica de puntaje (`POST /user/score`)
-
-Herramienta recomendada: `jest` + `supertest` + `mongodb-memory-server` para base de datos de test en memoria.
+| Ítem | Estado | Fecha |
+|------|--------|-------|
+| BS1 — `.env.example` con todas las variables documentadas | ✅ Creado en raíz del repo | 2026-06-08 |
+| BS2 — Sanitización y validación de inputs con `express-validator` | ✅ En todos los endpoints con body | 2026-06-08 |
+| BT1 — Unit tests Jest + Supertest + mongodb-memory-server | ✅ 33 tests — correr con `npm test` | 2026-06-08 |
