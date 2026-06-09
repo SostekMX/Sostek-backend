@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-08
+> Última actualización: 2026-06-09
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -67,7 +67,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **`DELETE /user`** — elimina la cuenta del usuario autenticado
 - **`POST /user/forgot-password`** — recibe email, genera token seguro (64 hex chars) con 1h de expiración, lo guarda en el usuario en DB, retorna `{ success: true, reset_token: "..." }`; limitado por rate limit
 - **`POST /user/reset-password`** — recibe `token` + `new_password`, valida que el token exista y no esté expirado, hashea la nueva contraseña con bcrypt y limpia los campos de reset en el documento
-- **`GET /evaluations`** — retorna lista de evaluaciones sin el campo `questions` (solo `name` y `career`)
+- **`GET /evaluations`** — retorna lista de evaluaciones sin el campo `questions` (incluye `name`, `career` y `description`)
 - **`GET /evaluations/:id`** — retorna evaluación completa con preguntas, opciones y valores numéricos
 - **`GET /articles`** — retorna lista completa de artículos
 - **`GET /articles/:id`** — retorna un artículo por ID
@@ -140,9 +140,10 @@ MongoDB (SostekDB)
     └── favorites           (Array de { content_id: String, type: 'article'|'presentation' })
 
 colección: evaluations
-    ├── name      (String, required)
-    ├── career    (String, required — enum: 'Arquitectura' | 'Diseño Industrial' | 'Otros')
-    └── questions (Array de { category, text, options: [{ text, value }] })
+    ├── name        (String, required)
+    ├── career      (String, required — enum: 'Arquitectura' | 'Diseño Industrial' | 'Otros')
+    ├── description (String, default: '' — texto descriptivo de la evaluación)
+    └── questions   (Array de { category, text, options: [{ text, value }] })
 
 colección: articles
     ├── title, subtitle, type, body  (String)
