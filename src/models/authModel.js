@@ -62,6 +62,11 @@ var UserSchema = new mongoose.Schema({
     favorites: [{
         content_id: { type: String, required: true },
         type: { type: String, enum: ['article', 'presentation'], required: true }
-    }]
+    }],
+    avatar: {
+        type: String,
+        required: false,
+        default: ''
+    }
 }, { collection: "users" });
 exports.User = mongoose.model('User', UserSchema);
