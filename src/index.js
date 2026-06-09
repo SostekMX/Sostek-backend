@@ -240,7 +240,7 @@ app.post("/user/forgot-password", authLimiter, [
 });
 
 
-app.post("/user/reset-password", [
+app.post("/user/reset-password", authLimiter, [
     body('token').notEmpty().isString().isLength({ max: 200 }).withMessage('El token es requerido'),
     body('new_password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres').isLength({ max: 128 }).withMessage('Contraseña demasiado larga'),
 ], (req, res) => {
