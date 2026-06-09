@@ -13,9 +13,10 @@ var QuestionSchema = new mongoose.Schema({
 }, { _id: false });
 
 var EvaluationSchema = new mongoose.Schema({
-    name:      { type: String, required: true },
-    career:    { type: String, required: true, enum: ['Arquitectura', 'Diseño Industrial', 'Otros'] },
-    questions: { type: [QuestionSchema], default: [] }
+    name:        { type: String, required: true },
+    career:      { type: String, required: true, enum: ['Arquitectura', 'Diseño Industrial', 'Otros'] },
+    description: { type: String, default: '' },
+    questions:   { type: [QuestionSchema], default: [] }
 }, { collection: 'evaluations' });
 
 var ArticleSchema = new mongoose.Schema({
