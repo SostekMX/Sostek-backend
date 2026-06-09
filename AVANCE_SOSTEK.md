@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-09
+> Última actualización: 2026-06-08
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -193,6 +193,7 @@ colección: tutorial  (documento único)
 | `seed/seedTutorial.js` | Inserta el instructivo del juego en MongoDB desde `seed/tutorial_data.json`. Uso: `npm run seed:tutorial` |
 | `seed/tutorial_data.json` | Contenido completo del instructivo: reglas + 48 tarjetas (16 escenario, 32 solución) extraídas del PDF original |
 | `.env` | Variables de entorno locales (no en repo) |
+| `.env.example` | Plantilla de variables de entorno — copiar a `.env` y completar valores |
 
 ---
 
