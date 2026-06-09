@@ -138,8 +138,8 @@ app.post("/user/login", authLimiter, [
                 }
             }
         })
-        .catch((err) => {
-            res.json({ success: false, error: err });
+        .catch(() => {
+            res.json({ success: false, error: "Error interno" });
         });
 });
 
@@ -177,8 +177,8 @@ app.get("/user/profile", verifyToken, (req, res) => {
             }
             res.json({ success: true, user: user });
         })
-        .catch((err) => {
-            res.json({ success: false, error: err });
+        .catch(() => {
+            res.json({ success: false, error: "Error interno" });
         });
 });
 
