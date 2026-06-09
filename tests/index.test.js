@@ -1,6 +1,19 @@
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const request = require('supertest');
 
+jest.mock('cloudinary', () => ({
+  v2: {
+    config: jest.fn(),
+    uploader: {
+      upload_stream: jest.fn((options, callback) => {
+        const fakeStream = { end: jest.fn() };
+        process.nextTick(() => callback(null, { secure_url: 'https://res.cloudinary.com/test/sostek/avatars/test.jpg' }));
+        return fakeStream;
+      })
+    }
+  }
+}));
+
 let app;
 let mongod;
 let mongoose;
@@ -343,5 +356,65 @@ describe('Favoritos', () => {
       .set('Authorization', `Bearer ${token}`);
     expect(res.body.success).toBe(true);
     expect(res.body.message).toBe('Favorito eliminado');
+  });
+});
+
+// ─── Avatar ─────────────────────────────────────────────────────────────────────
+
+describe('POST /user/avatar', () => {
+  let token;
+
+  beforeEach(async () => {
+    await crearUsuario();
+    token = await obtenerToken();
+  });
+
+  test('sube imagen y retorna avatar_url', async () => {
+    const fakeImage = Buffer.from('fake-image-data');
+    const res = await request(app)
+      .post('/user/avatar')
+      .set('Authorization', `Bearer ${token}`)
+      .attach('avatar', fakeImage, { filename: 'foto.jpg', contentType: 'image/jpeg' });
+    expect(res.body.success).toBe(true);
+    expect(res.body.avatar_url).toBe('https://res.cloudinary.com/test/sostek/avatars/test.jpg');
+  });
+
+  test('sin archivo retorna error', async () => {
+    const res = await request(app)
+      .post('/user/avatar')
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toBe('La imagen es requerida');
+  });
+
+  test('formato no permitido retorna error', async () => {
+    const fakeFile = Buffer.from('fake-gif-data');
+    const res = await request(app)
+      .post('/user/avatar')
+      .set('Authorization', `Bearer ${token}`)
+      .attach('avatar', fakeFile, { filename: 'foto.gif', contentType: 'image/gif' });
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toBe('Formato no válido. Solo jpg, png o webp');
+  });
+
+  test('sin token retorna error', async () => {
+    const fakeImage = Buffer.from('fake-image-data');
+    const res = await request(app)
+      .post('/user/avatar')
+      .attach('avatar', fakeImage, { filename: 'foto.jpg', contentType: 'image/jpeg' });
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toBe('Token requerido');
+  });
+
+  test('avatar queda guardado en el perfil del usuario', async () => {
+    const fakeImage = Buffer.from('fake-image-data');
+    await request(app)
+      .post('/user/avatar')
+      .set('Authorization', `Bearer ${token}`)
+      .attach('avatar', fakeImage, { filename: 'foto.png', contentType: 'image/png' });
+    const profileRes = await request(app)
+      .get('/user/profile')
+      .set('Authorization', `Bearer ${token}`);
+    expect(profileRes.body.user.avatar).toBe('https://res.cloudinary.com/test/sostek/avatars/test.jpg');
   });
 });
