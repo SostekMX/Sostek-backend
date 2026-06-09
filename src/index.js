@@ -24,8 +24,10 @@ var cors = require('cors');
 
 app.use(helmet());
 app.use(mongoSanitize());
+const corsOrigins = ['http://localhost:3000', 'http://localhost:8100'];
+if (process.env.CORS_ORIGIN) corsOrigins.push(process.env.CORS_ORIGIN);
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:8100'],
+    origin: corsOrigins,
     methods: ['GET', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -116,6 +118,8 @@ function uploadToCloudinary(buffer) {
     });
 }
 
+
+app.get("/health", (_req, res) => { res.json({ status: 'ok' }); });
 
 app.post("/user/signup", authLimiter, [
     body('email').isEmail().withMessage('Correo inválido').normalizeEmail().isLength({ max: 100 }).withMessage('Correo demasiado largo'),
