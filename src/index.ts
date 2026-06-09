@@ -119,7 +119,7 @@ function uploadToCloudinary(buffer: Buffer): Promise<any> {
 
 app.post("/user/signup", authLimiter, [
   body('email').isEmail().withMessage('Correo inválido').normalizeEmail().isLength({ max: 100 }).withMessage('Correo demasiado largo'),
-  body('password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres').isLength({ max: 128 }).withMessage('Contraseña demasiado larga'),
+  body('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres').isLength({ max: 128 }).withMessage('Contraseña demasiado larga'),
   body('name').notEmpty().trim().withMessage('El nombre es requerido').isLength({ max: 50 }).withMessage('El nombre es demasiado largo'),
   body('surname').notEmpty().trim().withMessage('El apellido es requerido').isLength({ max: 50 }).withMessage('El apellido es demasiado largo'),
   body('birth_date').optional({ nullable: true }).isString().trim().isLength({ max: 20 }).withMessage('Fecha de nacimiento inválida'),
@@ -268,7 +268,7 @@ app.post("/user/forgot-password", authLimiter, [
 
 app.post("/user/reset-password", authLimiter, [
   body('token').notEmpty().isString().isLength({ max: 200 }).withMessage('El token es requerido'),
-  body('new_password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres').isLength({ max: 128 }).withMessage('Contraseña demasiado larga'),
+  body('new_password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres').isLength({ max: 128 }).withMessage('Contraseña demasiado larga'),
 ], (req: Request, res: Response) => {
   if (!validate(req, res)) return;
 

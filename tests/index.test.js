@@ -93,7 +93,7 @@ describe('POST /user/signup', () => {
   test('password corta retorna error', async () => {
     const res = await crearUsuario({ password: '123' });
     expect(res.body.success).toBe(false);
-    expect(res.body.error).toBe('La contraseña debe tener al menos 6 caracteres');
+    expect(res.body.error).toBe('La contraseña debe tener al menos 8 caracteres');
   });
 
   test('nombre vacio retorna error', async () => {
