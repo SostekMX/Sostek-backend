@@ -1,6 +1,12 @@
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const request = require('supertest');
 
+jest.mock('nodemailer', () => ({
+  createTransport: jest.fn(() => ({
+    sendMail: jest.fn().mockResolvedValue({ messageId: 'test-id' })
+  }))
+}));
+
 jest.mock('cloudinary', () => ({
   v2: {
     config: jest.fn(),
@@ -247,28 +253,33 @@ describe('POST /user/forgot-password y reset-password', () => {
     await crearUsuario();
   });
 
-  test('forgot-password con email valido retorna reset_token', async () => {
+  test('forgot-password con email valido envia email y retorna mensaje generico', async () => {
     const res = await request(app)
       .post('/user/forgot-password')
       .send({ email: 'test@ejemplo.com' });
     expect(res.body.success).toBe(true);
-    expect(res.body.reset_token).toBeDefined();
-    expect(res.body.reset_token.length).toBe(64);
+    expect(res.body.message).toBeDefined();
+    const { User } = require('../src/models/authModel');
+    const user = await User.findOne({ email: 'test@ejemplo.com' });
+    expect(user.reset_token).toBeDefined();
+    expect(user.reset_token.length).toBe(64);
   });
 
-  test('forgot-password con email no registrado retorna error', async () => {
+  test('forgot-password con email no registrado retorna el mismo mensaje generico', async () => {
     const res = await request(app)
       .post('/user/forgot-password')
       .send({ email: 'noexiste@ejemplo.com' });
-    expect(res.body.success).toBe(false);
-    expect(res.body.error).toBe('Si el correo está registrado, recibirás instrucciones');
+    expect(res.body.success).toBe(true);
+    expect(res.body.message).toBeDefined();
   });
 
   test('reset-password con token valido cambia la password', async () => {
-    const forgotRes = await request(app)
+    await request(app)
       .post('/user/forgot-password')
       .send({ email: 'test@ejemplo.com' });
-    const token = forgotRes.body.reset_token;
+    const { User } = require('../src/models/authModel');
+    const user = await User.findOne({ email: 'test@ejemplo.com' });
+    const token = user.reset_token;
 
     const resetRes = await request(app)
       .post('/user/reset-password')

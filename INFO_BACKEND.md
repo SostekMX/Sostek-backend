@@ -75,13 +75,16 @@ El flujo de recuperación funciona así:
 
 1. El usuario ingresa su email en `/ForgotPassword`
 2. El frontend llama a `POST /user/forgot-password` con `{ email }`
-3. El backend responde con `{ success: true, reset_token: "<token>" }`
-4. El frontend guarda el token en `sessionStorage` con la clave `reset_token` y navega a `/ResetPassword`
-5. En `/ResetPassword`, el usuario ve el token precargado (editable) y escribe su nueva contraseña
-6. El frontend llama a `POST /user/reset-password` con `{ token, new_password }`
-7. Al éxito, el frontend borra el token de `sessionStorage` y redirige a login
+3. El backend responde con `{ success: true, message: "Si el correo está registrado, recibirás instrucciones en tu bandeja de entrada" }` — **siempre el mismo mensaje**, independientemente de si el email existe o no
+4. El backend envía un email al usuario con un link: `${FRONTEND_URL}/ResetPassword?token=<token>`
+5. El usuario abre el email, hace clic en el link (o copia el token)
+6. En `/ResetPassword`, el frontend lee el token del query param `?token=` de la URL
+7. El frontend llama a `POST /user/reset-password` con `{ token, new_password }`
+8. Al éxito, el frontend redirige a login
 
-> Nota: El frontend muestra el token directamente al usuario para que lo copie/use. No hay envío de email desde el frontend.
+> **Cambio respecto al flujo anterior:** el token ya no viene en la respuesta de la API — llega por email.
+> El frontend debe leer el token del query param de la URL en vez de `sessionStorage`.
+> Variables de entorno requeridas en backend: `EMAIL_USER`, `EMAIL_PASS`, `FRONTEND_URL` (ver `.env.example`).
 
 ---
 

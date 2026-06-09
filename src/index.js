@@ -9,6 +9,7 @@ const { body, validationResult } = require("express-validator");
 const rateLimit = require("express-rate-limit");
 const helmet = require('helmet');
 const fileType = require('file-type');
+const nodemailer = require('nodemailer');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 
@@ -75,6 +76,33 @@ const upload = multer({
         else cb(new Error('Formato no válido. Solo jpg, png o webp'));
     }
 });
+
+async function sendResetEmail(to, token) {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        console.warn('[email] EMAIL_USER o EMAIL_PASS no configurados — email no enviado');
+        return;
+    }
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
+    });
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+    const resetUrl = `${frontendUrl}/ResetPassword?token=${token}`;
+    await transporter.sendMail({
+        from: `"SOSTEK" <${process.env.EMAIL_USER}>`,
+        to,
+        subject: 'Recuperación de contraseña — SOSTEK',
+        html: `
+      <p>Hola,</p>
+      <p>Recibimos una solicitud para restablecer tu contraseña en SOSTEK.</p>
+      <p><a href="${resetUrl}">Restablecer contraseña</a></p>
+      <p>O copiá este token directamente en la app:</p>
+      <p><strong>${token}</strong></p>
+      <p>Este enlace expira en <strong>1 hora</strong>.</p>
+      <p>Si no solicitaste esto, podés ignorar este correo.</p>
+    `
+    });
+}
 
 function uploadToCloudinary(buffer) {
     return new Promise((resolve, reject) => {
@@ -206,34 +234,28 @@ app.post("/user/score", verifyToken, [
 
 app.post("/user/forgot-password", authLimiter, [
     body('email').isEmail().withMessage('Correo inválido').normalizeEmail().isLength({ max: 100 }).withMessage('Correo demasiado largo'),
-], (req, res) => {
+], async (req, res) => {
     if (!validate(req, res)) return;
 
-    dbSchema.User.findOne({ email: req.body.email })
-        .then((user) => {
-            if (!user) {
-                res.json({ success: false, error: "Si el correo está registrado, recibirás instrucciones" });
-                return;
-            }
-            const token = crypto.randomBytes(32).toString('hex');
-            const expiry = new Date(Date.now() + 60 * 60 * 1000);
+    const genericResponse = { success: true, message: "Si el correo está registrado, recibirás instrucciones en tu bandeja de entrada" };
 
-            dbSchema.User.findOneAndUpdate(
-                { email: req.body.email },
-                { reset_token: token, reset_token_expiry: expiry },
-                null,
-                function (err) {
-                    if (err) {
-                        res.json({ success: false, error: "Error al generar token" });
-                        return;
-                    }
-                    res.json({ success: true, reset_token: token });
-                }
-            );
-        })
-        .catch((err) => {
-            res.json({ success: false, error: "Error interno" });
-        });
+    try {
+        const user = await dbSchema.User.findOne({ email: req.body.email });
+        if (!user) {
+            res.json(genericResponse);
+            return;
+        }
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiry = new Date(Date.now() + 60 * 60 * 1000);
+        await dbSchema.User.findOneAndUpdate(
+            { email: req.body.email },
+            { reset_token: token, reset_token_expiry: expiry }
+        );
+        await sendResetEmail(user.email, token);
+        res.json(genericResponse);
+    } catch {
+        res.json({ success: false, error: "Error interno" });
+    }
 });
 
 
