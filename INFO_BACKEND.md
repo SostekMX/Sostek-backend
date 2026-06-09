@@ -2,7 +2,7 @@
 
 > Documento de comunicación frontend → backend.
 > Se actualiza cada vez que hay un cambio en el frontend que afecta la integración.
-> Última actualización: 2026-06-06
+> Última actualización: 2026-06-08
 > Backend corre en: `http://localhost:8080`
 
 ---
@@ -11,12 +11,18 @@
 
 | Fecha | Cambio | Qué necesita el backend |
 |-------|--------|------------------------|
-| 2026-06-06 | Pantallas de recuperación de contraseña implementadas (`/ForgotPassword`, `/ResetPassword`) | `POST /user/forgot-password` y `POST /user/reset-password` — ya implementados ✅ |
-| 2026-06-06 | Botón "Eliminar cuenta" implementado en `Profile.tsx` | `DELETE /user` — ya implementado ✅ |
-| 2026-06-06 | Puntaje enviado al backend al terminar evaluación | `POST /user/score` — ya implementado ✅ |
-| 2026-06-05 | Migración completa — frontend ya no usa Google APIs para nada de contenido | `GET /articles`, `GET /articles/:id`, `GET /evaluations`, `GET /evaluations/:id`, `GET /presentations` — ya implementados ✅ |
-| 2026-06-05 | Logout elimina el token de `localStorage` | Sin cambios en backend |
-| 2026-06-05 | Signup valida contraseña ≥ 6 chars antes de llamar al backend | Sin cambios en backend |
+| 2026-06-08 | Artículos con imágenes rotas detectados | Actualizar `image` en MongoDB para 3 artículos — ver sección "Pendientes de datos" |
+| 2026-06-08 | Párrafos en artículos — frontend ya divide `body` por `\n` | Agregar `\n` entre párrafos en los artículos que se ven como bloque continuo en MongoDB |
+| 2026-06-08 | Evaluaciones — frontend listo para recibir `description` | Agregar campo `description` al schema y seed — ver sección "Pendientes de datos" |
+| 2026-06-08 | Foto de perfil — UI pendiente de implementar | Necesita nuevo endpoint `POST /user/avatar` + campo `avatar` en modelo de usuario |
+| 2026-06-08 | Rediseño completo dark theme en toda la app | Sin cambios en backend |
+| 2026-06-08 | IonToast para errores, IonAlert para confirmaciones destructivas | Sin cambios en backend |
+| 2026-06-06 | Tutorial integrado en `Tab2.tsx` — ✅ | `GET /tutorial` — integrado en ambos lados |
+| 2026-06-06 | Favoritos integrados — ✅ | `POST/GET/DELETE /user/favorites` — integrado en ambos lados |
+| 2026-06-06 | Pantallas de recuperación de contraseña — ✅ | `POST /user/forgot-password` y `POST /user/reset-password` — integrado en ambos lados |
+| 2026-06-06 | Botón "Eliminar cuenta" en `Profile.tsx` — ✅ | `DELETE /user` — integrado en ambos lados |
+| 2026-06-06 | Puntaje enviado al terminar evaluación — ✅ | `POST /user/score` — integrado en ambos lados |
+| 2026-06-05 | Migración completa de Google APIs a backend — ✅ | Artículos, evaluaciones, presentaciones y tutorial desde MongoDB |
 
 ---
 
@@ -37,16 +43,22 @@
 | `GET /articles` | ✅ Integrado | ✅ Implementado |
 | `GET /articles/:id` | ✅ Integrado | ✅ Implementado |
 | `GET /presentations` | ✅ Integrado | ✅ Implementado |
-| `POST /user/favorites` | ❌ Sin integrar | ❌ Sin endpoint — pendiente definir |
+| `GET /tutorial` | ✅ Integrado | ✅ Implementado |
+| `POST /user/favorites` | ✅ Integrado | ✅ Implementado |
+| `GET /user/favorites` | ✅ Integrado | ✅ Implementado |
+| `DELETE /user/favorites/:id` | ✅ Integrado | ✅ Implementado |
+| `POST /user/avatar` | ⚠️ Pendiente frontend | ❌ Pendiente backend |
 
 ---
 
-## Lo que falta por definir
+## Pendiente de ambos lados
 
-| Elemento | Situación |
-|----------|-----------|
-| **Favoritos** | El menú lateral muestra la opción pero no hay endpoint ni contrato definido. Necesitamos definir qué datos guardar (array de IDs de artículos en el usuario, o colección separada) |
-| **Tutorial desde backend** | Actualmente el tutorial aún carga desde Google Drive. Pendiente definir si se migra igual que artículos o se hardcodea en el frontend |
+| Elemento | Frontend | Backend |
+|----------|----------|---------|
+| Foto de perfil | UI pendiente (espera endpoint) | Implementar `POST /user/avatar` + campo `avatar` en modelo |
+| Imágenes rotas en 3 artículos | ✅ Muestra placeholder cuando imagen falla | Actualizar URLs en MongoDB |
+| Párrafos en artículos | ✅ Divide `body` por `\n` | Agregar saltos de línea en datos de MongoDB |
+| `description` en evaluaciones | ✅ Listo para recibirlo | Agregar campo al schema + seed |
 
 ---
 
@@ -94,17 +106,18 @@ Cuando el usuario termina una evaluación:
 ```js
 {
   _id,
-  email,          // String, único, requerido
-  password,       // String hasheado con bcrypt — nunca devolver en respuestas
-  name,           // String, requerido
-  surname,        // String, requerido
-  birth_date,     // Date, opcional
-  occupation,     // String, opcional
-  gender,         // String, opcional
-  score_test,     // Number, default 0
-  score_game,     // Number, default 0
-  reset_token,    // String, interno — no devolver en respuestas
-  reset_token_expiry // Date, interno — no devolver en respuestas
+  email,              // String, único, requerido
+  password,           // String hasheado con bcrypt — nunca devolver en respuestas
+  name,               // String, requerido
+  surname,            // String, requerido
+  birth_date,         // Date, opcional
+  occupation,         // String, opcional
+  gender,             // String, opcional
+  score_test,         // Number, default 0
+  score_game,         // Number, default 0
+  favorites,          // Array de { content_id: String, type: "article" | "presentation" }
+  reset_token,        // String, interno — no devolver en respuestas
+  reset_token_expiry  // Date, interno — no devolver en respuestas
 }
 ```
 
@@ -158,11 +171,15 @@ app.use(cors({
 | `POST` | `/user/edit` | JWT | ✅ Implementado |
 | `POST` | `/user/score` | JWT | ✅ Implementado |
 | `DELETE` | `/user` | JWT | ✅ Implementado |
+| `POST` | `/user/favorites` | JWT | ✅ Implementado |
+| `GET` | `/user/favorites` | JWT | ✅ Implementado |
+| `DELETE` | `/user/favorites/:content_id` | JWT | ✅ Implementado |
 | `GET` | `/evaluations` | No | ✅ Implementado |
 | `GET` | `/evaluations/:id` | No | ✅ Implementado |
 | `GET` | `/articles` | No | ✅ Implementado |
 | `GET` | `/articles/:id` | No | ✅ Implementado |
 | `GET` | `/presentations` | No | ✅ Implementado |
+| `GET` | `/tutorial` | No | ✅ Implementado |
 
 ---
 
@@ -377,6 +394,114 @@ Sin body. Elimina permanentemente la cuenta del usuario identificado por el toke
 
 ---
 
+### `POST /user/favorites` — requiere JWT
+
+**Header:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{ "content_id": "<_id del artículo o presentación>", "type": "article" }
+```
+> `type` acepta solo `"article"` o `"presentation"`.
+
+**Respuesta exitosa:**
+```json
+{ "success": true, "message": "Favorito agregado" }
+```
+
+**Errores:**
+```json
+{ "success": false, "error": "Token requerido" }
+{ "success": false, "error": "El ID del contenido es requerido" }
+{ "success": false, "error": "El tipo debe ser article o presentation" }
+{ "success": false, "error": "Ya está en favoritos" }
+{ "success": false, "error": "Usuario no encontrado" }
+```
+
+---
+
+### `GET /user/favorites` — requiere JWT
+
+**Header:** `Authorization: Bearer <token>`
+
+**Respuesta exitosa:**
+```json
+{
+  "success": true,
+  "favorites": [
+    { "content_id": "664abc...", "type": "article" },
+    { "content_id": "664def...", "type": "presentation" }
+  ]
+}
+```
+
+**Errores:**
+```json
+{ "success": false, "error": "Token requerido" }
+{ "success": false, "error": "Usuario no encontrado" }
+```
+
+---
+
+### `DELETE /user/favorites/:content_id` — requiere JWT
+
+**Header:** `Authorization: Bearer <token>`
+
+El `content_id` va en la URL: `/user/favorites/664abc123...`
+
+**Respuesta exitosa:**
+```json
+{ "success": true, "message": "Favorito eliminado" }
+```
+
+**Errores:**
+```json
+{ "success": false, "error": "Token requerido" }
+{ "success": false, "error": "Usuario no encontrado" }
+{ "success": false, "error": "No se pudo eliminar el favorito" }
+```
+
+---
+
+### `GET /tutorial` — público
+
+Sin parámetros. Retorna el instructivo completo del juego con reglas y tarjetas.
+
+**Respuesta exitosa:**
+```json
+{
+  "success": true,
+  "tutorial": {
+    "_id": "...",
+    "title": "Instructivo SOSTEK",
+    "rules": "Recursos del pueblo: 20 fichas de c/u...",
+    "cards": [
+      {
+        "name": "ALIANZA ESTRATÉGICA",
+        "description": "Un reconocido grupo farmacéutico...",
+        "type": "scenario",
+        "resources": { "ambiental": 0, "economico": 0, "social": 0 }
+      },
+      {
+        "name": "APICULTORES",
+        "description": "Implementaste un programa de rescate...",
+        "type": "solution",
+        "resources": { "ambiental": 2, "economico": -2, "social": 0 }
+      }
+    ]
+  }
+}
+```
+> `type: "scenario"` = tarjeta de escenario (problema) · `type: "solution"` = tarjeta de solución
+> Hay 16 tarjetas de escenario y 32 de solución (48 en total)
+
+**Errores:**
+```json
+{ "success": false, "error": "Tutorial no encontrado" }
+```
+
+---
+
 ## Rate limiting
 
 Aplicar a `/user/signup`, `/user/login` y `/user/forgot-password`: 10 requests por IP cada 15 minutos.
@@ -384,3 +509,76 @@ Aplicar a `/user/signup`, `/user/login` y `/user/forgot-password`: 10 requests p
 ```json
 { "success": false, "error": "Demasiados intentos, intenta más tarde" }
 ```
+
+---
+
+## Pendientes del backend — datos
+
+### 1. Imágenes rotas en 3 artículos
+Actualizar el campo `image` en MongoDB para estos artículos:
+
+| Título | URL nueva |
+|--------|-----------|
+| `Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales` | `https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg` |
+| `El impacto del cine en el medio ambiente` | `https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png` |
+| `Muebles en Abuela` | `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s` |
+
+```js
+db.articles.updateOne({ title: "Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales" }, { $set: { image: "https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg" } })
+db.articles.updateOne({ title: "El impacto del cine en el medio ambiente" }, { $set: { image: "https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png" } })
+db.articles.updateOne({ title: "Muebles en Abuela" }, { $set: { image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s" } })
+```
+
+### 2. Párrafos en artículos
+El frontend ya divide el campo `body` por `\n` para mostrar párrafos separados. Los artículos que se ven como un bloque de texto continuo necesitan saltos de línea (`\n`) en su campo `body` en MongoDB.
+
+### 3. Campo `description` en evaluaciones
+Agregar campo `description: { type: String, default: '' }` al schema de evaluaciones e incluirlo en `GET /evaluations`. El frontend ya lo recibe y muestra automáticamente si existe.
+
+| Evaluación | Descripción sugerida |
+|------------|---------------------|
+| Arquitectura Nivel 1 | Mide si conoces y tomaste en cuenta los factores ambientales y sociales básicos en el análisis de tu proyecto. |
+| Arquitectura Nivel 2 | Mide cómo integras estrategias de sostenibilidad en el diseño y desarrollo de tu proyecto. |
+| Arquitectura Nivel 3 | Mide si tu proyecto plantea sistemas y programas de sostenibilidad a largo plazo. |
+| Diseño Industrial Nivel 1 | Mide tu conocimiento básico sobre impacto ambiental y sostenibilidad en el diseño de productos. |
+| Diseño Industrial Nivel 2 | Mide cómo consideras la sostenibilidad en tu proceso de diseño y selección de materiales. |
+| Diseño Industrial Nivel 3 | Mide qué tan profundo integra tu proyecto criterios de sostenibilidad en todo su ciclo de vida. |
+
+### 4. Endpoint `POST /user/avatar` — nuevo
+Subir imagen de perfil a Cloudinary y guardar la URL en el usuario.
+
+**Headers:** `Authorization: Bearer <token>` + `Content-Type: multipart/form-data`
+
+**Body (form-data):** campo `avatar` (archivo jpg/png/webp, máx 5MB)
+
+**Respuesta exitosa:**
+```json
+{ "success": true, "avatar_url": "https://res.cloudinary.com/.../avatar.jpg" }
+```
+
+**Cambios en el modelo de usuario:**
+- Agregar campo `avatar: { type: String, default: '' }`
+- Incluir `avatar` en la respuesta de `GET /user/profile`
+
+---
+
+## Pendientes del backend — seguridad y calidad
+
+### BS1 — Variables de entorno
+Verificar que ningún secreto (API keys, connection strings, JWT secret) esté hardcodeado en el código. Documentar en un `.env.example` todas las variables requeridas.
+
+### BS2 — Sanitizar inputs
+Validar y rechazar inputs malformados en todos los endpoints. Casos mínimos:
+- Longitud máxima en strings (nombre, apellido, email, contraseña)
+- Tipos correctos (número donde se espera número)
+- Rechazar body vacío o campos `null`/`undefined` inesperados
+- Recomendado: `express-validator`
+
+### BT1 — Unit tests (Jest + Supertest)
+Testear lógica crítica del backend:
+- Validaciones de autenticación (login, signup, tokens)
+- Rate limiting activo
+- Respuestas de endpoints con datos inválidos
+- Lógica de puntaje (`POST /user/score`)
+
+Herramienta recomendada: `jest` + `supertest` + `mongodb-memory-server` para base de datos de test en memoria.

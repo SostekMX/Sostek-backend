@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-06
+> Última actualización: 2026-06-08
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -71,7 +71,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **`GET /evaluations/:id`** — retorna evaluación completa con preguntas, opciones y valores numéricos
 - **`GET /articles`** — retorna lista completa de artículos
 - **`GET /articles/:id`** — retorna un artículo por ID
-- **`GET /presentations`** — retorna lista de presentaciones con sus URLs de slides
+- **`GET /presentations`** — retorna lista de presentaciones con sus URLs de slides; cada presentación incluye campo `cover` (URL de imagen de portada)
 - **`POST /user/favorites`** — agrega un artículo o presentación a favoritos; valida `content_id` y `type` (`article` | `presentation`); rechaza duplicados
 - **`GET /user/favorites`** — retorna el array `favorites` del usuario autenticado
 - **`DELETE /user/favorites/:content_id`** — elimina el favorito con ese `content_id` usando `$pull` de MongoDB
@@ -152,6 +152,7 @@ colección: articles
 
 colección: presentations
     ├── name    (String, required)
+    ├── cover   (String — URL de imagen de portada, default: '')
     └── slides  (Array de String — URLs de imágenes)
 
 colección: tutorial  (documento único)
