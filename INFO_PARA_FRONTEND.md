@@ -2,7 +2,7 @@
 
 > Para el equipo de frontend. Describe qué cambió, qué falta y cómo llamar cada endpoint.
 > Backend corre en: `http://localhost:8080`
-> Última actualización: 2026-06-08
+> Última actualización: 2026-06-09
 
 ---
 
@@ -10,6 +10,8 @@
 
 | Fecha | Qué cambió | Qué necesita saber el frontend |
 |-------|-----------|-------------------------------|
+| 2026-06-09 | **`POST /user/forgot-password` — flujo cambiado** | Ya no retorna `reset_token` en la respuesta. Ahora envía un **email** al usuario con el link y el token. Ver nuevo contrato abajo. **El frontend necesita actualizar las pantallas ForgotPassword y ResetPassword.** |
+| 2026-06-09 | **`POST /user/login` — mensajes de error unificados** | Ya no distingue entre "correo no registrado" y "contraseña incorrecta". Ahora ambos casos devuelven `"Correo o contraseña incorrectos"`. Actualizar cualquier lógica que compare el mensaje de error. |
 | 2026-06-08 | `POST /user/avatar` implementado | Nueva pantalla o botón para subir foto de perfil. Enviar `multipart/form-data` con el campo `avatar`. Formatos aceptados: jpg, png, webp (máx 5MB). La URL del avatar queda disponible en `GET /user/profile` como `avatar`. Ver contrato en sección 3. |
 | 2026-06-08 | Campo `avatar` agregado al modelo de usuario y al perfil | `GET /user/profile` ahora incluye `avatar` (string URL de Cloudinary, o `""` si no tiene foto). |
 | 2026-06-08 | Campo `description` en evaluaciones | `GET /evaluations` ahora incluye `description` en cada ítem de la lista. Puede mostrarse como subtítulo o descripción en la UI de selección de evaluación. |
@@ -31,16 +33,27 @@
 
 | Elemento | Dónde integrarlo | Estado |
 |----------|-----------------|--------|
-| Reemplazar `useGetDocuments` (tutorial) | Hook del tutorial — apuntar a `GET /tutorial` | ⚠️ Pendiente en frontend |
-| Reemplazar `gapi.client` con axios | Todas las pantallas que cargan evaluaciones, artículos y presentaciones | ⚠️ Pendiente en frontend |
-| Integrar favoritos | Menú lateral / pantalla de favoritos — usar los 3 endpoints de `/user/favorites` | ⚠️ Pendiente en frontend |
-| Integrar `POST /user/score` | `FinalScoreEvaluation.tsx` al terminar una evaluación | ⚠️ Pendiente en frontend |
-| Integrar `DELETE /user` | UI de perfil — opción "Eliminar cuenta" | ⚠️ Pendiente en frontend |
-| Integrar `POST /user/forgot-password` y `POST /user/reset-password` | Pantalla de login / recuperación de contraseña | ⚠️ Pendiente en frontend |
-| Integrar `POST /user/avatar` | Botón o pantalla de edición de perfil — subir foto (jpg/png/webp, máx 5MB) | ⚠️ Pendiente en frontend |
-| Mostrar `avatar` del usuario | Pantalla de perfil — mostrar la URL de `GET /user/profile` como foto | ⚠️ Pendiente en frontend |
-| Mostrar `description` de evaluaciones | Lista de selección de evaluación — subtítulo o descripción | ⚠️ Pendiente en frontend |
-| Mostrar `cover` de presentaciones | Lista de presentaciones — thumbnail de portada | ⚠️ Pendiente en frontend |
+| **Actualizar pantalla `ForgotPassword`** | Ya no leer `reset_token` de la respuesta. Mostrar mensaje "Revisá tu correo" y nada más. Ver flujo completo abajo. | 🔴 Requiere cambio — flujo roto si no se actualiza |
+| **Actualizar pantalla `ResetPassword`** | Leer el token del query param `?token=` de la URL en vez de `sessionStorage`. El link del email llega como `http://localhost:3000/ResetPassword?token=<token>`. | 🔴 Requiere cambio — flujo roto si no se actualiza |
+| Actualizar mensajes de error en login | Si el frontend compara el string de error (`"Cuenta no registrada"`, `"Contraseña incorrecta"`), ahora ambos son `"Correo o contraseña incorrectos"` | 🟡 Solo si se compara el string de error |
+
+---
+
+### Flujo nuevo de recuperación de contraseña
+
+```
+1. Usuario ingresa su email en ForgotPassword
+2. Frontend llama POST /user/forgot-password con { email }
+3. Backend responde { success: true, message: "Si el correo está registrado..." }
+   → El mismo mensaje para email registrado y no registrado
+4. Frontend muestra el mensaje y listo — no guarda ningún token
+5. Usuario recibe email con link: http://localhost:3000/ResetPassword?token=<token>
+6. Usuario hace clic en el link → llega a ResetPassword con ?token= en la URL
+7. Frontend lee el token con: new URLSearchParams(window.location.search).get('token')
+   (o el equivalente en React Router / Ionic)
+8. Usuario escribe nueva contraseña → Frontend llama POST /user/reset-password con { token, new_password }
+9. Al éxito, redirigir a login
+```
 
 ---
 
@@ -106,14 +119,13 @@ Valida credenciales y retorna un JWT.
 |---------|-------|
 | `"Correo inválido"` | Email mal formado |
 | `"La contraseña es requerida"` | `password` vacío |
-| `"Cuenta no registrada"` | No existe usuario con ese email |
-| `"Contraseña incorrecta"` | Password no coincide |
+| `"Correo o contraseña incorrectos"` | Email no registrado **o** contraseña incorrecta (mensaje unificado) |
 | `"Demasiados intentos, intenta más tarde"` | Rate limit superado (10 req / 15 min) |
 
 ---
 
 ### POST `/user/forgot-password`
-Genera un token de recuperación válido por **1 hora** y lo retorna en la respuesta.
+Envía un email al usuario con un link de recuperación válido por **1 hora**. El token ya **no** viene en la respuesta — llega por email.
 
 **Body**
 ```json
@@ -124,16 +136,19 @@ Genera un token de recuperación válido por **1 hora** y lo retorna en la respu
 
 **Respuesta exitosa — 200**
 ```json
-{ "success": true, "reset_token": "<64-char-hex-string>" }
+{ "success": true, "message": "Si el correo está registrado, recibirás instrucciones en tu bandeja de entrada" }
 ```
-> El frontend debe guardar este token y enviárselo al usuario para que pueda usarlo en `/user/reset-password`.
+> ⚠️ La respuesta es **siempre la misma** independientemente de si el email existe o no.
+> El frontend solo muestra este mensaje — no hace nada más.
+
+**El email que recibe el usuario contiene:**
+- Un link: `http://localhost:3000/ResetPassword?token=<token>`
+- El token en texto plano (por si el link no funciona)
 
 **Errores posibles**
 | `error` | Causa |
 |---------|-------|
 | `"Correo inválido"` | Email mal formado |
-| `"Correo no registrado"` | No existe usuario con ese email |
-| `"Error al generar token"` | Error interno de base de datos |
 | `"Demasiados intentos, intenta más tarde"` | Rate limit superado (10 req / 15 min) |
 
 ---

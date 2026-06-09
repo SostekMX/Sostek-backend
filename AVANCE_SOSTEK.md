@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-09
+> Última actualización: 2026-06-09 (seguridad + email)
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -18,6 +18,8 @@
 | Hashing | bcryptjs (salt 10) |
 | Validación | express-validator |
 | Rate limiting | express-rate-limit |
+| Headers de seguridad | helmet |
+| Email | nodemailer (Gmail SMTP) |
 | Variables de entorno | dotenv |
 | Desarrollo | nodemon (`npm run dev:js`) |
 
@@ -87,6 +89,13 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **Modelo de usuario** — esquema Mongoose completo con todos los campos (ver sección de arquitectura)
 - **CORS** — configurado para `http://localhost:3000` y `http://localhost:8100` (Ionic), con `methods` y `allowedHeaders` explícitos
 - **JWT** — secret leído desde variable de entorno `JWT_CODE`; tokens expiran en 7 días
+- **Email de recuperación** — `POST /user/forgot-password` envía email con link y token vía nodemailer + Gmail SMTP; requiere `EMAIL_USER`, `EMAIL_PASS` y `FRONTEND_URL` en `.env`; si no están configuradas, loguea warning y continúa sin enviar
+- **Seguridad (helmet)** — `app.use(helmet())` activa 15 headers HTTP de protección (CSP, X-Frame-Options, HSTS, etc.)
+- **Seguridad (MIME validation)** — subida de avatar valida magic bytes reales del archivo con `file-type`, no solo el Content-Type del cliente
+- **Seguridad (enumeración)** — login devuelve `"Correo o contraseña incorrectos"` en ambos casos de fallo; forgot-password siempre devuelve el mismo mensaje genérico independientemente de si el email existe
+- **Seguridad (rate limit completo)** — `/user/reset-password` también tiene rate limit (10 req / 15 min)
+- **Seguridad (profile)** — `GET /user/profile` excluye `reset_token` y `reset_token_expiry` de la respuesta
+- **Seguridad (errores)** — los `.catch()` devuelven mensajes genéricos; nunca exponen objetos de error de Mongoose al cliente
 
 ---
 
@@ -180,6 +189,9 @@ colección: tutorial  (documento único)
 | `CLOUDINARY_CLOUD_NAME` | — | Nombre del cloud en Cloudinary (para seed de presentaciones) |
 | `CLOUDINARY_API_KEY` | — | API key de Cloudinary |
 | `CLOUDINARY_API_SECRET` | — | API secret de Cloudinary |
+| `EMAIL_USER` | — | Cuenta de Gmail que envía los emails de recuperación |
+| `EMAIL_PASS` | — | Contraseña de aplicación de Google (no la contraseña normal) |
+| `FRONTEND_URL` | `http://localhost:3000` | URL base del frontend — se usa para armar el link de reset en el email |
 
 ---
 
