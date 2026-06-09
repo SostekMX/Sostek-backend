@@ -2,7 +2,7 @@
 
 > Para el equipo de frontend. Describe qué cambió, qué falta y cómo llamar cada endpoint.
 > Backend corre en: `http://localhost:8080`
-> Última actualización: 2026-06-09
+> Última actualización: 2026-06-09 — **backend 100% completo**
 
 ---
 
@@ -10,6 +10,7 @@
 
 | Fecha | Qué cambió | Qué necesita saber el frontend |
 |-------|-----------|-------------------------------|
+| 2026-06-09 | **Contraseña mínima subida a 8 caracteres** | En `/user/signup` y `/user/reset-password` el backend ahora rechaza contraseñas menores a 8 caracteres. El mensaje de error cambió a `"La contraseña debe tener al menos 8 caracteres"`. Actualizar validación en los formularios si no lo hicieron ya. |
 | 2026-06-09 | **`POST /user/forgot-password` — flujo cambiado** | Ya no retorna `reset_token` en la respuesta. Ahora envía un **email** al usuario con el link y el token. Ver nuevo contrato abajo. **El frontend necesita actualizar las pantallas ForgotPassword y ResetPassword.** |
 | 2026-06-09 | **`POST /user/login` — mensajes de error unificados** | Ya no distingue entre "correo no registrado" y "contraseña incorrecta". Ahora ambos casos devuelven `"Correo o contraseña incorrectos"`. Actualizar cualquier lógica que compare el mensaje de error. |
 | 2026-06-08 | `POST /user/avatar` implementado | Nueva pantalla o botón para subir foto de perfil. Enviar `multipart/form-data` con el campo `avatar`. Formatos aceptados: jpg, png, webp (máx 5MB). La URL del avatar queda disponible en `GET /user/profile` como `avatar`. Ver contrato en sección 3. |
@@ -27,15 +28,17 @@
 
 ---
 
-## 2. Lo que falta integrar en el frontend
+## 2. Lo que falta del lado del frontend
 
-> El backend tiene todo implementado. Lo pendiente es solo trabajo del frontend.
+> ✅ **El backend está 100% completo.** Todos los endpoints están implementados, testeados y funcionando.
+> Lo único pendiente es adaptar el frontend a los cambios de flujo listados abajo.
 
-| Elemento | Dónde integrarlo | Estado |
-|----------|-----------------|--------|
-| **Actualizar pantalla `ForgotPassword`** | Ya no leer `reset_token` de la respuesta. Mostrar mensaje "Revisá tu correo" y nada más. Ver flujo completo abajo. | 🔴 Requiere cambio — flujo roto si no se actualiza |
-| **Actualizar pantalla `ResetPassword`** | Leer el token del query param `?token=` de la URL en vez de `sessionStorage`. El link del email llega como `http://localhost:3000/ResetPassword?token=<token>`. | 🔴 Requiere cambio — flujo roto si no se actualiza |
-| Actualizar mensajes de error en login | Si el frontend compara el string de error (`"Cuenta no registrada"`, `"Contraseña incorrecta"`), ahora ambos son `"Correo o contraseña incorrectos"` | 🟡 Solo si se compara el string de error |
+| Tarea | Dónde | Urgencia |
+|-------|-------|----------|
+| **Actualizar `ForgotPassword.tsx`** | Quitar la lógica que lee `reset_token` de la respuesta. Mostrar el `message` que devuelve el backend y nada más. | 🔴 Roto sin este cambio |
+| **Actualizar `ResetPassword.tsx`** | Leer el token del query param `?token=` de la URL. El link del email llega como `…/ResetPassword?token=<token>`. Código: `new URLSearchParams(useLocation().search).get('token')` | 🔴 Roto sin este cambio |
+| Revisar validación de contraseña | El backend ahora rechaza contraseñas menores a 8 chars. Si el frontend ya valida 8, sin cambios. Si valida 6, subir a 8. | 🟡 Sin impacto visual — solo coherencia |
+| Revisar mensajes de error en login | Los strings `"Cuenta no registrada"` y `"Contraseña incorrecta"` ya no existen. Ahora es `"Correo o contraseña incorrectos"`. | 🟡 Solo si se comparan strings de error |
 
 ---
 
@@ -602,4 +605,4 @@ El frontend no depende de variables de entorno del backend. Solo necesita apunta
 | Desarrollo local | `http://localhost:8080` |
 | Producción | *(a definir cuando se haga deploy)* |
 
-> Actualmente la URL del backend está hardcodeada en el frontend. Para producción se recomienda moverla a una variable de entorno como `REACT_APP_BACKEND_URL`.
+> La URL del backend ya está en variable de entorno `REACT_APP_BACKEND_URL` (con fallback a `http://localhost:8080`). Definida en `src/config.ts`.
