@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-09 (seguridad + email)
+> Última actualización: 2026-06-09 (deploy Render — pendiente aprobación)
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -43,6 +43,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 | `GET` | `/user/profile` | Obtener datos del perfil | JWT requerido |
 | `POST` | `/user/score` | Actualizar score_test y/o score_game | JWT requerido |
 | `DELETE` | `/user` | Eliminar cuenta del usuario | JWT requerido |
+| `GET` | `/health` | Health check — responde `{ status: 'ok' }` (usado por UptimeRobot para mantener el servidor activo) | Ninguna (pública) |
 | `POST` | `/user/forgot-password` | Generar token de recuperación de contraseña | Ninguna (pública) |
 | `POST` | `/user/reset-password` | Resetear contraseña con token válido | Ninguna (pública) |
 | `GET` | `/evaluations` | Lista de evaluaciones (sin preguntas) | Ninguna (pública) |
@@ -87,7 +88,8 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **Unit tests** — Jest + Supertest + mongodb-memory-server; 33 tests cubriendo signup, login, JWT, score, recuperación de password, favoritos y avatar (`npm test`)
 - **CI/CD** — GitHub Actions corre `npm test` automáticamente en cada push a `main`/`development` y en PRs a `main`
 - **Modelo de usuario** — esquema Mongoose completo con todos los campos (ver sección de arquitectura)
-- **CORS** — configurado para `http://localhost:3000` y `http://localhost:8100` (Ionic), con `methods` y `allowedHeaders` explícitos
+- **CORS** — acepta `http://localhost:3000`, `http://localhost:8100`, y cualquier origen extra definido en `CORS_ORIGIN` (env var); útil para producción en Cloudflare Pages
+- **`GET /health`** — endpoint de health check; responde `{ status: 'ok' }`; usado por UptimeRobot para mantener el servidor en Render siempre activo
 - **JWT** — secret leído desde variable de entorno `JWT_CODE`; tokens expiran en 7 días
 - **Email de recuperación** — `POST /user/forgot-password` envía email con link y token vía nodemailer + Gmail SMTP; requiere `EMAIL_USER`, `EMAIL_PASS` y `FRONTEND_URL` en `.env`; si no están configuradas, loguea warning y continúa sin enviar
 - **Seguridad (helmet)** — `app.use(helmet())` activa 15 headers HTTP de protección (CSP, X-Frame-Options, HSTS, etc.)
@@ -131,7 +133,11 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 
 ### 🟢 Backlog (funcionalidades nuevas)
 
-*(No hay ítems pendientes en el backlog)*
+| Ítem | Estado |
+|------|--------|
+| **Deploy en Render** — cuenta creada, repo conectado; pendiente aprobación/activación del servicio en Render. Una vez activo: configurar variables de entorno y verificar `/health`. | ⏳ Pendiente aprobación |
+| **UptimeRobot** — cuenta creada; pendiente configurar monitor con URL de Render (`https://<nombre>.onrender.com/health`, cada 5 min) una vez que el servicio esté activo. | ⏳ Pendiente URL de Render |
+| **Actualizar URL del frontend** — el frontend Ionic debe cambiar la URL base de `http://localhost:8080` a la URL de Render para que los usuarios reales puedan hacer login/registro. | ⏳ Pendiente URL de Render |
 
 ---
 
@@ -192,6 +198,7 @@ colección: tutorial  (documento único)
 | `EMAIL_USER` | — | Cuenta de Gmail que envía los emails de recuperación |
 | `EMAIL_PASS` | — | Contraseña de aplicación de Google (no la contraseña normal) |
 | `FRONTEND_URL` | `http://localhost:3000` | URL base del frontend — se usa para armar el link de reset en el email |
+| `CORS_ORIGIN` | — | Origen CORS extra para producción (ej: `https://sostek.pages.dev`) — en desarrollo no hace falta |
 
 ---
 
