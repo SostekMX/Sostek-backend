@@ -10,9 +10,9 @@
 
 | Fecha | Qué cambió | Qué necesita saber el frontend |
 |-------|-----------|-------------------------------|
-| 2026-06-09 | **BS1 ✅ Sin secretos hardcodeados** | Confirmado — todos los secrets (JWT, DB, Cloudinary, Email) se leen de variables de entorno. Ninguno está hardcodeado en el código. |
-| 2026-06-09 | **BS2 ✅ express-validator + helmet + express-mongo-sanitize** | Los tres están activos. `express-validator` valida y sanitiza todos los inputs. `helmet` activa headers de seguridad HTTP. `express-mongo-sanitize` bloquea NoSQL injection en todos los endpoints. |
-| 2026-06-09 | **BS4 ✅ Contraseña mínima 8 caracteres** | En `/user/signup` y `/user/reset-password` el backend ahora rechaza contraseñas menores a 8 caracteres. Mensaje: `"La contraseña debe tener al menos 8 caracteres"`. |
+| 2026-06-09 | **BS1 ✅ RESUELTO — Sin secretos hardcodeados** | Todos los secrets (JWT_CODE, DB_URL, Cloudinary, Email) se leen de `process.env`. Ninguno está hardcodeado. El archivo `.env.example` documenta todas las variables requeridas. |
+| 2026-06-09 | **BS2 ✅ RESUELTO — express-validator + helmet + express-mongo-sanitize** | Los tres están instalados y activos en `src/index.ts`. `express-mongo-sanitize` en línea 29, `helmet` en línea 27, `express-validator` en todos los endpoints con body. |
+| 2026-06-09 | **BS4 ✅ RESUELTO — Contraseña mínima 8 caracteres** | `/user/signup` línea 124 y `/user/reset-password` línea 273 validan `min: 8`. Mensaje de error: `"La contraseña debe tener al menos 8 caracteres"`. |
 | 2026-06-09 | **✅ `description` en evaluaciones** | `GET /evaluations` ya incluye `description` en cada evaluación desde hace varios días. Las 6 evaluaciones tienen texto cargado. |
 | 2026-06-09 | **Imágenes rotas en 3 artículos — pendiente de datos** | Este es un fix de datos en MongoDB, no de código. Hay que correr los `updateOne` directamente en la base. Ver sección de pendientes abajo. |
 | 2026-06-09 | **`POST /user/forgot-password` — flujo cambiado** | Ya no retorna `reset_token` en la respuesta. Ahora envía un **email** al usuario con el link y el token. Ver nuevo contrato abajo. **El frontend necesita actualizar las pantallas ForgotPassword y ResetPassword.** |
