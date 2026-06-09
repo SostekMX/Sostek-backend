@@ -7,6 +7,9 @@ const bcryptJs = require("bcryptjs");
 const crypto = require("crypto");
 const { body, validationResult } = require("express-validator");
 const rateLimit = require("express-rate-limit");
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+
 const dbSchema = require("./models/authModel");
 const contentSchema = require("./models/contentModel");
 
@@ -52,6 +55,32 @@ function validate(req, res) {
         return false;
     }
     return true;
+}
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (_req, file, cb) => {
+        const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+        if (allowed.includes(file.mimetype)) cb(null, true);
+        else cb(new Error('Formato no válido. Solo jpg, png o webp'));
+    }
+});
+
+function uploadToCloudinary(buffer) {
+    return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+            { folder: 'sostek/avatars', resource_type: 'image' },
+            (error, result) => { if (error) reject(error); else resolve(result); }
+        );
+        stream.end(buffer);
+    });
 }
 
 
@@ -406,6 +435,26 @@ app.delete("/user/favorites/:content_id", verifyToken, (req, res) => {
             res.json({ success: true, message: "Favorito eliminado" });
         }
     );
+});
+
+
+app.post("/user/avatar", verifyToken, (req, res, next) => {
+    upload.single('avatar')(req, res, (err) => {
+        if (err) {
+            if (err.code === 'LIMIT_FILE_SIZE') return res.json({ success: false, error: 'La imagen no debe superar 5MB' });
+            return res.json({ success: false, error: err.message || 'Error al procesar imagen' });
+        }
+        next();
+    });
+}, async (req, res) => {
+    if (!req.file) return res.json({ success: false, error: 'La imagen es requerida' });
+    try {
+        const result = await uploadToCloudinary(req.file.buffer);
+        await dbSchema.User.findOneAndUpdate({ email: req.user.email }, { avatar: result.secure_url });
+        res.json({ success: true, avatar_url: result.secure_url });
+    } catch (err) {
+        res.json({ success: false, error: 'Error al subir imagen' });
+    }
 });
 
 
