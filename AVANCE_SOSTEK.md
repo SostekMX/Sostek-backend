@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-08
+> Última actualización: 2026-06-09
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -81,6 +81,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **Rate limiting** — `/user/signup` y `/user/login` limitados a 10 requests cada 15 minutos
 - **Validación y sanitización de inputs** — `express-validator` en todos los endpoints con body; incluye longitudes máximas (name/surname 50, email 100, password 128, occupation 100), tipos correctos (`isFloat` en scores, `isString` en opcionales), y sanitización (`.trim()`, `.normalizeEmail()`)
 - **`POST /user/avatar`** — recibe imagen `multipart/form-data` (campo `avatar`); valida formato (jpg/png/webp) y tamaño (máx 5MB); sube a Cloudinary en la carpeta `sostek/avatars`; guarda `secure_url` en el campo `avatar` del usuario; retorna `{ success: true, avatar_url: "..." }`
+- **Graceful shutdown** — el servidor captura `SIGUSR2` (nodemon restart), `SIGTERM` y `SIGINT` (Ctrl+C) para cerrar el HTTP server antes de salir; evita el error `EADDRINUSE` al reiniciar en desarrollo
 - **Unit tests** — Jest + Supertest + mongodb-memory-server; 33 tests cubriendo signup, login, JWT, score, recuperación de password, favoritos y avatar (`npm test`)
 - **CI/CD** — GitHub Actions corre `npm test` automáticamente en cada push a `main`/`development` y en PRs a `main`
 - **Modelo de usuario** — esquema Mongoose completo con todos los campos (ver sección de arquitectura)

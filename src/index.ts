@@ -466,9 +466,14 @@ app.post("/user/avatar", verifyToken, (req: any, res: Response, next: NextFuncti
 
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log("Backend running on port " + PORT);
   });
+
+  const shutdown = () => server.close(() => process.exit(0));
+  process.once('SIGUSR2', shutdown);  // nodemon restart
+  process.on('SIGTERM', shutdown);    // kill
+  process.on('SIGINT', shutdown);     // Ctrl+C
 }
 
 module.exports = app;
