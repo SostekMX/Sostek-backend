@@ -121,7 +121,7 @@ function uploadToCloudinary(buffer: Buffer): Promise<any> {
 }
 
 
-app.get("/health", (_req, res) => { res.json({ status: 'ok' }); });
+app.get("/health", (_req: Request, res: Response) => { res.json({ status: 'ok' }); });
 
 app.post("/user/signup", authLimiter, [
   body('email').isEmail().withMessage('Correo inválido').normalizeEmail().isLength({ max: 100 }).withMessage('Correo demasiado largo'),
@@ -324,9 +324,15 @@ app.delete("/user", verifyToken, (req: any, res: Response) => {
 
 
 app.get("/evaluations", (req: Request, res: Response) => {
-  contentSchema.Evaluation.find({}, { questions: 0 })
+  contentSchema.Evaluation.find({})
     .then((evaluations: any) => {
-      res.json({ success: true, evaluations });
+      const result = evaluations.map((evaluation: any) => {
+        const obj = evaluation.toObject();
+        obj.question_count = obj.questions.length;
+        delete obj.questions;
+        return obj;
+      });
+      res.json({ success: true, evaluations: result });
     })
     .catch(() => {
       res.json({ success: false, error: "Error al obtener evaluaciones" });

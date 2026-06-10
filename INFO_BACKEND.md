@@ -67,9 +67,21 @@
 | Elemento | Frontend | Backend |
 |----------|----------|---------|
 | Foto de perfil | ✅ Frontend completo (upload + crop + reposición + header) | Implementar `POST /user/avatar` + campo `avatar` en modelo |
-| Imágenes rotas en 3 artículos | ✅ Muestra placeholder cuando imagen falla | Actualizar URLs en MongoDB |
+| Imágenes rotas en 3 artículos | ✅ Muestra placeholder cuando imagen falla | ✅ Resuelto (2026-06-10) — las 3 URLs ya están actualizadas en MongoDB |
 | Párrafos en artículos | ✅ Divide `body` por `\n` | Agregar saltos de línea en datos de MongoDB |
-| `description` en evaluaciones | ✅ Listo para recibirlo | Agregar campo al schema + seed |
+| `description` en evaluaciones | ✅ Listo para recibirlo | ✅ Resuelto (2026-06-10) — incluye rango de semestre recomendado, ej. `"(3°-4° semestre) ..."` |
+
+---
+
+## Cambios del backend (2026-06-10)
+
+| Cambio | Detalle |
+|--------|---------|
+| `GET /evaluations` agrega `question_count` | Número total de preguntas de la evaluación (`questions.length`), calculado en el backend. El campo `questions` se sigue excluyendo de esta respuesta. |
+| `description` de evaluaciones con rango de semestre | Las 6 evaluaciones ahora tienen `description` con el rango sugerido: Nivel 1 → `(3°-4° semestre)`, Nivel 2 → `(5°-6° semestre)`, Nivel 3 → `(7°-8° semestre)`. |
+| `category` agregada a los 25 artículos | Todos los artículos ahora tienen `category`: `Ambiental` (17), `Económico` (4) o `Social` (4) — usado por el sistema de recomendación de artículos. |
+| Artículo "El impacto del cine en el medio ambiente" reconstruido | Tenía `title`, `author`, `body` y `tags` corruptos (datos de columnas mezclados/cortados). Se reconstruyó con el contenido original: `title`, `subtitle`, `author` ("Alexa Valladares Cristán"), `body` (7 párrafos), `tags` (`["cine","sostenibilidad","medio ambiente"]`) y `bibliography` limpios. |
+| Artículo duplicado eliminado | Existían 2 copias idénticas de "Los océanos y la vida" — se eliminó una. Total de artículos: 26 → 25. |
 
 ---
 
@@ -683,35 +695,14 @@ Aplicar a `/user/signup`, `/user/login` y `/user/forgot-password`: 10 requests p
 
 ## Pendientes del backend — datos
 
-### 1. Imágenes rotas en 3 artículos
-Actualizar el campo `image` en MongoDB para estos artículos:
-
-| Título | URL nueva |
-|--------|-----------|
-| `Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales` | `https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg` |
-| `El impacto del cine en el medio ambiente` | `https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png` |
-| `Muebles en Abuela` | `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s` |
-
-```js
-db.articles.updateOne({ title: "Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales" }, { $set: { image: "https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg" } })
-db.articles.updateOne({ title: "El impacto del cine en el medio ambiente" }, { $set: { image: "https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png" } })
-db.articles.updateOne({ title: "Muebles en Abuela" }, { $set: { image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s" } })
-```
+### 1. Imágenes rotas en 3 artículos — ✅ Resuelto (2026-06-10)
+Las 3 URLs ya están actualizadas en MongoDB (`Día Mundial de los Humedales`, `El impacto del cine en el medio ambiente`, `Muebles de la Abuela`).
 
 ### 2. Párrafos en artículos
 El frontend ya divide el campo `body` por `\n` para mostrar párrafos separados. Los artículos que se ven como un bloque de texto continuo necesitan saltos de línea (`\n`) en su campo `body` en MongoDB.
 
-### 3. Campo `description` en evaluaciones
-Agregar campo `description: { type: String, default: '' }` al schema de evaluaciones e incluirlo en `GET /evaluations`. El frontend ya lo recibe y muestra automáticamente si existe.
-
-| Evaluación | Descripción sugerida |
-|------------|---------------------|
-| Arquitectura Nivel 1 | Mide si conoces y tomaste en cuenta los factores ambientales y sociales básicos en el análisis de tu proyecto. |
-| Arquitectura Nivel 2 | Mide cómo integras estrategias de sostenibilidad en el diseño y desarrollo de tu proyecto. |
-| Arquitectura Nivel 3 | Mide si tu proyecto plantea sistemas y programas de sostenibilidad a largo plazo. |
-| Diseño Industrial Nivel 1 | Mide tu conocimiento básico sobre impacto ambiental y sostenibilidad en el diseño de productos. |
-| Diseño Industrial Nivel 2 | Mide cómo consideras la sostenibilidad en tu proceso de diseño y selección de materiales. |
-| Diseño Industrial Nivel 3 | Mide qué tan profundo integra tu proyecto criterios de sostenibilidad en todo su ciclo de vida. |
+### 3. Campo `description` en evaluaciones — ✅ Resuelto (2026-06-10)
+Las 6 evaluaciones ya tienen `description` con rango de semestre incluido (ver sección "Cambios del backend (2026-06-10)" arriba).
 
 ---
 

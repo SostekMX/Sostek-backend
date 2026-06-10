@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-09 (deploy Render — pendiente aprobación)
+> Última actualización: 2026-06-10 (main actualizado con development para disparar deploy en Render)
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
@@ -71,9 +71,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **`DELETE /user`** — elimina la cuenta del usuario autenticado
 - **`POST /user/forgot-password`** — recibe email, genera token seguro (64 hex chars) con 1h de expiración, lo guarda en el usuario en DB, retorna `{ success: true, reset_token: "..." }`; limitado por rate limit
 - **`POST /user/reset-password`** — recibe `token` + `new_password`, valida que el token exista y no esté expirado, hashea la nueva contraseña con bcrypt y limpia los campos de reset en el documento
-- **`GET /evaluations`** — retorna lista de evaluaciones sin el campo `questions` (incluye `name`, `career` y `description`)
+- **`GET /evaluations`** — retorna lista de evaluaciones sin el campo `questions`, pero agrega `question_count` (total de preguntas) calculado con `questions.length`; incluye `name`, `career` y `description` (ahora con rango de semestre recomendado, ej. `"(3°-4° semestre) ..."`)
 - **`GET /evaluations/:id`** — retorna evaluación completa con preguntas, opciones y valores numéricos
-- **`GET /articles`** — retorna lista completa de artículos
+- **`GET /articles`** — retorna lista completa de artículos; los 25 artículos tienen `category` asignada (`Ambiental` | `Económico` | `Social`) para el sistema de recomendación
 - **`GET /articles/:id`** — retorna un artículo por ID
 - **`GET /presentations`** — retorna lista de presentaciones con sus URLs de slides; cada presentación incluye campo `cover` (URL de imagen de portada)
 - **`POST /user/favorites`** — agrega un artículo o presentación a favoritos; valida `content_id` y `type` (`article` | `presentation`); rechaza duplicados
@@ -135,9 +135,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 
 | Ítem | Estado |
 |------|--------|
-| **Deploy en Render** — cuenta creada, repo conectado; pendiente aprobación/activación del servicio en Render. Una vez activo: configurar variables de entorno y verificar `/health`. | ⏳ Pendiente aprobación |
-| **UptimeRobot** — cuenta creada; pendiente configurar monitor con URL de Render (`https://<nombre>.onrender.com/health`, cada 5 min) una vez que el servicio esté activo. | ⏳ Pendiente URL de Render |
-| **Actualizar URL del frontend** — el frontend Ionic debe cambiar la URL base de `http://localhost:8080` a la URL de Render para que los usuarios reales puedan hacer login/registro. | ⏳ Pendiente URL de Render |
+| **Deploy en Render** — `main` sincronizado con `development`, deploy disparado y `/health` responde `{"status":"ok"}` (200 OK). URL: `https://sostek-backend.onrender.com` | ✅ Activo |
+| **UptimeRobot** — monitor activo en `https://sostek-backend.onrender.com/health`, checks cada 5 min, 100% uptime. | ✅ Activo |
+| **Actualizar URL del frontend** — el frontend Ionic debe cambiar la URL base de `http://localhost:8080` a `https://sostek-backend.onrender.com`. | ⏳ Pendiente avisar a frontend |
 
 ---
 

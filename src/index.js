@@ -317,9 +317,15 @@ app.delete("/user", verifyToken, (req, res) => {
 
 
 app.get("/evaluations", (req, res) => {
-    contentSchema.Evaluation.find({}, { questions: 0 })
+    contentSchema.Evaluation.find({})
         .then((evaluations) => {
-            res.json({ success: true, evaluations });
+            const result = evaluations.map((evaluation) => {
+                const obj = evaluation.toObject();
+                obj.question_count = obj.questions.length;
+                delete obj.questions;
+                return obj;
+            });
+            res.json({ success: true, evaluations: result });
         })
         .catch(() => {
             res.json({ success: false, error: "Error al obtener evaluaciones" });
