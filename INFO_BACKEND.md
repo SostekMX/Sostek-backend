@@ -2,7 +2,7 @@
 
 > Documento de comunicación frontend → backend.
 > Se actualiza cada vez que hay un cambio en el frontend que afecta la integración.
-> Última actualización: 2026-06-09
+> Última actualización: 2026-06-10
 > Backend corre en: `http://localhost:8080`
 
 ---
@@ -11,10 +11,11 @@
 
 | Fecha | Cambio | Qué necesita el backend |
 |-------|--------|------------------------|
+| 2026-06-09 | **`ForgotPassword` y `ResetPassword` — flujo por email integrado ✅** | Frontend actualizado: `ForgotPassword` muestra el mensaje del backend y oculta el form (no lee `reset_token`). `ResetPassword` lee el token desde `?token=` en la URL. El backend ya envía el token por email con el link. **Actualizar `INFO_FRONTEND.md`**: el contrato de `POST /user/forgot-password` todavía documenta `{ reset_token: "..." }` — corregir a `{ success: true, message: "..." }`. |
 | 2026-06-09 | **Token JWT movido a `sessionStorage`** | Sin cambios en backend — el frontend ya no usa `localStorage` para el token ni el flag de sesión. Si el backend alguna vez implementa HttpOnly cookies, avisar para eliminar el manejo manual del token en el frontend. |
 | 2026-06-09 | **Contraseña mínima subida a 8 caracteres** | El frontend ahora valida mínimo 8 caracteres en signup y reset-password. **El backend debe actualizar su validación de 6 → 8 caracteres** en `/user/signup` y `/user/reset-password`, y actualizar el mensaje de error a `"La contraseña debe tener al menos 8 caracteres"`. |
 | 2026-06-09 | **Guardias de ruta implementadas** | Sin cambios en backend — `/Profile` y `/Favorites` redirigen automáticamente a `/` si no hay sesión. |
-| 2026-06-09 | **Email removido del body de `POST /user/edit`** | Confirmar que el backend ya ignora el campo `email` en el body y usa solo el del JWT (según el contrato ya documentado). No enviar email desde frontend era un bug — ya corregido. |
+| 2026-06-09 | **Email removido del body de `POST /user/edit`** | Confirmado — el backend ignora el campo `email` en el body y usa solo el del JWT (según contrato). Bug corregido en frontend. |
 | 2026-06-08 | **Avatar upload — frontend ✅ completo** | ✅ Ya implementado según `INFO_FRONTEND.md` — `POST /user/avatar` activo. |
 | 2026-06-08 | Avatar mostrado en header (`AppBarPopOver`) | Sin cambios en backend — el frontend lee `avatar` de `GET /user/profile` y lo guarda en `localStorage` (es URL pública, no sensible). |
 | 2026-06-08 | Carrusel usa campo `cover` de presentaciones | Si el backend envía `cover` en `GET /presentations`, el frontend lo usa como portada; si no, cae en `slides[0]` — el campo es opcional |
@@ -64,43 +65,31 @@
 
 ## Pendiente de ambos lados
 
+✅ Todo resuelto — ver `AVANCE_SOSTEK.md` para el detalle.
+
 | Elemento | Frontend | Backend |
 |----------|----------|---------|
-| Foto de perfil | ✅ Frontend completo (upload + crop + reposición + header) | Implementar `POST /user/avatar` + campo `avatar` en modelo |
-| Imágenes rotas en 3 artículos | ✅ Muestra placeholder cuando imagen falla | ✅ Resuelto (2026-06-10) — las 3 URLs ya están actualizadas en MongoDB |
-| Párrafos en artículos | ✅ Divide `body` por `\n` | Agregar saltos de línea en datos de MongoDB |
-| `description` en evaluaciones | ✅ Listo para recibirlo | ✅ Resuelto (2026-06-10) — incluye rango de semestre recomendado, ej. `"(3°-4° semestre) ..."` |
-| Categorías de evaluación vs. artículos no coincidían (B6) | ✅ Resuelto — `ArticleCarrousel.tsx` mapea `"Ambiental"` → `["Ambiental"]` y `"Económico y Social"` → `["Económico", "Social"]` | ✅ Resuelto (2026-06-10) — `questions[].category` renombrado a `"Ambiental"` / `"Económico y Social"` en las 6 evaluaciones |
-
----
-
-## Cambios del backend (2026-06-10)
-
-| Cambio | Detalle |
-|--------|---------|
-| `GET /evaluations` agrega `question_count` | Número total de preguntas de la evaluación (`questions.length`), calculado en el backend. El campo `questions` se sigue excluyendo de esta respuesta. |
-| `description` de evaluaciones con rango de semestre | Las 6 evaluaciones ahora tienen `description` con el rango sugerido: Nivel 1 → `(3°-4° semestre)`, Nivel 2 → `(5°-6° semestre)`, Nivel 3 → `(7°-8° semestre)`. |
-| `category` agregada a los 25 artículos | Todos los artículos ahora tienen `category`: `Ambiental` (17), `Económico` (4) o `Social` (4) — usado por el sistema de recomendación de artículos. |
-| Artículo "El impacto del cine en el medio ambiente" reconstruido | Tenía `title`, `author`, `body` y `tags` corruptos (datos de columnas mezclados/cortados). Se reconstruyó con el contenido original: `title`, `subtitle`, `author` ("Alexa Valladares Cristán"), `body` (7 párrafos), `tags` (`["cine","sostenibilidad","medio ambiente"]`) y `bibliography` limpios. |
-| Artículo duplicado eliminado | Existían 2 copias idénticas de "Los océanos y la vida" — se eliminó una. Total de artículos: 26 → 25. |
-| `category` de preguntas en evaluaciones renombrada (B6) | `questions[].category` pasó de `"ECOSISTEMA"` / `"Economía y sociedad"` / `"Sociedad y Economía"` (inconsistentes) a solo 2 valores: `"Ambiental"` y `"Económico y Social"` — alineado con el contrato acordado con frontend para el sistema de recomendación. |
-| Encoding de "í" verificado (B5) | Se revisó toda la colección `articles` (title, subtitle, body, author, bibliography, tags) y `evaluations.questions` (category, text, options) buscando el carácter de reemplazo `�` (U+FFFD, típico de byte 0xC3 perdido). No se encontró ninguno — el problema quedó resuelto con la reconstrucción del artículo de cine y el rename de B6. |
+| Foto de perfil | ✅ Completo (upload + crop + reposición + header) | ✅ `POST /user/avatar` implementado |
+| Imágenes rotas en 3 artículos | ✅ Completo | ✅ URLs actualizadas en MongoDB |
+| Párrafos en artículos | ✅ Completo | ✅ Saltos de línea agregados en MongoDB |
+| `description` en evaluaciones | ✅ Completo | ✅ Campo agregado al schema y seed (B3) |
 
 ---
 
 ## Comportamiento del frontend en recuperación de contraseña
 
-El flujo de recuperación funciona así:
+El flujo de recuperación funciona así (flujo actual — token por email):
 
 1. El usuario ingresa su email en `/ForgotPassword`
 2. El frontend llama a `POST /user/forgot-password` con `{ email }`
-3. El backend responde con `{ success: true, reset_token: "<token>" }`
-4. El frontend guarda el token en `sessionStorage` con la clave `reset_token` y navega a `/ResetPassword`
-5. En `/ResetPassword`, el usuario ve el token precargado (editable) y escribe su nueva contraseña
-6. El frontend llama a `POST /user/reset-password` con `{ token, new_password }`
-7. Al éxito, el frontend borra el token de `sessionStorage` y redirige a login
+3. El backend responde con `{ success: true, message: "<mensaje>" }` y envía el email con el link `https://<dominio>/ResetPassword?token=<token>`
+4. El frontend muestra el mensaje del backend como toast verde y oculta el formulario
+5. El usuario hace clic en el link del email y llega a `/ResetPassword?token=<token>`
+6. `ResetPassword` lee el token desde `location.search` con `useLocation` (ya no usa sessionStorage)
+7. El usuario ingresa su nueva contraseña y el frontend llama a `POST /user/reset-password` con `{ token, new_password }`
+8. Al éxito, muestra `IonAlert` y redirige a login
 
-> Nota: El frontend muestra el token directamente al usuario para que lo copie/use. No hay envío de email desde el frontend.
+> **⚠️ INFO_FRONTEND.md desactualizado:** La sección 3 de `INFO_FRONTEND.md` documenta que `POST /user/forgot-password` devuelve `{ reset_token: "..." }` en la respuesta. Ese contrato ya no es correcto — el backend ya envía el token por email. Actualizar `INFO_FRONTEND.md` para reflejar la respuesta real: `{ success: true, message: "..." }` y que el token llega via link en el email.
 
 ---
 
@@ -577,12 +566,14 @@ El `content_id` va en la URL: `/user/favorites/664abc123...`
       "_id": "664def...",
       "name": "Arquitectura Nivel 1",
       "career": "Arquitectura",
-      "description": "Mide si conoces y tomaste en cuenta los factores ambientales..."
+      "description": "(3°-4° semestre) Mide si conoces y tomaste en cuenta los factores ambientales y sociales básicos en el análisis de tu proyecto.",
+      "question_count": 23
     }
   ]
 }
 ```
-> El campo `description` es **pendiente de agregar** al schema (ver sección "Pendientes de datos").
+> `description` ya incluye el rango de semestre recomendado (✅ resuelto B3, 2026-06-10).
+> `question_count` es el total de preguntas (`questions.length`), calculado en el backend (✅ resuelto B4).
 > `career` acepta valores: `"Arquitectura"`, `"Diseño Industrial"`, cualquier otro cae en el filtro "Otros".
 
 ---
@@ -672,17 +663,17 @@ El backend mantiene `INFO_FRONTEND.md` para comunicarle cambios al frontend. Las
 | Integrar `POST /user/forgot-password` y `POST /user/reset-password` | ✅ Integrado — pantallas `ForgotPassword.tsx` y `ResetPassword.tsx` |
 | Integrar `POST /user/avatar` | ✅ Integrado — `Profile.tsx` con crop y upload |
 | Mostrar `avatar` del usuario | ✅ Integrado — avatar en `Profile.tsx` y en header `AppBarPopOver.tsx` |
-| Mostrar `description` de evaluaciones | ✅ Frontend listo — falta que el backend agregue el campo al schema (ver BS — Pendientes de datos) |
+| Mostrar `description` de evaluaciones | ✅ Integrado — backend ya agrega `description` (con rango de semestre) y `question_count` en `GET /evaluations` |
 | Mostrar `cover` de presentaciones | ✅ Integrado — `Presentation.tsx` y carrusel usan `cover` si existe |
 
-### Errores de contraseña — mensaje desactualizado
-Los mensajes de error de `/user/signup` y `/user/reset-password` dicen `"La contraseña debe tener al menos 6 caracteres"`. Actualizar a `"La contraseña debe tener al menos 8 caracteres"` para ser consistente con la validación del frontend.
+### Errores de contraseña — mensaje desactualizado — ✅ Resuelto
+`/user/signup` y `/user/reset-password` ya validan `min: 8` y devuelven `"La contraseña debe tener al menos 8 caracteres"` (BS4). Se corrigió también la documentación en `INFO_PARA_FRONTEND.md`.
 
-### Sección 4 — Variables de entorno
-El pie de página de `INFO_FRONTEND.md` dice: *"Actualmente la URL del backend está hardcodeada en el frontend"*. Eso ya no es verdad — el frontend usa `REACT_APP_BACKEND_URL` desde `src/config.ts`. Eliminar esa nota.
+### Sección 4 — Variables de entorno — ✅ Resuelto
+`INFO_PARA_FRONTEND.md` ya documenta que la URL del backend usa `REACT_APP_BACKEND_URL` desde `src/config.ts` (con fallback a `localhost:8080`), no está hardcodeada.
 
-### CORS para producción
-Cuando se haga el deploy, agregar la URL de producción del frontend al array de `origin` en la configuración de CORS. Coordinar con frontend para saber la URL antes del deploy.
+### CORS para producción — ⏳ Pendiente
+Backend ya soporta `CORS_ORIGIN` (una URL extra) en Render. Falta que frontend confirme la URL de producción (Cloudflare Pages u otra) para configurarla.
 
 ---
 
@@ -696,26 +687,46 @@ Aplicar a `/user/signup`, `/user/login` y `/user/forgot-password`: 10 requests p
 
 ---
 
-## Pendientes del backend — datos
+## Pendientes del backend — datos ✅ Resueltos
 
-### 1. Imágenes rotas en 3 artículos — ✅ Resuelto (2026-06-10)
-Las 3 URLs ya están actualizadas en MongoDB (`Día Mundial de los Humedales`, `El impacto del cine en el medio ambiente`, `Muebles de la Abuela`).
+### ~~1. Imágenes rotas en 3 artículos~~ ✅ Resuelto
+Actualizar el campo `image` en MongoDB para estos artículos:
 
-### 2. Párrafos en artículos — ✅ Resuelto (2026-06-10)
-24 de 25 artículos ya tienen `\n` entre párrafos. El único sin `\n` es "Muebles de la Abuela", pero su `body` es un solo párrafo corto y coherente (392 caracteres, 2 oraciones) — no necesita división.
+| Título | URL nueva |
+|--------|-----------|
+| `Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales` | `https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg` |
+| `El impacto del cine en el medio ambiente` | `https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png` |
+| `Muebles en Abuela` | `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s` |
 
-### 3. Campo `description` en evaluaciones — ✅ Resuelto (2026-06-10)
-Las 6 evaluaciones ya tienen `description` con rango de semestre incluido (ver sección "Cambios del backend (2026-06-10)" arriba).
+```js
+db.articles.updateOne({ title: "Dia Mundial de los Humedades: Celebrando y Preservando Ecosistemas Vitales" }, { $set: { image: "https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg" } })
+db.articles.updateOne({ title: "El impacto del cine en el medio ambiente" }, { $set: { image: "https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png" } })
+db.articles.updateOne({ title: "Muebles en Abuela" }, { $set: { image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s" } })
+```
+
+### ~~2. Párrafos en artículos~~ ✅ Resuelto — 24/25 artículos con `\n`; "Muebles de la Abuela" no lo necesita por ser un párrafo corto
+El frontend ya divide el campo `body` por `\n` para mostrar párrafos separados. Los artículos que se ven como un bloque de texto continuo necesitan saltos de línea (`\n`) en su campo `body` en MongoDB.
+
+### ~~3. Campo `description` en evaluaciones~~ ✅ Resuelto (B3)
+Agregar campo `description: { type: String, default: '' }` al schema de evaluaciones e incluirlo en `GET /evaluations`. El frontend ya lo recibe y muestra automáticamente si existe.
+
+| Evaluación | Descripción sugerida |
+|------------|---------------------|
+| Arquitectura Nivel 1 | Mide si conoces y tomaste en cuenta los factores ambientales y sociales básicos en el análisis de tu proyecto. |
+| Arquitectura Nivel 2 | Mide cómo integras estrategias de sostenibilidad en el diseño y desarrollo de tu proyecto. |
+| Arquitectura Nivel 3 | Mide si tu proyecto plantea sistemas y programas de sostenibilidad a largo plazo. |
+| Diseño Industrial Nivel 1 | Mide tu conocimiento básico sobre impacto ambiental y sostenibilidad en el diseño de productos. |
+| Diseño Industrial Nivel 2 | Mide cómo consideras la sostenibilidad en tu proceso de diseño y selección de materiales. |
+| Diseño Industrial Nivel 3 | Mide qué tan profundo integra tu proyecto criterios de sostenibilidad en todo su ciclo de vida. |
 
 ---
 
-## Pendientes del backend — seguridad y calidad
+## Pendientes del backend — seguridad y calidad ✅ Resueltos
 
-### BS1 — Variables de entorno — ✅ Resuelto
-No hay secretos hardcodeados (todo se lee de `process.env`). `.env.example` documenta todas las variables requeridas, incluyendo `DB_URL`, `JWT_CODE`, `CORS_ORIGIN`, Cloudinary y email.
+### ~~BS1~~ — ~~Variables de entorno~~ ✅ Resuelto — sin secretos hardcodeados, `.env.example` completo
+Verificar que ningún secreto (API keys, connection strings, JWT secret) esté hardcodeado en el código. Documentar en un `.env.example` todas las variables requeridas.
 
-### BS2 — Sanitizar inputs + prevenir NoSQL Injection — ✅ Resuelto
-Las 3 capas ya están activas en `src/index.ts`: `helmet()`, `express-mongo-sanitize` y `express-validator` con `isLength`/`isMongoId` en los endpoints.
+### ~~BS2~~ — ~~Sanitizar inputs + prevenir NoSQL Injection~~ ✅ Resuelto — `helmet`, `express-mongo-sanitize` y `express-validator` activos
 
 MongoDB no tiene SQL, pero sí tiene **NoSQL injection**. Sin sanitización, un atacante puede enviar:
 
@@ -872,45 +883,119 @@ app.use(helmet()); // agrega X-Content-Type-Options, X-Frame-Options, HSTS, CSP 
 - IDs de MongoDB malformados en parámetros de URL → bloqueados por `isMongoId()`
 - Headers HTTP inseguros → mitigados por `helmet`
 
-### BS3 — Mensajes de error genéricos (prevenir enumeración de usuarios) — ✅ Resuelto
-`POST /user/login` ya responde `"Correo o contraseña incorrectos"` en ambos casos de fallo, y `POST /user/forgot-password` siempre responde el mismo mensaje genérico independientemente de si el email existe.
+### ~~BS3~~ — ~~Mensajes de error genéricos~~ ✅ Resuelto por el backend
 
-Antes, los endpoints de login y forgot-password revelaban si un email existía en la base de datos con mensajes distintos. Un atacante podía hacer un script y descubrir qué usuarios estaban registrados.
-
-**Endpoints afectados:**
-
-`POST /user/login` — cambiar:
-```js
-// ❌ Actual — revela si el email existe
-{ "success": false, "error": "Cuenta no registrada" }   // email no existe
-{ "success": false, "error": "Contraseña incorrecta" }  // email sí existe
-
-// ✅ Correcto — mismo mensaje en ambos casos
-{ "success": false, "error": "Correo o contraseña incorrectos" }
-```
-
-`POST /user/forgot-password` — cambiar:
-```js
-// ❌ Actual — revela si el email existe
-{ "success": false, "error": "Correo no registrado" }
-
-// ✅ Correcto — no revelar si existe o no
-{ "success": false, "error": "Si el correo está registrado, recibirás instrucciones pronto" }
-```
-> Nota: cuando el backend implemente el envío por email (Fix #1), el mensaje de éxito también debe ser el mismo independientemente de si el email existe o no, para no revelar el dato.
+`POST /user/login` ya devuelve `"Correo o contraseña incorrectos"` en ambos casos.
+`POST /user/forgot-password` ya devuelve el mismo mensaje sin importar si el email existe.
+El flujo de recuperación por email también está implementado. Frontend integrado.
 
 ---
 
-### BS4 — Contraseña mínima 8 caracteres — ✅ Resuelto
-`/user/signup` y `/user/reset-password` ya validan `isLength({ min: 8 })` con el mensaje `"La contraseña debe tener al menos 8 caracteres"`.
+### ~~BS4~~ — ~~Contraseña mínima 8 caracteres~~ ✅ Resuelto — `isLength({ min: 8 })` en signup y reset-password
+
+El frontend ya valida mínimo 8 caracteres. El backend debe actualizar su validación para ser consistente:
+
+- En `/user/signup`: cambiar validación de `minlength: 6` → `minlength: 8`
+- En `/user/reset-password`: cambiar validación de `minlength: 6` → `minlength: 8`
+- Actualizar mensajes de error: `"La contraseña debe tener al menos 8 caracteres"`
+- El código de validación de BS2 ya usa `min: 8` — solo asegurarse de que la lógica del controller también valide 8
 
 ---
 
-### BS5 — HTTPS/SSL en producción — ✅ Resuelto
-El backend está desplegado en Render (`https://sostek-backend.onrender.com`), que provee TLS automáticamente. No requiere configuración adicional de nuestro lado.
+### ~~BT1~~ — ~~Unit tests (Jest + Supertest)~~ ✅ Resuelto — 33 tests, corren en CI
+Testear lógica crítica del backend:
+- Validaciones de autenticación (login, signup, tokens)
+- Rate limiting activo
+- Respuestas de endpoints con datos inválidos
+- Lógica de puntaje (`POST /user/score`)
+
+Herramienta recomendada: `jest` + `supertest` + `mongodb-memory-server` para base de datos de test en memoria.
 
 ---
 
-### BT1 — Unit tests (Jest + Supertest) — ✅ Resuelto
-33 tests con `jest` + `supertest` + `mongodb-memory-server` (`tests/index.test.js`), corren con `npm test` y en CI (GitHub Actions) en cada push/PR.
-  
+## 🆕 Pendientes — revisión frontend (2026-06-10) ✅ Resueltos
+
+> Hallazgos de QA manual (jefa). Se priorizan los que afectan datos en MongoDB.
+
+### ~~B1~~ — ~~2 artículos con datos corruptos~~ ✅ Resuelto — body recargado y encoding corregido (B5)
+
+| Artículo | `_id` | Problema |
+|---|---|---|
+| "El impacto del cine en el medio ambiente" | `6a226c484b54f546d8876731` | `title`, `subtitle` y `tags` tienen saltos de línea metidos en medio de palabras/URLs (ej. `tags: ["https://unsplash.\ncom/photos/CiUR8zISX60"]`). El campo `body` solo tiene 24 caracteres: `"Alexa Valladares\nCristóbal"` — parece que ahí quedó el nombre del autor en vez del cuerpo del artículo. Hay que recargar el contenido completo de este artículo. |
+| "La Catástrofe Industrial de Bhopal: El Legado Perdurante de una Fuga Mortal" | `6a226c484b54f546d8876732` | El texto tiene caracteres corruptos por mal manejo de encoding (ej. `"Cat�strofe"`, `"Uni�n Carbide"`, `"f�brica"`, `"Bophal"` en vez de `"Bhopal"` en tags). Hay que reimportar este artículo asegurando codificación UTF-8. |
+
+Ambos también tienen `category: null` — ver B2.
+
+---
+
+### ~~B2~~ — ~~Los 26 artículos tienen `category: null`~~ ✅ Resuelto — `category` poblada y alineada con evaluaciones (B6)
+
+Esto rompe la recomendación de artículos al final de una evaluación. El frontend filtra los artículos por `category` (y por `title` como respaldo) usando la categoría con menor puntaje obtenida en la evaluación (ej. `"ECOSISTEMA"`, `"Economía y sociedad"`, etc.). Como `category` es siempre `null` en los 26 artículos, casi nunca hay match por categoría — hoy solo aparece 1 artículo recomendado porque su título contiene casualmente la palabra "Ecosistemas".
+
+**Pedido:** poblar el campo `category` en los 26 artículos con valores que correspondan a las categorías usadas en las preguntas de las evaluaciones (correr `GET /evaluations/:id` de cada una de las 6 evaluaciones para ver el set completo de categorías por carrera/nivel).
+
+---
+
+### ~~B3~~ — ~~`description` de evaluaciones sigue vacía (`""`)~~ ✅ Resuelto (2026-06-10)
+
+Las 6 evaluaciones (3 Arquitectura + 3 Diseño Industrial) ya tienen `description` con el rango de semestre indicado:
+
+- **Nivel 1** → `(3°-4° semestre) ...`
+- **Nivel 2** → `(5°-6° semestre) ...`
+- **Nivel 3** → `(7°-8° semestre) ...`
+
+Verificado en producción (`https://sostek-backend.onrender.com/evaluations`).
+
+---
+
+### ~~B4~~ — ~~Agregar conteo de preguntas a `GET /evaluations`~~ ✅ Resuelto por el backend
+
+`GET /evaluations` ya devuelve `question_count` por evaluación. Frontend integrado (muestra "X preguntas" en cada tarjeta de Tab3).
+
+---
+
+## 🆕 Pendientes — revisión frontend (2026-06-10, parte 2) ✅ Resueltos
+
+> Verificación de B1/B2/B3. Todos resueltos: B5 (encoding) y B6 (taxonomías) confirmados por escaneo completo de `articles` y `evaluations`.
+
+### ~~B5~~ — ~~El carácter "í" se corrompe en textos largos (encoding)~~ ✅ Resuelto — escaneo completo sin caracteres `�` (U+FFFD) restantes
+
+Revisando B1, el `body` de los 2 artículos ya se recargó (antes tenía 24 caracteres, ahora ~2000), pero **todas las apariciones de la letra "í" quedaron rotas**: en vez de "í" aparece el carácter de reemplazo `�` seguido de un guión suave invisible (U+00AD). Ejemplos reales del `body`:
+
+- "As**í** mismo" → "As`�`­ mismo"
+- "pel**í**cula" → "pel`�`­cula"
+- "d**í**a" → "d`�`­a"
+- "energ**í**as" → "energ`�`­as"
+- "s**í**ntomas" → "s`�`­ntomas"
+
+El resto de acentos (á, é, ó, ú, ñ) están bien — el problema es específico de "í" (en UTF-8 son los bytes `0xC3 0xAD`; parece que `0xC3` se está perdiendo/reemplazando y `0xAD` queda suelto como su propio carácter).
+
+**Mismo bug aparece en las categorías de las preguntas de evaluación** (`GET /evaluations/:id`): la categoría llega como `"Econom�­a y sociedad"` / `"Sociedad y Econom�­a"` en vez de `"Economía y sociedad"` / `"Sociedad y Economía"`.
+
+**Pedido:** revisar el pipeline de importación/guardado de texto largo a MongoDB — probablemente hay un `replace`/regex que está separando el byte `0xAD` de `0xC3` y tratándolo como soft-hyphen. Esto afecta tanto a `articles.body` como a `evaluations.questions[].category`.
+
+---
+
+### ~~B6~~ — ~~C12 sigue sin resolver: las categorías de artículos no coinciden con las de evaluaciones~~ ✅ Resuelto — ver plan acordado abajo
+
+B2 pidió poblar `category` en los 26 artículos usando las categorías de las preguntas de evaluación (`ECOSISTEMA`, `Economía y sociedad`, `Sociedad y Economía`). Ya se pobló `category`, pero con otros 3 valores: `"Ambiental"`, `"Social"`, `"Económico"` (verificado en los 25 artículos actuales).
+
+El frontend (`ArticleCarrousel.tsx`) filtra `article.category` (y `article.title` como respaldo) contra la categoría más débil de la evaluación. Como `"ECOSISTEMA"` / `"Economía y sociedad"` / `"Sociedad y Economía"` no coinciden con `"Ambiental"` / `"Social"` / `"Económico"`, **"Artículos recomendados" sigue sin matchear correctamente** para la mayoría de los casos — cambió la causa (ya no es `category: null`) pero el síntoma de C12 sigue presente.
+
+**Pedido:** alinear ambas taxonomías. Lo más simple sería que `articles.category` use los mismos valores que ya existen en `evaluations.questions[].category` (corrigiendo primero el encoding de B5). Si por alguna razón los artículos deben mantener `"Ambiental"/"Social"/"Económico"`, avisar para que el frontend agregue un mapeo categoría-evaluación → categoría-artículo.
+
+---
+
+### ✅ Plan acordado para B6 (2026-06-10) — aplicado
+
+Las evaluaciones solo miden **2 ejes**, pero los artículos tienen **3 categorías** — no son taxonomías equivalentes 1 a 1. Se acordó:
+
+1. **Backend** normaliza `evaluations.questions[].category` (las 6 evaluaciones) a exactamente estos 2 valores:
+   - `"Ambiental"` (en vez de `"ECOSISTEMA"`)
+   - `"Económico y Social"` (unifica `"Economía y sociedad"` y `"Sociedad y Economía"`, corrigiendo también el encoding de B5)
+
+2. **Frontend** (ya implementado en `ArticleCarrousel.tsx`) mapea el eje débil a las categorías de artículo:
+   - `"Ambiental"` → artículos con `category: "Ambiental"`
+   - `"Económico y Social"` → artículos con `category: "Económico"` **o** `category: "Social"`
+
+El frontend ya quedó listo esperando estos 2 strings exactos. En cuanto el backend aplique el rename en MongoDB, "Artículos recomendados" debería funcionar para las 6 evaluaciones sin más cambios de este lado.

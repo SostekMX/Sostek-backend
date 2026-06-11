@@ -90,7 +90,7 @@ Crea una cuenta nueva y retorna un JWT.
 | `error` | Causa |
 |---------|-------|
 | `"Correo inválido"` | Email mal formado |
-| `"La contraseña debe tener al menos 6 caracteres"` | Password corto |
+| `"La contraseña debe tener al menos 8 caracteres"` | Password corto |
 | `"El nombre es requerido"` | `name` vacío o ausente |
 | `"El apellido es requerido"` | `surname` vacío o ausente |
 | `"Correo ingresado está ya registrado en la plataforma"` | Email duplicado |
@@ -173,7 +173,7 @@ Cambia la contraseña usando el token recibido de `/user/forgot-password`. El to
 | `error` | Causa |
 |---------|-------|
 | `"El token es requerido"` | Campo `token` ausente |
-| `"La contraseña debe tener al menos 6 caracteres"` | `new_password` corto |
+| `"La contraseña debe tener al menos 8 caracteres"` | `new_password` corto |
 | `"Token inválido"` | Token no existe en la base de datos |
 | `"Token expirado"` | Han pasado más de 60 minutos desde que se generó |
 
