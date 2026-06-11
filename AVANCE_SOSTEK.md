@@ -88,7 +88,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **Unit tests** — Jest + Supertest + mongodb-memory-server; 33 tests cubriendo signup, login, JWT, score, recuperación de password, favoritos y avatar (`npm test`)
 - **CI/CD** — GitHub Actions corre `npm test` automáticamente en cada push a `main`/`development` y en PRs a `main`
 - **Modelo de usuario** — esquema Mongoose completo con todos los campos (ver sección de arquitectura)
-- **CORS** — acepta `http://localhost:3000`, `http://localhost:8100`, y cualquier origen extra definido en `CORS_ORIGIN` (env var); útil para producción en Cloudflare Pages
+- **CORS** — acepta `http://localhost:3000`, `http://localhost:8100`, y orígenes extra definidos en `CORS_ORIGIN` (env var, separados por coma); útil para producción en Render y Cloudflare Pages
 - **`GET /health`** — endpoint de health check; responde `{ status: 'ok' }`; usado por UptimeRobot para mantener el servidor en Render siempre activo
 - **JWT** — secret leído desde variable de entorno `JWT_CODE`; tokens expiran en 7 días
 - **Email de recuperación** — `POST /user/forgot-password` envía email con link y token vía nodemailer + Gmail SMTP; requiere `EMAIL_USER`, `EMAIL_PASS` y `FRONTEND_URL` en `.env`; si no están configuradas, loguea warning y continúa sin enviar
@@ -199,7 +199,7 @@ colección: tutorial  (documento único)
 | `EMAIL_USER` | — | Cuenta de Gmail que envía los emails de recuperación |
 | `EMAIL_PASS` | — | Contraseña de aplicación de Google (no la contraseña normal) |
 | `FRONTEND_URL` | `http://localhost:3000` | URL base del frontend — se usa para armar el link de reset en el email |
-| `CORS_ORIGIN` | — | Origen CORS extra para producción (ej: `https://sostek.pages.dev`) — en desarrollo no hace falta |
+| `CORS_ORIGIN` | — | Orígenes CORS extra para producción, separados por coma (ej: `https://sostek.pages.dev,https://sostek-frontend.onrender.com`) — en desarrollo no hace falta |
 
 ---
 

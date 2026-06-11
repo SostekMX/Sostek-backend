@@ -672,8 +672,8 @@ El backend mantiene `INFO_FRONTEND.md` para comunicarle cambios al frontend. Las
 ### Sección 4 — Variables de entorno — ✅ Resuelto
 `INFO_PARA_FRONTEND.md` ya documenta que la URL del backend usa `REACT_APP_BACKEND_URL` desde `src/config.ts` (con fallback a `localhost:8080`), no está hardcodeada.
 
-### CORS para producción — ⏳ Pendiente
-Backend ya soporta `CORS_ORIGIN` (una URL extra) en Render. Falta que frontend confirme la URL de producción (Cloudflare Pages u otra) para configurarla.
+### CORS para producción — ⏳ Pendiente configurar en Render
+Backend ahora soporta varias URLs en `CORS_ORIGIN` (separadas por coma). Falta actualizar la variable en el dashboard de Render del backend para incluir `https://sostek.pages.dev` (URL real de producción del frontend en Cloudflare Pages), ej: `CORS_ORIGIN=https://sostek.pages.dev,https://sostek-frontend.onrender.com`.
 
 ---
 

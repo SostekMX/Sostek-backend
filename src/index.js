@@ -25,7 +25,7 @@ var cors = require('cors');
 app.use(helmet());
 app.use(mongoSanitize());
 const corsOrigins = ['http://localhost:3000', 'http://localhost:8100'];
-if (process.env.CORS_ORIGIN) corsOrigins.push(process.env.CORS_ORIGIN);
+if (process.env.CORS_ORIGIN) corsOrigins.push(...process.env.CORS_ORIGIN.split(',').map(o => o.trim()));
 app.use(cors({
     origin: corsOrigins,
     methods: ['GET', 'POST', 'DELETE'],
