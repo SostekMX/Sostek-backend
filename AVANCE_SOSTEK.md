@@ -72,7 +72,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **`POST /user/forgot-password`** — recibe email, genera token seguro (64 hex chars) con 1h de expiración, lo guarda en el usuario en DB, retorna `{ success: true, reset_token: "..." }`; limitado por rate limit
 - **`POST /user/reset-password`** — recibe `token` + `new_password`, valida que el token exista y no esté expirado, hashea la nueva contraseña con bcrypt y limpia los campos de reset en el documento
 - **`GET /evaluations`** — retorna lista de evaluaciones sin el campo `questions`, pero agrega `question_count` (total de preguntas) calculado con `questions.length`; incluye `name`, `career` y `description` (ahora con rango de semestre recomendado, ej. `"(3°-4° semestre) ..."`)
-- **`GET /evaluations/:id`** — retorna evaluación completa con preguntas, opciones y valores numéricos
+- **`GET /evaluations/:id`** — retorna evaluación completa con preguntas, opciones y valores numéricos; `questions[].category` usa solo `"Ambiental"` o `"Económico y Social"` (alineado con las categorías de artículos para el sistema de recomendación)
 - **`GET /articles`** — retorna lista completa de artículos; los 25 artículos tienen `category` asignada (`Ambiental` | `Económico` | `Social`) para el sistema de recomendación
 - **`GET /articles/:id`** — retorna un artículo por ID
 - **`GET /presentations`** — retorna lista de presentaciones con sus URLs de slides; cada presentación incluye campo `cover` (URL de imagen de portada)

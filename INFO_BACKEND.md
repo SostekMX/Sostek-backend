@@ -70,6 +70,7 @@
 | Imágenes rotas en 3 artículos | ✅ Muestra placeholder cuando imagen falla | ✅ Resuelto (2026-06-10) — las 3 URLs ya están actualizadas en MongoDB |
 | Párrafos en artículos | ✅ Divide `body` por `\n` | Agregar saltos de línea en datos de MongoDB |
 | `description` en evaluaciones | ✅ Listo para recibirlo | ✅ Resuelto (2026-06-10) — incluye rango de semestre recomendado, ej. `"(3°-4° semestre) ..."` |
+| Categorías de evaluación vs. artículos no coincidían (B6) | ✅ Resuelto — `ArticleCarrousel.tsx` mapea `"Ambiental"` → `["Ambiental"]` y `"Económico y Social"` → `["Económico", "Social"]` | ✅ Resuelto (2026-06-10) — `questions[].category` renombrado a `"Ambiental"` / `"Económico y Social"` en las 6 evaluaciones |
 
 ---
 
@@ -82,6 +83,7 @@
 | `category` agregada a los 25 artículos | Todos los artículos ahora tienen `category`: `Ambiental` (17), `Económico` (4) o `Social` (4) — usado por el sistema de recomendación de artículos. |
 | Artículo "El impacto del cine en el medio ambiente" reconstruido | Tenía `title`, `author`, `body` y `tags` corruptos (datos de columnas mezclados/cortados). Se reconstruyó con el contenido original: `title`, `subtitle`, `author` ("Alexa Valladares Cristán"), `body` (7 párrafos), `tags` (`["cine","sostenibilidad","medio ambiente"]`) y `bibliography` limpios. |
 | Artículo duplicado eliminado | Existían 2 copias idénticas de "Los océanos y la vida" — se eliminó una. Total de artículos: 26 → 25. |
+| `category` de preguntas en evaluaciones renombrada (B6) | `questions[].category` pasó de `"ECOSISTEMA"` / `"Economía y sociedad"` / `"Sociedad y Economía"` (inconsistentes) a solo 2 valores: `"Ambiental"` y `"Económico y Social"` — alineado con el contrato acordado con frontend para el sistema de recomendación. |
 
 ---
 
