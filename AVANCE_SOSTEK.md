@@ -137,7 +137,8 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 |------|--------|
 | **Deploy en Render** — `main` sincronizado con `development`, deploy disparado y `/health` responde `{"status":"ok"}` (200 OK). URL: `https://sostek-backend.onrender.com` | ✅ Activo |
 | **UptimeRobot** — monitor activo en `https://sostek-backend.onrender.com/health`, checks cada 5 min, 100% uptime. | ✅ Activo |
-| **Actualizar URL del frontend** — el frontend Ionic debe cambiar la URL base de `http://localhost:8080` a `https://sostek-backend.onrender.com`. | ⏳ Pendiente avisar a frontend |
+| **Actualizar URL del frontend** — el frontend Ionic ya usa `REACT_APP_BACKEND_URL=https://sostek-backend.onrender.com`. | ✅ Hecho |
+| **Frontend desplegado en Render** — Static Site en `https://sostek-frontend.onrender.com` (no se duerme, no necesita UptimeRobot). `CORS_ORIGIN` configurado en el backend con esta URL — verificado, responde `access-control-allow-origin: https://sostek-frontend.onrender.com`. | ✅ Activo |
 
 ---
 
