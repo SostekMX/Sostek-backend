@@ -84,6 +84,7 @@
 | Artículo "El impacto del cine en el medio ambiente" reconstruido | Tenía `title`, `author`, `body` y `tags` corruptos (datos de columnas mezclados/cortados). Se reconstruyó con el contenido original: `title`, `subtitle`, `author` ("Alexa Valladares Cristán"), `body` (7 párrafos), `tags` (`["cine","sostenibilidad","medio ambiente"]`) y `bibliography` limpios. |
 | Artículo duplicado eliminado | Existían 2 copias idénticas de "Los océanos y la vida" — se eliminó una. Total de artículos: 26 → 25. |
 | `category` de preguntas en evaluaciones renombrada (B6) | `questions[].category` pasó de `"ECOSISTEMA"` / `"Economía y sociedad"` / `"Sociedad y Economía"` (inconsistentes) a solo 2 valores: `"Ambiental"` y `"Económico y Social"` — alineado con el contrato acordado con frontend para el sistema de recomendación. |
+| Encoding de "í" verificado (B5) | Se revisó toda la colección `articles` (title, subtitle, body, author, bibliography, tags) y `evaluations.questions` (category, text, options) buscando el carácter de reemplazo `�` (U+FFFD, típico de byte 0xC3 perdido). No se encontró ninguno — el problema quedó resuelto con la reconstrucción del artículo de cine y el rename de B6. |
 
 ---
 
@@ -700,8 +701,8 @@ Aplicar a `/user/signup`, `/user/login` y `/user/forgot-password`: 10 requests p
 ### 1. Imágenes rotas en 3 artículos — ✅ Resuelto (2026-06-10)
 Las 3 URLs ya están actualizadas en MongoDB (`Día Mundial de los Humedales`, `El impacto del cine en el medio ambiente`, `Muebles de la Abuela`).
 
-### 2. Párrafos en artículos
-El frontend ya divide el campo `body` por `\n` para mostrar párrafos separados. Los artículos que se ven como un bloque de texto continuo necesitan saltos de línea (`\n`) en su campo `body` en MongoDB.
+### 2. Párrafos en artículos — ✅ Resuelto (2026-06-10)
+24 de 25 artículos ya tienen `\n` entre párrafos. El único sin `\n` es "Muebles de la Abuela", pero su `body` es un solo párrafo corto y coherente (392 caracteres, 2 oraciones) — no necesita división.
 
 ### 3. Campo `description` en evaluaciones — ✅ Resuelto (2026-06-10)
 Las 6 evaluaciones ya tienen `description` con rango de semestre incluido (ver sección "Cambios del backend (2026-06-10)" arriba).
@@ -710,10 +711,11 @@ Las 6 evaluaciones ya tienen `description` con rango de semestre incluido (ver s
 
 ## Pendientes del backend — seguridad y calidad
 
-### BS1 — Variables de entorno
-Verificar que ningún secreto (API keys, connection strings, JWT secret) esté hardcodeado en el código. Documentar en un `.env.example` todas las variables requeridas.
+### BS1 — Variables de entorno — ✅ Resuelto
+No hay secretos hardcodeados (todo se lee de `process.env`). `.env.example` documenta todas las variables requeridas, incluyendo `DB_URL`, `JWT_CODE`, `CORS_ORIGIN`, Cloudinary y email.
 
-### BS2 — Sanitizar inputs + prevenir NoSQL Injection
+### BS2 — Sanitizar inputs + prevenir NoSQL Injection — ✅ Resuelto
+Las 3 capas ya están activas en `src/index.ts`: `helmet()`, `express-mongo-sanitize` y `express-validator` con `isLength`/`isMongoId` en los endpoints.
 
 MongoDB no tiene SQL, pero sí tiene **NoSQL injection**. Sin sanitización, un atacante puede enviar:
 
@@ -870,9 +872,10 @@ app.use(helmet()); // agrega X-Content-Type-Options, X-Frame-Options, HSTS, CSP 
 - IDs de MongoDB malformados en parámetros de URL → bloqueados por `isMongoId()`
 - Headers HTTP inseguros → mitigados por `helmet`
 
-### BS3 — Mensajes de error genéricos (prevenir enumeración de usuarios)
+### BS3 — Mensajes de error genéricos (prevenir enumeración de usuarios) — ✅ Resuelto
+`POST /user/login` ya responde `"Correo o contraseña incorrectos"` en ambos casos de fallo, y `POST /user/forgot-password` siempre responde el mismo mensaje genérico independientemente de si el email existe.
 
-Actualmente los endpoints de login y forgot-password revelan si un email existe en la base de datos con mensajes distintos. Un atacante puede hacer un script y descubrir qué usuarios están registrados.
+Antes, los endpoints de login y forgot-password revelaban si un email existía en la base de datos con mensajes distintos. Un atacante podía hacer un script y descubrir qué usuarios estaban registrados.
 
 **Endpoints afectados:**
 
@@ -898,23 +901,16 @@ Actualmente los endpoints de login y forgot-password revelan si un email existe 
 
 ---
 
-### BS4 — Contraseña mínima 8 caracteres
-
-El frontend ya valida mínimo 8 caracteres. El backend debe actualizar su validación para ser consistente:
-
-- En `/user/signup`: cambiar validación de `minlength: 6` → `minlength: 8`
-- En `/user/reset-password`: cambiar validación de `minlength: 6` → `minlength: 8`
-- Actualizar mensajes de error: `"La contraseña debe tener al menos 8 caracteres"`
-- El código de validación de BS2 ya usa `min: 8` — solo asegurarse de que la lógica del controller también valide 8
+### BS4 — Contraseña mínima 8 caracteres — ✅ Resuelto
+`/user/signup` y `/user/reset-password` ya validan `isLength({ min: 8 })` con el mensaje `"La contraseña debe tener al menos 8 caracteres"`.
 
 ---
 
-### BT1 — Unit tests (Jest + Supertest)
-Testear lógica crítica del backend:
-- Validaciones de autenticación (login, signup, tokens)
-- Rate limiting activo
-- Respuestas de endpoints con datos inválidos
-- Lógica de puntaje (`POST /user/score`)
+### BS5 — HTTPS/SSL en producción — ✅ Resuelto
+El backend está desplegado en Render (`https://sostek-backend.onrender.com`), que provee TLS automáticamente. No requiere configuración adicional de nuestro lado.
 
-Herramienta recomendada: `jest` + `supertest` + `mongodb-memory-server` para base de datos de test en memoria.
+---
+
+### BT1 — Unit tests (Jest + Supertest) — ✅ Resuelto
+33 tests con `jest` + `supertest` + `mongodb-memory-server` (`tests/index.test.js`), corren con `npm test` y en CI (GitHub Actions) en cada push/PR.
   
