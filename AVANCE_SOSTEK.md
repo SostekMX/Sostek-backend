@@ -1,6 +1,6 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-10 (main actualizado con development para disparar deploy en Render)
+> Última actualización: 2026-06-17 (limpieza de documentación: se eliminaron `INFO_BACKEND.md` e `INFO_PARA_FRONTEND.md` — eran documentos de comunicación con el equipo de frontend durante la migración a MongoDB, ya resueltos por completo)
 > Rama activa: `development`
 > Stack: Node.js + Express + TypeScript + MongoDB
 
