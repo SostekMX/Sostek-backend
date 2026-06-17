@@ -51,4 +51,4 @@ npm test     # 33 unit tests con Jest + Supertest (no necesita MongoDB)
 | Archivo | Para quién |
 |---------|-----------|
 | `AVANCE_SOSTEK.md` | Fuente de verdad del proyecto — estado, endpoints, arquitectura |
-| `ONBOARDING_BACKEND.pdf` | Guía de onboarding para quien se suma al proyecto por primera vez |
+| `ONBOARDING_BACKEND.md` | Guía de onboarding para quien se suma al proyecto por primera vez |
