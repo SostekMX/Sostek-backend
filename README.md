@@ -35,6 +35,15 @@ npm run seed:presentations "Nombre de la presentacion" "ruta/a/la/carpeta"
 
 # Evaluaciones — descarga automáticamente desde Google Sheets público
 npm run seed:evaluations
+
+# Tutorial del juego — inserta reglas y tarjetas desde seed/tutorial_data.json
+npm run seed:tutorial
+```
+
+## Correr los tests
+
+```bash
+npm test     # 33 unit tests con Jest + Supertest (no necesita MongoDB)
 ```
 
 ## Documentación
@@ -42,5 +51,4 @@ npm run seed:evaluations
 | Archivo | Para quién |
 |---------|-----------|
 | `AVANCE_SOSTEK.md` | Fuente de verdad del proyecto — estado, endpoints, arquitectura |
-| `INFO_PARA_FRONTEND.md` | Equipo frontend — contratos de todos los endpoints |
-| `INFO_BACKEND.md` | Equipo backend — cambios del frontend que afectan la integración |
+| `ONBOARDING_BACKEND.pdf` | Guía de onboarding para quien se suma al proyecto por primera vez |
