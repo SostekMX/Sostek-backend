@@ -83,7 +83,36 @@ const upload = multer({
   }
 });
 
-async function sendResetEmail(to: string, token: string): Promise<void> {
+function resetEmailContent(lang: 'es' | 'en', resetUrl: string, token: string) {
+  if (lang === 'en') {
+    return {
+      subject: 'Password recovery — SOSTEK',
+      html: `
+      <p>Hello,</p>
+      <p>We received a request to reset your SOSTEK password.</p>
+      <p><a href="${resetUrl}">Reset password</a></p>
+      <p>Or copy this token directly into the app:</p>
+      <p><strong>${token}</strong></p>
+      <p>This link expires in <strong>1 hour</strong>.</p>
+      <p>If you didn't request this, you can ignore this email.</p>
+    `
+    };
+  }
+  return {
+    subject: 'Recuperación de contraseña — SOSTEK',
+    html: `
+      <p>Hola,</p>
+      <p>Recibimos una solicitud para restablecer tu contraseña en SOSTEK.</p>
+      <p><a href="${resetUrl}">Restablecer contraseña</a></p>
+      <p>O copiá este token directamente en la app:</p>
+      <p><strong>${token}</strong></p>
+      <p>Este enlace expira en <strong>1 hora</strong>.</p>
+      <p>Si no solicitaste esto, podés ignorar este correo.</p>
+    `
+  };
+}
+
+async function sendResetEmail(to: string, token: string, lang: 'es' | 'en'): Promise<void> {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     console.warn('[email] EMAIL_USER o EMAIL_PASS no configurados — email no enviado');
     return;
@@ -97,16 +126,7 @@ async function sendResetEmail(to: string, token: string): Promise<void> {
   await transporter.sendMail({
     from: `"SOSTEK" <${process.env.EMAIL_USER}>`,
     to,
-    subject: 'Recuperación de contraseña — SOSTEK',
-    html: `
-      <p>Hola,</p>
-      <p>Recibimos una solicitud para restablecer tu contraseña en SOSTEK.</p>
-      <p><a href="${resetUrl}">Restablecer contraseña</a></p>
-      <p>O copiá este token directamente en la app:</p>
-      <p><strong>${token}</strong></p>
-      <p>Este enlace expira en <strong>1 hora</strong>.</p>
-      <p>Si no solicitaste esto, podés ignorar este correo.</p>
-    `
+    ...resetEmailContent(lang, resetUrl, token)
   });
 }
 
@@ -264,7 +284,7 @@ app.post("/user/forgot-password", authLimiter, [
       { email: req.body.email },
       { reset_token: token, reset_token_expiry: expiry }
     );
-    await sendResetEmail(user.email, token);
+    await sendResetEmail(user.email, token, req.body.lang === 'en' ? 'en' : 'es');
     res.json(genericResponse);
   } catch {
     res.json({ success: false, error: "Error interno" });
