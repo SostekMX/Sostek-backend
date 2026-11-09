@@ -265,6 +265,24 @@ describe('POST /user/forgot-password y reset-password', () => {
     expect(user.reset_token.length).toBe(64);
   });
 
+  test('forgot-password manda el correo en el idioma pedido', async () => {
+    process.env.EMAIL_USER = 'sostek@ejemplo.com';
+    process.env.EMAIL_PASS = 'clave';
+    const { createTransport } = require('nodemailer');
+    const asuntoCon = async (extra) => {
+      await request(app).post('/user/forgot-password').send({ email: 'test@ejemplo.com', ...extra });
+      return createTransport.mock.results.at(-1).value.sendMail.mock.calls[0][0].subject;
+    };
+    try {
+      expect(await asuntoCon({ lang: 'en' })).toBe('Password recovery — SOSTEK');
+      expect(await asuntoCon({})).toBe('Recuperación de contraseña — SOSTEK');
+      expect(await asuntoCon({ lang: 'fr' })).toBe('Recuperación de contraseña — SOSTEK');
+    } finally {
+      delete process.env.EMAIL_USER;
+      delete process.env.EMAIL_PASS;
+    }
+  });
+
   test('forgot-password con email no registrado retorna el mismo mensaje generico', async () => {
     const res = await request(app)
       .post('/user/forgot-password')
