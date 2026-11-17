@@ -55,7 +55,36 @@ var TutorialSchema = new mongoose.Schema({
   cards: { type: [TutorialCardSchema], default: [] }
 }, { collection: 'tutorial' });
 
+// Quiz por nivel y tipo de proyecto. score va de 0 (nula) a 3 (optima); feedback explica la opcion.
+var QuizOptionSchema = new mongoose.Schema({
+  text:     { type: String, required: true },
+  score:    { type: Number, required: true, min: 0, max: 3 },
+  feedback: { type: String, default: '' }
+}, { _id: false });
+
+var QuizQuestionSchema = new mongoose.Schema({
+  text:    { type: String, required: true },
+  options: { type: [QuizOptionSchema], default: [] }
+}, { _id: false });
+
+var QuizBlockSchema = new mongoose.Schema({
+  name:      { type: String, required: true },
+  questions: { type: [QuizQuestionSchema], default: [] }
+}, { _id: false });
+
+var QuizSchema = new mongoose.Schema({
+  level:         { type: Number, required: true },
+  type:          { type: Number, required: true },
+  title:         { type: String, required: true },
+  summary:       { type: String, default: '' },
+  focus:         { type: String, default: '' },
+  feedbackDraft: { type: Boolean, default: false },
+  blocks:        { type: [QuizBlockSchema], default: [] }
+}, { collection: 'quizzes' });
+QuizSchema.index({ level: 1, type: 1 }, { unique: true });
+
 exports.Evaluation  = mongoose.model('Evaluation',  EvaluationSchema);
 exports.Article     = mongoose.model('Article',     ArticleSchema);
 exports.Presentation = mongoose.model('Presentation', PresentationSchema);
 exports.Tutorial    = mongoose.model('Tutorial',    TutorialSchema);
+exports.Quiz        = mongoose.model('Quiz',        QuizSchema);
