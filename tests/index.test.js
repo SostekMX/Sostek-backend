@@ -447,3 +447,88 @@ describe('POST /user/avatar', () => {
     expect(profileRes.body.user.avatar).toBe('https://res.cloudinary.com/test/sostek/avatars/test.jpg');
   });
 });
+
+// ─── Quiz ──────────────────────────────────────────────────────────────────────
+
+describe('Quiz', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const quizData = require('../seed/quiz_data.json');
+
+  // Se piden dentro de cada test para usar el mismo mongoose que la app (beforeAll hace resetModules).
+  const modelos = () => require('../src/models/contentModel');
+  const sembrar = () => require('../seed/seedQuiz').upsertQuizzes(quizData);
+
+  test('GET /quiz?level=3 retorna los dos tipos con sus bloques', async () => {
+    await sembrar();
+    const res = await request(app).get('/quiz?level=3');
+    expect(res.body.success).toBe(true);
+    expect(res.body.quizzes.map(q => q.type)).toEqual([1, 2]);
+    res.body.quizzes.forEach((quiz, i) => {
+      expect(quiz.blocks.map(b => b.name)).toEqual(quizData[i].blocks.map(b => b.name));
+      expect(quiz.blocks.map(b => b.questions.length)).toEqual(quizData[i].blocks.map(b => b.questions.length));
+    });
+  });
+
+  test('nivel sin contenido retorna lista vacia', async () => {
+    await sembrar();
+    const res = await request(app).get('/quiz?level=1');
+    expect(res.body).toEqual({ success: true, quizzes: [] });
+  });
+
+  test('nivel invalido retorna error', async () => {
+    const res = await request(app).get('/quiz?level=abc');
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toBe('Nivel inválido');
+  });
+
+  test('sin nivel retorna todos ordenados por nivel y tipo', async () => {
+    await sembrar();
+    await modelos().Quiz.create({ level: 1, type: 1, title: 'Otro' });
+    const res = await request(app).get('/quiz');
+    expect(res.body.quizzes.map(q => [q.level, q.type])).toEqual([[1, 1], [3, 1], [3, 2]]);
+  });
+
+  test('el seed es idempotente y no toca otros documentos', async () => {
+    const { Quiz, Evaluation } = modelos();
+    await Quiz.create({ level: 1, type: 1, title: 'Otro' });
+    await Evaluation.create({ name: 'Arquitectura Nivel 1', career: 'Arquitectura' });
+    await sembrar();
+    await sembrar();
+    expect(await Quiz.countDocuments({ level: 3 })).toBe(2);
+    expect(await Quiz.countDocuments({ level: 1 })).toBe(1);
+    expect(await Evaluation.countDocuments()).toBe(1);
+  });
+
+  test('el seed reemplaza un quiz que cambio en la base', async () => {
+    const { Quiz } = modelos();
+    await sembrar();
+    await Quiz.updateOne({ level: 3, type: 1 }, { title: 'Alterado', blocks: [] });
+    await sembrar();
+    const quiz = await Quiz.findOne({ level: 3, type: 1 }).lean();
+    expect(quiz.title).toBe(quizData[0].title);
+    expect(quiz.blocks).toEqual(quizData[0].blocks);
+  });
+
+  test('cada pregunta tiene 4 opciones de 0 a 3 con retroalimentacion', () => {
+    for (const quiz of quizData) {
+      expect(typeof quiz.feedbackDraft).toBe('boolean');
+      for (const pregunta of quiz.blocks.flatMap(b => b.questions)) {
+        expect(pregunta.options.map(o => o.score)).toEqual([0, 1, 2, 3]);
+        pregunta.options.forEach(o => expect(o.feedback.trim()).not.toBe(''));
+      }
+    }
+  });
+
+  test('los textos coinciden en orden con quiz_nivel3.txt', () => {
+    const lineas = fs.readFileSync(path.join(__dirname, '../seed/quiz_nivel3.txt'), 'utf8')
+      .split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    const bloques = lineas.filter(l => l.startsWith('Bloque '))
+      .map(l => l.replace(/^Bloque /, '').replace(/ \(Preguntas.*\)$/, ''));
+    const textos = lineas.filter(l => !/^(Tipo \d+:|Enfoque:|Bloque )/.test(l));
+
+    expect(quizData.flatMap(q => q.blocks.map(b => b.name))).toEqual(bloques);
+    expect(quizData.flatMap(q => q.blocks.flatMap(b => b.questions.flatMap(p => [p.text, ...p.options.map(o => o.text)]))))
+      .toEqual(textos);
+  });
+});
