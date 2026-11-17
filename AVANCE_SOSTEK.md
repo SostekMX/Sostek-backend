@@ -55,6 +55,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 | `GET` | `/user/favorites` | Obtener lista de favoritos del usuario | JWT requerido |
 | `DELETE` | `/user/favorites/:content_id` | Eliminar un favorito por ID de contenido | JWT requerido |
 | `GET` | `/tutorial` | Obtener instructivo del juego (reglas + tarjetas) | Ninguna (pública) |
+| `GET` | `/quiz?level=N` | Quizzes de proyectos de negocio (`level` opcional) | Ninguna (pública) |
 | `POST` | `/user/avatar` | Subir foto de perfil (jpg/png/webp, máx 5MB) a Cloudinary y guardar URL en el usuario | JWT requerido |
 
 ---
@@ -80,6 +81,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **`GET /user/favorites`** — retorna el array `favorites` del usuario autenticado
 - **`DELETE /user/favorites/:content_id`** — elimina el favorito con ese `content_id` usando `$pull` de MongoDB
 - **`GET /tutorial`** — retorna el documento único de tutorial con `title`, `rules` y `cards[]` (16 tarjetas de escenario + 32 de solución); cada tarjeta tiene `name`, `description`, `type` y `resources` (ambiental/economico/social)
+- **`GET /quiz`** — retorna `quizzes[]` ordenados por `level` y `type`; con `?level=N` filtra por nivel (un nivel sin contenido da `[]`, uno inválido da `success: false`). Cada quiz trae `blocks[].questions[].options[]` con `score` 0–3 y `feedback`
 - **Middleware `verifyToken`** — valida JWT en header `Authorization: Bearer <token>` antes de rutas protegidas
 - **Rate limiting** — `/user/signup` y `/user/login` limitados a 10 requests cada 15 minutos
 - **Validación y sanitización de inputs** — `express-validator` en todos los endpoints con body; incluye longitudes máximas (name/surname 50, email 100, password 128, occupation 100), tipos correctos (`isFloat` en scores, `isString` en opcionales), y sanitización (`.trim()`, `.normalizeEmail()`)
@@ -182,6 +184,12 @@ colección: tutorial  (documento único)
     ├── title   (String, required — "Instructivo SOSTEK")
     ├── rules   (String, required — texto de reglas del juego)
     └── cards   (Array de { name, description, type: 'scenario'|'solution', resources: { ambiental, economico, social } })
+
+colección: quizzes  (único por level + type)
+    ├── level, type      (Number, required — p. ej. 3 y 1)
+    ├── title, summary, focus (String)
+    ├── feedbackDraft    (Boolean — true mientras Carlos revisa la retroalimentación)
+    └── blocks           (Array de { name, questions: [{ text, options: [{ text, score: 0–3, feedback }] }] })
 ```
 
 **Variables de entorno** (archivo `.env` en raíz, no incluido en el repo):
@@ -217,6 +225,9 @@ colección: tutorial  (documento único)
 | `seed/seedPresentations.js` | Sube imágenes locales a Cloudinary y guarda URLs en MongoDB. Uso: `npm run seed:presentations "Nombre" "ruta/carpeta"` |
 | `seed/seedEvaluations.js` | Descarga las 6 evaluaciones desde Google Sheets y las inserta en MongoDB. Uso: `npm run seed:evaluations` |
 | `seed/seedTutorial.js` | Inserta el instructivo del juego en MongoDB desde `seed/tutorial_data.json`. Uso: `npm run seed:tutorial` |
+| `seed/seedQuiz.js` | Upsert idempotente de los quizzes por nivel + tipo desde `seed/quiz_data.json`; no borra nada. Uso: `npm run seed:quiz` |
+| `seed/quiz_data.json` | Banco del quiz (fuente del seed) con borrador de retroalimentación por opción |
+| `seed/quiz_nivel3.txt` | Texto original del Nivel 3 de Carlos; un test verifica que coincida con el JSON |
 | `seed/tutorial_data.json` | Contenido completo del instructivo: reglas + 48 tarjetas (16 escenario, 32 solución) extraídas del PDF original |
 | `.env` | Variables de entorno locales (no en repo) |
 | `.env.example` | Plantilla de variables de entorno — copiar a `.env` y completar valores |

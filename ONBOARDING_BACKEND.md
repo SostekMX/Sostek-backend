@@ -79,6 +79,7 @@ npm run seed:articles "ruta/al/archivo.csv"
 npm run seed:presentations "Nombre" "ruta/a/carpeta"
 npm run seed:evaluations
 npm run seed:tutorial
+npm run seed:quiz        # idempotente: upsert por nivel + tipo
 ```
 
 Si corrés un seed sobre una base que ya tiene datos, revisá el script primero — algunos insertan duplicados en vez de actualizar si lo corrés dos veces.

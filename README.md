@@ -38,6 +38,10 @@ npm run seed:evaluations
 
 # Tutorial del juego — inserta reglas y tarjetas desde seed/tutorial_data.json
 npm run seed:tutorial
+
+# Quiz de proyectos de negocio — upsert por nivel y tipo desde seed/quiz_data.json
+# (idempotente: no borra ni duplica, se puede correr sobre producción)
+npm run seed:quiz
 ```
 
 ## Correr los tests
