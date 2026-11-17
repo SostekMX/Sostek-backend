@@ -14,7 +14,7 @@ const jsonWebToken = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const bcryptJs = require("bcryptjs");
 const crypto = require("crypto");
-const { body, validationResult } = require("express-validator");
+const { body, query, validationResult } = require("express-validator");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const helmet = require('helmet');
@@ -382,6 +382,21 @@ app.get("/tutorial", (req, res) => {
     })
         .catch(() => {
         res.json({ success: false, error: "Error al obtener el tutorial" });
+    });
+});
+// Sin level devuelve todos los quizzes; un nivel sin contenido devuelve una lista vacia.
+app.get("/quiz", [
+    query('level').optional().isInt({ min: 1 }).withMessage('Nivel inválido').toInt(),
+], (req, res) => {
+    if (!validate(req, res))
+        return;
+    const filter = req.query.level !== undefined ? { level: req.query.level } : {};
+    contentSchema.Quiz.find(filter).sort({ level: 1, type: 1 })
+        .then((quizzes) => {
+        res.json({ success: true, quizzes });
+    })
+        .catch(() => {
+        res.json({ success: false, error: "Error al obtener el quiz" });
     });
 });
 app.post("/user/favorites", verifyToken, [

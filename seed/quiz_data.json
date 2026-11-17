@@ -1,0 +1,1202 @@
+[
+  {
+    "level": 3,
+    "type": 1,
+    "title": "Modelo de Negocio",
+    "summary": "Enfoque estratégico / propuesta de valor",
+    "focus": "Escalamiento del modelo de negocio, regeneración ambiental y social, resiliencia sistémica, alianzas de alto impacto y gobernanza madura.",
+    "feedbackDraft": true,
+    "blocks": [
+      {
+        "name": "Ambiental y Regeneración Sistémica",
+        "questions": [
+          {
+            "text": "Al proyectar el escalamiento de tu modelo de negocio a nuevos mercados o regiones, ¿cómo se gestiona la huella ecológica de la expansión?",
+            "options": [
+              {
+                "text": "No se considera el impacto ambiental dentro de los planes de expansión comercial.",
+                "score": 0,
+                "feedback": "Ignorar la huella de la expansión hace que cada nuevo mercado multiplique los impactos sin control; crecer así traslada costos ambientales a terceros y expone al negocio a riesgos futuros."
+              },
+              {
+                "text": "Se replican los mismos procesos actuales sin adaptar las cadenas logísticas.",
+                "score": 1,
+                "feedback": "Copiar los procesos tal cual es mejor que no planear, pero ignora que las distancias, los proveedores y el contexto cambian en cada región, así que la huella suele crecer más rápido que las ventas."
+              },
+              {
+                "text": "Se establecen centros de operación y proveeduría descentralizados para minimizar traslados.",
+                "score": 2,
+                "feedback": "Acercar la operación y la proveeduría a cada mercado reduce emisiones de transporte y fortalece economías locales; es un avance sólido, aunque todavía no fija una meta ambiental exigible a cada sede."
+              },
+              {
+                "text": "Se exige que cada nueva sede o franquicia cumpla con estándares de carbono neutralidad desde su apertura.",
+                "score": 3,
+                "feedback": "Exigir carbono neutralidad desde la apertura integra la sostenibilidad en el diseño de la expansión y no como corrección posterior; así el crecimiento no aumenta la huella neta del modelo."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué manera tu modelo de negocio pasa de \"reducir daños\" a generar un impacto ambiental regenerativo en su entorno?",
+            "options": [
+              {
+                "text": "El modelo se limita a cumplir con las leyes ambientales mínimas vigentes.",
+                "score": 0,
+                "feedback": "Cumplir la ley es el punto de partida, no una estrategia: el modelo sigue generando daño, solo que dentro de lo permitido."
+              },
+              {
+                "text": "Se compensan emisiones mediante la compra ocasional de bonos o donativos externos.",
+                "score": 1,
+                "feedback": "Compensar de vez en cuando mitiga parte del impacto, pero no cambia cómo opera el negocio y corre el riesgo de usarse como permiso para seguir contaminando."
+              },
+              {
+                "text": "Se rediseña la cadena de valor para restaurar suelos, ecosistemas o biodiversidad vinculada a los insumos.",
+                "score": 2,
+                "feedback": "Rediseñar la cadena de valor para restaurar suelos y ecosistemas ataca el impacto en su origen y convierte la operación en parte de la solución."
+              },
+              {
+                "text": "El producto o servicio regenera activamente los recursos naturales de la comunidad durante su uso.",
+                "score": 3,
+                "feedback": "Cuando el propio producto regenera recursos al usarse, crecer en ventas significa crecer en impacto positivo: es el nivel más alto de alineación entre negocio y naturaleza."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo aborda el modelo de negocio la obsolescencia y el cierre total del ciclo de vida del producto/servicio a gran escala?",
+            "options": [
+              {
+                "text": "El ciclo termina en el momento en que el cliente realiza la compra.",
+                "score": 0,
+                "feedback": "Desentenderse del producto después de venderlo traslada al cliente y al ambiente el problema de los residuos; es la lógica lineal de usar y tirar."
+              },
+              {
+                "text": "Se brindan recomendaciones al cliente sobre dónde reciclar el producto por su cuenta.",
+                "score": 1,
+                "feedback": "Informar al cliente ayuda, pero deja toda la responsabilidad en él; en la práctica, solo una pequeña parte de los productos llega a reciclarse por esta vía."
+              },
+              {
+                "text": "Se integra una logística inversa formal para recolectar, remanufacturar y reincorporar materiales.",
+                "score": 2,
+                "feedback": "Con logística inversa la empresa asume la responsabilidad del fin de vida y recupera materiales valiosos; es una práctica circular concreta y medible."
+              },
+              {
+                "text": "El modelo opera 100% bajo economía circular, donde los residuos de un proceso son la materia prima del siguiente.",
+                "score": 3,
+                "feedback": "Diseñar el modelo para que los residuos de un proceso alimenten al siguiente elimina el concepto de desecho; es la circularidad plena, la meta más exigente y la más sostenible."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué mecanismos utiliza el modelo para monitorear y auditar la huella hídrica y de carbono en toda su cadena de suministro extendida (Alcance 1, 2 y 3)?",
+            "options": [
+              {
+                "text": "No se miden ni se rastrean las emisiones ni el consumo de agua.",
+                "score": 0,
+                "feedback": "Lo que no se mide no se puede gestionar: sin datos de emisiones ni de agua es imposible fijar metas o detectar dónde está el mayor impacto."
+              },
+              {
+                "text": "Se miden únicamente los consumos directos de las oficinas o instalaciones propias.",
+                "score": 1,
+                "feedback": "Medir lo propio es un buen inicio, pero en la mayoría de los negocios el mayor impacto está en la cadena de suministro (Alcance 3), que aquí queda fuera."
+              },
+              {
+                "text": "Se solicita a los proveedores principales reportes periódicos de su impacto ambiental.",
+                "score": 2,
+                "feedback": "Pedir reportes a los proveedores clave amplía la mirada a la cadena, aunque depende de información que la empresa no verifica y que no siempre se traduce en metas."
+              },
+              {
+                "text": "Se implementa trazabilidad completa de toda la cadena de valor con metas verificables de reducción anual.",
+                "score": 3,
+                "feedback": "La trazabilidad completa con metas verificables cubre los tres alcances y permite demostrar avances reales; es lo que hoy exigen los estándares e inversionistas más rigurosos."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué forma el modelo de negocio promueve la autosuficiencia energética o hídrica tanto en su operación como en la de sus usuarios?",
+            "options": [
+              {
+                "text": "Depende completamente de las redes públicas convencionales de energía y agua.",
+                "score": 0,
+                "feedback": "Depender por completo de las redes convencionales mantiene un consumo mayormente fósil y deja al negocio vulnerable ante cortes o alzas de tarifas."
+              },
+              {
+                "text": "Se adoptan tecnologías internas de eficiencia para disminuir el consumo operativo.",
+                "score": 1,
+                "feedback": "La eficiencia interna reduce consumo y costos, pero su alcance se limita a la propia operación y no cambia la fuente de la energía o del agua."
+              },
+              {
+                "text": "La propuesta de valor incluye herramientas o servicios que reducen el consumo energético/hídrico del cliente.",
+                "score": 2,
+                "feedback": "Ayudar a que el cliente consuma menos multiplica el impacto más allá de la empresa, porque el beneficio se repite en cada usuario."
+              },
+              {
+                "text": "El modelo genera excedentes de energía limpia o agua tratada que benefician a la red o comunidad local.",
+                "score": 3,
+                "feedback": "Producir excedentes de energía limpia o agua tratada convierte al negocio en proveedor neto de recursos para su entorno; es el escenario más regenerativo."
+              }
+            ]
+          },
+          {
+            "text": "Frente a escenarios de crisis climática severa (sequías, inundaciones, escasez extrema de insumos), ¿qué tan resiliente es el diseño del modelo de negocio?",
+            "options": [
+              {
+                "text": "No se han contemplado planes de adaptación ante fenómenos climáticos extremos.",
+                "score": 0,
+                "feedback": "Sin planes de adaptación, una sequía o una inundación pueden detener toda la operación; ignorar el riesgo climático es hoy un riesgo de negocio."
+              },
+              {
+                "text": "Se cuenta con un listado básico de proveedores alternativos en caso de emergencia.",
+                "score": 1,
+                "feedback": "Tener proveedores alternativos ayuda a reaccionar, pero es una medida de emergencia que no reduce la exposición del modelo al clima."
+              },
+              {
+                "text": "Se diversifican materias primas hacia opciones resistentes al clima y de regeneración rápida.",
+                "score": 2,
+                "feedback": "Diversificar hacia insumos resistentes y de regeneración rápida reduce la vulnerabilidad desde el diseño y disminuye la presión sobre recursos escasos."
+              },
+              {
+                "text": "La infraestructura y la cadena de suministro están diseñadas para operar de forma autónoma ante interrupciones externas.",
+                "score": 3,
+                "feedback": "Diseñar la infraestructura y la cadena para operar con autonomía ante interrupciones es resiliencia sistémica: el negocio puede seguir sirviendo a su comunidad incluso en una crisis."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo se asegura que la innovación tecnológica incorporada al negocio (IA, software, hardware) no incremente desproporcionadamente el consumo energético o la basura electrónica?",
+            "options": [
+              {
+                "text": "No se evalúa el impacto ambiental de la infraestructura tecnológica utilizada.",
+                "score": 0,
+                "feedback": "La tecnología también contamina: servidores, equipos y modelos de IA consumen energía y generan residuos, y no evaluarlo deja crecer un impacto invisible."
+              },
+              {
+                "text": "Se aplican políticas básicas de reciclaje de equipos electrónicos al final de su vida útil.",
+                "score": 1,
+                "feedback": "Reciclar los equipos atiende el final del ciclo, pero no reduce la energía que consumen durante su uso ni la cantidad de equipos que se compran."
+              },
+              {
+                "text": "Se contratan servidores en la nube y proveedores tecnológicos alimentados con energías renovables.",
+                "score": 2,
+                "feedback": "Elegir proveedores con energía renovable reduce de forma importante las emisiones de la operación digital, aunque no optimiza cuánto se consume."
+              },
+              {
+                "text": "Se optimizan los algoritmos, equipos y procesos digitales bajo criterios de diseño sostenible (Green IT).",
+                "score": 3,
+                "feedback": "Aplicar Green IT ataca el consumo desde el diseño: algoritmos y equipos eficientes necesitan menos energía y menos hardware, sea cual sea la fuente."
+              }
+            ]
+          },
+          {
+            "text": "¿El modelo de negocio impulsa estándares ambientales que transforman positivamente a otros competidores o aliados de su industria?",
+            "options": [
+              {
+                "text": "Mantiene sus prácticas ambientales cerradas como un secreto comercial exclusivo.",
+                "score": 0,
+                "feedback": "Guardar las prácticas ambientales como secreto limita su impacto a una sola empresa, cuando los problemas ambientales son de toda la industria."
+              },
+              {
+                "text": "Comparte buenas prácticas de manera informal en eventos del sector.",
+                "score": 1,
+                "feedback": "Compartir de manera informal genera conversación, pero sin documentación ni seguimiento es difícil que otros adopten realmente las prácticas."
+              },
+              {
+                "text": "Publica sus metodologías sustentables como código abierto o guía para impulsar el sector.",
+                "score": 2,
+                "feedback": "Publicar metodologías abiertas permite que otras empresas las repliquen y multiplica el impacto positivo en todo el sector."
+              },
+              {
+                "text": "Lidera coaliciones empresariales para establecer certificaciones y normas ecológicas más estrictas en la industria.",
+                "score": 3,
+                "feedback": "Liderar coaliciones que elevan las normas de la industria cambia las reglas del juego para todos; es el mayor nivel de influencia sistémica."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Económico y Social",
+        "questions": [
+          {
+            "text": "¿De qué manera el modelo de negocio integra principios de comercio justo y desarrollo económico en comunidades vulnerables o rurales?",
+            "options": [
+              {
+                "text": "Se compra a intermediarios buscando exclusivamente el costo más bajo del mercado.",
+                "score": 0,
+                "feedback": "Comprar solo por precio a intermediarios suele presionar a la baja el ingreso de los productores, que se quedan con la menor parte del valor."
+              },
+              {
+                "text": "Se adquieren insumos directamente a pequeños productores pagando precios de mercado.",
+                "score": 1,
+                "feedback": "Comprar directo elimina intermediarios y mejora el ingreso del productor, aunque el precio de mercado puede seguir sin cubrir un nivel de vida digno."
+              },
+              {
+                "text": "Se establecen contratos a largo plazo con precios justos garantizados y capacitación técnica.",
+                "score": 2,
+                "feedback": "Los contratos de largo plazo con precio justo dan estabilidad y permiten a los productores invertir y mejorar; es comercio justo en la práctica."
+              },
+              {
+                "text": "Se co-crean cadenas productivas donde las comunidades locales son socias o copropietarias del valor generado.",
+                "score": 3,
+                "feedback": "Cuando las comunidades son socias, participan en las decisiones y en las utilidades; su desarrollo económico deja de depender de la buena voluntad del comprador."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo garantiza la propuesta de valor que el acceso a sus productos o servicios promueva la equidad social y la inclusión real?",
+            "options": [
+              {
+                "text": "El servicio está diseñado únicamente para segmentos de alto poder adquisitivo.",
+                "score": 0,
+                "feedback": "Diseñar solo para segmentos de alto poder adquisitivo deja fuera a la mayoría y puede ampliar las brechas sociales que ya existen."
+              },
+              {
+                "text": "Se realizan campañas ocasionales de donación o caridad hacia sectores vulnerables.",
+                "score": 1,
+                "feedback": "Las donaciones ocasionales ayudan en lo puntual, pero no cambian quién puede acceder al producto de forma permanente."
+              },
+              {
+                "text": "Se implementan modelos de subsidio cruzado o tarifas escalonadas para democratizar el acceso.",
+                "score": 2,
+                "feedback": "Los subsidios cruzados y las tarifas escalonadas integran la inclusión al modelo de ingresos, así que el acceso se sostiene sin depender de la caridad."
+              },
+              {
+                "text": "El diseño del producto elimina barreras físicas, económicas y digitales para grupos históricamente excluidos.",
+                "score": 3,
+                "feedback": "Diseñar desde el inicio para quienes han sido excluidos elimina las barreras de raíz; la inclusión es parte del producto, no un agregado."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué forma el modelo de negocio mide y demuestra el impacto social real que genera en la calidad de vida de sus usuarios o comunidad?",
+            "options": [
+              {
+                "text": "No se mide el impacto social; se asume que vender el producto ya es un beneficio.",
+                "score": 0,
+                "feedback": "Suponer que vender ya es un beneficio social impide saber si el producto mejora o empeora la vida de las personas."
+              },
+              {
+                "text": "Se recopilan testimonios cualitativos o encuestas básicas de satisfacción.",
+                "score": 1,
+                "feedback": "Los testimonios y encuestas aportan señales, pero miden satisfacción y no impacto, y son difíciles de comparar en el tiempo."
+              },
+              {
+                "text": "Se utilizan indicadores clave de impacto social (SROI o métricas de bienestar) auditados periódicamente.",
+                "score": 2,
+                "feedback": "Usar indicadores como el SROI con auditorías periódicas da evidencia confiable del impacto y permite comunicarlo con rigor."
+              },
+              {
+                "text": "Los resultados de impacto social condicionan directamente las decisiones estratégicas y de inversión del negocio.",
+                "score": 3,
+                "feedback": "Cuando los resultados de impacto guían la estrategia y la inversión, el propósito social pesa en las decisiones tanto como el financiero."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo se estructura la distribución del valor económico generado entre los distintos actores de la cadena (fundadores, colaboradores, proveedores y comunidad)?",
+            "options": [
+              {
+                "text": "Las utilidades se concentran exclusivamente en los inversionistas y socios mayoritarios.",
+                "score": 0,
+                "feedback": "Concentrar las utilidades en pocas manos aumenta la desigualdad y debilita el compromiso de quienes generan el valor día a día."
+              },
+              {
+                "text": "Se ofrecen salarios competitivos dentro del promedio del mercado laboral.",
+                "score": 1,
+                "feedback": "Pagar salarios de mercado es justo y necesario, pero no comparte con el equipo ni con la comunidad el valor adicional que crea el negocio."
+              },
+              {
+                "text": "Se establecen esquemas de reparto de utilidades, bonos por impacto o participación accionaria para el equipo.",
+                "score": 2,
+                "feedback": "Compartir utilidades o acciones alinea los intereses del equipo con los del negocio y distribuye mejor la riqueza generada."
+              },
+              {
+                "text": "Se reinvierte un porcentaje fijo de los ingresos en fondos de desarrollo comunitario y fortalecimiento de proveedores.",
+                "score": 3,
+                "feedback": "Reinvertir un porcentaje fijo en la comunidad y en los proveedores extiende el reparto del valor a toda la cadena y fortalece el entorno del que depende el negocio."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué rol juega la economía colaborativa o el diseño de ecosistemas empresariales en la escalabilidad del negocio?",
+            "options": [
+              {
+                "text": "El negocio compite de forma aislada buscando monopolizar su nicho de mercado.",
+                "score": 0,
+                "feedback": "Buscar monopolizar un nicho concentra poder y limita la innovación; además, deja al negocio sin aliados frente a los cambios del mercado."
+              },
+              {
+                "text": "Se realizan alianzas comerciales puntuales de promoción cruzada con otras empresas.",
+                "score": 1,
+                "feedback": "Las alianzas promocionales dan beneficios mutuos de corto plazo, aunque no comparten recursos ni capacidades de fondo."
+              },
+              {
+                "text": "Se comparten plataformas, infraestructura logística o canales de distribución con otros emprendimientos.",
+                "score": 2,
+                "feedback": "Compartir infraestructura y canales reduce costos y duplicación de recursos, y permite que emprendimientos pequeños crezcan juntos."
+              },
+              {
+                "text": "El modelo funciona como un habilitador que conecta y potencia a múltiples microempresas o actores locales.",
+                "score": 3,
+                "feedback": "Un modelo habilitador crece cuando crecen los demás: su escalabilidad se basa en fortalecer a muchos actores locales en lugar de reemplazarlos."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué manera el modelo previene que su crecimiento genere desplazamientos económicos, precarización laboral o gentrificación en las zonas donde opera?",
+            "options": [
+              {
+                "text": "No se evalúan las consecuencias socioeconómicas indirectas de la expansión.",
+                "score": 0,
+                "feedback": "Ignorar los efectos indirectos de la expansión puede encarecer la vida, desplazar comercios o precarizar empleos en las comunidades a donde se llega."
+              },
+              {
+                "text": "Se prioriza la contratación de personal residente de la zona de operación.",
+                "score": 1,
+                "feedback": "Contratar personal local reparte beneficios en la zona, pero no previene otros efectos como el alza de precios o el desplazamiento de negocios existentes."
+              },
+              {
+                "text": "Se realizan estudios de impacto social previo antes de abrir operaciones en nuevas comunidades.",
+                "score": 2,
+                "feedback": "Evaluar el impacto social antes de llegar permite anticipar daños y ajustar el plan de entrada; es una práctica responsable y preventiva."
+              },
+              {
+                "text": "Se establecen acuerdos comunitarios vinculantes para proteger el tejido social y la economía local.",
+                "score": 3,
+                "feedback": "Los acuerdos vinculantes dan a la comunidad garantías exigibles y no solo promesas; así el crecimiento del negocio protege el tejido social local."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo fomenta el modelo de negocio una cultura de consumo responsable y ciudadanía activa en sus clientes?",
+            "options": [
+              {
+                "text": "Las estrategias de marketing buscan incentivar el consumo impulsivo y recurrente sin límite.",
+                "score": 0,
+                "feedback": "Fomentar el consumo impulsivo genera ventas a costa de más residuos y gasto innecesario; va contra la sostenibilidad aunque sea rentable a corto plazo."
+              },
+              {
+                "text": "Se incluye información educativa sobre el uso adecuado del producto o servicio.",
+                "score": 1,
+                "feedback": "Informar sobre el uso correcto alarga la vida del producto y evita desperdicios, aunque no cuestiona cuánto se consume."
+              },
+              {
+                "text": "Se diseñan mecanismos que ayudan al usuario a reducir su dependencia de compras innecesarias.",
+                "score": 2,
+                "feedback": "Ayudar al cliente a comprar menos parece ir contra el negocio, pero genera confianza y lealtad, y reduce el impacto ambiental del consumo."
+              },
+              {
+                "text": "La marca moviliza a su comunidad de clientes para participar en iniciativas cívicas, ambientales o sociales.",
+                "score": 3,
+                "feedback": "Movilizar a los clientes como ciudadanos activos lleva el impacto de la marca más allá de la compra y construye comunidad alrededor de un propósito."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué tan sólida es la protección de los derechos humanos y laborales a lo largo de toda la cadena de proveeduría (incluyendo subcontratistas)?",
+            "options": [
+              {
+                "text": "No se verifica el cumplimiento laboral de los proveedores ni subcontratistas.",
+                "score": 0,
+                "feedback": "No verificar a los proveedores expone a la empresa a ser cómplice de explotación laboral, con graves riesgos éticos, legales y reputacionales."
+              },
+              {
+                "text": "Se incluye una cláusula estándar de cumplimiento legal en los contratos de proveeduría.",
+                "score": 1,
+                "feedback": "Una cláusula contractual establece la expectativa, pero sin verificación es fácil que se quede en el papel."
+              },
+              {
+                "text": "Se realizan evaluaciones periódicas para asegurar trabajo digno y cero explotación en la cadena.",
+                "score": 2,
+                "feedback": "Las evaluaciones periódicas comprueban en la práctica las condiciones de trabajo y permiten corregir abusos a tiempo."
+              },
+              {
+                "text": "Se exige certificación internacional de derechos humanos y trazabilidad laboral a todos los aliados.",
+                "score": 3,
+                "feedback": "Exigir certificación internacional y trazabilidad a todos los aliados, incluidos los subcontratistas, cierra los puntos ciegos donde suele ocurrir la explotación."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Gobernanza, Riesgos y Finanzas Responsables",
+        "questions": [
+          {
+            "text": "¿Cómo se blinda legal y estatutariamente el propósito socioambiental de la empresa para que no se pierda al recibir inversión externa o cambiar de socios?",
+            "options": [
+              {
+                "text": "El propósito es solo una declaración de marketing sin respaldo legal.",
+                "score": 0,
+                "feedback": "Un propósito sin respaldo legal puede abandonarse en cuanto cambian los socios o aparece presión financiera; comunicarlo sin sustento roza el greenwashing."
+              },
+              {
+                "text": "Se incluye la misión social/ambiental en los documentos internos de cultura organizacional.",
+                "score": 1,
+                "feedback": "Plasmar la misión en la cultura interna orienta al equipo, pero no obliga a nadie si cambian los dueños o los inversionistas."
+              },
+              {
+                "text": "Se incorporan cláusulas de impacto en los pactos de socios y acuerdos de inversión.",
+                "score": 2,
+                "feedback": "Incluir cláusulas de impacto en los acuerdos de socios e inversión hace que el propósito sea exigible entre quienes toman las decisiones."
+              },
+              {
+                "text": "La empresa se constituye bajo figuras legales de triple impacto (ej. Empresa B / Sociedad de Beneficio e Interés Colectivo).",
+                "score": 3,
+                "feedback": "Constituirse bajo una figura de triple impacto integra el propósito en los estatutos, así que la ley obliga a considerar lo social y lo ambiental junto con lo financiero."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué nivel de madurez tiene la estructura de gobierno corporativo y toma de decisiones estratégicas del negocio?",
+            "options": [
+              {
+                "text": "Todas las decisiones recaen de manera informal en el fundador principal.",
+                "score": 0,
+                "feedback": "Concentrar todo en el fundador hace frágil al negocio: no hay contrapesos ante los errores y el proyecto depende de una sola persona."
+              },
+              {
+                "text": "Existe un equipo directivo con roles definidos, pero sin contrapesos formales.",
+                "score": 1,
+                "feedback": "Definir roles ordena la operación, pero sin contrapesos formales las decisiones de alto riesgo nadie las revisa."
+              },
+              {
+                "text": "Se cuenta con un consejo asesor multidisciplinario que evalúa decisiones financieras y de sostenibilidad.",
+                "score": 2,
+                "feedback": "Un consejo asesor multidisciplinario aporta visiones distintas y ayuda a equilibrar las decisiones financieras con las de sostenibilidad."
+              },
+              {
+                "text": "Opera un consejo de administración independiente con comités formales de ética, riesgos y sostenibilidad.",
+                "score": 3,
+                "feedback": "Un consejo independiente con comités formales asegura supervisión real y rendición de cuentas; es el estándar de un gobierno corporativo maduro."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué manera la empresa gestiona la transparencia, la ética de datos y el uso responsable de tecnologías emergentes (como Inteligencia Artificial)?",
+            "options": [
+              {
+                "text": "No existen lineamientos éticos sobre el manejo de datos o algoritmos.",
+                "score": 0,
+                "feedback": "Sin lineamientos éticos sobre datos y algoritmos, la empresa puede discriminar o vulnerar la privacidad de sus usuarios sin siquiera darse cuenta."
+              },
+              {
+                "text": "Se cumple únicamente con el aviso de privacidad mínimo exigido por la ley.",
+                "score": 1,
+                "feedback": "Cumplir con el aviso de privacidad es obligatorio, pero protege poco frente a riesgos como los sesgos algorítmicos o los usos secundarios de los datos."
+              },
+              {
+                "text": "Se auditan los algoritmos y bases de datos para evitar sesgos, discriminación o mal uso de información.",
+                "score": 2,
+                "feedback": "Auditar algoritmos y datos permite detectar sesgos y malos usos antes de que dañen a las personas; es un uso responsable de la tecnología."
+              },
+              {
+                "text": "Se publican políticas abiertas de gobernanza digital, otorgando soberanía total al usuario sobre sus datos.",
+                "score": 3,
+                "feedback": "Publicar políticas abiertas y dar al usuario control total de sus datos convierte la ética digital en un compromiso verificable que genera confianza."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo se estructuran las rondas de levantamiento de capital o financiamiento para asegurar la alineación ética con los inversionistas?",
+            "options": [
+              {
+                "text": "Se acepta capital de cualquier fuente sin evaluar el origen de los fondos ni sus valores.",
+                "score": 0,
+                "feedback": "Aceptar dinero sin evaluar su origen expone a la empresa a riesgos legales y a inversionistas que pueden alejarla de su misión."
+              },
+              {
+                "text": "Se buscan inversionistas tradicionales negociando únicamente valuación y retorno financiero.",
+                "score": 1,
+                "feedback": "Negociar solo valuación y retorno es habitual, pero deja la misión sin protección cuando los intereses del inversionista chocan con el impacto."
+              },
+              {
+                "text": "Se seleccionan fondos de inversión de impacto o capital paciente alineados con la misión.",
+                "score": 2,
+                "feedback": "El capital de impacto o paciente comparte la misión y tolera plazos más largos, lo que reduce la presión por sacrificar lo social o lo ambiental."
+              },
+              {
+                "text": "Se vinculan las condiciones financieras del capital a metas medibles de desempeño ambiental y social.",
+                "score": 3,
+                "feedback": "Vincular las condiciones del capital a metas medibles de impacto hace que lo financiero y lo socioambiental avancen juntos y con incentivos claros."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué mecanismos formales existen para garantizar la rendición de cuentas pública y evitar cualquier forma de greenwashing o social washing?",
+            "options": [
+              {
+                "text": "No se publican reportes de desempeño fuera del círculo interno de socios.",
+                "score": 0,
+                "feedback": "Sin reportes públicos nadie puede verificar el desempeño de la empresa, y cualquier afirmación de sostenibilidad pierde credibilidad."
+              },
+              {
+                "text": "Se comparten logros aislados en redes sociales y comunicados de prensa.",
+                "score": 1,
+                "feedback": "Comunicar solo logros aislados da una imagen parcial, y ese es justamente el patrón del greenwashing: mostrar lo bueno y callar lo demás."
+              },
+              {
+                "text": "Se elabora un informe anual de sostenibilidad basado en estándares reconocidos (ej. GRI, SASB).",
+                "score": 2,
+                "feedback": "Reportar con estándares reconocidos como GRI o SASB obliga a cubrir los temas completos y permite comparar con otras empresas."
+              },
+              {
+                "text": "El informe de impacto financiero y socioambiental es verificado por un auditor externo independiente.",
+                "score": 3,
+                "feedback": "La verificación de un auditor externo independiente da credibilidad al informe y es la mejor defensa contra el greenwashing y el social washing."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo gestiona el modelo de negocio los riesgos regulatorios, reputacionales y de continuidad operativa a largo plazo?",
+            "options": [
+              {
+                "text": "Se reacciona a los problemas legales o crisis cuando ya ocurrieron.",
+                "score": 0,
+                "feedback": "Reaccionar solo cuando el problema ya ocurrió suele salir más caro y puede poner en riesgo la continuidad del negocio."
+              },
+              {
+                "text": "Se cuenta con asesoría legal básica para atender requerimientos gubernamentales.",
+                "score": 1,
+                "feedback": "La asesoría legal básica ayuda a cumplir requerimientos, pero no anticipa riesgos reputacionales ni operativos."
+              },
+              {
+                "text": "Se mantiene una matriz dinámica de riesgos ASG (Ambientales, Sociales y de Gobernanza) con planes de mitigación.",
+                "score": 2,
+                "feedback": "Una matriz de riesgos ASG actualizada permite identificar amenazas antes de que ocurran y preparar respuestas; es gestión preventiva."
+              },
+              {
+                "text": "Se realizan simulacros de crisis y pruebas de estrés financiero-operativo de manera periódica.",
+                "score": 3,
+                "feedback": "Los simulacros y las pruebas de estrés comprueban que los planes funcionan en la práctica, lo que fortalece la resiliencia de largo plazo."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué forma participan los grupos de interés (stakeholders: empleados, clientes, comunidad, proveedores) en la gobernanza del negocio?",
+            "options": [
+              {
+                "text": "Los grupos de interés no tienen voz ni canales de participación en las decisiones.",
+                "score": 0,
+                "feedback": "Excluir a los grupos de interés deja fuera información valiosa y aumenta el riesgo de conflictos con quienes resultan afectados por el negocio."
+              },
+              {
+                "text": "Se realizan encuestas anuales para conocer su percepción sobre la empresa.",
+                "score": 1,
+                "feedback": "Las encuestas permiten escuchar, pero la participación es pasiva: las opiniones no necesariamente influyen en las decisiones."
+              },
+              {
+                "text": "Existen mesas de diálogo periódicas donde sus propuestas influyen en la estrategia.",
+                "score": 2,
+                "feedback": "Las mesas de diálogo con influencia real en la estrategia convierten a los grupos de interés en participantes activos, no solo consultados."
+              },
+              {
+                "text": "Tienen representación formal en los comités consultivos o de evaluación de impacto de la organización.",
+                "score": 3,
+                "feedback": "Dar representación formal a los grupos de interés en los comités institucionaliza su voz y asegura que sus intereses pesen en las decisiones."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "type": 2,
+    "title": "Empresa Rentable",
+    "summary": "Enfoque operativo / financiero",
+    "focus": "Ingeniería financiera sostenible, optimización avanzada de CapEx/OpEx, valoración de riesgos climáticos y ASG, economía circular rentable y gobierno corporativo.",
+    "feedbackDraft": true,
+    "blocks": [
+      {
+        "name": "Ambiental y Eficiencia Operativa",
+        "questions": [
+          {
+            "text": "Al evaluar proyectos de inversión de capital (CapEx) a gran escala, ¿cómo se integran los criterios ambientales en el cálculo de rentabilidad (VPN / TIR)?",
+            "options": [
+              {
+                "text": "Se evalúa exclusivamente el flujo de efectivo tradicional sin considerar variables ambientales.",
+                "score": 0,
+                "feedback": "Evaluar inversiones sin variables ambientales subestima riesgos y costos futuros, como regulaciones o escasez, y puede llevar a activos que pierdan valor."
+              },
+              {
+                "text": "Se incluyen los costos de cumplimiento normativo básico para evitar multas.",
+                "score": 1,
+                "feedback": "Incluir el costo de cumplir la norma evita multas, pero trata lo ambiental solo como un gasto obligatorio y no como una fuente de valor."
+              },
+              {
+                "text": "Se incorpora un precio interno al carbono y ahorros proyectados por eficiencia energética/hídrica.",
+                "score": 2,
+                "feedback": "Un precio interno al carbono y los ahorros proyectados hacen visible en el VPN y la TIR el valor de las opciones limpias, y mejoran la calidad de la decisión."
+              },
+              {
+                "text": "Se priorizan inversiones en tecnologías limpias y activos regenerativos mediante análisis de ciclo de vida completo.",
+                "score": 3,
+                "feedback": "Priorizar tecnologías limpias con un análisis de ciclo de vida completo captura todos los costos y beneficios del activo; es la evaluación más rigurosa y sostenible."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué manera la empresa transforma sus pasivos ambientales (residuos, mermas, emisiones) en flujos de ingresos o ahorros estructurales en el OpEx?",
+            "options": [
+              {
+                "text": "Se pagan servicios externos de disposición final asumiendo el costo como pérdida fija.",
+                "score": 0,
+                "feedback": "Pagar por desechar y asumirlo como pérdida fija ignora que los residuos son materiales e insumos ya pagados que se están tirando."
+              },
+              {
+                "text": "Se implementan campañas internas de reciclaje básico con impacto marginal en los costos.",
+                "score": 1,
+                "feedback": "El reciclaje básico reduce algo de residuos, pero su efecto en los costos es marginal porque no cambia cómo se generan."
+              },
+              {
+                "text": "Se rediseñan las líneas de producción para alcanzar estándares de \"Cero Residuos a Relleno Sanitario\".",
+                "score": 2,
+                "feedback": "Rediseñar los procesos para no enviar residuos al relleno sanitario reduce los costos de disposición y el desperdicio desde el origen."
+              },
+              {
+                "text": "Se monetizan los subproductos y mermas mediante simbiosis industrial, generando una nueva línea de ingresos.",
+                "score": 3,
+                "feedback": "La simbiosis industrial convierte residuos en ingresos al venderlos como insumos a otras empresas: el pasivo ambiental se vuelve un activo."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo gestiona la empresa la eficiencia energética y la transición hacia fuentes renovables en sus operaciones principales?",
+            "options": [
+              {
+                "text": "Se paga la tarifa eléctrica convencional sin monitoreo ni metas de reducción.",
+                "score": 0,
+                "feedback": "Pagar la tarifa sin monitoreo ni metas deja escapar ahorros fáciles y mantiene a la operación expuesta a alzas de precio y a la energía fósil."
+              },
+              {
+                "text": "Se aplican medidas de ahorro operativo (iluminación eficiente, mantenimiento de equipos).",
+                "score": 1,
+                "feedback": "Las medidas de ahorro básicas tienen un retorno rápido, pero su alcance es limitado y no cambian la fuente de la energía."
+              },
+              {
+                "text": "Se invierte en generación distribuida propia (paneles solares, cogeneración) con retorno de inversión calculado.",
+                "score": 2,
+                "feedback": "Invertir en generación propia con retorno calculado reduce costos y emisiones al mismo tiempo, y da mayor control sobre el suministro."
+              },
+              {
+                "text": "La operación alcanza el 100% de abastecimiento renovable mediante contratos de largo plazo (PPA) o autogeneración.",
+                "score": 3,
+                "feedback": "Abastecerse al 100% con renovables mediante contratos de largo plazo o autogeneración elimina las emisiones de la energía y estabiliza su costo."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué metodología financiera utiliza la empresa para medir y reducir el costo oculto del consumo y tratamiento del agua?",
+            "options": [
+              {
+                "text": "El agua se considera un insumo de costo despreciable sin medición por proceso.",
+                "score": 0,
+                "feedback": "Tratar el agua como un costo despreciable oculta su verdadero valor y el riesgo de escasez, sobre todo en regiones con estrés hídrico."
+              },
+              {
+                "text": "Se monitorean los recibos mensuales de agua para detectar fugas o sobrecostos.",
+                "score": 1,
+                "feedback": "Revisar los recibos ayuda a detectar fugas y sobrecostos, pero no muestra en qué procesos se usa el agua ni cuánto cuesta en realidad."
+              },
+              {
+                "text": "Se calcula el costo real del agua (extracción, tratamiento, descarga) por unidad producida.",
+                "score": 2,
+                "feedback": "Calcular el costo real del agua por unidad producida revela su peso en la rentabilidad y permite priorizar las inversiones de ahorro."
+              },
+              {
+                "text": "Se invierte en plantas de tratamiento y circuitos cerrados de recirculación hídrica de alta eficiencia.",
+                "score": 3,
+                "feedback": "Tratar y recircular el agua reduce drásticamente la extracción y la descarga, y protege a la operación frente a la escasez."
+              }
+            ]
+          },
+          {
+            "text": "En la gestión de la cadena de suministro, ¿cómo se equilibran la resiliencia logística, los costos de transporte y la reducción de emisiones?",
+            "options": [
+              {
+                "text": "Se selecciona siempre al proveedor más barato sin importar la distancia ni el riesgo logístico.",
+                "score": 0,
+                "feedback": "Elegir siempre al proveedor más barato ignora el costo oculto del riesgo logístico y de las emisiones del transporte de larga distancia."
+              },
+              {
+                "text": "Se consolidan cargas y optimizan rutas para reducir el gasto en combustible.",
+                "score": 1,
+                "feedback": "Consolidar cargas y optimizar rutas reduce combustible y costos; es una mejora eficiente, aunque limitada a la logística actual."
+              },
+              {
+                "text": "Se implementa una estrategia de nearshoring o proveeduría regional para reducir costos de flete y huella de carbono.",
+                "score": 2,
+                "feedback": "Acercar la proveeduría reduce fletes, emisiones y el riesgo de interrupciones; es una decisión que mejora a la vez los costos y la resiliencia."
+              },
+              {
+                "text": "Se establecen incentivos contractuales y financiamiento para que los proveedores logísticos migren a flotillas limpias.",
+                "score": 3,
+                "feedback": "Incentivar y financiar que los proveedores logísticos migren a flotillas limpias extiende la descarbonización a toda la cadena con beneficios compartidos."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué manera la empresa aplica el análisis de costo de ciclo de vida (LCC) para la adquisición de activos, maquinaria y materiales?",
+            "options": [
+              {
+                "text": "La decisión de compra se basa únicamente en el precio inicial de factura más bajo.",
+                "score": 0,
+                "feedback": "Comprar por el precio inicial más bajo suele salir caro: los equipos baratos tienden a consumir más energía y a requerir más mantenimiento."
+              },
+              {
+                "text": "Se considera el costo de compra más el presupuesto estimado de mantenimiento básico.",
+                "score": 1,
+                "feedback": "Sumar el mantenimiento mejora la comparación, pero aún deja fuera el consumo energético y el costo de la disposición final."
+              },
+              {
+                "text": "Se calcula el costo total de propiedad (adquisición, consumo energético, mantenimiento y disposición final).",
+                "score": 2,
+                "feedback": "Calcular el costo total de propiedad muestra lo que el activo cuesta durante toda su vida y favorece las opciones eficientes y duraderas."
+              },
+              {
+                "text": "Se opta por modelos de servitización (pago por uso/rendimiento) donde el proveedor garantiza la eficiencia y reciclaje del activo.",
+                "score": 3,
+                "feedback": "En la servitización el proveedor conserva la propiedad y gana cuando el activo dura y rinde más, lo que alinea los incentivos hacia la eficiencia y el reciclaje."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo evalúa la empresa el impacto financiero de posibles regulaciones ambientales futuras (impuestos al carbono, restricciones de materiales)?",
+            "options": [
+              {
+                "text": "No se monitorean los cambios en las leyes ambientales ni fiscales.",
+                "score": 0,
+                "feedback": "Ignorar los cambios regulatorios expone a la empresa a impuestos y sanciones inesperados que pueden afectar seriamente su rentabilidad."
+              },
+              {
+                "text": "Se ajustan los presupuestos de forma reactiva cuando entra en vigor una nueva ley.",
+                "score": 1,
+                "feedback": "Ajustar el presupuesto cuando la ley ya entró en vigor obliga a absorber los costos de golpe y sin margen para planear."
+              },
+              {
+                "text": "Se realizan análisis de sensibilidad financiera ante posibles impuestos verdes o aranceles ambientales.",
+                "score": 2,
+                "feedback": "Los análisis de sensibilidad anticipan cómo afectarían los impuestos verdes al negocio y permiten prepararse con tiempo."
+              },
+              {
+                "text": "La empresa se anticipa operando bajo estándares internacionales estrictos, eliminando riesgos de sanciones o impuestos futuros.",
+                "score": 3,
+                "feedback": "Operar desde ahora bajo estándares estrictos elimina el riesgo regulatorio futuro y puede convertirse en una ventaja competitiva."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué papel juega el ecodiseño o la eficiencia de materiales en la mejora del margen bruto de los productos/servicios?",
+            "options": [
+              {
+                "text": "No se revisa la composición de materiales una vez que el producto está en el mercado.",
+                "score": 0,
+                "feedback": "No revisar los materiales una vez que el producto está en el mercado desaprovecha oportunidades de ahorro y de reducir su impacto."
+              },
+              {
+                "text": "Se buscan materiales sustitutos más baratos aunque reduzcan la calidad o durabilidad.",
+                "score": 1,
+                "feedback": "Abaratar materiales a costa de la calidad mejora el margen a corto plazo, pero acorta la vida del producto y genera más residuos y devoluciones."
+              },
+              {
+                "text": "Se optimiza el diseño para usar menos materia prima virgen, reduciendo costos directos sin perder calidad.",
+                "score": 2,
+                "feedback": "Usar menos materia prima virgen sin perder calidad reduce al mismo tiempo los costos directos y el impacto ambiental."
+              },
+              {
+                "text": "Se utilizan materiales reciclados o certificados que reducen costos de producción y permiten un precio premium.",
+                "score": 3,
+                "feedback": "Los materiales reciclados o certificados pueden bajar costos y además justificar un precio premium ante clientes que valoran la sostenibilidad."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Económico, Costos y Capital Humano",
+        "questions": [
+          {
+            "text": "¿De qué manera la estructura financiera de la empresa vincula la productividad y rentabilidad con el bienestar integral del capital humano?",
+            "options": [
+              {
+                "text": "Se busca mantener los costos laborales al mínimo legal para maximizar la utilidad neta.",
+                "score": 0,
+                "feedback": "Mantener los costos laborales al mínimo suele elevar la rotación y bajar la productividad, y traslada el costo a la calidad de vida de las personas."
+              },
+              {
+                "text": "Se ofrecen salarios competitivos de mercado con prestaciones estándar.",
+                "score": 1,
+                "feedback": "Pagar salarios de mercado con prestaciones estándar es una base justa, aunque no invierte en el desarrollo ni en el bienestar del equipo."
+              },
+              {
+                "text": "Se presupuesta inversión continua en salud, ergonomía, capacitación técnica y desarrollo de carrera.",
+                "score": 2,
+                "feedback": "Invertir en salud, capacitación y carrera se refleja en mayor productividad y menor rotación; el bienestar se trata como inversión y no como gasto."
+              },
+              {
+                "text": "Se implementan esquemas de salario digno (living wage) y participación en utilidades vinculada a metas de eficiencia sostenible.",
+                "score": 3,
+                "feedback": "El salario digno y la participación en utilidades ligada a metas sostenibles alinean el bienestar de las personas con los resultados del negocio."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo gestiona la empresa el capital de trabajo y las políticas de pago para fortalecer la estabilidad financiera de sus proveedores (especialmente PYMES)?",
+            "options": [
+              {
+                "text": "Se extienden los plazos de pago (90 a 120 días) para financiar la liquidez de la empresa a costa del proveedor.",
+                "score": 0,
+                "feedback": "Alargar los plazos de pago financia a la empresa con el dinero de proveedores pequeños, lo que puede asfixiar su liquidez y debilitar la cadena."
+              },
+              {
+                "text": "Se respetan estrictamente los plazos de pago acordados (30 días) sin retrasos.",
+                "score": 1,
+                "feedback": "Pagar a tiempo es una práctica responsable y básica que da certidumbre a los proveedores."
+              },
+              {
+                "text": "Se ofrecen esquemas de factoraje financiero con tasas preferenciales o pronto pago a pequeños proveedores.",
+                "score": 2,
+                "feedback": "Ofrecer factoraje preferencial o pronto pago mejora la liquidez de las PYMES a bajo costo para la empresa y fortalece la cadena."
+              },
+              {
+                "text": "Se co-invierten recursos en el desarrollo tecnológico y operativo de proveedores estratégicos locales.",
+                "score": 3,
+                "feedback": "Coinvertir en el desarrollo de proveedores locales crea socios más capaces y confiables; toda la cadena gana competitividad."
+              }
+            ]
+          },
+          {
+            "text": "Al fijar estrategias de precios y márgenes operativos, ¿cómo internaliza la empresa los costos sociales y ambientales de su operación?",
+            "options": [
+              {
+                "text": "Se externalizan todos los costos socioambientales para ofrecer el precio más bajo del mercado.",
+                "score": 0,
+                "feedback": "Externalizar los costos socioambientales hace que la sociedad pague un daño que el precio no refleja: es un precio bajo que no es real."
+              },
+              {
+                "text": "Se trasladan los costos de cumplimiento ambiental directamente al consumidor mediante alzas de precio.",
+                "score": 1,
+                "feedback": "Trasladar el costo de cumplimiento al cliente reconoce ese costo, pero lo hace sin buscar eficiencias y puede afectar la competitividad."
+              },
+              {
+                "text": "Se absorben los costos de sostenibilidad mediante la optimización operativa y reducción de desperdicios.",
+                "score": 2,
+                "feedback": "Absorber los costos de sostenibilidad mediante eficiencia demuestra que se puede ser responsable sin encarecer el producto."
+              },
+              {
+                "text": "Se desarrolla una estructura de precios basada en valor compartido que demuestra ahorro o beneficio directo al cliente.",
+                "score": 3,
+                "feedback": "Una estructura de precios basada en valor compartido le muestra al cliente el ahorro o beneficio que recibe, y así la sostenibilidad se paga sola."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué métricas financieras utiliza la dirección para evaluar el retorno sobre la inversión (ROI) de sus iniciativas de sostenibilidad?",
+            "options": [
+              {
+                "text": "Las acciones sociales y ambientales se registran únicamente como gasto perdido o filantropía.",
+                "score": 0,
+                "feedback": "Registrar la sostenibilidad como gasto perdido impide ver su retorno y la convierte en lo primero que se recorta en tiempos difíciles."
+              },
+              {
+                "text": "Se miden ahorros básicos en recibos de luz, agua o compra de papelería.",
+                "score": 1,
+                "feedback": "Medir ahorros en recibos demuestra beneficios tangibles, aunque deja fuera retornos importantes como la reputación o la retención de talento."
+              },
+              {
+                "text": "Se cuantifica el impacto financiero en ahorro de costos, retención de talento y fidelización de clientes.",
+                "score": 2,
+                "feedback": "Cuantificar ahorro, retención de talento y fidelización da una visión más completa del retorno y justifica mejor las inversiones sostenibles."
+              },
+              {
+                "text": "Se integra un estado de resultados ampliado que monetiza los beneficios económicos, sociales y ambientales.",
+                "score": 3,
+                "feedback": "Un estado de resultados ampliado monetiza los impactos económicos, sociales y ambientales y los pone al nivel de las cifras financieras al decidir."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo mitiga la empresa el riesgo de concentración de ingresos y asegura la estabilidad del flujo de efectivo ante crisis económicas?",
+            "options": [
+              {
+                "text": "Depende de uno o dos clientes principales para sostener más del 60% de su facturación.",
+                "score": 0,
+                "feedback": "Depender de uno o dos clientes para la mayor parte de la facturación significa que perder uno pone en riesgo a toda la empresa y sus empleos."
+              },
+              {
+                "text": "Mantiene una cartera diversificada de clientes dentro del mismo sector tradicional.",
+                "score": 1,
+                "feedback": "Diversificar clientes reduce el riesgo individual, pero si todos están en el mismo sector una crisis sectorial los afecta a la vez."
+              },
+              {
+                "text": "Desarrolla líneas de ingreso recurrente y modelos de negocio anticíclicos.",
+                "score": 2,
+                "feedback": "Los ingresos recurrentes y los modelos anticíclicos estabilizan el flujo de efectivo cuando la economía se contrae."
+              },
+              {
+                "text": "Cuenta con una estrategia financiera de diversificación de mercados, reservas líquidas y cobertura de riesgos.",
+                "score": 3,
+                "feedback": "Combinar diversificación de mercados, reservas líquidas y coberturas da a la empresa la solidez para sostener operaciones y empleos en cualquier crisis."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué forma la empresa impulsa la inclusión económica y la equidad salarial dentro de su estructura organizacional?",
+            "options": [
+              {
+                "text": "No existen tabuladores salariales formales ni políticas de equidad.",
+                "score": 0,
+                "feedback": "Sin tabuladores ni políticas de equidad, los salarios quedan a discreción y suelen reproducir brechas de género y otras desigualdades."
+              },
+              {
+                "text": "Se cumple con la no discriminación básica en los procesos de contratación.",
+                "score": 1,
+                "feedback": "No discriminar al contratar es una obligación básica, pero no corrige las brechas que aparecen después en salarios y ascensos."
+              },
+              {
+                "text": "Se realizan auditorías salariales anuales para eliminar brechas de género y garantizar equidad interna.",
+                "score": 2,
+                "feedback": "Las auditorías salariales anuales detectan y corrigen brechas con datos, para que a trabajo igual corresponda pago igual."
+              },
+              {
+                "text": "Se establecen metas cuantitativas de diversidad e inclusión en puestos directivos y en la cadena de proveeduría.",
+                "score": 3,
+                "feedback": "Fijar metas cuantitativas de diversidad en la dirección y en la proveeduría lleva la inclusión a donde se toman las decisiones y se reparte el gasto."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo gestiona la empresa el costo financiero y operativo de las garantías, devoluciones y servicio posventa?",
+            "options": [
+              {
+                "text": "Se minimiza el gasto restringiendo al máximo el derecho a devoluciones o garantías.",
+                "score": 0,
+                "feedback": "Restringir garantías y devoluciones ahorra a corto plazo, pero daña la confianza del cliente y oculta los problemas de calidad."
+              },
+              {
+                "text": "Se asume un porcentaje de pérdida financiera por devoluciones como un costo normal de venta.",
+                "score": 1,
+                "feedback": "Aceptar las devoluciones como pérdida normal evita conflictos con el cliente, pero desperdicia productos que podrían recuperarse."
+              },
+              {
+                "text": "Se implementan procesos de logística inversa para reparar, reacondicionar y revender productos devueltos.",
+                "score": 2,
+                "feedback": "Reparar y revender los productos devueltos recupera valor, reduce residuos y abre una línea de ingresos de segunda mano."
+              },
+              {
+                "text": "Se retroalimenta el diseño y control de calidad con datos de posventa para llevar las fallas cercanas a cero.",
+                "score": 3,
+                "feedback": "Usar los datos de posventa para eliminar fallas desde el diseño ataca la causa: menos devoluciones, menos desperdicio y menores costos."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué manera la inversión en investigación, desarrollo e innovación (I+D+i) se orienta hacia la sostenibilidad rentable?",
+            "options": [
+              {
+                "text": "No se destina presupuesto a innovación; se opera con procesos tradicionales estáticos.",
+                "score": 0,
+                "feedback": "Operar sin innovación deja a la empresa rezagada frente a competidores y regulaciones que cambian, y la hace más vulnerable con el tiempo."
+              },
+              {
+                "text": "Se invierte en innovación enfocada únicamente en reducir costos de manufactura a corto plazo.",
+                "score": 1,
+                "feedback": "Innovar solo para bajar costos de manufactura da resultados rápidos, pero puede sacrificar la durabilidad o el impacto social y ambiental."
+              },
+              {
+                "text": "Se destina un porcentaje fijo de las utilidades a desarrollar productos más durables y eficientes.",
+                "score": 2,
+                "feedback": "Destinar un porcentaje fijo a productos más durables y eficientes asegura una inversión constante en sostenibilidad, no solo cuando sobra dinero."
+              },
+              {
+                "text": "La cartera de I+D+i exige que todo nuevo proyecto demuestre viabilidad financiera y mejora ambiental/social simultánea.",
+                "score": 3,
+                "feedback": "Exigir que cada proyecto demuestre viabilidad financiera y mejora socioambiental integra ambos criterios en el ADN de la innovación."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Gobernanza, Riesgos y Finanzas Responsables",
+        "questions": [
+          {
+            "text": "¿Cómo estructura la empresa su acceso a financiamiento verde, bonos sostenibles o créditos vinculados a desempeño ASG?",
+            "options": [
+              {
+                "text": "Se financia únicamente con deuda comercial tradicional de alto costo sin evaluar alternativas.",
+                "score": 0,
+                "feedback": "Financiarse solo con deuda cara sin evaluar alternativas encarece el capital y desaprovecha opciones que premian el buen desempeño ambiental."
+              },
+              {
+                "text": "Se comparan tasas bancarias convencionales buscando el menor costo financiero inmediato.",
+                "score": 1,
+                "feedback": "Comparar tasas convencionales reduce el costo inmediato, pero ignora instrumentos que podrían salir más baratos si se vinculan a metas sostenibles."
+              },
+              {
+                "text": "Se negocian líneas de crédito verde o financiamientos con tasas preferenciales ligadas a metas ambientales.",
+                "score": 2,
+                "feedback": "Las líneas de crédito verde ofrecen tasas preferenciales a cambio de metas ambientales, lo que alinea el costo del dinero con la sostenibilidad."
+              },
+              {
+                "text": "Se estructuran instrumentos financieros sostenibles con indicadores auditados que reducen el costo de capital (WACC).",
+                "score": 3,
+                "feedback": "Estructurar instrumentos sostenibles con indicadores auditados reduce el costo de capital y da credibilidad ante el mercado; son las finanzas sostenibles en su forma más madura."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué tan robusta es la matriz de gestión de riesgos financieros y operativos frente a eventos climáticos o interrupciones en la cadena de suministro?",
+            "options": [
+              {
+                "text": "No existe un plan de continuidad de negocio ni evaluación de riesgos físicos.",
+                "score": 0,
+                "feedback": "Sin plan de continuidad, un desastre natural o una interrupción en la cadena pueden detener la operación y causar pérdidas irreparables."
+              },
+              {
+                "text": "Se cuenta con pólizas de seguro patrimoniales básicas contra daños materiales.",
+                "score": 1,
+                "feedback": "Los seguros básicos cubren daños materiales, pero no protegen la continuidad del negocio ni los ingresos perdidos durante la interrupción."
+              },
+              {
+                "text": "Se modelan escenarios financieros de estrés ante escasez de insumos, alzas energéticas o desastres naturales.",
+                "score": 2,
+                "feedback": "Modelar escenarios de estrés permite saber de antemano cuánto resistiría la empresa y dónde tiene que reforzarse."
+              },
+              {
+                "text": "Se cuenta con fondos de reserva anticíclicos, seguros paramétricos y planes probados de continuidad operativa.",
+                "score": 3,
+                "feedback": "Combinar reservas, seguros paramétricos y planes de continuidad probados da una respuesta rápida y financiada ante una crisis; es resiliencia integral."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué nivel de rigor y transparencia tienen los sistemas de control interno, auditoría y prevención de corrupción o lavado de dinero?",
+            "options": [
+              {
+                "text": "Controles contables básicos enfocados únicamente en el pago de impuestos.",
+                "score": 0,
+                "feedback": "Unos controles enfocados solo en los impuestos dejan espacio para fraudes, desvíos y riesgos de corrupción sin detectar."
+              },
+              {
+                "text": "Segregación de funciones financieras y revisiones internas periódicas de caja e inventarios.",
+                "score": 1,
+                "feedback": "Separar funciones y revisar periódicamente caja e inventarios reduce errores y fraudes internos, aunque no cubre los riesgos con terceros."
+              },
+              {
+                "text": "Políticas estrictas anticorrupción, canales de denuncia anónimos y debida diligencia con terceros.",
+                "score": 2,
+                "feedback": "Las políticas anticorrupción, los canales de denuncia y la debida diligencia con terceros previenen riesgos dentro y fuera de la empresa."
+              },
+              {
+                "text": "Auditorías financieras y de cumplimiento normativo realizadas por firmas externas independientes.",
+                "score": 3,
+                "feedback": "Las auditorías externas independientes verifican que los controles funcionan y dan confianza a inversionistas, bancos y autoridades."
+              }
+            ]
+          },
+          {
+            "text": "¿De qué manera el Consejo de Administración o la Alta Dirección supervisa e incentiva el cumplimiento de las metas de sostenibilidad financiera y operativa?",
+            "options": [
+              {
+                "text": "La dirección evalúa exclusivamente el cumplimiento de cuotas de venta y utilidad trimestral.",
+                "score": 0,
+                "feedback": "Evaluar a la dirección solo por ventas y utilidad trimestral empuja decisiones de corto plazo que pueden sacrificar la sostenibilidad."
+              },
+              {
+                "text": "Se revisan indicadores ambientales o sociales de forma aislada una vez al año.",
+                "score": 1,
+                "feedback": "Revisar indicadores sociales o ambientales una vez al año los deja como tema secundario, sin peso real en las decisiones cotidianas."
+              },
+              {
+                "text": "Los objetivos ASG forman parte del tablero de control (Balanced Scorecard) de la dirección.",
+                "score": 2,
+                "feedback": "Integrar objetivos ASG al tablero de control de la dirección los pone al mismo nivel que los financieros en el seguimiento."
+              },
+              {
+                "text": "La compensación variable y bonos de los directivos están vinculados directamente al logro de metas financieras y de sostenibilidad.",
+                "score": 3,
+                "feedback": "Ligar los bonos de los directivos a metas de sostenibilidad crea un incentivo directo y medible para cumplirlas."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo gestiona la empresa su estrategia fiscal y tributaria bajo principios de ética y responsabilidad corporativa?",
+            "options": [
+              {
+                "text": "Se utilizan esquemas agresivos de elusión fiscal para reducir al mínimo el pago de impuestos.",
+                "score": 0,
+                "feedback": "La elusión agresiva aprovecha vacíos legales para pagar lo mínimo y priva a las comunidades de recursos públicos, además de traer riesgos legales y reputacionales."
+              },
+              {
+                "text": "Se cumple estrictamente con las obligaciones fiscales locales en tiempo y forma.",
+                "score": 1,
+                "feedback": "Cumplir en tiempo y forma con los impuestos es la base de una conducta fiscal responsable."
+              },
+              {
+                "text": "Se cuenta con políticas de transparencia fiscal aprobadas por la dirección, evitando paraísos fiscales.",
+                "score": 2,
+                "feedback": "Adoptar políticas de transparencia fiscal y evitar paraísos fiscales demuestra que la empresa contribuye de forma justa donde genera valor."
+              },
+              {
+                "text": "Se publican reportes desglosados de contribución tributaria e inversión social en las comunidades donde opera.",
+                "score": 3,
+                "feedback": "Publicar el detalle de los impuestos pagados y de la inversión social permite a la sociedad verificar la contribución de la empresa; es la máxima transparencia fiscal."
+              }
+            ]
+          },
+          {
+            "text": "¿Qué protocolos de ciberseguridad, gobernanza de datos y continuidad tecnológica protegen los activos financieros y la información de clientes?",
+            "options": [
+              {
+                "text": "Medidas básicas de antivirus y respaldos manuales ocasionales.",
+                "score": 0,
+                "feedback": "Las medidas básicas dejan expuesta la información financiera y de clientes ante ataques cada vez más frecuentes; una brecha cuesta dinero y confianza."
+              },
+              {
+                "text": "Cumplimiento de leyes de protección de datos y respaldos automatizados en la nube.",
+                "score": 1,
+                "feedback": "Cumplir la ley de protección de datos y automatizar los respaldos protege lo esencial, aunque no garantiza resistencia ante ataques sofisticados."
+              },
+              {
+                "text": "Arquitectura de ciberseguridad auditada, encriptación de datos financieros y planes de recuperación ante desastres.",
+                "score": 2,
+                "feedback": "Una arquitectura de ciberseguridad auditada, con encriptación y planes de recuperación, protege los activos y asegura la continuidad ante incidentes."
+              },
+              {
+                "text": "Certificaciones internacionales de seguridad de la información (ej. ISO 27001) y ética en automatización financiera.",
+                "score": 3,
+                "feedback": "Certificaciones como ISO 27001 demuestran una gestión de la información verificada por terceros y, sumadas a la ética en la automatización, generan la máxima confianza."
+              }
+            ]
+          },
+          {
+            "text": "¿Cómo integra la empresa la información financiera y no financiera (ASG) en su rendición de cuentas a inversionistas, bancos y grupos de interés?",
+            "options": [
+              {
+                "text": "Se entregan estados financieros básicos únicamente a los socios o autoridades fiscales.",
+                "score": 0,
+                "feedback": "Entregar solo estados financieros básicos oculta riesgos y oportunidades ASG que hoy son relevantes para bancos e inversionistas."
+              },
+              {
+                "text": "Se elabora un informe financiero anual acompañado de un resumen general de actividades sociales.",
+                "score": 1,
+                "feedback": "Agregar un resumen social es un avance, pero al ir separado de los números no muestra cómo lo ASG afecta los resultados."
+              },
+              {
+                "text": "Se publica un Reporte Integrado anual bajo marcos internacionales (ISSB / GRI) que conecta riesgos ASG con resultados financieros.",
+                "score": 2,
+                "feedback": "Un Reporte Integrado bajo marcos como ISSB o GRI conecta los riesgos ASG con los resultados financieros y permite decidir mejor informado."
+              },
+              {
+                "text": "Los estados financieros y reportes de sostenibilidad cuentan con aseguramiento externo y se presentan en asambleas abiertas a stakeholders.",
+                "score": 3,
+                "feedback": "El aseguramiento externo y la presentación abierta a los grupos de interés hacen la rendición de cuentas verificable y participativa; es el nivel más alto de transparencia."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
