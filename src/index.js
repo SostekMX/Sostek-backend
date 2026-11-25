@@ -206,7 +206,7 @@ app.post("/user/edit", verifyToken, [
         update.gender = req.body.gender;
     dbSchema.User.findOneAndUpdate({ email: req.user.email }, update, null, function (err, docs) {
         if (err) {
-            res.json({ success: false, message: "No se pudo actualizar información del usuario" });
+            res.json({ success: false, error: "No se pudo actualizar información del usuario" });
             return;
         }
         res.json({ success: true, message: "Usuario actualizado" });

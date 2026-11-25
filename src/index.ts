@@ -216,7 +216,7 @@ app.post("/user/edit", verifyToken, [
     null,
     function (err: any, docs: any) {
       if (err) {
-        res.json({ success: false, message: "No se pudo actualizar información del usuario" });
+        res.json({ success: false, error: "No se pudo actualizar información del usuario" });
         return;
       }
       res.json({ success: true, message: "Usuario actualizado" });
