@@ -107,10 +107,10 @@ function resetEmailContent(lang, resetUrl, token) {
       <p>Hola,</p>
       <p>Recibimos una solicitud para restablecer tu contraseña en SOSTEK.</p>
       <p><a href="${resetUrl}">Restablecer contraseña</a></p>
-      <p>O copiá este token directamente en la app:</p>
+      <p>O copia este token directamente en la app:</p>
       <p><strong>${token}</strong></p>
       <p>Este enlace expira en <strong>1 hora</strong>.</p>
-      <p>Si no solicitaste esto, podés ignorar este correo.</p>
+      <p>Si no solicitaste esto, puedes ignorar este correo.</p>
     `
     };
 }
@@ -206,7 +206,7 @@ app.post("/user/edit", verifyToken, [
         update.gender = req.body.gender;
     dbSchema.User.findOneAndUpdate({ email: req.user.email }, update, null, function (err, docs) {
         if (err) {
-            res.json({ success: false, message: "No se pudo actualizar información del usuario" });
+            res.json({ success: false, error: "No se pudo actualizar información del usuario" });
             return;
         }
         res.json({ success: true, message: "Usuario actualizado" });
