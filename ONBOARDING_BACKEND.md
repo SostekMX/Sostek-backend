@@ -81,7 +81,7 @@ La app solo **lee** el contenido. Se edita en los JSON de `seed/` y se carga con
 | Seed | Fuente | Qué hace |
 |---|---|---|
 | `npm run seed:content` | `seed/content/*.json` | Hace upsert por `_id`: no borra, no duplica y conserva los favoritos y las URLs |
-| `npm run seed:quiz` | `seed/quiz_data.json` | Hace upsert por nivel y tipo |
+| `npm run seed:quiz` | `seed/quiz_data.json` | Hace upsert por nivel y tipo, y copia los tramos de retroalimentación a cada test |
 | `npm run seed:tutorial` | `seed/tutorial_data.json` | Reemplaza el documento del tutorial |
 | `npm run seed:presentations "Nombre" "carpeta"` | imágenes locales | Sube las slides a Cloudinary (necesita `CLOUDINARY_*`) y agrega la presentación a `seed/content/presentations.json`. Después corre `seed:content`. |
 
@@ -91,6 +91,13 @@ Todos escriben en la base de tu `.env`. Con el `DB_URL` de Atlas, escriben en **
 1. Copia uno en `seed/content/articles.json`, cambia los campos y ponle un `_id` nuevo de 24 caracteres hexadecimales. Puedes generarlo con `node -e "console.log(new (require('mongoose').Types.ObjectId)().toString())"`.
 2. Usa en `category` un valor de `Ambiental`, `Económico` o `Social`. Con eso el frontend recomienda artículos al terminar una evaluación.
 3. Las preguntas de las evaluaciones usan `Ambiental` o `Económico y Social`. Un test revisa estas categorías.
+
+**Para cambiar el quiz:**
+- Edita `seed/quiz_data.json`. Su fuente es el PDF de ponderación de Carlos.
+- Cada opción lleva su `score`, que es su escalón de 0 a 3. Cada pregunta lleva su `weight`: 4, o 5 si es estratégica.
+- Los 5 tramos de retroalimentación están una sola vez, al inicio del archivo.
+- El test del quiz falla si una pregunta no usa una escala completa o si un test no suma 100.
+- Después corre `npm run seed:quiz`.
 
 `seed:articles` (desde un CSV) y `seed:evaluations` (desde Google Sheets) se retiraron en noviembre de 2026. Sus fuentes estaban desactualizadas y correrlos borraba arreglos que se hicieron en la base. Siguen en el historial de git.
 
