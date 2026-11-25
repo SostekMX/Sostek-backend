@@ -532,3 +532,59 @@ describe('Quiz', () => {
       .toEqual(textos);
   });
 });
+
+// ─── Contenido versionado (seed:content) ───────────────────────────────────────
+
+describe('Contenido versionado (seed:content)', () => {
+  const contenido = archivo => require(`../seed/content/${archivo}`);
+  const modelos = () => require('../src/models/contentModel');
+  const sembrar = () => require('../seed/seedContent').upsertContent();
+
+  test('carga el snapshot conservando los _id y es idempotente', async () => {
+    const { Article, Presentation, Evaluation } = modelos();
+    await sembrar();
+    await sembrar();
+    expect(await Article.countDocuments()).toBe(contenido('articles.json').length);
+    expect(await Presentation.countDocuments()).toBe(contenido('presentations.json').length);
+    expect(await Evaluation.countDocuments()).toBe(contenido('evaluations.json').length);
+    const primero = contenido('articles.json')[0];
+    const guardado = await Article.collection.findOne({ _id: new (require('mongoose').Types.ObjectId)(primero._id) });
+    expect(guardado.title).toBe(primero.title);
+  });
+
+  test('no borra documentos que no estan en el snapshot', async () => {
+    const { Article } = modelos();
+    await Article.create({ title: 'Solo en la base' });
+    await sembrar();
+    expect(await Article.countDocuments({ title: 'Solo en la base' })).toBe(1);
+  });
+
+  test('las rutas de detalle responden con los _id del snapshot', async () => {
+    await sembrar();
+    const articulo = contenido('articles.json')[0];
+    const evaluacion = contenido('evaluations.json')[0];
+    expect((await request(app).get('/articles/' + articulo._id)).body.article.title).toBe(articulo.title);
+    expect((await request(app).get('/evaluations/' + evaluacion._id)).body.evaluation.name).toBe(evaluacion.name);
+  });
+
+  test('todos los campos del snapshot existen en los esquemas (si no, Mongoose los tiraria)', () => {
+    const { Article, Presentation, Evaluation } = modelos();
+    const pregunta = Evaluation.schema.path('questions').schema;
+    for (const [archivo, Model] of [['articles.json', Article], ['presentations.json', Presentation], ['evaluations.json', Evaluation]]) {
+      for (const doc of contenido(archivo)) {
+        Object.keys(doc).forEach(campo => expect([archivo, campo, Boolean(Model.schema.path(campo))]).toEqual([archivo, campo, true]));
+      }
+    }
+    for (const p of contenido('evaluations.json').flatMap(e => e.questions)) {
+      Object.keys(p).forEach(campo => expect([campo, Boolean(pregunta.path(campo))]).toEqual([campo, true]));
+      p.options.forEach(o => expect(Object.keys(o).sort()).toEqual(['text', 'value']));
+    }
+  });
+
+  test('las categorias son las que usa el frontend para recomendar articulos', () => {
+    const deArticulos = new Set(contenido('articles.json').map(a => a.category));
+    const dePreguntas = new Set(contenido('evaluations.json').flatMap(e => e.questions.map(q => q.category)));
+    expect([...deArticulos].sort()).toEqual(['Ambiental', 'Económico', 'Social']);
+    expect([...dePreguntas].sort()).toEqual(['Ambiental', 'Económico y Social']);
+  });
+});
