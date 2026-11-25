@@ -487,6 +487,12 @@ app.post("/user/avatar", verifyToken, (req, res, next) => {
     }
 }));
 if (process.env.NODE_ENV !== 'test') {
+    // Sin JWT_CODE el servidor arrancaba, pero el registro y el login fallaban con un error generico.
+    if (!JWT_CODE) {
+        console.error('[config] Falta JWT_CODE en el .env: sin él no se pueden firmar las sesiones.');
+        console.error(`[config] Genera uno con: node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`);
+        process.exit(1);
+    }
     const server = app.listen(PORT, () => {
         console.log("Backend running on port " + PORT);
     });
