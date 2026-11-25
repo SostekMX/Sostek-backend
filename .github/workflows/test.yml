@@ -30,3 +30,13 @@ jobs:
 
       - name: Correr tests
         run: npm test
+
+      # Render corre los .js: si alguien edita solo un .ts, el cambio nunca llega a producción.
+      - name: Revisar que los .js salgan de los .ts
+        run: |
+          npm run build
+          if [ -n "$(git status --porcelain -- src)" ]; then
+            git status --porcelain -- src
+            echo "::error::Los .js de src/ no coinciden con los .ts. Corre 'npm run build' y commitea el resultado."
+            exit 1
+          fi
