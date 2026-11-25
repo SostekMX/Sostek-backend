@@ -13,7 +13,8 @@
     "seed:presentations": "node -r dotenv/config seed/seedPresentations.js",
     "seed:evaluations": "node -r dotenv/config seed/seedEvaluations.js",
     "seed:tutorial": "node -r dotenv/config seed/seedTutorial.js",
-    "seed:quiz": "node -r dotenv/config seed/seedQuiz.js"
+    "seed:quiz": "node -r dotenv/config seed/seedQuiz.js",
+    "seed:content": "node -r dotenv/config seed/seedContent.js"
   },
   "keywords": [],
   "author": "",
