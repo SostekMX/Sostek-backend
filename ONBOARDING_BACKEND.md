@@ -92,6 +92,13 @@ Todos escriben en la base de tu `.env`. Con el `DB_URL` de Atlas, escriben en **
 2. Usa en `category` un valor de `Ambiental`, `Económico` o `Social`. Con eso el frontend recomienda artículos al terminar una evaluación.
 3. Las preguntas de las evaluaciones usan `Ambiental` o `Económico y Social`. Un test revisa estas categorías.
 
+**Para cambiar el quiz:**
+- Edita `seed/quiz_data.json`. Su fuente es el PDF de ponderación de Carlos.
+- Cada opción lleva su `score`, que es su escalón de 0 a 3. Cada pregunta lleva su `weight`: 4, o 5 si es estratégica.
+- Los 5 tramos de retroalimentación están una sola vez, al inicio del archivo.
+- El test del quiz falla si una pregunta no usa una escala completa o si un test no suma 100.
+- Después corre `npm run seed:quiz`.
+
 `seed:articles` (desde un CSV) y `seed:evaluations` (desde Google Sheets) se retiraron en noviembre de 2026. Sus fuentes estaban desactualizadas y correrlos borraba arreglos que se hicieron en la base. Siguen en el historial de git.
 
 ---
