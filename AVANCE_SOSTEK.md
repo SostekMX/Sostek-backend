@@ -1,8 +1,8 @@
 # AVANCE SOSTEK — Backend (Fuente de Verdad)
 
-> Última actualización: 2026-06-17 (limpieza de documentación: se eliminaron `INFO_BACKEND.md` e `INFO_PARA_FRONTEND.md` — eran documentos de comunicación con el equipo de frontend durante la migración a MongoDB, ya resueltos por completo)
-> Rama activa: `development`
-> Stack: Node.js + Express + TypeScript + MongoDB
+> Última actualización: 2026-11-24, entrega del servicio social. Contenido versionado en `seed/content`, `npm run dev:memoria`, CI que revisa la sincronía `.ts`/`.js` y mensajes claros al arrancar.
+> Rama activa: `development`. `main` es lo que corre en producción.
+> Stack: Node.js 24 + Express 4 + TypeScript + MongoDB (Mongoose 6)
 
 ---
 
@@ -70,7 +70,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **`GET /user/profile`** — retorna datos del usuario (sin password); protegido con JWT
 - **`POST /user/score`** — actualiza `score_test` y/o `score_game`; acepta uno o ambos campos opcionalmente
 - **`DELETE /user`** — elimina la cuenta del usuario autenticado
-- **`POST /user/forgot-password`** — recibe email, genera token seguro (64 hex chars) con 1h de expiración, lo guarda en el usuario en DB, retorna `{ success: true, reset_token: "..." }`; limitado por rate limit
+- **`POST /user/forgot-password`**: recibe el correo (y `lang`: `es` o `en`), genera un token seguro de 64 caracteres hexadecimales que vence en 1 h, lo guarda en el usuario y lo manda **solo por correo**. Siempre responde el mismo mensaje genérico, exista o no el correo, y nunca devuelve el token. Tiene rate limit.
 - **`POST /user/reset-password`** — recibe `token` + `new_password`, valida que el token exista y no esté expirado, hashea la nueva contraseña con bcrypt y limpia los campos de reset en el documento
 - **`GET /evaluations`** — retorna lista de evaluaciones sin el campo `questions`, pero agrega `question_count` (total de preguntas) calculado con `questions.length`; incluye `name`, `career` y `description` (ahora con rango de semestre recomendado, ej. `"(3°-4° semestre) ..."`)
 - **`GET /evaluations/:id`** — retorna evaluación completa con preguntas, opciones y valores numéricos; `questions[].category` usa solo `"Ambiental"` o `"Económico y Social"` (alineado con las categorías de artículos para el sistema de recomendación)
@@ -87,10 +87,12 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **Validación y sanitización de inputs** — `express-validator` en todos los endpoints con body; incluye longitudes máximas (name/surname 50, email 100, password 128, occupation 100), tipos correctos (`isFloat` en scores, `isString` en opcionales), y sanitización (`.trim()`, `.normalizeEmail()`)
 - **`POST /user/avatar`** — recibe imagen `multipart/form-data` (campo `avatar`); valida formato (jpg/png/webp) y tamaño (máx 5MB); sube a Cloudinary en la carpeta `sostek/avatars`; guarda `secure_url` en el campo `avatar` del usuario; retorna `{ success: true, avatar_url: "..." }`
 - **Graceful shutdown** — el servidor captura `SIGUSR2` (nodemon restart), `SIGTERM` y `SIGINT` (Ctrl+C) para cerrar el HTTP server antes de salir; evita el error `EADDRINUSE` al reiniciar en desarrollo
-- **Unit tests** — Jest + Supertest + mongodb-memory-server; 33 tests cubriendo signup, login, JWT, score, recuperación de password, favoritos y avatar (`npm test`)
-- **CI/CD** — GitHub Actions corre `npm test` automáticamente en cada push a `main`/`development` y en PRs a `main`
+- **Unit tests**: Jest, Supertest y mongodb-memory-server. Cubren signup, login, JWT, score, recuperación de contraseña, favoritos, avatar, el quiz y los seeds de contenido (`npm test`).
+- **CI**: GitHub Actions corre `npm test` y revisa que los `.js` salgan de los `.ts` (`npm run build` sin diferencias) en cada push a `main` y a `development`, y en los PR hacia ellas.
+- **Arranque claro**: si la base no responde, el servidor imprime el host (sin credenciales) y qué revisar. Sin `JWT_CODE` no arranca, y dice cómo generarlo.
+- **`npm run dev:memoria`**: backend completo con MongoDB en memoria y el contenido de `seed/`. Nunca toca Atlas.
 - **Modelo de usuario** — esquema Mongoose completo con todos los campos (ver sección de arquitectura)
-- **CORS** — acepta `http://localhost:3000`, `http://localhost:8100`, y orígenes extra definidos en `CORS_ORIGIN` (env var, separados por coma); útil para producción en Render y Cloudflare Pages
+- **CORS**: acepta `http://localhost:3000`, `http://localhost:8100` y los orígenes de `CORS_ORIGIN` (variable de entorno, separados por coma). En producción es `https://sostek.vercel.app`.
 - **`GET /health`** — endpoint de health check; responde `{ status: 'ok' }`; usado por UptimeRobot para mantener el servidor en Render siempre activo
 - **JWT** — secret leído desde variable de entorno `JWT_CODE`; tokens expiran en 7 días
 - **Email de recuperación** — `POST /user/forgot-password` envía email con link y token vía nodemailer + Gmail SMTP; requiere `EMAIL_USER`, `EMAIL_PASS` y `FRONTEND_URL` en `.env`; si no están configuradas, loguea warning y continúa sin enviar
@@ -139,8 +141,9 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 |------|--------|
 | **Deploy en Render** — `main` sincronizado con `development`, deploy disparado y `/health` responde `{"status":"ok"}` (200 OK). URL: `https://sostek-backend.onrender.com` | ✅ Activo |
 | **UptimeRobot** — monitor activo en `https://sostek-backend.onrender.com/health`, checks cada 5 min, 100% uptime. | ✅ Activo |
-| **Actualizar URL del frontend** — el frontend Ionic ya usa `REACT_APP_BACKEND_URL=https://sostek-backend.onrender.com`. | ✅ Hecho |
-| **Frontend desplegado en Render** — Static Site en `https://sostek-frontend.onrender.com` (no se duerme, no necesita UptimeRobot). `CORS_ORIGIN` configurado en el backend con esta URL — verificado, responde `access-control-allow-origin: https://sostek-frontend.onrender.com`. | ✅ Activo |
+| **Actualizar URL del frontend**: el frontend usa `REACT_APP_BACKEND_URL=https://sostek-backend.onrender.com`. | ✅ Hecho |
+| **Frontend en Vercel**: `https://sostek.vercel.app` es el oficial desde el 2026-06-17. `CORS_ORIGIN` lo deja pasar (verificado el 2026-11-24). | ✅ Activo |
+| **Sitio estático de Render** (`sostek-frontend.onrender.com`): quedó abandonado. Se sigue publicando con cada push a `main`, pero CORS no lo deja pasar, así que no carga contenido. Está pendiente de baja: ve `ACCESOS.md` en el repo del frontend. | ⚠️ Pendiente de baja |
 
 ---
 
@@ -172,8 +175,9 @@ colección: evaluations
 colección: articles
     ├── title, subtitle, type, body  (String)
     ├── image, author, author_image, page_image  (String — URLs)
-    ├── category  (String)
-    └── tags      (Array de String)
+    ├── category  (String — 'Ambiental' | 'Económico' | 'Social', la usa el frontend para recomendar)
+    ├── tags      (Array de String)
+    └── bibliography (String)
 
 colección: presentations
     ├── name    (String, required)
@@ -192,22 +196,7 @@ colección: quizzes  (único por level + type)
     └── blocks           (Array de { name, questions: [{ text, options: [{ text, score: 0–3, feedback }] }] })
 ```
 
-**Variables de entorno** (archivo `.env` en raíz, no incluido en el repo):
-
-| Variable | Default actual | Descripción |
-|----------|----------------|-------------|
-| `PORT` | `8080` | Puerto del servidor |
-| `DB_IP` | `127.0.0.1` | IP de MongoDB |
-| `DB_PORT` | `27017` | Puerto de MongoDB |
-| `JWT_CODE` | — | Secret para firmar tokens JWT (requerido, sin default) |
-| `DB_URL` | — | Connection string completo de MongoDB Atlas (si se usa, ignora DB_IP y DB_PORT) |
-| `CLOUDINARY_CLOUD_NAME` | — | Nombre del cloud en Cloudinary (para seed de presentaciones) |
-| `CLOUDINARY_API_KEY` | — | API key de Cloudinary |
-| `CLOUDINARY_API_SECRET` | — | API secret de Cloudinary |
-| `EMAIL_USER` | — | Cuenta de Gmail que envía los emails de recuperación |
-| `EMAIL_PASS` | — | Contraseña de aplicación de Google (no la contraseña normal) |
-| `FRONTEND_URL` | `http://localhost:3000` | URL base del frontend — se usa para armar el link de reset en el email |
-| `CORS_ORIGIN` | — | Orígenes CORS extra para producción, separados por coma (ej: `https://sostek.pages.dev,https://sostek-frontend.onrender.com`) — en desarrollo no hace falta |
+**Variables de entorno**: cada una está explicada en [`.env.example`](.env.example), que es la única referencia. Los valores de producción viven en Render; ve [`DESPLIEGUE.md`](https://github.com/SostekMX/Sostek/blob/main/DESPLIEGUE.md).
 
 ---
 
@@ -215,25 +204,24 @@ colección: quizzes  (único por level + type)
 
 | Archivo | Responsabilidad |
 |---------|----------------|
-| `src/index.ts` | Todos los endpoints y middleware (fuente TypeScript) |
-| `src/index.js` | Ídem compilado — debe mantenerse sincronizado con `.ts` |
-| `src/models/authModel.ts` | Schema de usuario + conexión a MongoDB (fuente) |
-| `src/models/authModel.js` | Ídem compilado |
-| `src/models/contentModel.ts` | Schemas de Evaluation, Article y Presentation (fuente) |
-| `src/models/contentModel.js` | Ídem compilado |
-| `seed/seedArticles.js` | Importa artículos desde CSV a MongoDB. Uso: `npm run seed:articles "ruta/al/archivo.csv"` |
-| `seed/seedPresentations.js` | Sube imágenes locales a Cloudinary y guarda URLs en MongoDB. Uso: `npm run seed:presentations "Nombre" "ruta/carpeta"` |
-| `seed/seedEvaluations.js` | Descarga las 6 evaluaciones desde Google Sheets y las inserta en MongoDB. Uso: `npm run seed:evaluations` |
-| `seed/seedTutorial.js` | Inserta el instructivo del juego en MongoDB desde `seed/tutorial_data.json`. Uso: `npm run seed:tutorial` |
-| `seed/seedQuiz.js` | Upsert idempotente de los quizzes por nivel + tipo desde `seed/quiz_data.json`; no borra nada. Uso: `npm run seed:quiz` |
-| `seed/quiz_data.json` | Banco del quiz (fuente del seed) con borrador de retroalimentación por opción |
-| `seed/quiz_nivel3.txt` | Texto original del Nivel 3 de Carlos; un test verifica que coincida con el JSON |
-| `seed/tutorial_data.json` | Contenido completo del instructivo: reglas + 48 tarjetas (16 escenario, 32 solución) extraídas del PDF original |
-| `.env` | Variables de entorno locales (no en repo) |
-| `.env.example` | Plantilla de variables de entorno — copiar a `.env` y completar valores |
-| `tests/index.test.js` | 33 unit tests con Jest + Supertest — correr con `npm test` |
+| `src/index.ts` | Todos los endpoints y el middleware (fuente TypeScript) |
+| `src/index.js` | Lo genera `npm run build` desde el `.ts`. Es lo que corre en producción; CI revisa que coincida |
+| `src/models/authModel.ts` | Esquema de usuario y conexión a MongoDB (fuente) |
+| `src/models/contentModel.ts` | Esquemas de Evaluation, Article, Presentation, Tutorial y Quiz (fuente) |
+| `src/models/*.js` | Los genera `npm run build` |
+| `seed/content/*.json` | **Contenido de producción**: artículos, presentaciones y evaluaciones con sus `_id`. Se exportó de Atlas el 2026-11-24 y es la fuente de verdad. |
+| `seed/seedContent.js` | Carga `seed/content` con upsert por `_id`; no borra nada. Uso: `npm run seed:content` |
+| `seed/seedPresentations.js` | Sube imágenes locales a Cloudinary y agrega la presentación a `seed/content/presentations.json`. Uso: `npm run seed:presentations "Nombre" "ruta/carpeta"` |
+| `seed/seedTutorial.js` | Carga el instructivo del juego desde `seed/tutorial_data.json`. Uso: `npm run seed:tutorial` |
+| `seed/seedQuiz.js` | Upsert idempotente de los quizzes por nivel y tipo desde `seed/quiz_data.json`; no borra nada. Uso: `npm run seed:quiz` |
+| `seed/quiz_data.json` | Banco del quiz, con el borrador de retroalimentación por opción |
+| `seed/quiz_nivel3.txt` | Texto original de Carlos para el Nivel 3; un test verifica que coincida con el JSON |
+| `seed/tutorial_data.json` | El instructivo completo: reglas y 48 tarjetas (16 de escenario y 32 de solución) |
+| `scripts/dev-memoria.js` | `npm run dev:memoria`: MongoDB en memoria con el contenido de `seed/` y el servidor |
+| `.env.example` | Plantilla de variables de entorno. Se copia a `.env`, que no se versiona |
+| `tests/index.test.js` | Tests con Jest y Supertest. Se corren con `npm test` |
 | `jest.config.js` | Configuración de Jest |
-| `.github/workflows/test.yml` | GitHub Actions — corre tests en cada push/PR |
+| `.github/workflows/test.yml` | GitHub Actions: tests y revisión de que los `.js` salgan de los `.ts` |
 
 ---
 
@@ -241,12 +229,21 @@ colección: quizzes  (único por level + type)
 
 ```bash
 npm install
-
-# MongoDB debe estar corriendo primero
-npm run dev:js       # desarrollo con nodemon (recarga automática)
+npm run dev:memoria  # MongoDB en memoria con el contenido real; no necesita .env ni Atlas
+npm run dev:js       # desarrollo con nodemon, contra la base de tu .env
 npm start            # producción (node directo)
-npm run build-start  # compila TypeScript y arranca
-npm test             # corre los 33 unit tests (no necesita MongoDB)
+npm run build        # regenera los .js después de editar un .ts
+npm test             # tests (no necesitan MongoDB instalado ni .env)
 ```
 
-El frontend debe correr por separado en `http://localhost:3000`.
+El frontend corre por separado en `http://localhost:3000`. Todo el detalle está en `ONBOARDING_BACKEND.md`.
+
+---
+
+## Deuda técnica conocida
+
+No bloquea nada hoy, pero conviene planearla:
+
+- **Mongoose 6.** Pasar a la 8 o posterior obliga a quitar los callbacks de `findOneAndUpdate` en `src/index.ts`, porque Mongoose 7 los eliminó.
+- **Express 4, `express-validator` 6 y `nodemailer` 8** están varias versiones atrás.
+- **El contenido de los artículos enlaza imágenes de sitios ajenos.** Algunas ya no cargan. Conviene subirlas a Cloudinary y cambiar las URLs en `seed/content/articles.json`.

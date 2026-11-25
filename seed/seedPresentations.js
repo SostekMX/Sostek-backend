@@ -1,8 +1,8 @@
 require('dotenv').config();
-const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 const path = require('path');
+const { Types } = require('mongoose');
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,15 +10,8 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const DB_URL = process.env.DB_URL ||
-    ('mongodb://' + (process.env.DB_IP || '127.0.0.1') + ':' + (process.env.DB_PORT || '27017') + '/SostekDB');
-
-var PresentationSchema = new mongoose.Schema({
-    name:   { type: String, required: true },
-    slides: { type: [String], default: [] }
-}, { collection: 'presentations' });
-
-const Presentation = mongoose.model('Presentation', PresentationSchema);
+// Las presentaciones viven en seed/content/presentations.json; npm run seed:content las carga a la base.
+const CONTENT_PATH = path.join(__dirname, 'content', 'presentations.json');
 
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
 
@@ -40,16 +33,23 @@ async function uploadToCloudinary(localPath, presentationName) {
     return result.secure_url;
 }
 
+/* Agrega una presentacion a la lista, o le cambia las slides si ya existe una con ese nombre.
+   Si ya existe conserva su _id (los favoritos apuntan a el) y su portada. */
+function mergePresentation(list, name, slides) {
+    return list.some(p => p.name === name)
+        ? list.map(p => (p.name === name ? { ...p, slides } : p))
+        : [...list, { _id: new Types.ObjectId().toString(), name, cover: '', slides }];
+}
+
 async function seed() {
-    // Espera: node seed/seedPresentations.js "Nombre Presentacion" "/ruta/a/carpeta"
-    // Ejemplo: node seed/seedPresentations.js "Is Sustainable Innovation" "C:/Users/Lenovo/Downloads/slides1"
+    // Espera: npm run seed:presentations "Nombre de la presentacion" "ruta/a/carpeta"
     const presName = process.argv[2];
     const folderPath = process.argv[3];
 
     if (!presName || !folderPath) {
         console.log('Uso: npm run seed:presentations "Nombre de la presentacion" "ruta/a/carpeta"');
         console.log('Ejemplo:');
-        console.log('  npm run seed:presentations "Is Sustainable Innovation an Oxymoron" "C:/Users/Lenovo/Downloads/Is Sustainable Innovation"');
+        console.log('  npm run seed:presentations "Is Sustainable Innovation an Oxymoron" "C:/Users/tu-usuario/Downloads/Is Sustainable Innovation"');
         process.exit(1);
     }
 
@@ -64,8 +64,6 @@ async function seed() {
         process.exit(1);
     }
 
-    await mongoose.connect(DB_URL, { useNewUrlParser: true });
-    console.log('Conectado a MongoDB');
     console.log(`\n📁 Presentación: ${presName}`);
     console.log(`   ${images.length} imágenes encontradas\n`);
 
@@ -78,14 +76,19 @@ async function seed() {
         console.log('✓');
     }
 
-    await Presentation.deleteOne({ name: presName });
-    await Presentation.create({ name: presName, slides });
+    const list = JSON.parse(fs.readFileSync(CONTENT_PATH, 'utf8'));
+    fs.writeFileSync(CONTENT_PATH, JSON.stringify(mergePresentation(list, presName, slides), null, 2) + '\n');
 
-    console.log(`\n✅ "${presName}" guardada en MongoDB con ${slides.length} slides`);
-    await mongoose.disconnect();
+    console.log(`\n✅ "${presName}" quedó en seed/content/presentations.json con ${slides.length} slides.`);
+    console.log('   Si quieres portada, pon la URL de la imagen en su campo "cover".');
+    console.log('   Para publicarla: npm run seed:content, y commitea el JSON.');
 }
 
-seed().catch(err => {
-    console.error('Error:', err.message);
-    process.exit(1);
-});
+if (require.main === module) {
+    seed().catch(err => {
+        console.error('Error:', err.message);
+        process.exit(1);
+    });
+}
+
+module.exports = { mergePresentation };
