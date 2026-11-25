@@ -88,3 +88,7 @@ exports.Article     = mongoose.model('Article',     ArticleSchema);
 exports.Presentation = mongoose.model('Presentation', PresentationSchema);
 exports.Tutorial    = mongoose.model('Tutorial',    TutorialSchema);
 exports.Quiz        = mongoose.model('Quiz',        QuizSchema);
+
+
+// Marca el archivo como modulo: sin esto, el `const mongoose` choca con el del otro modelo (TS2451).
+export {};

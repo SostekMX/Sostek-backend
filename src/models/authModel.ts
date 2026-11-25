@@ -73,3 +73,6 @@ var UserSchema = new mongoose.Schema({
 }, { collection: "users" });
 
 exports.User = mongoose.model('User', UserSchema);
+
+// Marca el archivo como modulo: sin esto, el `const mongoose` choca con el del otro modelo (TS2451).
+export {};
