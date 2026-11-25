@@ -1,9 +1,7 @@
 "use strict";
 const mongoose = require('mongoose');
-
 const DB_URL = process.env.DB_URL ||
     ("mongodb://" + (process.env.DB_IP || "127.0.0.1") + ":" + (process.env.DB_PORT || "27017") + "/SostekDB");
-
 mongoose.connect(DB_URL, { useNewUrlParser: true });
 // Schema that defines the user register to validate login and signin
 var UserSchema = new mongoose.Schema({
@@ -29,6 +27,7 @@ var UserSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    // These are the non-required values
     birth_date: {
         type: String,
         required: false
@@ -60,9 +59,9 @@ var UserSchema = new mongoose.Schema({
         required: false
     },
     favorites: [{
-        content_id: { type: String, required: true },
-        type: { type: String, enum: ['article', 'presentation'], required: true }
-    }],
+            content_id: { type: String, required: true },
+            type: { type: String, enum: ['article', 'presentation'], required: true }
+        }],
     avatar: {
         type: String,
         required: false,
