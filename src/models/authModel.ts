@@ -3,7 +3,14 @@ const mongoose = require('mongoose');
 const DB_URL = process.env.DB_URL ||
   ("mongodb://" + (process.env.DB_IP || "127.0.0.1") + ":" + (process.env.DB_PORT || "27017") + "/SostekDB");
 
-mongoose.connect(DB_URL, { useNewUrlParser: true });
+// Sin este catch, una base inalcanzable tumba el proceso con un stack trace que no dice que paso.
+// El host se imprime sin usuario ni contrasena.
+mongoose.connect(DB_URL, { useNewUrlParser: true }).catch((err: any) => {
+  const host = DB_URL.replace(/^mongodb(\+srv)?:\/\/([^@/]*@)?/, '').split('/')[0];
+  console.error(`[db] No se pudo conectar a MongoDB en ${host}: ${err.message}`);
+  console.error('[db] Revisa DB_URL (o DB_IP y DB_PORT) en tu .env. Ver ONBOARDING_BACKEND.md.');
+  process.exit(1);
+});
 
 // Schema that defines the user register to validate login and signin
 var UserSchema = new mongoose.Schema({
