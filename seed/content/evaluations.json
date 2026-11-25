@@ -1,0 +1,2796 @@
+[
+  {
+    "_id": "6a2775a022611ab57aae36ce",
+    "name": "Arquitectura Nivel 1",
+    "career": "Arquitectura",
+    "questions": [
+      {
+        "category": "Ambiental",
+        "text": "En tu análisis de sitio, ¿cuáles de los siguientes factores consideraste para emplazar tu proyecto?",
+        "options": [
+          {
+            "text": "Recorrido del sol",
+            "value": 1
+          },
+          {
+            "text": "Impacto de vientos",
+            "value": 1
+          },
+          {
+            "text": "Análisis de flora y vegetación endémica",
+            "value": 1
+          },
+          {
+            "text": "Análisis de fauna silvestres y domésticas",
+            "value": 1
+          },
+          {
+            "text": "Procesos hídricos de lluvias",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo se identifica a la fauna nativa en el diseño del proyecto?",
+        "options": [
+          {
+            "text": "No se identifica",
+            "value": 0
+          },
+          {
+            "text": "Se evalúa el estado de fauna domestica presente en el contexto",
+            "value": 1
+          },
+          {
+            "text": "Se evalúa el estado de fauna silvestre presente en el contexto",
+            "value": 1
+          },
+          {
+            "text": "Se evalua el proceso de migración de fauna estacionaria en el contexto",
+            "value": 1
+          },
+          {
+            "text": "Se evalúa el estado de los ecosistemas circundantes",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo contempla tu proyecto la regeneración del ecosistema impactado?",
+        "options": [
+          {
+            "text": "No lo conotempla",
+            "value": 0
+          },
+          {
+            "text": "Empleando vegetación endémica y nativa de la zona",
+            "value": 2
+          },
+          {
+            "text": "Aplicando técnicas de almacenamiento de agua como generador de microclimas/ecosistemas como: espejos de agua, estanques, etc.",
+            "value": 2
+          },
+          {
+            "text": "Utilizando técnicas de manejo de residuos para aminorar el impacto del proyecto en el ecosistema",
+            "value": 3
+          },
+          {
+            "text": "Mediante un manejo eficiente de residuos orgánicos, para la regeneración del suelo y vegetación",
+            "value": 3
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿La existencia de que bioindicadores has detectado en el contexto del proyecto ?",
+        "options": [
+          {
+            "text": "No se que es un bioindicador",
+            "value": 0
+          },
+          {
+            "text": "No se ha identificado ningún bioindicador",
+            "value": 1
+          },
+          {
+            "text": "Fauna y flora doméstica",
+            "value": 1
+          },
+          {
+            "text": "Fauna y flora silvestre",
+            "value": 1
+          },
+          {
+            "text": "Migración de especies externas al contexto",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera integra tu proyecto, las diferentes condicionantes climaticas y geograficas del sitio ?",
+        "options": [
+          {
+            "text": "No se integra",
+            "value": 0
+          },
+          {
+            "text": "El diseño del proyecto, evalúa las vialidades e infraestructura urbana en la zona circundante",
+            "value": 1
+          },
+          {
+            "text": "El programa arquitectónico se adapta a las condiciones geográficas del sitio como clima, topografía, etc.",
+            "value": 1
+          },
+          {
+            "text": "Se evalúan la infraestructura y servicios en el sitio así como la carencia de estos, en el diseño del proyecto",
+            "value": 1
+          },
+          {
+            "text": "El diseño se adapta al tipo de suelo y/o al tipo de vegetación pre-existente",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿ Cómo se plantean las diferentes zonas de re infiltración en tu proyecto?",
+        "options": [
+          {
+            "text": "No se contemplan",
+            "value": 0
+          },
+          {
+            "text": "Se contemplan algunas áreas verdes para reinfiltración del agua",
+            "value": 1
+          },
+          {
+            "text": "Se contemplan grandes áreas verdes para reinfiltración del agua",
+            "value": 1
+          },
+          {
+            "text": "Aprovechando las descargas de agua del proyecto  para infiltración",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Qué vulnerabilidades en temas de precipitación has detectado en tu proyecto ?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "La carencia de precipitación representa un riesgo potencial de sequías en la zona",
+            "value": 1
+          },
+          {
+            "text": "La precipitación es escasa en la zona, se deberá plantear medios alternos para autosuficiencia hídrica",
+            "value": 1
+          },
+          {
+            "text": "La precipitación representa un riesgo de inundación alto en el sitio",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿ Cómo se planea utilizar la precipitación del sitio como ventaja para tu proyecto?",
+        "options": [
+          {
+            "text": "No se planea",
+            "value": 0
+          },
+          {
+            "text": "Se planea utilizar sistemas de captación de agua pluvial, como complemento a la captación de la red local",
+            "value": 1
+          },
+          {
+            "text": "En sistemas de captación para riego de áreas verdes y reinfiltración",
+            "value": 1
+          },
+          {
+            "text": "En sistemas de aseo y ventilación en el proyecto",
+            "value": 1
+          },
+          {
+            "text": "Se planea utilizar sistemas de captación de agua pluvial, para una total autonomía hídrica",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Qué factores del desarrollo del proyecto generan una mayor huella de carbono?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Los materiales empleados",
+            "value": 1
+          },
+          {
+            "text": "El gasto energético en cuanto a ventilación y calefacción",
+            "value": 1
+          },
+          {
+            "text": "Gasto energético en cuanto a iluminación",
+            "value": 1
+          },
+          {
+            "text": "Emisión de CO2 por transportes, para acceder al proyecto",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera tu proyecto reduce o mitiga las emisiones de CO 2 en el entorno?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "Utilización de materiales locales",
+            "value": 1
+          },
+          {
+            "text": "Procurando un comportamiento térmico óptimo mediante estrategias pasivas",
+            "value": 1
+          },
+          {
+            "text": "Mediante un programa de recuperación de ecosistemas",
+            "value": 1
+          },
+          {
+            "text": "Análisis de ubicación y vialidades para aminorar las emisiones por transporte",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera tu proyecto mitiga el impacto hídrico producido en el contexto, una vez finalizado el proceso de construcción?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Cuerpos de agua y estanques que refuercen la sensorialidad del proyecto mediante la generación de ecosistemas",
+            "value": 1
+          },
+          {
+            "text": "Áreas de infiltración para alimentar los mantos acuíferos",
+            "value": 1
+          },
+          {
+            "text": "Mediante la elección de muebles de baño ahorradores de agua",
+            "value": 1
+          },
+          {
+            "text": "Con la optimización del uso de agua en los usuarios",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera se sustenta el gasto hídrico del proyecto ?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "Sistema convencional de red de agua local",
+            "value": 1
+          },
+          {
+            "text": "Sistemas alternos de abastecimiento de agua como pozos o canales",
+            "value": 1
+          },
+          {
+            "text": "Sistemas de captación y reutilización de agua pluvial",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué beneficios en materia de salud podría traer tu edificación al contexto directo?",
+        "options": [
+          {
+            "text": "Ninguno",
+            "value": 0
+          },
+          {
+            "text": "Mejorando la calidad del aire, mediante reforestación de áreas verdes",
+            "value": 1
+          },
+          {
+            "text": "Mejorando la salud emocional y física de las personas, mediante la propia tipología del proyecto (hospitales, clínicas, centros de salud, etc.)",
+            "value": 1
+          },
+          {
+            "text": "Mejorando la salud emocional, física y psicológica de la persona mediante espacios mejor diseñados para el usuario",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué beneficios en materia de salud podría traer tu edificación al contexto directo?",
+        "options": [
+          {
+            "text": "Ninguno",
+            "value": 0
+          },
+          {
+            "text": "Mejorando la calidad del aire, mediante reforestación de áreas verdes",
+            "value": 1
+          },
+          {
+            "text": "Mejorando la salud emocional y física de las personas, mediante la propia tipología del proyecto (hospitales, clínicas, centros de salud, etc.)",
+            "value": 1
+          },
+          {
+            "text": "Mejorando la salud emocional, física y psicológica de la persona mediante espacios mejor diseñados para el usuario",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ De qué manera impacta la selección de materiales de tu edificio al usuario?",
+        "options": [
+          {
+            "text": "No lo sé",
+            "value": 0
+          },
+          {
+            "text": "La elección de materiales es indiferente",
+            "value": 1
+          },
+          {
+            "text": "Mediante un comportamiento térmico óptimo en el interior del proyecto",
+            "value": 1
+          },
+          {
+            "text": "Generando una sensibilidad acorde al concepto y tipo de proyecto ( Los materiales generan una atmósfera agradable para el usuario )",
+            "value": 1
+          },
+          {
+            "text": "Tiene un gran impacto positivo, sigue un gran proceso de diseño que mejora las condiciones climáticas, físicas y sensoriales",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué oportunidades en el contexto atiende tu proyecto ?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "El proyecto atiende la carencia de espacios verdes y de servicios públicos en el contexto",
+            "value": 1
+          },
+          {
+            "text": "El proyecto atiende la carencia de espacios culturales en el contexto",
+            "value": 1
+          },
+          {
+            "text": "El proyecto brinda espacios de conexión y comunicación entre comunidades",
+            "value": 1
+          },
+          {
+            "text": "El proyecto brinda espacios de producción y comercio justo en el sitio",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ Cómo se promueve tu proyecto un desarrollo de la comunidad a través del comercio justo ?",
+        "options": [
+          {
+            "text": "No lo promueve",
+            "value": 0
+          },
+          {
+            "text": "Elección de mano de obra y materiales locales",
+            "value": 1
+          },
+          {
+            "text": "El proyecto plantea espacios de producción agrícola fortaleciendo la economía local",
+            "value": 1
+          },
+          {
+            "text": "El proyecto plantea espacios de producción artesanal fortaleciendo la economía local",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué factores ha considerado tu proyecto para estar preparado ante las condiciones cambiantes del clima?",
+        "options": [
+          {
+            "text": "No se han considerado",
+            "value": 0
+          },
+          {
+            "text": "Modificaciones en el índice pluvial en la zona (inundaciones, sequias)",
+            "value": 1
+          },
+          {
+            "text": "Aumento  o disminución de temperaturas. Condicione atípicas.",
+            "value": 1
+          },
+          {
+            "text": "Alteración en el índice de fauna y flora local (Perdida de la flora y fauna nativa, etc.)",
+            "value": 1
+          },
+          {
+            "text": "Alteración en la disponibilidad hídrica (pozos y cuerpos de agua próximos)",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué vulnerabilidades presenta tu proyecto con relación a fenómenos naturales?",
+        "options": [
+          {
+            "text": "No se han considerado los riesgos de fenómenos en el sitio",
+            "value": 0
+          },
+          {
+            "text": "Se consideran elementos geológicos pues el proyecto se encuentra en una zona sísmica de alta actividad",
+            "value": 1
+          },
+          {
+            "text": "El proyecto considera los impactos relacionados a los desastres naturales como huracanes e inundaciones",
+            "value": 1
+          },
+          {
+            "text": "El proyecto considera los impactos relacionados a los  de una zona volcánica activa",
+            "value": 1
+          },
+          {
+            "text": "El proyecto  considera los impactos de estrés hidrico por estar en una zona de falta de agua.",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué infraestructuras y medios de producción energética están disponibles en el sitio ?",
+        "options": [
+          {
+            "text": "Red eléctrica convencional",
+            "value": 1
+          },
+          {
+            "text": "Instalaciones de paneles solares",
+            "value": 1
+          },
+          {
+            "text": "Parques eólicos terrestres",
+            "value": 1
+          },
+          {
+            "text": "Presas o turbinas hidráulicas",
+            "value": 1
+          },
+          {
+            "text": "Otros",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Tu proyecto respeta el carácter visual y espacial del contexto?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "A través de elementos de diseño propios de la región",
+            "value": 2
+          },
+          {
+            "text": "Mediante técnicas constructivas y materiales producidos en la zona",
+            "value": 2
+          },
+          {
+            "text": "El proyecto en si esta destinado a la expresión cultural de la zona",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Tu proyecto toma en cuenta las vulnerabilidades de sectores de la población de la zona de emplazamiento?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Adultos mayores",
+            "value": 1
+          },
+          {
+            "text": "Violencia de Género",
+            "value": 1
+          },
+          {
+            "text": "Grupos indígenas",
+            "value": 1
+          },
+          {
+            "text": "Personas con capacidades diferentes",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ Cómo tu proyecto favorece o invita a la ciudadanía a participar en las actividades sociales de la zona?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Involucra a los vecinos a la toma de desiciones para el proyecto",
+            "value": 1
+          },
+          {
+            "text": "Hace consenso para saber que es lo que la comunidad necesita",
+            "value": 1
+          },
+          {
+            "text": "Preguntó sobre el plan de desarrollo del ayuntamiento para ir acorde con lo planeado",
+            "value": 1
+          },
+          {
+            "text": "Promueve la votación y participación de Organizaciones Civiles para mejorar el proyecto diseñado",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "description": "(3°-4° semestre) Mide si conoces y tomaste en cuenta los factores ambientales y sociales básicos en el análisis de tu proyecto."
+  },
+  {
+    "_id": "6a2775a122611ab57aae36d1",
+    "name": "Arquitectura Nivel 2",
+    "career": "Arquitectura",
+    "questions": [
+      {
+        "category": "Ambiental",
+        "text": "En tu análisis de sitio, ¿cuáles de los siguientes factores consideraste para emplazar tu proyecto?",
+        "options": [
+          {
+            "text": "Recorrido del sol por estaciones para ahorro lumínico y de consumo de calefacción o aire acondicionado",
+            "value": 1
+          },
+          {
+            "text": "Dirección, velocidad, y temporalidades de vientos",
+            "value": 1
+          },
+          {
+            "text": "Análisis estacional de flora y vegetación endémica, con análisis de suelo",
+            "value": 1
+          },
+          {
+            "text": "Análisis estacional de fauna silvestre con procesos de migración",
+            "value": 1
+          },
+          {
+            "text": "Estimación estacional de lluvias para re uso y filtración a mantos freáticos",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera integral la fauna del contexto a tu proyecto ?",
+        "options": [
+          {
+            "text": "No la integra",
+            "value": 0
+          },
+          {
+            "text": "Con un impacto mínimo a las áreas verdes preexistentes",
+            "value": 1
+          },
+          {
+            "text": "Dotando al proyecto de un mayor número de áreas verdes a las preexistentes, buscando la regeneración de ecosistemas",
+            "value": 1
+          },
+          {
+            "text": "Aprovechándola como atractivo sensorial en distintas zonas del proyecto como: Paseos de fauna, Áreas de recreación con fauna doméstica, etc.",
+            "value": 1
+          },
+          {
+            "text": "Mediante espacios, mobiliario y/o infraestructuras dedicadas a la preservación de la fauna como:",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo contempla tu proyecto la regeneración del ecosistema impactado?",
+        "options": [
+          {
+            "text": "No lo conotempla",
+            "value": 0
+          },
+          {
+            "text": "Empleando vegetación endémica y nativa de la zona",
+            "value": 1
+          },
+          {
+            "text": "Aplicando técnicas de almacenamiento de agua como generador de microclimas/ecosistemas como: espejos de agua, estanques, etc.",
+            "value": 1
+          },
+          {
+            "text": "Utilizando técnicas de manejo de residuos para aminorar el impacto del proyecto en el ecosistema",
+            "value": 1
+          },
+          {
+            "text": "Mediante un manejo eficiente de residuos orgánicos, para la regeneración del suelo y vegetación",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo empleas los bioindicadores en tu proyecto?",
+        "options": [
+          {
+            "text": "No se emplean",
+            "value": 0
+          },
+          {
+            "text": "En Áreas Verdes, para analizar el estado de la vegetación",
+            "value": 1
+          },
+          {
+            "text": "Analizando el comportamiento de la fauna, para analizar el ambiente generado por el proyecto en abiertas y/o públicas",
+            "value": 1
+          },
+          {
+            "text": "Analizando las condiciones de los cuerpos de agua circundantes y propios del proyecto",
+            "value": 1
+          },
+          {
+            "text": "Empleandolo en zonas de producción que existen en tu proyecto",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera se integran las diferentes condicionantes geográficas del sitio en el diseño del proyecto ?",
+        "options": [
+          {
+            "text": "No las integra :(",
+            "value": 0
+          },
+          {
+            "text": "Mediante la adaptación del proyecto a su topografía",
+            "value": 1
+          },
+          {
+            "text": "Mediante la adaptación a infraestructuras preexistentes en el sitio",
+            "value": 1
+          },
+          {
+            "text": "Adaptación al tipo de suelo y la vegetación pre-existente",
+            "value": 1
+          },
+          {
+            "text": "Mediante la adaptación a los cuerpos hídricos nativos del sitio",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Qué vulnerabilidades en temas de precipitación has detectado en tu proyecto  a nivel urbano ?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Escasez de cuerpos de agua para abastecimiento local",
+            "value": 1
+          },
+          {
+            "text": "Falta de infraestructura para captación y uso de agua pluvial",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Como planteas las zonas de infiltración de tu proyecto?",
+        "options": [
+          {
+            "text": "Mi proyecto no cuenta con zonas de infiltración",
+            "value": 0
+          },
+          {
+            "text": "Se contemplan algunas áreas verdes para reinfiltración del agua",
+            "value": 1
+          },
+          {
+            "text": "Se plantean extensas zonas de reinfiltración en las áreas verdes del proyecto",
+            "value": 1
+          },
+          {
+            "text": "Aprovechando las descargas de agua del proyecto  para infiltración",
+            "value": 1
+          },
+          {
+            "text": "Como complemento del sistema de captación pluvial planteado para el proyecto",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Conoces cual es la precipitación anual de la zona y su relación contexto-proyecto?",
+        "options": [
+          {
+            "text": "La he tomado en cuenta para proceso de diseño del proyecto",
+            "value": 1
+          },
+          {
+            "text": "La he tomado en cuenta parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No la he considerado",
+            "value": 1
+          },
+          {
+            "text": "Es indiferente",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Qué estrategias emplea tu proyecto para reducir la huella de carbono durante el proceso de desarrollo ?",
+        "options": [
+          {
+            "text": "No lo he considerado",
+            "value": 0
+          },
+          {
+            "text": "Selección de materiales de bajo impacto en la huella de carbono en su producción",
+            "value": 1
+          },
+          {
+            "text": "Selección de métodos constructivos eficientes y de carácter local",
+            "value": 1
+          },
+          {
+            "text": "Gasto energético durante el proceso de diseño a través de dispositivos electrónicos, así como basura producida",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera tu proyecto reduce o mitiga las emisiones de CO 2 en el entorno?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "Utilización de materiales locales",
+            "value": 1
+          },
+          {
+            "text": "Procurando un comportamiento térmico óptimo mediante estrategias pasivas",
+            "value": 1
+          },
+          {
+            "text": "Mediante un programa de recuperación de ecosistemas",
+            "value": 1
+          },
+          {
+            "text": "Análisis de ubicación y vialidades para aminorar las emisiones por transporte",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera tu proyecto mitiga el impacto hídrico producido en el contexto, una vez finalizado el proceso de construcción?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Cuerpos de agua y estanques que refuercen la sensorialidad del proyecto mediante la generación de ecosistemas",
+            "value": 1
+          },
+          {
+            "text": "Áreas de infiltración para alimentar los mantos acuíferos",
+            "value": 1
+          },
+          {
+            "text": "Mediante la elección de muebles de baño ahorradores de agua",
+            "value": 1
+          },
+          {
+            "text": "Con la optimización del uso de agua en los usuarios",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera se sustenta el gasto hídrico del proyecto ?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "Sistema convencional de red de agua local",
+            "value": 1
+          },
+          {
+            "text": "Sistemas alternos de abastecimiento de agua como pozos o canales",
+            "value": 1
+          },
+          {
+            "text": "Sistemas de captación y reutilización de agua pluvial",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿ De qué manera la construcción de tus proyectos se relaciona con la salud del entorno?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Considero elección de materiales locales y de bajo impacto en su elaboración",
+            "value": 1
+          },
+          {
+            "text": "Considero elección de materiales locales y de bajo impacto en su método constructivo",
+            "value": 1
+          },
+          {
+            "text": "El diseño del proyecto tiene un bajo impacto en el subsuelo del sitio y sus componentes",
+            "value": 1
+          },
+          {
+            "text": "El proyecto tiene un manejo eficiente de emisiones hídricas y orgánicas, reduciendo su impacto en el ecosistema",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué beneficios en materia de salud podría traer tu edificación al contexto directo?",
+        "options": [
+          {
+            "text": "Ninguno",
+            "value": 0
+          },
+          {
+            "text": "Mejorando la calidad del aire, mediante reforestación de áreas verdes",
+            "value": 1
+          },
+          {
+            "text": "Mejorando la salud emocional y física de las personas, mediante la propia tipología del proyecto (hospitales, clínicas, centros de salud, etc.)",
+            "value": 1
+          },
+          {
+            "text": "Mejorando la salud emocional, física y psicológica de la persona mediante espacios mejor diseñados para el usuario",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ De qué manera impacta la selección de materiales de tu edificio al usuario?",
+        "options": [
+          {
+            "text": "No lo sé",
+            "value": 0
+          },
+          {
+            "text": "La elección de materiales es indiferente",
+            "value": 1
+          },
+          {
+            "text": "Mediante un comportamiento térmico óptimo en el interior del proyecto",
+            "value": 1
+          },
+          {
+            "text": "Generando una sensibilidad acorde al concepto y tipo de proyecto ( Los materiales generan una atmósfera agradable para el usuario )",
+            "value": 1
+          },
+          {
+            "text": "Tiene un gran impacto positivo, sigue un gran proceso de diseño que mejora las condiciones climáticas, físicas y sensoriales",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿De qué manera tu proyecto, genera un valor agregado en el contexto a nivel urbano?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "Mediante la recuperación de espacios en deterioro",
+            "value": 1
+          },
+          {
+            "text": "Contemplando la generación de espacios públicos integrados al proyecto",
+            "value": 1
+          },
+          {
+            "text": "El proyecto contempla la generación de desarrollos de vivienda y comercio en el sitio",
+            "value": 1
+          },
+          {
+            "text": "Genera alguna red de transporte público y mejora la conexión a nivel urbano",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ Cómo se promueve tu proyecto un desarrollo de la comunidad a través del comercio justo ?",
+        "options": [
+          {
+            "text": "No lo promueve",
+            "value": 0
+          },
+          {
+            "text": "Elección de mano de obra y materiales locales",
+            "value": 1
+          },
+          {
+            "text": "El proyecto plantea espacios de producción agrícola fortaleciendo la economía local",
+            "value": 1
+          },
+          {
+            "text": "El proyecto plantea espacios de producción artesanal fortaleciendo la economía local",
+            "value": 1
+          },
+          {
+            "text": "El proyecto genera un ambiente de equidad en la comunidad",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Considerando las cambiantes climáticas actuales, como va a responder tu edificio ante estos futuros retos?",
+        "options": [
+          {
+            "text": "No responde a las cambiantes climáticas",
+            "value": 0
+          },
+          {
+            "text": "Empleando de materiales de baja huella de carbono de alta adaptabilidad al cambio climático",
+            "value": 1
+          },
+          {
+            "text": "Empleando la vegetación como estrategia de protección contra los elementos climáticos como viento, luz solar y precipitación",
+            "value": 1
+          },
+          {
+            "text": "Generando un equilibrio térmico a través del diseño y materialidad del proyecto. Para reducir consumo energético.",
+            "value": 1
+          },
+          {
+            "text": "Incluyendo enotecnias y tecnologías para\nsuministrar agua, alimentos, energía en condiciones de escasez",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿De qué manera responde tu proyecto a los fenómenos naturales comunes en la zona?",
+        "options": [
+          {
+            "text": "No se han considerado los riesgos de fenómenos en el sitio",
+            "value": 0
+          },
+          {
+            "text": "El proyecto responde al riesgo de inundación del sitio mediante el diseño de niveles de piso y el uso de barreras naturales",
+            "value": 1
+          },
+          {
+            "text": "El diseño del proyecto reduce el impacto directo de los vientos dominantes mediante barreras naturales y artificiales",
+            "value": 1
+          },
+          {
+            "text": "El diseño del proyecto provee flexibilidad al uso de espacios, respondiendo a los estados de emergencia en caso de fenómenos naturales",
+            "value": 1
+          },
+          {
+            "text": "Generando un ciclo para producción de recursos propios como: agua, luz, alimentos, energía.",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Cómo se re resuelve el abastecimiento energético de tu proyecto?",
+        "options": [
+          {
+            "text": "Depende totalmente de la red de abastecimiento local",
+            "value": 1
+          },
+          {
+            "text": "Se abastece parcialmente con energías renovables como: Paneles solares, Turbinas eólicas, etc.",
+            "value": 1
+          },
+          {
+            "text": "El proyecto aminora el gasto energético mediante su orientación, diseño y uso de  materiales",
+            "value": 1
+          },
+          {
+            "text": "Se abastece totalmente con energías renovables",
+            "value": 1
+          },
+          {
+            "text": "El  proyecto, produce y devuelve energía a la comunidad a través de métodos sustentables",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Tu proyecto respeta el carácter visual y espacial del contexto?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "A través de elementos de diseño propios de la región",
+            "value": 1
+          },
+          {
+            "text": "Mediante técnicas constructivas y materiales producidos en la zona",
+            "value": 1
+          },
+          {
+            "text": "El proyecto en si esta destinado a la expresión cultural de la zona",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ Considera tu proyecto la inclusión de sectores vulnerables de la población, con el fin de generar un cambio positivo en sus vidas?",
+        "options": [
+          {
+            "text": "No los considera",
+            "value": 0
+          },
+          {
+            "text": "El proyecto atiende las limitaciones de movilidad de personas con capacidades diferentes  a través del diseño de vialidades y mobiliario urbano",
+            "value": 1
+          },
+          {
+            "text": "El proyecto genera espacios de convivencia para promover la integración social de manera accesible para todos en la comunidad",
+            "value": 1
+          },
+          {
+            "text": "El  proyecto genera espacios promueve y genera oportunidades de crecimiento económico en sectores vulnerables económicamente",
+            "value": 1
+          },
+          {
+            "text": "El proyecto favorece una convivencia con la naturaleza y el entorno saludable, espacios al aire libre donde las personas mejoren su salud (ej,hacer ejercicio, cultivar sus alimentos)",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Cómo se involucra la comunidad en el desarrollo del proyecto ?",
+        "options": [
+          {
+            "text": "La comunidad no se ve involucrada",
+            "value": 0
+          },
+          {
+            "text": "Participa en una etapa inicial del diseño del proyecto",
+            "value": 1
+          },
+          {
+            "text": "La comunidad participa en el proceso de construcción del proyecto",
+            "value": 1
+          },
+          {
+            "text": "El proyecto integra la o las principales actividades económicas de la zona",
+            "value": 1
+          },
+          {
+            "text": "La comunidad participa en el mantenimiento del proyecto y sus ecosistemas circundantes",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿De qué manera tu proyecto genera valor ambiental en el entorno?",
+        "options": [
+          {
+            "text": "No genera valor ambiental",
+            "value": 0
+          },
+          {
+            "text": "El proyecto rescata espacios en deterioro, reintegrandose al tejido social",
+            "value": 1
+          },
+          {
+            "text": "El proyecto se vincula con la renovación de vialidades y espacio público",
+            "value": 1
+          },
+          {
+            "text": "Fomenta la implementación de ecotecnias a una escala doméstica y urbana en la comunidad",
+            "value": 1
+          },
+          {
+            "text": "Fomenta la participación social para regenerar los ecosistemas de la zona",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "description": "(5°-6° semestre) Mide cómo integras estrategias de sostenibilidad en el diseño y desarrollo de tu proyecto."
+  },
+  {
+    "_id": "6a2775a322611ab57aae36d4",
+    "name": "Arquitectura Nivel 3",
+    "career": "Arquitectura",
+    "questions": [
+      {
+        "category": "Ambiental",
+        "text": "¿A qué factores de impacto de biodiversidad está respodiendo tu proyecto de forma resiliente?",
+        "options": [
+          {
+            "text": "Responde al cambio climático e la zona, posibles sequías, tormentas solares y olas de calor",
+            "value": 1
+          },
+          {
+            "text": "Responde y es resiliente ante huracanes, tormentas eléctricas, temporales y grandes tempestades",
+            "value": 1
+          },
+          {
+            "text": "Responde y es resiliente a la deforestación, de reconstrucción de su hábitat y genera valor en el mismo",
+            "value": 1
+          },
+          {
+            "text": "Responde y es resiliente a la migración de las especies, de reconstrucción del hábitat en especies terrestres y marinas",
+            "value": 1
+          },
+          {
+            "text": "Ayuda a restaurar cuencas donde se emplaza, al tiempo que crear microclimas que ayudan a restaurar el medio ambiente",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De que manera integras la fauna del contexto a tu proyecto ?",
+        "options": [
+          {
+            "text": "No la integra",
+            "value": 0
+          },
+          {
+            "text": "El proyecto permite el acceso a la fauna domestica",
+            "value": 1
+          },
+          {
+            "text": "El proyecto plantea zonas de recreación y cuidado de la fauna domestica",
+            "value": 1
+          },
+          {
+            "text": "El proyecto genera zonas destinadas al paso y preservación de fauna aerea",
+            "value": 1
+          },
+          {
+            "text": "El proyecto genera zonas destinadas a la preservación de fauna marina",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo plantea tu proyecto el mantenimiento de los ecosistemas regeneradoss?",
+        "options": [
+          {
+            "text": "No se plantea la regeneración de ecosistemas",
+            "value": 0
+          },
+          {
+            "text": "No se plantea ningun sistema de mantenimiento",
+            "value": 1
+          },
+          {
+            "text": "Los ecosistemas regenerados fungen como espacio público o semi publico, involucrando a la comunidad en su preservación y mantenimiento",
+            "value": 1
+          },
+          {
+            "text": "Mediante el uso de ecotecnias para gestionar las emisiones de resiudos orgánicos e hídricos del proyecto",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera establece tu proyecto un sistema de seguimiento  y preservación de bioindicadores ?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Se planteará un sistema de regeneración de los cuerpos de agua con relación al ecosistema regenerado",
+            "value": 1
+          },
+          {
+            "text": "Se generan ecosistemas destinados a especies externas a la zona para seguimiento de su migración",
+            "value": 1
+          },
+          {
+            "text": "Se genera un plan de rescate para la regeneración de ecosistemas con relación indirecta o externa a la zona de emplazamiento",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera integra tu proyecto, las diferentes condicionantes climaticas y geograficas del sitio ?",
+        "options": [
+          {
+            "text": "No se integra",
+            "value": 0
+          },
+          {
+            "text": "El diseño del proyecto, evalua las vialidades e infraestructura urbana en la zona circundante",
+            "value": 1
+          },
+          {
+            "text": "El programa arquitectónico se adapta a las condiciones geograficas del sitio como clima, topografia, etc.",
+            "value": 1
+          },
+          {
+            "text": "Se evaluan la infraestructura y servicios en el sitio así como la carencia de estos, en el diseño del proyecto",
+            "value": 1
+          },
+          {
+            "text": "El diseño se adapta al tipo de suelo y/o al tipo de vegetación pre-existente",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De qué manera tu proyecto detona el desarrollo de estrategias de infiltración en las zona?",
+        "options": [
+          {
+            "text": "El proyecto no plantea zonas de re infiltración",
+            "value": 0
+          },
+          {
+            "text": "Se consideran zonas de infiltración unicamente en áreas propias del proyecto",
+            "value": 1
+          },
+          {
+            "text": "El proyecto aplicará estrategias de reinfiltración en las areas verdes pre existentes, circundantes",
+            "value": 1
+          },
+          {
+            "text": "El proyecto aplica estrategias de infiltración en zonas de transito peatonal para reducir el riesgo de inundación en las vialidades",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo responde tu proyecto detona el desarrollo de estrategias de manejo de aguas a nivel urbano?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "El proyecto aplica estrategias de manejo de agua pluvial para aminorar el riesgo de inundación del sito",
+            "value": 1
+          },
+          {
+            "text": "El proyecto integrara tecnologías de tratamiento de agua para aminorar el impacto por aguas negras y aguas grises",
+            "value": 1
+          },
+          {
+            "text": "El proyecto integra espacios de abastecimiento de agua pluvial para el mantenimiento de espacios públicos",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo mitiga tu proyecto sus emisiones de CO2 una vez finalizada la construcción ?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "El proyecto emplea estrategias pasivas para eliminar las emisiones por sistemas de calefacción y/o enfriamiento",
+            "value": 1
+          },
+          {
+            "text": "El proyecto emplea tecnologías para gestionar y reducir las emisiones de CO 2 generadas durante el día",
+            "value": 1
+          },
+          {
+            "text": "El proyecto genera nuevas zonas verdes como áreas de absorción de CO2",
+            "value": 1
+          },
+          {
+            "text": "El proyecto emplea tecnología de materiales para absorción del CO 2 presente en la atmosfera",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Se contempla un programa futuro para mitigación de emisiones de CO2 en zonas externas al proyecto?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "El proyecto emplea estrategias pasivas para eliminar las emisiones por sistemas de calefacción y/o enfriamiento",
+            "value": 1
+          },
+          {
+            "text": "Se generaran áreas verdes públicas como jardines de absorción",
+            "value": 1
+          },
+          {
+            "text": "El proyecto propondrá un plan de regulación de diseño en la zona de emplazamiento (áreas verdes, metodos de construcción, etc.)",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Plantea tu proyecto un programa de mantenimiento para sus fuentes de abastecimiento hídrico?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "El proyecto aplica tecnologías de filtración de aguas en los cuerpos cercanos al emplazamiento",
+            "value": 1
+          },
+          {
+            "text": "El proyecto aplica tecnologías de filtración de aguas en los cuerpos menos cercanos al emplazamiento",
+            "value": 1
+          },
+          {
+            "text": "La tipología del proyecto genera espacios públicos, culturales o educativos dedicados a la preservación de cuerpos de agua",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿De que manera tu proyecto mitiga el impacto hídrico producido en el contexto, una vez finalizado el proceso de construcción?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Cuerpos de agua y estanques que refuerzen la sensorialidad del proyecto mediante la generación de ecosistemas",
+            "value": 1
+          },
+          {
+            "text": "Áreas de infiltración para alimentar los mantos acuíferos",
+            "value": 1
+          },
+          {
+            "text": "Mediante la elección de muebles de baño ahorradores de agua",
+            "value": 1
+          },
+          {
+            "text": "Con la obtimización del uso de agua en los usuarios",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿ De que manera la construcción de tus proyectos se relaciona con la salud del entorno?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Considero elección de materiales locales y de bajo impacto en su elaboración",
+            "value": 1
+          },
+          {
+            "text": "Considero elección de materiales locales y de bajo impacto en su método constructivo",
+            "value": 1
+          },
+          {
+            "text": "El diseño del proyecto tiene un bajo impacto en el subsuelo del sitio y sus componentes",
+            "value": 1
+          },
+          {
+            "text": "El proyecto tiene un manejo eficiente de emisiones hídricas y orgánicas, reduciendo su impacto en el ecosistema",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué beneficios en materia de salud podría traer tu edificación al contexto directo?",
+        "options": [
+          {
+            "text": "Ninguno",
+            "value": 0
+          },
+          {
+            "text": "Mejorando la calidad del aire, mediante reforestación de áreas verdes",
+            "value": 1
+          },
+          {
+            "text": "Mejorando la salud emocional y física de las personas, mediante la propia tipología del proyecto (hospitales, clinicas, centros de salud, etc.)",
+            "value": 1
+          },
+          {
+            "text": "Mejorando la salud emocional, física y psicológica de la persona mediante espacios mejor diseñados para el usuario",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Cómo se relaciona la composición química de los materiales seleccionados a los recusos geográficos del sitio?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "Los materiales se componen en su totalidad de elementos externos a la zona de emplazamiento",
+            "value": 1
+          },
+          {
+            "text": "Los materiales se componen parcialmente de elementos naturales de la zona de emplazamiento",
+            "value": 1
+          },
+          {
+            "text": "Los mateiales se componen totalmente de elementos naturales de la zona de emplazamiento",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Cómo genera tu proyecto un valor agregado en el contexto?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "El proyecto atiende la carencia de espacios verdes y de servicios públicos en el contexto",
+            "value": 1
+          },
+          {
+            "text": "El proyecto atiende la carencia de espacios culturales en el contexto",
+            "value": 1
+          },
+          {
+            "text": "El proyecto brinda espacios de conexion y comunicación entre comunidades",
+            "value": 1
+          },
+          {
+            "text": "El proyecto brinda espacios de producción y comercio justo en el sitio",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ Cómo se promueve tu proyecto un desarrollo de la comunidad a traves del comercio justo ?",
+        "options": [
+          {
+            "text": "No lo promueve",
+            "value": 0
+          },
+          {
+            "text": "Elección de mano de obra y materiales locales",
+            "value": 1
+          },
+          {
+            "text": "El proyecto plantea espacios de producción agricola fortaleciendo la economía local",
+            "value": 1
+          },
+          {
+            "text": "El proyecto plantea espacios de producción artesanal fortaleciendo la economía local",
+            "value": 1
+          },
+          {
+            "text": "El proyecto genera un ambiente de equidad en la comunidad",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como promueve tu proyecto un estado de resiliencia en la comunidad?",
+        "options": [
+          {
+            "text": "No se ha considerado",
+            "value": 0
+          },
+          {
+            "text": "El proyecto cuenta con ecotecnias que permiten un mejor aprovechamiento de recursos ante el clima del lugar",
+            "value": 1
+          },
+          {
+            "text": "El proyecto integra a los ecosistemas cercanos, como barrera y sistema de medición natural de las cambiantes climaticas",
+            "value": 1
+          },
+          {
+            "text": "El proyecto genera o se integra en un sistema de economía circular",
+            "value": 1
+          },
+          {
+            "text": "Generando espacios de producción y desarrollo económico en sectores desfavorecidos",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Aspira tu proyecto a lograr una autosuficiencia energética total  en el futuro?",
+        "options": [
+          {
+            "text": "No se considera",
+            "value": 0
+          },
+          {
+            "text": "Si a traves de infraestructura tecnológica que provea energía al proyecto",
+            "value": 1
+          },
+          {
+            "text": "Si a traves de infraestructura tecnológica que provea energía a la zona de emplazamiento",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ Considera tu edificio la inclusión de sectores vulnerables de la población, con el fin de traer un cambio positivo en sus vidas?",
+        "options": [
+          {
+            "text": "No los considera",
+            "value": 0
+          },
+          {
+            "text": "El proyecto atiende las limitantes de movilidad de personas con capacidades diferentes  a traves del diseño de vialidades y mobiliario urbano",
+            "value": 1
+          },
+          {
+            "text": "El proyecto promueve la equidad e integración social en la comunidad",
+            "value": 1
+          },
+          {
+            "text": "El desarrollo del proyecto promueve un crecimiento economico en sectores vulnerables económicamente",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Cómo se involucra la comunidad en el desarrollo del proyecto ?",
+        "options": [
+          {
+            "text": "La comunidad no se ve involucrada",
+            "value": 0
+          },
+          {
+            "text": "Participa en una etapa inicial del diseño del proyecto",
+            "value": 1
+          },
+          {
+            "text": "La comunidad participa en el proceso de construcción del proyecto",
+            "value": 1
+          },
+          {
+            "text": "El proyecto integra la o las principales actividades economicas de la zona",
+            "value": 1
+          },
+          {
+            "text": "La comunidad participa en el mantenimiento del proyecto y sus ecosistemas circundantes",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿De qué manera tu proyecto genera valor ambiental en el entorno?",
+        "options": [
+          {
+            "text": "No genera valor ambiental",
+            "value": 0
+          },
+          {
+            "text": "El proyecto rescata espacios en deterioro, reintegrandolos al tejido social",
+            "value": 1
+          },
+          {
+            "text": "El proyecto se vincula con la renovación de vialidades y espacio públlico",
+            "value": 1
+          },
+          {
+            "text": "Fomenta la implementación de ecotecnias a una escala domestica y urbana en la comunidad",
+            "value": 1
+          },
+          {
+            "text": "Fomenta la participación social para regenerar los ecosistemas de la zona",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "description": "(7°-8° semestre) Mide si tu proyecto plantea sistemas y programas de sostenibilidad a largo plazo."
+  },
+  {
+    "_id": "6a2775a422611ab57aae36d7",
+    "name": "Diseño Industrial Nivel 1",
+    "career": "Diseño Industrial",
+    "questions": [
+      {
+        "category": "Ambiental",
+        "text": "¿Tienes conocimiento del impacto que puede tener un proyecto en la biodiversidad?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Impacta tu producto directa o indirectamente la fauna local?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Tu proyecto implica considerar la regeneración de un ecosistema?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Sabes lo que es un bioindicador?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Tomas en cuenta si existe algún tipo de vulneración en el proceso de producción de tus diseños?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Conoces qué impacto tiene el gasto de CO2 en la atmósfera el proceso de tu proyecto?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Se ha considerado la mitigación de gasto de CO2 en el proyecto?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Investigaste acerca del gasto de agua en el proceso de producción?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Existen riesgos a la salud de las personas asociados a tu producto?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Se tiene considerado el impacto a la salud de los materiales a utilizar en el proyecto?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como diseñador buscas generar un valor agregado para el contexto con tus proyectos?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como diseñador consideras el tema del comercio justo?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿En el desarrollo de tus proyectos reflexionas sobre el cambio climatico?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como diseñador consideras el tema de resiliencia ante fenómenos naturales?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como diseñador consideras el tema de la autosuficiencia energética?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Tu proyecto promueve la autosuficiencia de uso del usuario?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Tu proyecto promueve la autosuficiencia de consumo del usuario?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Hubo alguna mejora en la calidad de vida de los involucrados en el proyecto?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Tu proyecto considera de alguna forma el tema de la inclusividad?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Es tu proyecto incluyente con los sectores vulnerables de la población?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como diseñador promueves el valor ambiental en el entorno?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como diseñador promueves la ciudadanía activa?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      }
+    ],
+    "description": "(3°-4° semestre) Mide tu conocimiento básico sobre impacto ambiental y sostenibilidad en el diseño de productos."
+  },
+  {
+    "_id": "6a2775a622611ab57aae36da",
+    "name": "Diseño Industrial Nivel 2",
+    "career": "Diseño Industrial",
+    "questions": [
+      {
+        "category": "Ambiental",
+        "text": "En tu análisis previo al diseño del producto, ¿Consideras factores de impacto a la diversidad tales como uso de materiales y empleo de procesos de manufactora amigables con el medio ambiente?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "En el proceso de diseño de productos ¿Acostumbras reflexionar sobre cuáles recursos renovables y no renovables será explotado por el proceso de producción de tu diseño?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Contemplas en tus proyectos y diseños la regeneración del ecosistema impactado por el uso de materiales / procesos de manufactura?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Conoces y empleas los bioindicadores en tus propuestas?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Consideras con detenimiento lo que podría ser vulnerado directa o indirectamente por el proceso de producción de tus diseños?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "Durante el desarrollo del proyecto, ¿Consideras los factores para evaluar la huella de carbono?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Consideras el concepto de huella ecológica de los procesos de manfactura que tu producto implica?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Reflexionas acerca del gasto de agua en la manufactura que tendrán tus productos?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Consideras acciones encaminadas a tener un ciclo cerrado en el ciclo de vida del producto?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿En la selección de materiales y procesos de manufactura tomas en cuenta los riesgos para la salud de las personas involucradas?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Promueves como diseñador beneficios al contexto?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Consideras como diseñador el impacto a la salud de los materiales que propones?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿De que manera tu diseño, genera un valor agregado al usuario?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Es el comercio justo un adjetivo calificativo que podrías dar a tu proyecto, desde el proceso de creación hasta el uso de este?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿El producto diseñado será el único de su tipo que el usuario necesita comprar o está pensado para ser deschable o reemplazarse frecuentemente?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como diseñador promueves la resiliencia del usuario ante fenómenos naturales?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Como diseñador promueves la autosuficiencia energética?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Contemplas una segunda vida útil para tus productos más allá de su función inicial?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Promueves como diseñador la autosuficiencia de consumo del usuario?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 4
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Promueves con tus productos el bienestar de producción?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Consideras que tus productos se adapten al tejido social local?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿ Consideras que tus productos promuevan la participación e inclusión de sectores vulnerables de la población?",
+        "options": [
+          {
+            "text": "Si",
+            "value": 5
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      }
+    ],
+    "description": "(5°-6° semestre) Mide cómo consideras la sostenibilidad en tu proceso de diseño y selección de materiales."
+  },
+  {
+    "_id": "6a2775a722611ab57aae36dd",
+    "name": "Diseño Industrial Nivel 3",
+    "career": "Diseño Industrial",
+    "questions": [
+      {
+        "category": "Ambiental",
+        "text": "En tu análisis previo al diseño del producto, ¿Cuáles de los siguientes factores consideraste?",
+        "options": [
+          {
+            "text": "Uso de materiales y procesos de manufactora amigables con el medio ambiente",
+            "value": 1
+          },
+          {
+            "text": "Uso de procesos de manufactora amigables con el medio ambiente",
+            "value": 1
+          },
+          {
+            "text": "Uso de materiales amigables con el medio ambiente",
+            "value": 1
+          },
+          {
+            "text": "Ninguno de los anteriores",
+            "value": 1
+          },
+          {
+            "text": "No hubo un análisis previo al diseño para considerar estos factores",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "Reflexiona ¿En el proceso de producción de tu diseño están siendo explotados recursos naturales no renovables?",
+        "options": [
+          {
+            "text": "No",
+            "value": 0
+          },
+          {
+            "text": "SÍ",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo contempla tu proyecto la regeneración del ecosistema impactado por el uso de materiales / procesos de manufactura?",
+        "options": [
+          {
+            "text": "Si contempla a profundidad la preocupación por la preservación de especies",
+            "value": 3
+          },
+          {
+            "text": "Si contempla en términos generales la preocupación por la preservación de especies",
+            "value": 2
+          },
+          {
+            "text": "Lo contempla a un nivel muy básico",
+            "value": 1
+          },
+          {
+            "text": "No lo contempla",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cuántos bioindicadores consideras en el diseño de tus productos?",
+        "options": [
+          {
+            "text": "De 3 a 5",
+            "value": 2
+          },
+          {
+            "text": "1 ó 2",
+            "value": 2
+          },
+          {
+            "text": "Ninguno / no conozco el concepto",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿En el proceso de producción de tu diseño se vulnerarán hábitatis, comunidades en vías de desarrollo o derechos humanos?",
+        "options": [
+          {
+            "text": "No",
+            "value": 0
+          },
+          {
+            "text": "SÍ",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "Durante el desarrollo del proyecto, ¿Consideraste la selección de materiales de bajo impacto en la huella de carbono?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 2
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "Durante el desarrollo del proyecto, ¿Consideraste la opción de gasto energético mediante dispositivos electrónicos para reducir la huella de carbono?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 2
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "Para mitigar las emisiones de CO 2 en el entorno ¿Hiciste una o más de las siguientes? 1.Análisis de ubicación vialidades para reducir emisiones por transporte. 2.Análisis de comportamiento térmico óptimo mediante estrategias pasivas. 3.Utilización de materiales locales.",
+        "options": [
+          {
+            "text": "Las tres",
+            "value": 3
+          },
+          {
+            "text": "Dos de ellas",
+            "value": 2
+          },
+          {
+            "text": "Una de ellas",
+            "value": 1
+          },
+          {
+            "text": "Ninguna de ellas",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Cómo consideras que será el gasto de agua en la manufactura de tu producto?",
+        "options": [
+          {
+            "text": "Considerablemente menor al de un producto similar promedio del mercado",
+            "value": 3
+          },
+          {
+            "text": "Menor al de un producto similar promedio del mercado",
+            "value": 2
+          },
+          {
+            "text": "Igual al de un producto similar promedio del mercado",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "category": "Ambiental",
+        "text": "¿Consideras acciones encaminadas a tener un ciclo cerrado en el ciclo de vida del producto?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 2
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿En la selección de materiales y procesos de manufactura tomas en cuenta el riesgo de salud de producción de las personas implicadas?",
+        "options": [
+          {
+            "text": "Sí",
+            "value": 2
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Qué nivel de impacto en materia de salud puede tener tu producto al contexto directo?",
+        "options": [
+          {
+            "text": "Tiene un gran impacto positivo",
+            "value": 3
+          },
+          {
+            "text": "Tiene un impacto positivo",
+            "value": 2
+          },
+          {
+            "text": "Tiene un impacto neutro",
+            "value": 1
+          },
+          {
+            "text": "Tiene un impacto negativo",
+            "value": 0
+          },
+          {
+            "text": "No lo sé",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿De que manera impacta la selección de materiales de tu producto al usuario?",
+        "options": [
+          {
+            "text": "Tiene un gran impacto positivo",
+            "value": 3
+          },
+          {
+            "text": "Tiene un impacto positivo",
+            "value": 2
+          },
+          {
+            "text": "Tiene un impacto neutro",
+            "value": 1
+          },
+          {
+            "text": "Tiene un impacto negativo",
+            "value": 0
+          },
+          {
+            "text": "No lo sé",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿De que manera tu diseño, genera un valor agregado al usuario?",
+        "options": [
+          {
+            "text": "Tiene un gran impacto positivo",
+            "value": 3
+          },
+          {
+            "text": "Tiene un impacto positivo",
+            "value": 2
+          },
+          {
+            "text": "Tiene un impacto neutro",
+            "value": 1
+          },
+          {
+            "text": "Tiene un impacto negativo",
+            "value": 0
+          },
+          {
+            "text": "No lo sé",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Es el comercio justo un adjetivo calificativo que podrías dar a tu proyecto, desde el proceso de creación hasta el uso de este?",
+        "options": [
+          {
+            "text": "Si, totalmente",
+            "value": 3
+          },
+          {
+            "text": "Si, parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿El producto diseñado será el único de su tipo que el usuario necesita comprar y/o está pensado para ser deschable o reemplazarse frecuentemente?",
+        "options": [
+          {
+            "text": "Su vida útil es larga, el usario no tendrá que reemplazarlo en el corto plazo .",
+            "value": 3
+          },
+          {
+            "text": "Su vida útil es corta, el usario tendrá que reemplazarlo en el corto plaza",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Apoya tu producto a la resiliencia del usuario ante fenómenos naturales?",
+        "options": [
+          {
+            "text": "Sí apoya directamente",
+            "value": 2
+          },
+          {
+            "text": "Apoya indirectamente",
+            "value": 1
+          },
+          {
+            "text": "No está considerado",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Promueves como diseañdor la autosuficiencia energética?",
+        "options": [
+          {
+            "text": "Si, totalmente",
+            "value": 2
+          },
+          {
+            "text": "Si, parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Tiene una segunda vida útil el producto más allá de su función inicial?",
+        "options": [
+          {
+            "text": "Si, totalmente",
+            "value": 2
+          },
+          {
+            "text": "Si, parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Apoya tu producto a la autosuficiencia de consumo del usuario?",
+        "options": [
+          {
+            "text": "Si, totalmente",
+            "value": 2
+          },
+          {
+            "text": "Si, parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Promueve tu producto el bienestar de producción?",
+        "options": [
+          {
+            "text": "Si, totalmente",
+            "value": 2
+          },
+          {
+            "text": "Si, parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Consideras que tu producto se adapta al tejido social local?",
+        "options": [
+          {
+            "text": "Sí, mediante procesos de manufactura y materiales producidos en la zona",
+            "value": 2
+          },
+          {
+            "text": "Sí, a traves de elementos de diseño propios de la región",
+            "value": 1
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Considera que tu producto promueve la participación e inclusión de sectores vulnerables de la población?",
+        "options": [
+          {
+            "text": "Si, en su mayoría",
+            "value": 2
+          },
+          {
+            "text": "Si, parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No lo he considerado",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Promueves como diseañdor el valor ambiental en el entorno de forma activa?",
+        "options": [
+          {
+            "text": "Si, totalmente",
+            "value": 2
+          },
+          {
+            "text": "Si, parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "category": "Económico y Social",
+        "text": "¿Promueves como diseñador los valores vinculados a una ciudadanía activa?",
+        "options": [
+          {
+            "text": "Si, totalmente",
+            "value": 2
+          },
+          {
+            "text": "Si, parcialmente",
+            "value": 1
+          },
+          {
+            "text": "No",
+            "value": 0
+          }
+        ]
+      }
+    ],
+    "description": "(7°-8° semestre) Mide qué tan profundo integra tu proyecto criterios de sostenibilidad en todo su ciclo de vida."
+  }
+]

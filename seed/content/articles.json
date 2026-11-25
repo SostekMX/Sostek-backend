@@ -1,0 +1,460 @@
+[
+  {
+    "_id": "6a226c484b54f546d887671c",
+    "title": "Aprendiendo sobre el cambio climático",
+    "subtitle": "¿Entendemos qué es el cambio climático?",
+    "type": "article",
+    "body": "Uno de los temas más escuchados durante los últimos años es el cambio climático, pero ¿realmente lo entendemos? ¿Sabemos cuáles son sus causas? ¿Estamos conscientes de sus efectos? En este artículo te daremos una breve explicación para que puedas entender todo sobre el cambio climático.\n\nEl mundo está rodeado por una atmósfera, la cual tiene gases de efecto invernadero (GEI). Estos gases ayudan a mantener el calor del sol dentro de la tierra y de esa manera, podemos tener vida. Sin embargo, a partir de la primera Revolución Industrial el hombre comenzó a emitir de manera excesiva estos GEI: Dióxido de Carbono, Metano, Óxido Nitroso, entre otros.\n\nLa emisión de los GEI ha ido en aumento constante durante años, por lo que el calor atrapado por la atmósfera es cada vez mayor. Así es como la temperatura promedio de la tierra ha aumentado 1°C desde la Primera Revolución Industrial. Puede parecer un número pequeño, pero las consecuencias de este cambio son enormes.\n\nA pesar de que sabemos que la emisión de gases de invernadero es la causa del cambio climático, no hemos dejado de generarlos debido a que están estrechamente ligados con todas las actividades que realizamos día a día: la electricidad, utilizar un medio de transporte con motor, la producción industrial, la producción de alimentos, el desecho de residuos, etc. Para lograr reducirlos, debemos hacer cambios en nuestra forma de consumir, producir y desechar.\n\nLas consecuencias del cambio climático son diferentes para cada región, y los países menos desarrollados serán los más afectados. Algunos de los eventos que se intensificarán por el cambio climático son: sequías, inundaciones, incendios, aumento del nivel del mar, entre otros. Como resultado, habrá grandes retos en la producción de alimentos, acceso al agua, aumentará la migración climática, etc.\n\nPor la magnitud del problema, se está actuando en conjunto a nivel global. En el 2015 se firmó el Acuerdo de París donde los países del mundo se comprometieron a realizar acciones para no superar el aumento de la temperatura media global 2°C, haciendo esfuerzos para limitarlo a 1.5°C. \n\nDentro de los planes para enfrentar el cambio climático, se encuentran las estrategias de mitigación y adaptación. La primera, mitigación, se refiere a las acciones que ayudan a reducir la cantidad de gases de efecto invernadero que llegan a la atmósfera. Y la segunda, adaptación, se refiere a las medidas que se van a tomar ante los ya inevitables efectos del cambio climático para que reduzcan el impacto.\n\nEl cambio climático es un problema enorme y bastante complejo, por lo que se requieren soluciones desde todos los sectores para que podamos garantizar un planeta habitable. El primer paso es informarnos para poder tomar acción de manera inteligente y rápida. Es importante que comencemos a actuar hoy, para cuidar nuestro mañana.",
+    "image": "https://cdn.pixabay.com/photo/2017/06/03/10/15/bulb-2368396_960_720.jpg",
+    "author": "Verónica Vilet Rodríguez",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "cambio climático",
+      "gases efecto invernadero"
+    ],
+    "bibliography": "UN. (s.f.). ¿Qué es el cambio climático? Recuperado de https://www.un.org/es/climatechange/what-is-climate-change",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d887671d",
+    "title": "Eficiencia Energética",
+    "subtitle": "La energía más limpia es la que no se usa.",
+    "type": "article",
+    "body": "El principal punto de conversación cuando se habla de desarrollo sustentable radica en mencionar las tecnologías que se pueden utilizar para suministrar a los procesos que la requieren, sin afectar como tecnologías de fuentes fósiles. Sin embargo muchas veces se ignora el hecho que la energía más limpia, es la que no se usa. Se muestra en la gráfica 1. como todas las fuentes de energía conllevan ciertas toneladas de CO2 asociadas a su producción. Según la World Nuclear Association, no hay un solo proceso energético cuya naturaleza le permita ser inocuo o beneficioso para el medio ambiente.\nEntonces el reto en el sector energético radica en disminuir el impacto asociado a este sector ¿De qué manera? Se encuentra en gran parte el disminuir el consumo relacionado a operaciones de combustibles fósiles reemplazadas por tecnologías de energía renovables. Sin embargo, también se necesita el emplear prácticas para la reducción de consumo energético. Prácticas de eficiencia energética son la clave para que los procesos energéticos no sólo provengan de fuentes limpias, pero además su aprovechamiento permite que la energía no se desperdicie en ninguna etapa. Dentro de sí misma, la eficiencia energética puede considerarse en aspectos de diseño de procesos eficientes, como el diseñar turbinas, calderas, compresores, paneles, y demás procesos involucrados en la generación de energía. La otra vertiente considerada es en el sector del consumo energético, pues el desperdicio en el consumo puede llegar a ser otro factor determinante en cuanto al impacto del consumo energético. De acuerdo a la International Energy Agency, en 2016, el mundo habría utilizado un 12 % más de energía si no hubiera sido por las mejoras en la eficiencia energética desde el año 2000. He ahí la importancia de impulsar estas áreas del desarrollo sustentable, claro que se tiene que pensar en maneras de proveer energía limpia, pero así como es más fácil mitigar que remediar un daño, es más provechoso ahorrar energía que generarla de manera limpia. La tarea entonces para los ingenieros, investigadores e involucrados en las propuestas de aplicación para las tecnologías en combate al cambio climático, es tanto sencilla como compleja en cuanto a descifrar las maneras en las cuales procesos y usos de energía puedan obtener el mayor rendimiento de sí.",
+    "image": "https://i.postimg.cc/bNSkVJ6K/jason-blackeye-s1w1-Sgu-ZTI-unsplash.jpg",
+    "author": "José Mario López Carrasco",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "eficiencia energética",
+      "tecnologías de energía renovables",
+      "consumo energético"
+    ],
+    "bibliography": "World Nuclear Association (2022) “Carbon Dioxide Emissions From Electricity”\nhttps://www.world-nuclear.org/information-library/energy-and-the-environment/carbon-dioxid\ne-emissions-from-electricity.aspx \nInternational Energy Agency (2017) “Energy Efficiency Indicators”\nhttps://www.iea.org/reports/energy-efficiency-2017",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d887671e",
+    "title": "El análisis de ciclo de vida y su importancia para evaluar las alternativas “sustentables”",
+    "subtitle": "Etapas del Análisis del Ciclo de Vida",
+    "type": "article",
+    "body": "Debido a la consciencia sobre el cambio climático y sus consecuencias, las empresas están trabajando en alternativas “sustentables” a productos cuyo impacto ambiental es muy alto, esto principalmente se está viendo en artículos de un sólo uso. Y dentro de la publicidad podemos encontrar discursos tales como “Hecho con material 100% reciclado”, “Empaque biodegradable”, “Hecho de fibras naturales”, etc. Lo que a nosotros como consumidores nos hace preguntarnos ¿es más sustentable comprar este producto en vez del otro?, ¿en verdad estoy haciendo una diferencia?, ¿qué producto contamina menos? \n\nAfortunadamente existe una herramienta llamada Análisis de Ciclo de Vida que permite a los especialistas estimar el impacto ambiental de los procesos de los productos.\n\n¿Qué es el Análisis de Ciclo de Vida?\nEl Análisis de Ciclo de Vida (ACV) es una metodología que permite, de manera objetiva, calcular y evaluar los impactos ambientales que un producto, proceso o actividad puede generar durante todas las etapas de su vida. Esta herramienta logra:\n●        Cuantificar la energía y los materiales utilizados, al igual que los residuos que se van al medio ambiente.\n●        Evaluar el impacto generado por los productos utilizados (energía y materiales) y las emisiones al medio ambiente.\n●        Identificar los puntos críticos de los procesos para buscar soluciones que mejoren el proceso. \n\nEtapas del ACV \nPara poder hacer un ACV se tienen que seguir las siguientes etapas: \n1.        Definición de objetivos y alcance: En los objetivos se describen los motivos por los que se está llevando a cabo el estudio, la aplicación prevista y a quién se dirige. Mientras que el alcance expone las etapas de la vida del producto que se van a considerar, los cuales pueden ser:\n●        De la puerta a la puerta (Gate to Gate): Toma en cuenta únicamente el proceso productivo de la empresa que hace el producto.\n●        De la cuna a la puerta (Cradle to Gate): Se considera desde la extracción de la materia prima hasta el proceso productivo.\n●        De la puerta a la tumba (Gate to Grave): Considera el proceso productivo de la empresa que hace el producto y abarca hasta la fase de gestión de los residuos.\n●        De la cuna  a la tumba (Cradle to Grave): Abarca desde la obtención de las materias primas hasta la gestión última de los residuos, ya sea el reciclaje, reutilización, etc.\n●        De la cuna a la cuna (Cradle to Cradle): Se analiza el ciclo de vida completo del producto, es decir, desde la extracción de materias primas hasta que el producto es reintroducido en el mismo proceso productivo o en otro.\n2.        Inventario del Ciclo de Vida (ICV): Se incluye la identificación y cuantificación de las entradas y salidas del sistema productivo. Para esta etapa se puede hacer uso de los siguientes softwares:\n●        Bousted Consulting Database and Software\n●        ECO-iT\n●        EIO-LCA\n●        GaBi\n●        IDEMAT\n●        SimaPro\n●        Umberto\n●        TRACI\n\n3.        Evaluación de los impactos del Ciclo de Vida (EICV): Utilizando los resultados obtenidos del ICV, se evalúa la importancia de los potenciales impactos generados debido a las entradas y salidas.\n4.        Interpretación de resultados: Después de identificar los puntos críticos y de acuerdo a los objetivos que se establezcan, se obtienen conclusiones y recomendaciones que facilitan la toma de decisiones. \n\nAnálisis de Ciclo de Vida de los envases\nEn 2020, la empresa Tetra Pak en conjunto con el Instituto de Investigación Energética y Ambiental, realizó un ACV con el objetivo de evaluar el portafolio de envases en el mercado europeo, incluyendo las alternativas hechas a base de plantas. \n\nDe dicho análisis se obtuvo lo siguiente:\n●        Los envases de cartón generan menores emisiones de CO2 equivalente.\n●        Los envases de origen vegetal tienen un menor impacto ambiental que los de origen fósil.\n●        Se pueden transportar más unidades de envases hechos de cartón a comparación de los de metal y vidrio.",
+    "image": "https://images.unsplash.com/photo-1611646589407-586a1eaebc23?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+    "author": "Elena Cerón Cisneros",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "análisis del ciclo de vida",
+      "etapas del ACV"
+    ],
+    "bibliography": "Eurofins. (2020, 21 abril). Análisis de Ciclo de Vida (ACV): qué es y para qué sirve. https://envira.es/es/analisis-de-ciclo-de-vida/\r\nTetra Pak. (2020). BEVERAGE CARTONS ARE YOUR SUSTAINABLE CHOICE. https://www.tetrapak.com/content/dam/tetrapak/publicweb/gb/en/sustainability/documents/ECA-LCA-2020-Summary.pdf\r\nManos Verdes. (2021, 12 marzo). Análisis del ciclo de vida de un producto. https://www.manosverdes.co/analisis-del-ciclo-de-vida-de-un-producto/",
+    "category": "Económico"
+  },
+  {
+    "_id": "6a226c484b54f546d887671f",
+    "title": "El incorrecto manejo de los residuos tiene impactos \nambientales",
+    "subtitle": "Consecuencias y cómo puedo contribuir desde mi hogar",
+    "type": "article",
+    "body": "El cambio climático y el calentamiento global es una problemática de bastante importancia en \nnuestra actualidad de la cual todos somos contribuyentes. Esta es causante de la degradación del \nmedio ambiente y de limitar la cantidad de carbono que la tierra es capaz de contener.\nUno de los diversos causantes de este cambio climático es la generación exponencial de residuos \nque ha sucedido en los últimos años, ya que al haber una alta acumulación de estos y un mal manejo, \nse convierten en fuente de producción de gases de efecto invernadero. No obstante, puede afectar \nla salud, en forma de enfermedades; o puede también tener efectos perjudiciales al medio \nambiente: en lo estético de las ciudades, los paisajes naturales y en sus especies, y en la \ncontaminación del agua, suelo y aire, por lo que afecta nuestra calidad de vida.\n¿Qué consecuencias puede traer el mal manejo de los residuos?\n1) Contaminación del aire: La acumulación de grandes cantidades de residuos en un sector puede\ntraer una descomposición lenta y con baja o nula presencia de oxígeno. También se generan malos \nolores y emanación de gases contaminantes.\n2) Contaminación del agua: Cuando no se cuenta con una capa impermeable que proteja y aísle el \nsuelo, los líquidos percolados provenientes de la descomposición y compresión de los residuos se \nlixivian o filtran a través del suelo. Estos pueden llegar a las napas de agua subterránea, \ncontaminando el agua, por el arrastre de desechos que traen los ríos, depositándolos en lagos y \nocéanos.\n3) Degradación de los suelos: La acumulación de residuos de distintas procedencias, se combinan y \ngeneran una alteración de las propiedades físicas y químicas del suelo. Esta alteración reduce su \nfertilidad, capacidad de aireación, retención de agua y porosidad. También la acumulación de \nresiduos de manera inapropiada en sectores no autorizados puede aumentar el riesgo de incendios.\n4) Alteración de los ecosistemas: La capacidad de carga y de regeneración del ecosistema se ve \nsobrepasada por la acumulación de residuos no controlada. Se ven afectados hábitats y las especies \nque los componen. Ejemplo de esto son aquellos residuos que por arrastre de las corrientes marinas \nse dispersan y muchos de ellos se acumulan en el fondo marino, lo que afecta la vida y las cadenas \ntróficas.\n¿Cómo puedo contribuir para reducir los residuos desde mi hogar?\n1. Reduce el desperdicio alimentario. Cuando tiramos comida a la basura estamos \ndesperdiciando también la energía y el agua empleadas para la producción, el transporte, \nel almacenamiento y la gestión de residuos.\n2. Separa y recicla. Separa los envases de plástico, el papel y cartón, el vidrio, la materia \norgánica y los restos, para depositarlos en el contenedor correcto.\n3. Evita el uso de bolsas de plástico. Si llevas tu propia bolsa de tela o rafia a la compra, evitas \nque te den una nueva cada vez.\n4. Elabora compostaje doméstico. Utiliza tus residuos orgánicos para crear tu propio compost \ny generar abono natural.\n5. Reduce el uso de productos desechables. Utiliza productos que sean reutilizables o \nrecargables para darles más vidas.\nEs importante hacer una revisión de nuestras acciones diarias para pensar en cómo podemos reducir \nnuestro impacto en el clima y mejorar nuestra gestión de los residuos en casa.",
+    "image": "https://i0.hippopx.com/photos/634/626/374/glass-garbage-glass-waste-disposal-preview.jpg",
+    "author": "Rubí Camargo Martínez",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "manejo de residuos",
+      "degradación ambiental"
+    ],
+    "bibliography": "pendiente",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876720",
+    "title": "Smart Cities",
+    "subtitle": "Una propuesta sustentable",
+    "type": "article",
+    "body": "El porcentaje de la población mexicana que vive en zonas urbanas ha crecido de manera continua en los últimos años. Según la INEGI, el porcentaje de la población que vive en zonas urbanas creció de un 43% en 1950 hasta un 79% en el 2020.\nLa concentración de actividad humana en una zona relativamente pequeña conlleva a problemas climáticos, problemas de administración, problemas de disponibilidad y distribución de recursos, crimen, entre muchos otros más. Es por esto que la Organización de las Naciones Unidas, en el 2015, puso énfasis en resolver este problema, incluyéndolo en sus Objetivos de Desarrollo Sostenible. Sin embargo, la tendencia sigue siendo una movilización de zonas rurales hacia las ciudades, acrecentando el problema. Las ciudades inteligentes o Smart cities es una propuesta innovadora que pretende maximizar las ventajas de las tecnologías de información modernas para mejorar la administración de las urbes y el bienestar de los ciudadanos. La propuesta de ciudades inteligentes busca aprovechar una infraestructura basada en tecnologías de la información para diseñar y desplegar soluciones a problemas causados por la urbanización descontrolada. Algunas de las tecnologías que más se emplean para la creación de la infraestructura previamente mencionada son el Internet de las Cosas (o Internet of Things en inglés), inteligencia artificial, machine learning, cómputo en la nube, sensores, entre muchas otras. Este tipo de tecnologías pueden ser usadas para implementar soluciones desde Smart parking, donde se ayuda a los ciudadanos a encontrar cajones de estacionamiento hasta la generación de tableros que permitan hacer un análisis predictivo de los patrones de crimen en la ciudad. Es importante entender que el valor de esta idea no se fundamenta en lo innovador de las tecnologías en sí o en el avance tecnológico, sino en el saber darles uso para generar soluciones que acrecienten el bienestar de los ciudadanos y el progreso de la comunidad. Algunos de los retos que se deben considerar con esta idea es la cantidad de información sensible que se va a manejar. Cada día crece el escepticismo y desconfianza hacía las grandes empresas de tecnología y el uso que le dan a la información que recaban de sus usuarios. La colecta de datos para el manejo de una ciudad puede potencialmente poner en una situación vulnerable a los ciudadanos de esta, por lo que es esencial elaborar protocolos y mecanismos que protejan al ciudadano y que garantice un nivel de anonimidad dentro de la infraestructura. La migración de zonas rurales a las urbes está proyectada que seguirá sucediendo en el futuro inmediato. El crecimiento descontrolado de las urbes, el surgimiento de nuevas mega ciudades y todos los retos asociados es ahora un problema anunciado. Si bien la propuesta de ciudades inteligentes no ha sido implementada en su totalidad en ninguna ciudad del país, ya existen ejemplos de su ejecución en otros países como China y Estados Unidos, donde \nse observan resultados muy favorables.",
+    "image": "https://images.pexels.com/photos/681335/pexels-photo-681335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "author": "Fernanda Sánchez",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "innovación",
+      "tecnología",
+      "futuro"
+    ],
+    "bibliography": "Selva V. (2022) Ciudades inteligentes: ¿un camino para lograr la sostenibilidad urbana?. El Español. Recuperado el 6 de noviembre de 2022 de https://www.elespanol.com/enclave-ods/historias/20221014/ciudades-inteligentes-camino-lograr-sostenibilidad-urbana/710429053_0.html Millán C. (n.d.) Smart cities en México: factores de éxito. KPMG. Recuperado el 6 de noviembre de 2022 de https://home.kpmg/mx/es/home/tendencias/2021/10/ao-smart-cities-en-mexico-factores-de-exito.html",
+    "category": "Social"
+  },
+  {
+    "_id": "6a226c484b54f546d8876721",
+    "title": "Consumo insostenible",
+    "subtitle": "La sostenibilidad en un mundo desechable",
+    "type": "article",
+    "body": "El rápido crecimiento urbano, la sobrepoblación y diversos factores culturales, sociales, familiares y personales han llevado a la sociedad a un punto de sobreproducción y sobreconsumo de bienes, tanto necesarios como innecesarios y de diversas índoles, desde tecnología hasta alimentos. Esta es una situación que impacta directamente en el medio ambiente y los recursos naturales, al grado que se definió el objetivo número 12: Producción y consumo responsables, de un conjunto de 17 Objetivos de Desarrollo Sostenible (ODS) desarrollados por la Organización de la Naciones Unidas (ONU) como parte de una agenda para poner fin y mejorar la situación del mundo respecto a diversos tópicos relevanes.\n\nDe acuerdo con estimaciones de la ONU, anualmente se desperdicia un tercio de la comida que es producida, ya sea porque se produjo una cantidad excesiva y terminó pudriéndose o porque no se le dio el tratamiento de almacenamiento y transporte adecuado. Asimismo, al realizar estimaciones a futuro se ha determinado que si para el año 2050 la población mundial llega a ser de 9,600 millones o más, la situación se volverá insostenible ya que se necesitaría al menos el equivalente a tres planetas Tierra para poder disponer de los recursos necesarios para que las personas puedan mantener un estilo de vida similar al conocido actualmente.\n\nPara contrarrestar la situación que se está viviendo y que se preveé a futuro, se está impulsando el consumo y la producción sostenibles, los cuales se fundamentan en el principio básico de hacer más y mejor con menos, es decir, que se reduzca la sobreexplotación de recursos pero manteniendo la calidad de los bienes y servicios e incluso mejorándolos al encontrar alternativas con una menor huella ecológica. Esto no sólo traería beneficios en materia de sostenibilidad al permitir la recuperación paulatina de los ecosistemas y recursos naturales, sino que también implicaría en mejorías sociales también como la reducción de la pobreza y desigualdad social. \n\nEspecíficamente, para lograr este ODS, la ONU definió una serie de metas puntuales, de entre las cuales destacan algunas como alentar a los gobiernos y las grandes empresas a emplear prácticas sostenibles, reducir el desperdicio de alimentos a la mitad, entre otras. De estas metas es importante destacar la importancia del rol de las empresas, ya que si bien es cierto que las acciones individuales pueden tener un impacto colectivo masivo (como menciona la ONU al estimar que se ahorrarían 120,000 millones de dólares anuales si todos los ciudadanos utilizaran bombillas energéticamente eficientes), en gran medida son los grandes corporativos quienes tienen un mayor impacto tanto para bien como para mal, como es el caso de Coca-Cola y el consumo desmesurado de agua que utiliza en la producción del refresco.\n\nEn conclusión, el estilo de vida colectivo que estamos llevando actualmente nos está dirigiendo a un futuro insostenible donde los recursos no serán suficientes para satisfacer ni aún las necesidad más básicas. Si bien es responsabilidad de todos y aunque no lo parezca, cada acción individual cuenta, es cierto que se requiere ejercer presión sobre los gobiernos y las organizaciones para optar por un estilo y proceso de eficiencia de sus recursos para migrar a un modelo completamente sostenible.",
+    "image": "https://cdn.pixabay.com/photo/2017/05/27/18/22/bottle-2349136_960_720.jpg",
+    "author": "Emilio Rios Ochoa",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "tecnología",
+      "impacto",
+      "huella ecológica",
+      "consumismo",
+      "desecho"
+    ],
+    "bibliography": "Organización de las Naciones Unidas. (s.f.) Objetivo 12: Garantizar modalidades de consumo y producción sostenibles. https://www.un.org/sustainabledevelopment/es/sustainable-consumption-production/",
+    "category": "Social"
+  },
+  {
+    "_id": "6a226c484b54f546d8876722",
+    "title": "Uso excesivo de plásticos en la agricultura y sus efectos colaterales",
+    "subtitle": "Afecciones en la salud , integridad del suelo y la producción de alimentos",
+    "type": "article",
+    "body": "La agricultura es la actividad económica primaria con mayor importancia en la historia del ser humano y por ende se han desarrollado más zonas de cultivo para poder obtener una mejor y mayor cantidad de alimentos para abastecer el consumo humano; sin embargo, para ello se emplean una gran cantidad de plásticos que se están acumulando en los suelos, lo cual puede tener “altas repercusiones en la salud del suelo, la biodiversidad y la productividad, todas ella vitales para la salud humana”, afirma la profesora Elaine Parker.\r\nLos plásticos se encuentran en distintos aspectos de la agricultura, tanto a través de los macroplásticos como de los microplásticos. Los primeros se pueden encontrar en envolturas protectoras, cubriendo lo invernaderos, tubos de riego y sacos; al descomponerse se filtran en el suelo.\r\nPor otro lado, los microplásticos añadidos como revestimientos de fertilizante e insecticidas pueden cambiar la estructura física del suelo y limitar su capacidad de retención del agua, lo cual afecta en el crecimiento de las raíces de las plantas y por ende hay una carencia en la absorción de nutrientes.\r\nTodo lo anterior afecta en la salud humana debido a que los efectos colaterales que se dan en las plantas se transfieren a las personas cuando se ingieren los productos.\r\nEsta situación es preocupante para el Programa de las Naciones Unidas para el Medio Ambiente (UNEP), por lo cual se buscan alternativas que mejoren la biodegradabilidad de los polímeros utilizados; este debido a que los actuales polímeros de origen biológico no son 100% biodegradables y su precio es un gran problema.\r\nEs por ello que los expertos demandan que se trabaje en la producción de polímeros de base biológica que consideren las necesidades de la industria agrícola sostenible; o bien impulsan a las personas que cultivan a realizar un cambio en el tipo de cultivo para que de igual manera se demande menos uso de biopolímeros, tal como los cultivos de covertura. \r\nDe esta manera, y al tener acciones tanto por el desarrollo de nuevos polímeros biodegradables, como por cambios en el estilo de cultivo se puede disminuir considerablemente este problema, haciendo así que la agricultura sea sostenible.",
+    "image": "https://i.ytimg.com/vi/6hgMNwB5JXs/maxresdefault.jpg",
+    "author": "Grecia Pacheco",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "agricultura",
+      "sostenibilidad",
+      "biopolímeros"
+    ],
+    "bibliography": "El uso masivo de plástico en la agricultura afecta nuestra salud, la del suelo y la producción de alimentos. (2022, 28 octubre). Noticias ONU. https://news.un.org/es/story/2022/10/1516177",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876723",
+    "title": "El rol de los residuos en el desarrollo sostenible",
+    "subtitle": "Los beneficios de manejar correctamente nuestros residuos",
+    "type": "article",
+    "body": "Día a día el humano desecha una enorme cantidad de residuos generados por múltiples actividades. Esto lo podemos ver en todos lados: en las casas, las escuelas, los hospitales, los locales, las industrias, en la calle, etc. ¿A dónde llegan todos esos residuos? ¿Dónde crees que esté la primera botella de plástico que usaste? Tal vez esta fue reciclada, pero hay más probabilidad de que se encuentre en un vertedero de basura, donde se quedará cientos de años más.\r\n\r\nEn México generamos diariamente 102,895 toneladas de Residuos Sólidos Urbanos (RSU), de los cuales el 78.54% termina en un vertedero a cielo abierto: una forma de disposición final en la que se sitúan los residuos sobre el suelo sin algún tipo de manejo, lo que se vuelve altamente contaminante. Un 9.63% de los residuos se recicla, y el porcentaje restante no es colectado (Secretaría de Medio Ambiente y Recursos Naturales, 2017).\r\n\r\nManejar correctamente nuestros residuos es sumamente importante para que podamos hablar de un futuro sostenible. No hay que buscar tratar nuestros residuos como basura, muchos de los materiales que desechamos pueden tener otro uso y ser reincorporados a la cadena de valor en lugar de tener una disposición final. Esta valorización de residuos puede realizarse de distintas maneras: a través del reciclaje, reutilización, reincorporación a la tierra, etc; además de que debemos procurar usar la menor cantidad de materiales desde un inicio.\r\n\r\nExisten distintos tipos de residuos y pueden ser categorizados de varias formas: orgánico, inorgánico, plásticos, metales, vidrio, madera, tela, residuos electrónicos, etc. Es sumamente importante separar estos residuos ya que cada uno requiere pasar por procesos diferentes para ser reciclados. pues todos cuentan con distintas características. Además, al separar residuos se fomenta la creación de mercados de materiales reciclables, se disminuye el volumen de los residuos y ayuda a la degradación de los recursos naturales (García, s.f.). \r\n\r\nLos beneficios de manejar correctamente nuestros residuos son muy grandes: reducimos la emisión de gases de efecto invernadero que se da en los vertederos por la descomposición de basura, se extraen menos recursos naturales al utilizar los materiales que ya tenemos, hay un ahorro importante de energía y de agua, reducimos la cantidad de contaminación, entre otros (INCINEROX, 2021). \r\n\r\nAdemás de estos beneficios ambientales, también se cuentan con ventajas económicas y sociales del buen tratamiento de residuos. De la parte económica, es un motor para la creación de nuevos empleos; así mismo, reduce costos de operación en las empresas al usar residuos en lugar de materia prima virgen. Cuando hablamos de los beneficios sociales podemos ver la creación de nuevos empleos, disminución de propagación de enfermedades y un entorno más limpio (Hernández, 2018).\r\n\r\nComo se ha visto, hay muchos efectos positivos de manejar nuestros residuos correctamente. Es uno de los muchos pasos indispensables que debemos dar para poder hablar de un futuro sostenible, un planeta habitable y una vida digna.",
+    "image": "https://cdn.pixabay.com/photo/2016/03/14/18/47/garbage-bag-1256041_960_720.jpg",
+    "author": "Verónica Vilet Rodríguez",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "residuos",
+      "menajo de residuos",
+      "sostenibilidad"
+    ],
+    "bibliography": "Secretaria de Medio Ambiente y Recursos Naturales. (2017). Residuos Sólidos Urbanos (RSU). Recuperado de https://www.gob.mx/semarnat/acciones-y-programas/residuos-solidos-urbanos-rsu#:~:text=En%20M%C3%A9xico%20se%20generan%20diariamente,9.63%25%20de%20los%20residuos%20generados. \r\n\r\nGarcía, L. (s.f.). Separación de residuos. Recuperado de https://www.ipn.mx/assets/files/dri/docs/comite_amb/SEPARACION-DE-RESIDUOS.pdf \r\n\r\nINCINEROX. (2021). 5 beneficios de una adecuada gestión de residuos para el medio ambiente. Recuperado de https://incinerox.com.ec/5-beneficios-de-una-adecuada-gestion-de-residuos-para-el-medio-ambiente/ \r\n\r\nHernandez Nuñez, C. F. (2018). Beneficios económicos, sociales y ambientales en el aprovechamiento de los residuos sólidos urbanos. RIADS: Revistas De Investigación Agropecuaria Y Desarrollo Sostenible, 3(2), 30–35. Recuperado a partir de https://revistas.sena.edu.co/index.php/riads/article/view/1449",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876725",
+    "title": "Aprovechamiento de los Residuos para la generación de energía",
+    "subtitle": "Producción de electricidad a partir de residuos",
+    "type": "article",
+    "body": "La generación de energía eléctrica en México se divide en 7 categorías, gas natural, carbón, nuclear, hidroeléctrica, eólica y solar, biomasa y petróleo, con la mayor producción siendo mediante gas natural, la tendencia, como lo expresa la International Energy Agency, es a la producción mundial de energía por estas mismas metodologías, sin embargo, se incluyen otras como la generación de energía por geotérmicas. La transición energética de fuentes fósiles a energías renovables, implica un reto para la humanidad, pues esto significa partir de los métodos convencionales de hacer las cosas. Sin embargo, cada vez más se desarrollan las tecnologías, tanto las convencionales y en especial las renovables. \n\n\n\nPara la transición energética, es una realidad no factible emplear tecnologías fuera de los procesos a partir de fósiles. Por lo cual se buscan estrategias para la producción de energía, basado en los fundamentos de energías fósiles, empleando fuentes de energía como el la fisión nuclear, el uso de biogás, o colectores solares, para llegar a que las tecnologías de generación convencionales, operen a partir de fuentes con menor impacto ambiental. Según el Dr. González Santaló, la tecnología que más sentido tendría, sería seguir utilizando las centrales de ciclo combinado para la generación de energía, pues su alta eficiencia y bajo coste a comparación de los demás procesos revisados, indican que para un uso más eficiente del poder calorífico de los fósiles, el ciclo combinado sigue siendo la mejor opción. El enfoque cambia sin embargo, si se parte de la idea de usar combustibles\nrenovables (biomasa), y hacer un proceso de gasificación de la misma, para la generación\nde energía eléctrica con ese recurso.\n\n\n\nLa gasificación es un proceso termoquímico que convierte la biomasa sólida en un gas combustible bajo condiciones de alta temperatura y en presencia de un agente gasificante (aire, oxígeno, vapor de agua, etc). El resultado es un combustible de poder calorífico similar al gas natural, proveniente de fuentes limpias. Al final estos procesos se vuelven una alternativa real a los combustibles fósiles, dado que se puede acoplar al manejo de residuos orgánicos. De acuerdo a la Harvard School of Health, el 40% de la comida que se produce, no se come, y de esa comida, el 95% termina en los vertederos. El problema que representa se deriva de la cantidad de recursos que se pierden por el desaprovechamiento de estos productos. La alternativa entonces, plantea que estos sistemas se diseñan para que el proceso de gasificación utilice la biomasa sólida. El combustible resultante entonces es uno de fuentes que de otra manera serían desperdicio. Esto en plan de apoyar a que la transición energética se desarrolle de manera en la que las tecnologías convencionales sigan siendo funcionales, pero ya no tengan el impacto negativo que tienen actualmente.",
+    "image": "https://i.postimg.cc/8PK7BVBj/matthew-henry-y-ETqk-Lnhs-UI-unsplash.jpg",
+    "author": "José Mario López Carrasco",
+    "author_image": "Matthew Henry",
+    "page_image": "Burst",
+    "tags": [
+      "Biogas",
+      "Gasificacion",
+      "Ciclo Combinado",
+      "Energía Renovable"
+    ],
+    "bibliography": "[1] IEA (2021), World Energy Balances: Overview, IEA, Paris Recuperado 15 de Marzo de 2022 de https://www.iea.org/reports/world-energy-balances-overview                                                Treviño, S. (s.f) Tecnología de Gasificación Integrada al Ciclo Combinado. Recuperado\n15 de Marzo de 2022 de http://redsolenergy.com/1_gasificacion_gicc.pdf                                                                                                 Harvard School of Public Health (s.f) \"Food Waste\" Recuperado 14 de Noviembre de 2022 de https://www.hsph.harvard.edu/nutritionsource/sustainability/food-waste/",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876726",
+    "title": "Casos de éxito - Emprendimientos Sustentables",
+    "subtitle": "México 10 emprendedores sustentables",
+    "type": "article",
+    "body": "El principal interés y motivación de los emprendedores de hoy en día es generar una idea que contribuya a la solución de problemáticas sociales y ambientales. De esta iniciativa surgen los emprendimientos sustentables, los cuales están desarrollando alternativas que puedan satisfacer las necesidades actuales sin comprometer a las generaciones futuras. \n\nDicho esto, el pasado 15 de noviembre, el Tecnológico de Monterrey, Disruptivo.tv y la Editorial LID, con el apoyo de Tetra Pak, presentaron el Libro México 10: Emprendedores Sustentables en INCmty, el festival de emprendimiento más importante de Latinoamérica.  Y como su nombre lo dice, en el libro se expone la historia de 10 casos de éxito de emprendimientos mexicanos que buscan dejar un impacto positivo en el entorno desde la generación de energías limpias, reciclaje, productos amigables con el medio ambiente, entre otros. \n\nUno de los casos de éxito que se abordan es el de Ecolana, empresa mexicana que promueve la cultura de reciclaje y fomenta el consumo responsable de todo tipo de productos. La historia de este proyecto demuestra que no necesariamente tienes que tener años de preparación o ser un experto en emprendimiento para tomar acción y crear un negocio que ayude al medio ambiente y a la sociedad. Todo comienza cuando Lisseth Cordero y Alejandra Valdez, dos apasionadas por el reciclaje se dan cuenta que no había nadie en México que informara a la población sobre cómo pueden reutilizar y reciclar sus residuos. Si bien, sí había muchos actores en el sistema de reciclaje, no existía una conexión entre ellos, no estaban actualizados y era difícil que las personas llegaran a los centros de acopio.  \n\nComo cualquier emprendimiento, a lo largo de todo el proceso hubieron diversos retos a los que se tuvieron que enfrentar, sin embargo todo ha valido la pena, ya que actualmente, Ecolana se convierte en una de las principales compañías promotoras del reciclaje con presencia en todo el país a través de diferentes programas y buscan expandirse a toda América Latina. Hasta el momento cuentan con 16 empleados, han impactado a más de 300 000 habitantes y han reciclado alrededor de 4500 toneladas de residuos.\n\nEste tipo de historias nos hacen darnos cuenta que cada día son más las personas y compañías que se convierten en agentes de cambio. Y como estos ejemplos existen otros que tal vez todavía no salen al mercado o que no son tan conocidos, pero cada uno de ellos buscan crear una relación positiva entre lo económico, social y ambiental. \n\nTú puedes ser el próximo emprendedor sustentable, sólo recuerda que la verdadera sustentabilidad en el emprendimiento implica un involucramiento real de todos los procesos, esto incluye relaciones con terceros, medio ambiente y promueve la prosperidad y un amyor bienestar social, debido a que la idea es crecer juntos y volvernos una comunidad más justa y equitativa.",
+    "image": "https://images.unsplash.com/photo-1630344745875-ebc82ba33f8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80",
+    "author": "Elena Cerón Cisneros",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Emprendimiento",
+      "sustentable",
+      "libros"
+    ],
+    "bibliography": "Del Cerro, J., Caballero, M., Piñón, V., López, L., Seltzer, S., Padilla, I., De la Fuente, J., Hernández, I., Farías, R., De la Cruz, G. & Almanza, L. (2022). México 10: Emprendedores Sutentables (1.a ed.) [Digital]. https://www.lideditorial.com/libros/mexico-10-emprendedores-sustentables\nLópez, J. A. (2022, 19 octubre). México 10 Emprendedores Sustentables: Presentan libro con casos de éxito en favor de la naturaleza. El Capitalino. https://elcapitalino.mx/nacion/mexico-10-empre",
+    "category": "Económico"
+  },
+  {
+    "_id": "6a226c484b54f546d8876727",
+    "title": "Los océanos y la vida",
+    "subtitle": "¿Somos conscientes de la importancia que tienen los océanos en nuestra vida?",
+    "type": "article",
+    "body": "Los océanos abarcan más del 90% del espacio del planeta y habitan más de 250,000 especcies marinas, y eso que aún no se descubren más de dos tercios de este mismo. La biodiversidad que existe en los mares y océanos es muy amplia, muchas veces no dimensionamos la importancia que estos cuerpos naturales tienen en nuestra vida. Es muy importante saber lo que nos aportan y lo vital que es cuidarlos, muchos de nosotros creemos que los principales proovedores de oxígeno son los bosques y selvasa, pero estamos equivocados, el mar constituye más de laa mitad del oxígeno que respiramos y absorben cerca del 26% de las emisiones de dióxido de carbono emitidas a la atmósfera.\n\nTristemente, cada año se han empezado a ocurrir fenómenos que nos indican que estos inmensos cuerpos de agua se están viendo perjudicados. Se ha visto recientemente un aumento de sargazo en las playas gracias al cambio climático que estamos viviendo. De igual manera, cada vez vemos más basura, toneladas de plástico llegan a estos cuerpos de agua. Se estima que llegan cercaa de 13 millones de toneladas al mar. Todo este tipo de basura generan la muerte de 100,000 especies marinas. A su vez, tenemos actividades como la sobrepesca y la destrucción del hábitat, presión de ecosistema y pérdidas de biodiversidad. La pesca eccesiva o sobrepesca es una actividad que no es para nada sostenible, la sobrepesca ha generadao que cerca del 60% de las reservas de peses estén completamente explotadas y otro 30% en el cual se está haciendo está actividad día con día.\n\nEs por esto que ayudemos a cuidar nuestro planeta, el hecho de no contaminar las calles, ríos y mares es de gran ayuda. Todo suma, desde tener un ahorro energético, reducir nuestros desechos, y contribuir a acciones para el planeta son muy buenas. Debemos comenzar a eliminar costumbres malas que tenemos, un ejemplo es la de consumir de manera desmedida. Esta acción es la causa de mucho de lo que hoy vemos como contaminantes, el hecho de producir en exceso genera muchos residuos que no tienen a donde ir y terminan desembocando en los mares. Si cada uno de nosotros cambia estas malas costumbres, podremos empezar a ver mejorías en el mar y así, tener un planeta más verde.",
+    "image": "https://www.pactomundial.org/wp-content/uploads/2021/10/14-vida-submarina-3.jpg",
+    "author": "Alfonso Adloune Godínez",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "vida marina",
+      "oxígeno",
+      "contaminación",
+      "residuos",
+      "ecosistema"
+    ],
+    "bibliography": "Pasca, C (2022). La biodiversidad y los ecosistemas marinos mantienen la salud del planeta y sostienen el bienestar social. Naciones Unidas. Recuperado de: https://www.un.org/es/chronicle/article/la-biodiversidad-y-los-ecosistemas-marinos-mantienen-la-salud-del-planeta-y-sostienen-el-bienestar#:~:text=Los%20oc%C3%A9anos%20y%20la%20vida,emitidas%20a%20la%20atm%C3%B3sfera3.So",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876728",
+    "title": "El consumismo y sus efectos en el cambio climático",
+    "subtitle": "¿Consumimos por necesidad o por gusto?",
+    "type": "article",
+    "body": "El consumismo es la tendencia incontrolada a adquirir bienes y servicios que no siempre son necesarios para el ser humano. Muchas veces esta práctica trae consecuencias que muchos de nosotros no vemos, como lo es la producción desmedida de productos para satisfacer esta demanda que la sociedad genera. Todo esto también provoca la sobreexplotación del suelo, agua, aire y otros recursos, aunado al agotamiento de recursos naturales. Estas actividades son la causa del 60% de las emisiones de Gases de Efecto Invernadero (GEI). Mucho de lo que consumimos tiene plástico, el plástico contribuye a la emisión de estos gases desde su producción (por combustibles fósiles), fabricación, transporte y disposición final. Una vez son residuos, emiten metano y etileno tras ser expuestos al sol, aire o agua. Pese a esto se sigue produciendo alrededor de 380 millones de toneladas de plástico para sus diversos usos.\n\nEs por esto que debemos evitar las prácticas de consumismo y de verdad cuestionarnos si lo que estamos a punto de consumir lo necesitamos o es comprar por comprar. Las grandes empresas fomentan estos actos pues es mayor ganancia económica para ellos sin importar las consecuencias que se tengan y muchas veces, se hacen ver que están tomando acción para ayudar al cambio climático cuando en realidad no lo hacen.",
+    "image": "https://img.freepik.com/foto-gratis/personas-sonrientes-tiro-medio-gafas-sol_23-2149536974.jpg?w=740&t=st=1674548167~exp=1674548767~hmac=73592c80bd7ae24ea4ed9d95aa7c519bee2f1b5aeec3fcf7dfc238489f9bbaad",
+    "author": "Alfonso Adloune Godínez",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Consumismo",
+      "innecesario",
+      "producción"
+    ],
+    "bibliography": "Soto, J. (2020). ¿Cómo afecta el consumismo al medio ambiente?. Greenpeace. Recuperado de:https://www.greenpeace.org/mexico/blog/8704/como-afecta-el-consumismo-al-medio-ambiente/",
+    "category": "Económico"
+  },
+  {
+    "_id": "6a226c484b54f546d8876729",
+    "title": "El impacto de la minería de Oro en México",
+    "subtitle": "El trasfondo de la minería de oro",
+    "type": "article",
+    "body": "La minería y producción de metales es uno de los sectores económicos cuyo impacto ambiental es completamente desmesurado debido al impacto ambiental de la extracción y su procesamiento. La persona en su vida cotidiana observa todo lo que le rodea y no es consciente de todos los procesos que requirieron la explotación de un recurso natural. Como procesos de economía circular, los procesos de minería son una gran área de oportunidad que tiene la industria. De acuerdo a Statista, México se encuentra dentro de los mayores productores de oro a nivel mundial, siendo el séptimo productor más grande de oro, por detrás de Ghana. Además de ser un gran productor de oro a nivel mundial, en su economía local, el 31.2% de la minería que se da en México es proveniente de las minas de oro, siendo Sonora y Zacatecas los principales productores.\n\nReferente al impacto ambiental de estas prácticas, el consumo y la alteración a los recursos hídricos, se va dando mediante el nivel freático se altera y desplaza las aguas subterráneas. Contamina el agua superficial y subterránea con sales minerales, sulfatos, nitratos, óxidos, aceites, grasas, lubricantes, químicos, explosivos y metales pesados (arsénico, plomo, cadmio, cromo, cianuro y mercurio). Los desechos y las presas de jales almacenan contaminantes que se evapora y la absorben los follajes, los árboles y las plantas; otra se escurre a los ríos o arroyos, o se filtra al subsuelo contaminando aguas y pozos, y otra queda atrapada en la presa. Se producen filtraciones, derrames o fugas de aguas contaminadas. La extracción gigantesca de agua provoca desertificación masiva, sequías y agotamiento de fuentes de agua. No hay mina que no contamine el agua. Es inevitable a una mina y deja el agua inservible para el consumo humano o para la agricultura. Es imposible dejarla en su mismo estado en el que se encontró. \n\nPese a que los procesos productivos de la industria presentan dificultad para su transformación a la circularidad, no es imposible, la investigación lleva a la ideación, la cual lleva al desarrollo de proyectos, que al final van rindiendo resultados positivos para el desarrollo de alternativas a lo que tenemos actualmente. Tomando el caso del oro, es un proceso cuyo impacto ambiental llega a ser alto, y cuyas áreas de oportunidad son muchas, pero el que las tenga significa que hay posibilidades de mejora. Migrar a estas alternativas, va siendo poco a poco, la necesidad en una economía cuya principal prioridad es dejar los procesos lineales, y alcanzar procesos circulares.",
+    "image": "https://i.postimg.cc/VLypgFQn/close-up-of-construction-site-excavator.jpg",
+    "author": "José Mario López Carrasco",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Minería",
+      "Oro",
+      "México",
+      "Impacto Ambiental"
+    ],
+    "bibliography": "Statista (2021) “Mining in Mexico” Rescatado 24 de Noviembre de 2022 de https://biblioteca-ils.tec.mx/wamvalidate?url=https%3A%2F%2F0-www-statista-com.biblioteca-ils.tec.mx%3A443%2Fstudy%2F66938%2Fmining-in-mexico%2F\n\nCastro, G. (2013) “La minería y sus consecuencias en Mexico” Rescatado 24 de Noviembre de 2022 de   https://www.ocmal.org/la-mineria-y-consecuencias-en-mexico/",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d887672a",
+    "title": "Más allá de Reciclar, Reutilizar y Reducir",
+    "subtitle": "Las R´s de la Economía Circular",
+    "type": "article",
+    "body": "Seguramente conoces la famosa regla de las 3 R´s. Reducir, Reciclar y Reutilizar, son tres conceptos que surgieron con la necesidad de informar a la población  sobre acciones que pueden reducir el  impacto ambiental que los residuos generan, ya que se vive un consumismo masivo, en donde se busca reemplazar las cosas de manera inmediata para tirar las anteriores, sin concientizarse sobre las consecuencias en el medio ambiente.\n\nCon el paso del tiempo se empezaron a agregar propuestas de R´s que estén alineadas con la modificación de los hábitos de consumo de la sociedad para lograr la reducción de residuos, por eso es que actualmente podemos encontrar las 3 R´s, 7 R´d, 9 R´s, hasta 10 R´s, pero de acuerdo con Christopher Brosse en su libro “La Basura No Existe: Hacia el suprarreciclaje y la Economía Circular”, existen infinidad de posibilidades en la Economía Circular para enumerar las R´s, debido a que se refieren tanto a procesos tangibles como intangibles.\n\nLa Economía Circular es un concepto que se compone de múltiples procesos que busca y que los materiales circulen de forma infinita, ya sea de un producto a otro, de un proceso a otro pero todo con el objetivo de que nunca lleguen a convertirse en materiales no utilizados. De igual forma, la Economía Circular tiene como propósito optimizar la producción de bienes y servicios.\n\nAlgunas R´s de la Economía Circular son las siguientes:\nRepensar el ciclo completo del aprovechamiento de  los materiales y la interacción que los consumidores establecen con lo que se produce.\nReducir nuestro consumo teniendo en consideración que nuestras acciones individuales siempre tienen consecuencias.\nRemanufacturar con el objetivo de aprovechar los materiales de los productos cuya vida útil llegó a su fin debido algún defecto.\nReutilizar o reusar los productos para alargar al máximo su vida útil.\nReciclar las cosas que ya han sido utilizadas para poderlas usar de nuevo\nRediseñar los productos para hacer más eficiente su reciclaje y alargar la vida útil del mismo.\nReparar los artículos antes de comprar nuevos.\nRenovar los productos con el fin de darle un nuevo uso o apariencia estética.\nRecuperar materiales y productos para utilizarlos de nuevo.\nRechazar aquello que no necesitamos",
+    "image": "https://images.unsplash.com/photo-1582408921715-18e7806365c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "author": "Elena Cerón Cisneros",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Economía circular",
+      "reciclar",
+      "consumo"
+    ],
+    "bibliography": "Manjón, N. (2020, 2 marzo). 7R: Rediseñar, Reducir, Reutilizar, Reparar, Renovar, Recuperar y Reciclar.\nhttps://www.ecologiaverde.com/7r-redisenar-reducir-reutilizar-reparar-renovar-recuperar-y-reciclar-2066.html\n\nValverde, C. B. (2021). La Basura No Existe: Hacia el suprarreciclaje y la Economía Circular. Amazon Digital Services LLC - KDP Print US\n\nVillach, Q. G. (2022, 8 noviembre). Las 9 R de la Economía Circular ♻️ Sostenibilidad. Sostenible o Sustentable. https://sostenibleosustentable.com/es/economia-verde/9-r-de-la-economia-circular/",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d887672b",
+    "title": "MDF: El material disfrazado",
+    "subtitle": "Una estafa sostenible",
+    "type": "article",
+    "body": "Debemos empezar preguntándonos, ¿Qué es el MDF?\nSe le conoce así por sus siglas en inglés, Medium Density Fibreboard, esto significa que es un material de fibra de media densidad, este se realiza con fibras de madera maciza, la cual muchas veces es reciclada, es decir, que estamos hablando de un material reciclado que es altamente sostenible. Este material tiene la ventaja de que no se deforma con la humedad como hace la madera maciza, aun así no es recomendable tenerlo expuesto en lugares donde el nivel de humedad es muy alto. Otro beneficio es que al estar hecho de fibra es una superficie suave y lisa siendo así más fácil de pintar que la madera maciza, ya que en esta última suelen resaltar sus vetas, pero esta cualidad también juega en su contra porque si el MDF se raya y/o agrieta, no se puede arreglar.\nPor último, lo que parece ser la ventaja más grande del MDF, es su precio. Este material es mucho más barato que la madera maciza, además de que al ser fabricado por el humano, en vez de ser de un árbol como la madera, le permite producirse en tableros de mayor tamaño. El precio accesible permite crear productos más accesibles para el público general.\nAhora sí, ¿por qué se menciona que es un material disfrazado?\nComo otros materiales el MDF puede estar enchapado, lo que significa que está cubierto por otro material, como puede ser chapa de madera o incluso con resinas melamínicas (las cuales por cierto pueden proteger el MDF de la humedad). Inicialmente estos enchapados permiten que el material adquiera diferentes acabados al darle otra apariencia al MDF, haciendo este más versátil y según algunos más bello.\nEl problema reside en que se han presentado casos de que venden muebles y otros productos de MDF enchapado como piezas de madera maciza, lo cual significa que el precio es altamente elevado. En ocasiones el trabajo de enchapado es tan bueno que para personas sin conocimiento sobre estos materiales caen en las estafas.\n ¿Cómo identificar un MDF “disfrazado”?\nEl MDF ya enchapado de melamina solo tiene cubierto de largo a ancho, es decir, el grosor viene al descubierto, para ocultar esto existe una tira engomada tipo una cinta que trae el adhesivo de un lado y chapa de madera o melamina del otro, este producto es mejor conocido como cubrecantos. El truco está en ver el grosor del material y suele verse una línea que es la que separa el enchapado del cubrecantos. Para el enchapado de madera es más sencillo, porque la manera en la que las vetas de la madera maciza se distribuyen en un tablón es diferente a lo que se ve con un cubrecantos. Aunque también se puede usar en conjunto al método anterior.",
+    "image": "https://enchapadosytablerosmonterrey.files.wordpress.com/2019/08/mdf-banner.jpg",
+    "author": "Melanie Carbajal Depraect",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Materiales",
+      "sostenibilidad",
+      "MDF",
+      "versatilidad"
+    ],
+    "bibliography": "Agloma. (2020). Qué son los tableros MDF y cuáles son sus beneficios principales. Recuperado \nde:https://www.agloma.es/que-son-los-tableros-mdf-y-cuales-son-sus-beneficios-principales/#:~:text=Las%20siglas%20MDF%2C%20se%20corresponden,de%20fibras%20de%20densidad%20media.\nSoto, R., (2020). MDF Vs Madera: Por qué se ha vuelto popular para puertas de gabinetes. De carpinteria. Recuperado de:https://decarpinteria.net/mdf-vs-madera-solida/\nGomez, G., (2020) Melamina: qué es, ventajas y desventajas. Homify. Recuperado de: https://www.homify.com.mx/libros_de_ideas/6162623/melamina-que-es-ventajas-y-ejemplos",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d887672c",
+    "title": "Muebles de la Abuela",
+    "subtitle": "El impacto del \"second hand\"",
+    "type": "article",
+    "body": "Recientemente se ha visto una popularización impactante en el uso recurrente de muebles de segunda mano, o también conocido como “second hand”. Este ha trascendido al mainstream y por mucho que se negara la apariencia “sucia” y “anticuada” de estas antigüedades; ahora la popularización de estos mismos en el interiorismo se ha promovido el rehusar las materias y por ende, la sostenibilidad.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszpgQOrAHvdAqeYQKGcQ0qo8FXS84XH6WIg&s",
+    "author": "Luisa Salazar",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "segunda mano",
+      "diseño de interiores",
+      "consumismo"
+    ],
+    "bibliography": "E. (2021, 17 agosto). Eco-Friendly Benefits of Buying or Repurposing Used Furniture. Earth911. https://earth911.com/inspire/eco-friendly-benefits-of-used-furniture/                             K. (2021b, diciembre 17). IKEA’s sustainability: the controversy. Green Mo. https://www.greenmo.space/post/ikea-s-sustainability-the-controversy",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d887672d",
+    "title": "Torre Reforma “LEED’er” en diseño ambiental",
+    "subtitle": "La certificación LEED está cambiando la manera en que construimos los edificios del futuro.",
+    "type": "article",
+    "body": "La Torre Reforma se encuentra en CDMX, en la avenida Paseo de Reforma. Este edificio fue diseñado por el arquitecto Benjamín Romano y su despacho LBR & A.  Después de su construcción ganó el premio a mejor rascacielos del mundo en el 2018 por los premios International Highrise Award. \n¿Por qué le denominamos “LEED’er” en sustentabilidad?\nLa certificación de Liderazgo en Energía y Diseño Ambiental, también conocida como LEED por sus siglas en inglés, es un sistema que certifica nuevas edificaciones y mide su grado de sustentabilidad en diferentes ámbitos tales como:\n-Ubicación y transporte. ¿Incentiva el uso del transporte público o bicicleta?\n-Eficiencia del agua. ¿Se aprovecha al máximo el recurso hídrico?\n-Innovación. ¿Se usan mejores técnicas?\n-Energía y atmósfera. ¿Es óptimo el uso de energía?\n-Sitios sustentables. ¿Cómo impacta con los agentes exteriores, como la flora y fauna?\n-Materiales y recursos. ¿De dónde vienen los materiales de construcción?¿Son reciclados?\n-Calidad del ambiente interior. ¿Se usan estrategias que promuevan una buena ventilación interior?\n-Prioridad regional. ¿Se usaron materiales de la región para evitar un largo transporte?\nCada categoría otorga cierto puntaje en una calificación sobre 100. A su vez, la certificación cuenta con diversos niveles según el puntaje obtenido. Existe la certificación base, la de plata, la de oro y finalmente la de platino, siendo está última la más difícil de obtener necesitando 80 puntos o más.\nLa Torre Reforma cuenta con la certificación LEED de platino, gracias a esta el edificio es ahora un referente en la industria como un símbolo de sostenibilidad. Algunos de los factores que destacan es que a la hora de la construcción no se destruyó la edificación ya existente incluso se preservó la fachada. Además el edificio cuenta con unos orificios a los lados en forma de tetris que están colocados de forma estratégica para promover la ventilación natural, mejorando el flujo de aire y reduciendo el uso del aire acondicionado. Algunas de las salas de juntas se encuentran conectadas a las terrazas, así que se puede abrir las puertas para que el aire circule, esto también ayudando a una excelente ventilación. Por último, el uso de grandes ventanales y puertas de cristal permiten el uso de luz natural como fuente lumínica a lo largo del día. \nActualmente en México existen 509 edificios con esta certificación, de los cuales sólo 50 tienen la certificación de platino. Más allá de verse como premios, estos nuevos marcos de referencia son fundamentales para la toma de decisiones acertadas e informadas al momento de desarrollar proyectos, ya sea de arquitectura, diseño o cualquier otro ámbito.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/73/Torre_Reforma_2016.jpg",
+    "author": "Melanie Carbajal Depraect",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Certificaciones",
+      "arquitectura",
+      "sostenible",
+      "LEED"
+    ],
+    "bibliography": "Bibliografía\nBioconstrucción y energía alternativa. (s.f.). Certificación LEED. Recuperado de: https://bioconstruccion.com.mx/certificacion-leed/\nTorre Reforma. (2021). Torre Reforma. Recuperado de: https://www.torrereforma.com/\nInmobiliare. (2022). 5 proyectos con certificación LEED en CDMX. Recuperado de:\nhttps://inmobiliare.com/5-proyectos-con-certificacion-leed-en-mexico/",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d887672e",
+    "title": "El mercado de las energías renovables, apuntando a la energía solar",
+    "subtitle": "Comos disminuir tu consumo electrico y ser más sostenible por medio de paneles solares",
+    "type": "article",
+    "body": "La energía electrica hoy en día es indispensable para realizar cualquier actividad, ya sea trabajar, estudiar, hobbies, entre otras cosas, sin embargo, su generación implica una liberación alta de emisiones de gases de efecto invernadero dado que en su mayoría es generada a partir de la quema de combustibles fósiles como el gas natural y combustóleo (CONAHCYT, 2023). Ante esto, como solución surgen las energías limpias, fuentes de energía y procesos de generación de electricidad donde las emisiones se encuentran por debajo de los umbrales permitidos o son nulas ya que provienen de fuentes renovables como el sol (fotovoltaica), viento (eolica), agua (hidroeléctrica) y biomasa, y no utilizan combustibles fósiles (DOF, 2014). \n\nEn la actualidad, la tecnología que más ha crecido en el mercado energético han sido los paneles solares, dado que permite el aprovechamiento de una fuente abundante, radiación solar, tienen alta capacidad de adaptabilidad, es decir, pueden ser aplicados a la industria, comercios o uso domestico y disponibilidad, pues pueden ser adquiridos con mayor facilidad que otras tecnologías (BBVA, 2022). \n\nPor lo anterior, su implementación a nivel doméstico representa un ahorro en costos del consumo eléctrico (al reducir la demanda a la red eléctrica), una reducción en las emisiones al hacer un uso eficiente de los recursos naturales y la disminución de la dependencia de los combustibles fósiles. Adicionalmente, dadas las condiciones climáticas en México, más del 70% del territorio nacional tiene potencial para su instalación, haciendo rentable para el usuario lainstalación considerando el bajo costo de producción y ahorros hasta de 100 mil pesos por hogar (IMCO, 2019).  \n\nLos paneles solares representan una alternativa a la generación de energía eléctrica más sostenible que hace un aprovechamiento de recursos naturales renovables como la luz solar, permitiendo reducir la dependencia de la red eléctrica, y por consiguiente reducir el costo por energía en los hogares.",
+    "image": "https://images.unsplash.com/photo-1660330589257-813305a4a383?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
+    "author": "Lidieth Quezada Colorado",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Energías renovables",
+      "sostenibilidad",
+      "paneles solares"
+    ],
+    "bibliography": "BBVA. (2022). ¿Qué son los paneles solares y cuáles son sus ventajas? Bbva.mx; Educación Financiera . https://www.bbva.mx/educacion-financiera/blog/beneficios-de-los-paneles-solares-en-mexico.html \nCONAHCYT. (2023). Capacidad y generación. Plataforma Nacional de Energía, Ambiente Y Sociedad. https://energia.conacyt.mx/planeas/electricidad/generacion \nDIARIO OFICIAL DE LA FEDERACIÓN [DOF]. (2014). LEY DE LA INDUSTRIA ELÉCTRICA . https://www.diputados.gob.mx/LeyesBiblio/pdf/LIElec.pdf \nIMCO. (2019). Energía solar para los hogares de México. Energía Solar Para Los Hogares de México. https://imco.org.mx/energia-solar-los-hogares-mexico/",
+    "category": "Económico"
+  },
+  {
+    "_id": "6a226c484b54f546d887672f",
+    "title": "De la Invención a la Crisis Ambiental: La Historia de los CFCs y la Capa de Ozono",
+    "subtitle": "El agujero de ozono",
+    "type": "article",
+    "body": "Rowland, profesor de química en la Universidad de California, Irvine, y Molina, becario postdoctoral en el laboratorio de Rowland, habían demostrado que los clorofluorocarbonos (CFC) podían destruir el ozono, una molécula formada por tres átomos de oxígeno (O3) en la estratosfera de la Tierra. Ese ozono estratosférico absorbe la radiación ultravioleta que, de otro modo, llegaría a la superficie de la Tierra. En ese momento, los CFC se usaban en refrigeradores, aires acondicionados y aerosoles. Estos compuestos son inertes y esencialmente no tóxicos, características que los hacen adecuados para estas aplicaciones. Sin embargo, estas mismas características también los convertían en un peligro para la vida en la Tierra. Rowland, profesor de química en la Universidad de California, Irvine, y Molina, becario postdoctoral en el laboratorio de Rowland, habían demostrado que los clorofluorocarbonos (CFC) podían destruir el ozono, una molécula formada por tres átomos de oxígeno (O3) en la estratosfera de la Tierra. Ese ozono estratosférico absorbe la radiación ultravioleta que, de otro modo, llegaría a la superficie de la Tierra. En ese momento, los CFC se usaban en refrigeradores, aires acondicionados y aerosoles. Estos compuestos son inertes y esencialmente no tóxicos, características que los hacen adecuados para estas aplicaciones. Sin embargo, estas mismas características también los convertían en un peligro para la vida en la Tierra.\n\nEn la década de 1920, los sistemas de refrigeración y aire acondicionado utilizaban compuestos tóxicos e inflamables como refrigerantes. Thomas Midgely Jr. y su equipo desarrollaron alternativas no tóxicas, como los clorofluorocarbonos (CFCs), que se volvieron populares y llevaron a una producción masiva en la década de 1970.\n\nSin embargo, en la década de 1970, los científicos, como F. Sherwood Rowland y Mario J. Molina, descubrieron que los CFCs liberados en la atmósfera destruían la capa de ozono estratosférico, crucial para proteger contra la radiación ultravioleta dañina. Esto desencadenó preocupaciones sobre la salud y el medio ambiente.\n\nA pesar de la controversia inicial, las pruebas contundentes, incluido el descubrimiento del agujero de la capa de ozono en la Antártida en 1985, llevaron a la firma del Protocolo de Montreal en 1987, un acuerdo internacional para reducir y eliminar gradualmente la producción de CFCs y otras sustancias dañinas para la capa de ozono.\n\nEste episodio demuestra cómo la investigación científica y la acción internacional pueden abordar problemas ambientales globales y resalta la importancia de la protección de la capa de ozono como un precedente para abordar el cambio climático.",
+    "image": "https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2016/10/AdobeStock_87198884-1024x733.jpeg",
+    "author": "Dana Uribe",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Clorofluorocarbonos (CFCs)",
+      "Capa de ozono",
+      "Protocolo de Montreal",
+      "Impacto ambiental."
+    ],
+    "bibliography": "LINK: https://www.acs.org/education/whatischemistry/landmarks/historia-quimica/clorofluorocarbonos-ozono.html\n\nAPA: Los clorofluorocarbonos y el agujero de ozono. (s/f). American Chemical Society. Recuperado de https://www.acs.org/education/whatischemistry/landmarks/historiaquimica/clorofluorocarbonos-ozono.html",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876730",
+    "title": "La controversia sobre la Huella de Carbono",
+    "subtitle": "Cómo una estrategia de marketing cambió la perspectiva de la sostenibilidad",
+    "type": "article",
+    "body": "Un término que se ha popularizado en la última década cuando se habla sobre la sostenibilidad es la huella de carbono. La huella de carbono es un indicador ambiental que mide las emisiones de gases de efecto invernadero generadas por las actividades de los seres humanos (Iberdrola, 2021).\n\nLa huella de carbono ha concientizado a incontables individuos sobre la relación entre las actividades de los seres humanos y su impacto en el medio ambiente, además de que hace posible evaluar estrategias para reducir las emisiones de gases de efecto invernadero. Consecuentemente, la huella de carbono ha tomado un papel importante en los esfuerzos de sostenibilidad y lucha contra el cambio climático, como se ve reflejado en la Agenda 2030 para el Desarrollo Sostenible de la Organización de las Naciones Unidas, en el Objetivo #13: Acción por el clima (Organización de las Naciones Unidas, 2023). \n\n¿De dónde surge este término? ¿Por qué es tan relevante? El concepto de la huella de carbono surge a finales del siglo XX; no obstante, el término se popularizó gracias a que la empresa BP (antes conocida como British Petroleum) lanzó su “calculadora de huella de carbono” en el año 2004. El principal objetivo de esta calculadora fue permitir que los individuos calcularan su huella de carbono personal y descubrir cómo su estilo de vida contribuye al cambio climático. \n\nSin embargo, otro objetivo de esta campaña de marketing fue dirigir los esfuerzos de sostenibilidad a un nivel individual para desviar la atención del hecho de que empresas como BP produjeron alrededor de 4 millones de barriles de petróleo diarios en el año 2005 (Kaufman, 2020).\n\nSu estrategia de marketing comete “Greenwashing” al transmitir la noción de que BP es una empresa ambientalmente responsable, aún y tomando en cuenta que forma parte de una de las industrias más contaminantes del planeta (Heatable, 2023).\n\nA pesar de la polémica popularización del término “huella de carbono”, es imposible negar que ha ayudado a fortalecer una cultura de consumo responsable, a establecer metas que reduzcan las emisiones de efecto invernadero, a combatir el cambio climático y a fomentar a que las personas, empresas y organizaciones prioricen la sostenibilidad.",
+    "image": "https://i.guim.co.uk/img/media/b5df75bb8eca9f1bca2f330c39755bdc6452ea2e/0_43_7212_4328/master/7212.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=e215b24bc618883f7d2bb412ad1ebeea",
+    "author": "Daniela Ortega",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Huella de carbono",
+      "greenwashing",
+      "sostenibilidad"
+    ],
+    "bibliography": "Heatable. (2023). Most Polluting Industries in 2023 Revealed. [Industrias más contaminantes en 2023, reveladas]. Heatable.co.uk. https://heatable.co.uk/boiler-advice/most-polluting-industries\nIberdrola. (2021, April 22). HUELLA DE CARBONO. Iberdrola; Iberdrola. https://www.iberdrola.com/sostenibilidad/huella-de-carbono\nKaufman, M. (2020, July 13). The devious fossil fuel propaganda we all use. Mashable; Mashable. https://mashable.com/feature/carbon-footprint-pr-campaign-sham\nOrganización de las Naciones Unidas. (2023). Objetivo 13: Adoptar medidas urgentes para combatir el cambio climático y sus efectos. Desarrollo Sostenible. https://www.un.org/sustainabledevelopment/es/climate-change-2/",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876731",
+    "title": "El impacto del cine en el medio ambiente",
+    "subtitle": "Rodajes verdes",
+    "type": "artículo",
+    "body": "El cine es una industria muy grande y vasta, dónde para producir un film se utilizan grandes cantidades de materiales y recursos que muchas veces son ilimitados.\nEn cuanto al gasto de materiales, pensemos en sólo los materiales para la decoración de cada escena de cualquier film, la madera, el plastico y otros de ellos, pueden quedar inservibles despues de su uso principal y estos se deshechan inmediatamente. Así mismo sucede con los materiales de un maquillaje para efectos visuales o el guardaropa y vesuario de una producción.\nPara un panorama más amplio, cabe destacar que también el gasto de mantener un equipo dentro de la producción es bastante elevado ya que un equipo de este tipo ocupa desde 50 a 500 personas que necesitan alimentarse e hidratarse, cómo estar debajo de un edificio con buena iluminación y un ambiente agradable que además ocupa mantenimiento.\nSe estima que se crean unas 700 película y 500 series solo en Estados Unidos y el dióxido de carbono estimado al año es de 15 millones de toneladas.\nExisten compañías que ya han estado haciendo una labor por reducir este impacto en el medio ambiente. Se busca optimizar la producción con ciertas estrategias que ayuden a ello, desde planear una película con guión dónde se ocupen menos materiales o implementar matriales que se puedan reutilizar o reciclar, mantener el edificio con energías renovables o incluso algo tan simple como cambiar las botellas de agua para el cast y staff por botes reusables o biodegradables.\nUn buen ejemplo de esto, fue la producción de la película Spider-Man 2 que se le reconoció debidio a tener una estrategia eco-friendly en su creación.\nEl cine además de entretener, nos da distintas perspectivas de problemas que se desarrollan hoy en día. Así como nos dejan una enseñanza para que podamos implementar medidas para proteger al medio ambiente, la industria cinematográfica necesita continuar con el sentimiento de preocupación y seguir planeando estrategias para reducir su impacto ambiental.",
+    "image": "https://media.sitioandino.com.ar/p/bedcd30db0702619a8e5aac262fc8d38/adjuntos/335/imagenes/000/810/0000810381/790x0/smart/cine-medio-ambiente.png",
+    "author": "Alexa Valladares Cristán",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "cine",
+      "sostenibilidad",
+      "medio ambiente"
+    ],
+    "bibliography": "Magro, S. (2020, 24 enero). ¿Para cuándo un premio a la película más sostenible? | OpenMind. OpenMind. https://www.bbvaopenmind.com/ciencia/medioambiente/para-cuando-un-premio-a-la-pelicula-mas-sostenible/#:~:text=La%20industria%20del%20cine%20genera,energ%C3%ADa%20y%20material%20de%20decorados.\n\nSáez, C. (2019, 31 enero). Prácticas ecológicas en la industria del cine | CCCB LAB. CCCB LAB. https://lab.cccb.org/es/practiques-ecologiques-a-la-industria-del-cine/",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876732",
+    "title": "La Catástrofe Industrial de Bhopal: El Legado Perdurante de una Fuga Mortal",
+    "subtitle": "El Desastre de Union Carbide en India y su Impacto Duradero en la Salud y el Medio Ambiente",
+    "type": "artículo",
+    "body": "Fuga de isocianato de metilo producido por la fábrica de plaguicidas Union Carbide en Bhopal, India, ocasionó más de 7000 muertos, miles de lesionados y, a 35 años, continúa dañando a la población. La madrugada del 3 de diciembre de 1984 una nube tóxica invadió la ciudad de Bhopal, estado de Madhya Pradesh, India. La fábrica de plaguicidas de la empresa estadunidense Union Carbide dejó escapar isocianato de metilo (MIC), gas sumamente tóxico que se emplea para fabricar insecticidas. El accidente se produjo debido a un aumento de presión en el tanque de almacenamiento, que hizo se abriera la válvula de seguridad y lo liberara a la atmósfera. Los sistemas de seguridad de la planta, como el lavador de gases y la torre de quemado, no funcionaron para evitar la tragedia.\n\nHubo más de 7000 muertos, mucha gente estaba durmiendo a esa hora y no tuvo tiempo de escapar. También murieron centenares de animales domésticos, silvestres y de uso comercial, además se contaminaron los pozos de agua, que afectó a las familias que la bebieron.\n\nEl isocianato de metilo es una sustancia que se puede absorber por inhalación y a través de la piel; ataca a los sistemas respiratorio y circulatorio, con síntomas similares a los de un ataque de asma. La inhalación continua durante unos minutos provoca la muerte por quemadura química de los pulmones y tiene efectos mutagénicos. Muchas personas quedaron ciegas o sufrieron la destrucción del olfato, oído o tacto. Otras sucumbieron a efectos secundarios neurológicos, inmunológicos y cancerígenos. Mujeres en estado de gestación tuvieron abortos espontáneos, otras que dieron a luz en los meses siguientes, alumbraron hijos con malformaciones congénitas. Provocó también daños genéticos y hormonales en las personas.\n\nAún ahora, después de 35 años del accidente, la población sufre las graves secuelas: nacen niños con discapacidades físicas y psíquicas, ciegos y sordos. con enfermedades crónicas, problemas respiratorios, ceguera, cánceres y desórdenes hormonales.",
+    "image": "https://media.istockphoto.com/id/1371033231/es/foto/tragedia-de-bhopal-gas.jpg?s=1024x1024&w=is&k=20&c=rorP2KAiZjKgWz_aIfNgKixEVUn3M8bOd-_l3K8xTvg=",
+    "author": "Gobierno de México",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Bophal",
+      "Unión Carbide",
+      "Isocianato de metilo"
+    ],
+    "bibliography": "LINK: https://www.gob.mx/cenapred/articulos/la-catastrofe-indurtrial-mas-grande-de-la-historia#:~:text=Fuga%20de%20isocianato%20de%20metilo,contin%C3%BAa%20da%C3%B1ando%20a%20la%20poblaci%C3%B3n.&text=La%20madrugada%20del%203%20de,estado%20de%20Madhya%20Pradesh%2C%20India.",
+    "category": "Social"
+  },
+  {
+    "_id": "6a226c484b54f546d8876733",
+    "title": "Desechos en el área de salud",
+    "subtitle": "Residuos sanitarios y su impacto en el medio ambiente",
+    "type": "article",
+    "body": "El manejo de residuos en el área de salud es un tema importante que se debe reconocer y visualizar a escala. En países desarrollados, se produce en promedio medio kilo de desechos peligrosos por cama de hospital, mientras que en aquellos menos desarrollados este número es 0.2 kg (OMS, 2018). Sin embargo, debido a que en ellos aún no existe un adecuado manejo de residuos sanitarios, la cifra aumenta considerablemente.\nPrimeramente, esta separación entre el tipo de desechos en lugares donde se otorgue atención de salud a una población es esencial para evitar riesgos mayores para la población en general, donde pueden servir como iniciadores de infecciones y daños físicos. Estos desechos pueden provenir de hospitales, centros de salud, clínicas, laboratorios, e incluso centros de investigación (Méndez, 2012).\nPor otra parte, aquellos desechos generales que no muestran un riesgo para la población comúnmente son incinerados en países en desarrollo; representan un 85% de los residuos totales de un hospital. Esto llega a causar daños significativos al ambiente, al expulsarse diferentes sustancias contaminantes que afectarían la atmósfera, con un potencial cancerígeno (OMS, 2018). \nIncluso puede ocurrir que residuos peligrosos utilizados anteriormente, como jeringas u otros, se reutilicen después de ser desechados, siendo un enorme riesgo sanitario para aquellas personas encargadas de manejar estos residuos (Salud sin Daño, 2023). Evitar la exposición de la población general a ellos es fundamental.\nEs importante notar este tipo de acciones especialmente en hospitales en países en desarrollo o en comunidades sin la capacidad para el manejo de estos residuos, para el desarrollo de diferentes estrategias enfocadas en su tratamiento adecuado. \nSe deben conocer e implementar medidas como seleccionar los métodos adecuados reduciendo riesgos sanitarios en todo el procesamiento de estos desechos, así como la expansión de este conocimiento a diferentes centros de salud sin importar su tamaño.",
+    "image": "https://images.unsplash.com/photo-1526814642650-e274fe637fe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    "author": "Gerardo Perales Gaona",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "hospitales",
+      "sanidad",
+      "manejo de residuos"
+    ],
+    "bibliography": "OMS (2018). Desechos de las actividades de atención sanitaria. Organización mundial de la Salud. Recuperado de: https://www.who.int/es/news-room/fact-sheets/detail/health-care-waste\nMéndez, J.A (2012) Los desechos sanitarios: su impacto en el medio ambiente. Instituto de Bioética Juan Pablo II. Recuperado de: http://www.cbioetica.org/revista/122/122-0408.pdf\nSalud sin Daño (2023) Residuos hospitalarios. Recuperado de: https://saludsindanio.org/americalatina/temas/residuos-hospitalarios",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876734",
+    "title": "Día Mundial de los Humedales: Celebrando y Preservando Ecosistemas Vitales",
+    "subtitle": "Un Vistazo a la Importancia de los Humedales y las Amenazas que Enfrentan",
+    "type": "article",
+    "body": "El 2 de febrero, se celebra el Día Mundial de los Humedales en conmemoración de la aprobación del Convenio Ramsar en 1971. Este convenio es único en su enfoque en la protección de los humedales como un asunto de importancia internacional. Los humedales, definidos como áreas de tierra cubiertas de agua que albergan diversos ecosistemas, son cruciales tanto para la humanidad como para el desarrollo sostenible del planeta.\n \n Estos ecosistemas son diversos, pudiendo ser de agua dulce, salobre o salada. Los humedales se caracterizan por ser hábitats de una gran variedad de especies animales y vegetales. Aves acuáticas como los ibis y el martín pescador encuentran en los humedales refugio para anidar y alimentarse, dotando a estos entornos de una belleza y vitalidad únicas.\n \n A pesar de su importancia, los humedales enfrentan serias amenazas. La actividad humana y los efectos negativos del cambio climático han tenido un impacto devastador. Desde 1970, el 81% de las poblaciones de especies de humedales continentales y el 36% de las especies costeras y marinas han disminuido debido a la sobreexplotación y a la crisis climática.\n \n Los humedales desempeñan un papel crucial en la sostenibilidad del planeta. Proporcionan alimentos esenciales como el arroz y suministran la mayor parte del agua dulce del mundo. También regulan el clima y los regímenes hidrológicos, reducen la contaminación y mitigan el riesgo de desastres naturales, como inundaciones o sequías. Además, los humedales almacenan carbono, y turberas, marismas y manglares retienen más carbono que los bosques.\n \n La actual crisis del agua amenaza la vida en la Tierra, ya que utilizamos más agua de la que la naturaleza puede regenerar. Esta amenaza pone en peligro la supervivencia de los humedales, afectando a miles de especies y a millones de personas que dependen de estos ecosistemas.\n \n Desde 1700, casi el 90% de los humedales se ha perdido, y su desaparición ocurre tres veces más rápido que la de los bosques. La pérdida de estos ecosistemas podría tener efectos devastadores en la humanidad. Por lo tanto, es crucial tomar conciencia de la importancia de proteger estos entornos naturales en el Día Mundial de los Humedales y promover su gestión sostenible para preservar la biodiversidad y asegurar un futuro sostenible.",
+    "image": "https://provea.org/wp-content/uploads/2020/12/Efemerides_Humedales.jpg",
+    "author": "Dana Isabel Uribe Reza",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "Humedales",
+      "Convenio Ramsar",
+      "Biodiversidad",
+      "Sostenibilidad"
+    ],
+    "bibliography": "Los humedales, islas de agua repletas de biodiversidad. (2021, enero 30). Fundación Aquae. https://www.fundacionaquae.org/wiki/biodiversidad-humedales/",
+    "category": "Ambiental"
+  },
+  {
+    "_id": "6a226c484b54f546d8876735",
+    "title": "Biomateriales sustentables en el área de Salud",
+    "subtitle": "Polímeros biodegradables y sus aplicaciones en medicina",
+    "type": "article",
+    "body": "Debido a la creciente problemática ambiental en la actualidad, existe una demanda por parte de organismos internacionales para implementar diferentes productos y servicios que sean englobados por bases sustentables. Esto con el objetivo de disminuir el impacto producido por desechos generados y la reducción de la huella de carbono total del consumo de utilidades o la utilización de un servicio. Gracias a esto, en el área de salud han surgido a la relevancia el uso de polímeros biodegradables a manera de innovación para combatir este problema ambiental actual.\n Este material busca reemplazar los plásticos desechables u otros compuestos para que, al acabarse su vida útil como dispositivos o implementaciones médicas, puedan ser degradados de manera natural por el mismo cuerpo o desechados sin un impacto mayor en el ambiente. Este proceso de degradación puede darse debido a que sus estructuras pueden descomponerse en fragmentos químicos de menor tamaño, para finalmente ser absorbidos por el mismo cuerpo sin dejar residuos peligrosos (Kunduru et al., 2016).\n Es importante notar la importancia de la elección correcta del material utilizado para estos biomateriales, debido al contacto directo con el cuerpo humano y el riesgo de ser detectado por el sistema inmune o rechazado del organismo directamente. Para esto, existen diferentes criterios a tomar en cuenta al momento de la creación de estos biomateriales, como ser capaces de no crear respuestas inflamatorias, tener un tiempo de degradación acorde a su vida útil, ser degradados de manera no tóxica, entre otros factores importantes (Ulery et al., 2011).\n Este tipo de materiales ya cuenta con diferentes aplicaciones médicas relevantes, como para la creación de contenedores, instrumentos médicos, suturas, apósitos, gasas, catéteres, implantes, e incluso prótesis externas (Oliver, 2021). En general, esta área de investigación relacionada con la ingeniería de tejidos es sumamente relevante para el desarrollo del área médica y su importante relación con la sustentabilidad.",
+    "image": "https://images.unsplash.com/photo-1486825586573-7131f7991bdd?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "author": "Gerardo Perales Gaona",
+    "author_image": "",
+    "page_image": "",
+    "tags": [
+      "biomateriales",
+      "medicina",
+      "tejidos",
+      "biodegradable"
+    ],
+    "bibliography": "Kunduru, K. R., Basu, A., & Domb, A. J. (2016). Biodegradable Polymers: Medical Applications. Encyclopedia of Polymer Science and Technology, 1–22. https://doi.org/10.1002/0471440264.pst027.pub2\n Ulery, B. D., Nair, L. S., & Laurencin, C. T. (2011). Biomedical applications of biodegradable polymers. Journal of Polymer Science Part B: Polymer Physics, 49(12), 832–864. https://doi.org/10.1002/polb.22259\n Oliver, R. (2021). Marcapasos biodegradables, la penúltima frontera de la biomedicina. Ethic. https://ethic.es/2021/09/marcapasos-biodegradables-la-penultima-frontera-de-la-biomedicina/",
+    "category": "Social"
+  }
+]
