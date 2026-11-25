@@ -581,6 +581,16 @@ describe('Contenido versionado (seed:content)', () => {
     }
   });
 
+  test('seed:presentations conserva el _id y la portada al actualizar una presentacion', () => {
+    const { mergePresentation } = require('../seed/seedPresentations');
+    const lista = [{ _id: 'a1', name: 'X', cover: 'portada.jpg', slides: ['1'] }];
+    expect(mergePresentation(lista, 'X', ['2', '3'])).toEqual([{ _id: 'a1', name: 'X', cover: 'portada.jpg', slides: ['2', '3'] }]);
+    const conNueva = mergePresentation(lista, 'Y', ['9']);
+    expect(conNueva[0]).toBe(lista[0]);
+    expect(conNueva[1]).toMatchObject({ name: 'Y', cover: '', slides: ['9'] });
+    expect(conNueva[1]._id).toMatch(/^[0-9a-f]{24}$/);
+  });
+
   test('las categorias son las que usa el frontend para recomendar articulos', () => {
     const deArticulos = new Set(contenido('articles.json').map(a => a.category));
     const dePreguntas = new Set(contenido('evaluations.json').flatMap(e => e.questions.map(q => q.category)));
