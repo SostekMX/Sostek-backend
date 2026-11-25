@@ -81,7 +81,7 @@ La app solo **lee** el contenido. Se edita en los JSON de `seed/` y se carga con
 | Seed | Fuente | Qué hace |
 |---|---|---|
 | `npm run seed:content` | `seed/content/*.json` | Hace upsert por `_id`: no borra, no duplica y conserva los favoritos y las URLs |
-| `npm run seed:quiz` | `seed/quiz_data.json` | Hace upsert por nivel y tipo |
+| `npm run seed:quiz` | `seed/quiz_data.json` | Hace upsert por nivel y tipo, y copia los tramos de retroalimentación a cada test |
 | `npm run seed:tutorial` | `seed/tutorial_data.json` | Reemplaza el documento del tutorial |
 | `npm run seed:presentations "Nombre" "carpeta"` | imágenes locales | Sube las slides a Cloudinary (necesita `CLOUDINARY_*`) y agrega la presentación a `seed/content/presentations.json`. Después corre `seed:content`. |
 
