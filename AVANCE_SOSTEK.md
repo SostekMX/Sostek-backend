@@ -81,7 +81,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 - **`GET /user/favorites`** — retorna el array `favorites` del usuario autenticado
 - **`DELETE /user/favorites/:content_id`** — elimina el favorito con ese `content_id` usando `$pull` de MongoDB
 - **`GET /tutorial`** — retorna el documento único de tutorial con `title`, `rules` y `cards[]` (16 tarjetas de escenario + 32 de solución); cada tarjeta tiene `name`, `description`, `type` y `resources` (ambiental/economico/social)
-- **`GET /quiz`** — retorna `quizzes[]` ordenados por `level` y `type`; con `?level=N` filtra por nivel (un nivel sin contenido da `[]`, uno inválido da `success: false`). Cada quiz trae `blocks[].questions[].options[]` con `score` 0–3 y `feedback`
+- **`GET /quiz`** — retorna `quizzes[]` ordenados por `level` y `type`; con `?level=N` filtra por nivel (un nivel sin contenido da `[]`, uno inválido da `success: false`). Hay 6 tests: niveles 1 a 3, cada uno con type 1 (Modelo de Negocio) y type 2 (Empresa Rentable), de 23 preguntas. Cada pregunta trae su `weight` (4 estándar, 5 estratégica), cada opción su `score` (escalón 0–3), y cada quiz sus 5 `tiers` de retroalimentación final. La opción vale `score × weight / 3` y el total va de 0 a 100 (ver API_CONTRACTS)
 - **Middleware `verifyToken`** — valida JWT en header `Authorization: Bearer <token>` antes de rutas protegidas
 - **Rate limiting** — `/user/signup` y `/user/login` limitados a 10 requests cada 15 minutos
 - **Validación y sanitización de inputs** — `express-validator` en todos los endpoints con body; incluye longitudes máximas (name/surname 50, email 100, password 128, occupation 100), tipos correctos (`isFloat` en scores, `isString` en opcionales), y sanitización (`.trim()`, `.normalizeEmail()`)
@@ -192,8 +192,8 @@ colección: tutorial  (documento único)
 colección: quizzes  (único por level + type)
     ├── level, type      (Number, required — p. ej. 3 y 1)
     ├── title, summary, focus (String)
-    ├── feedbackDraft    (Boolean — true mientras Carlos revisa la retroalimentación)
-    └── blocks           (Array de { name, questions: [{ text, options: [{ text, score: 0–3, feedback }] }] })
+    ├── blocks           (Array de { name, questions: [{ text, weight: 4|5, options: [{ text, score: 0–3 }] }] })
+    └── tiers            (Array de { min, title, text } — 5 tramos de retroalimentación, iguales en los 6 tests)
 ```
 
 **Variables de entorno**: cada una está explicada en [`.env.example`](.env.example), que es la única referencia. Los valores de producción viven en Render; ve [`DESPLIEGUE.md`](https://github.com/SostekMX/Sostek/blob/main/DESPLIEGUE.md).
@@ -213,9 +213,8 @@ colección: quizzes  (único por level + type)
 | `seed/seedContent.js` | Carga `seed/content` con upsert por `_id`; no borra nada. Uso: `npm run seed:content` |
 | `seed/seedPresentations.js` | Sube imágenes locales a Cloudinary y agrega la presentación a `seed/content/presentations.json`. Uso: `npm run seed:presentations "Nombre" "ruta/carpeta"` |
 | `seed/seedTutorial.js` | Carga el instructivo del juego desde `seed/tutorial_data.json`. Uso: `npm run seed:tutorial` |
-| `seed/seedQuiz.js` | Upsert idempotente de los quizzes por nivel y tipo desde `seed/quiz_data.json`; no borra nada. Uso: `npm run seed:quiz` |
-| `seed/quiz_data.json` | Banco del quiz, con el borrador de retroalimentación por opción |
-| `seed/quiz_nivel3.txt` | Texto original de Carlos para el Nivel 3; un test verifica que coincida con el JSON |
+| `seed/seedQuiz.js` | Upsert idempotente de los quizzes por nivel y tipo desde `seed/quiz_data.json`: copia los tramos a cada test, conserva los `_id` y no borra nada. Uso: `npm run seed:quiz` |
+| `seed/quiz_data.json` | Los 6 tests y los 5 tramos, extraídos del PDF de ponderación de Carlos (`Ponderacion_retro.pdf`, lo guarda coordinación). Un test valida escalas, preguntas estratégicas, máximo de 100 y tramos |
 | `seed/tutorial_data.json` | El instructivo completo: reglas y 48 tarjetas (16 de escenario y 32 de solución) |
 | `scripts/dev-memoria.js` | `npm run dev:memoria`: MongoDB en memoria con el contenido de `seed/` y el servidor |
 | `.env.example` | Plantilla de variables de entorno. Se copia a `.env`, que no se versiona |

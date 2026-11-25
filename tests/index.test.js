@@ -451,85 +451,140 @@ describe('POST /user/avatar', () => {
 // ─── Quiz ──────────────────────────────────────────────────────────────────────
 
 describe('Quiz', () => {
-  const fs = require('fs');
-  const path = require('path');
   const quizData = require('../seed/quiz_data.json');
+  const ESTRATEGICAS = [6, 7, 8, 14, 15, 16, 22, 23];
+  const ESCALAS = { 4: [0, 1.33, 2.67, 4], 5: [0, 1.67, 3.33, 5] };
+  const preguntas = quiz => quiz.blocks.flatMap(b => b.questions);
+  // Puntos de una opcion con 2 decimales, como los escribe el PDF de Carlos.
+  const puntos = (opcion, pregunta) => Math.round((opcion.score * pregunta.weight / 3) * 100) / 100;
+  // El tramo de un total: el de mayor min que no lo rebasa.
+  const tramo = total => [...quizData.tiers].sort((a, b) => b.min - a.min).find(t => total >= t.min).title;
 
   // Se piden dentro de cada test para usar el mismo mongoose que la app (beforeAll hace resetModules).
   const modelos = () => require('../src/models/contentModel');
   const sembrar = () => require('../seed/seedQuiz').upsertQuizzes(quizData);
 
-  test('GET /quiz?level=3 retorna los dos tipos con sus bloques', async () => {
-    await sembrar();
-    const res = await request(app).get('/quiz?level=3');
-    expect(res.body.success).toBe(true);
-    expect(res.body.quizzes.map(q => q.type)).toEqual([1, 2]);
-    res.body.quizzes.forEach((quiz, i) => {
-      expect(quiz.blocks.map(b => b.name)).toEqual(quizData[i].blocks.map(b => b.name));
-      expect(quiz.blocks.map(b => b.questions.length)).toEqual(quizData[i].blocks.map(b => b.questions.length));
+  describe('datos de quiz_data.json (fuente: el PDF de Carlos)', () => {
+    test('hay 6 tests: niveles 1 a 3, cada uno con Modelo de Negocio y Empresa Rentable', () => {
+      expect(quizData.quizzes.map(q => [q.level, q.type, q.title])).toEqual([
+        [1, 1, 'Modelo de Negocio'], [1, 2, 'Empresa Rentable'],
+        [2, 1, 'Modelo de Negocio'], [2, 2, 'Empresa Rentable'],
+        [3, 1, 'Modelo de Negocio'], [3, 2, 'Empresa Rentable'],
+      ]);
+    });
+
+    test('cada test tiene 23 preguntas en 3 bloques y cada pregunta exactamente 4 opciones', () => {
+      for (const quiz of quizData.quizzes) {
+        expect(quiz.blocks.map(b => b.questions.length)).toEqual([8, 8, 7]);
+        preguntas(quiz).forEach(p => expect(p.options).toHaveLength(4));
+      }
+    });
+
+    test('cada pregunta usa una escala completa sin repetir valores', () => {
+      for (const quiz of quizData.quizzes) {
+        for (const p of preguntas(quiz)) {
+          expect([4, 5]).toContain(p.weight);
+          expect(p.options.map(o => o.score).sort()).toEqual([0, 1, 2, 3]);
+          expect(p.options.map(o => puntos(o, p)).sort((a, b) => a - b)).toEqual(ESCALAS[p.weight]);
+        }
+      }
+    });
+
+    test('las preguntas estrategicas son exactamente la 6, 7, 8, 14, 15, 16, 22 y 23', () => {
+      for (const quiz of quizData.quizzes) {
+        const deCinco = preguntas(quiz).map((p, i) => (p.weight === 5 ? i + 1 : null)).filter(Boolean);
+        expect(deCinco).toEqual(ESTRATEGICAS);
+      }
+    });
+
+    test('cada test va de 0 a 100 puntos exactos, sumados en tercios', () => {
+      for (const quiz of quizData.quizzes) {
+        const maxTercios = preguntas(quiz).reduce((s, p) => s + Math.max(...p.options.map(o => o.score)) * p.weight, 0);
+        const minTercios = preguntas(quiz).reduce((s, p) => s + Math.min(...p.options.map(o => o.score)) * p.weight, 0);
+        expect(maxTercios).toBe(300);
+        expect(maxTercios / 3).toBe(100);
+        expect(minTercios).toBe(0);
+      }
+    });
+
+    test('los tramos de retroalimentacion cubren de 0 a 100 y respetan sus limites', () => {
+      expect(quizData.tiers.map(t => [t.min, t.title])).toEqual([
+        [0, 'Nivel Base-Inicial'], [20, 'Nivel Inicial'], [40, 'Desarrollo Intermedio'],
+        [60, 'Desarrollo Intermedio-avanzado'], [80, 'Nivel Avanzado'],
+      ]);
+      quizData.tiers.forEach(t => expect(t.text.trim()).not.toBe(''));
+      expect(tramo(0)).toBe('Nivel Base-Inicial');
+      expect(tramo(19.99)).toBe('Nivel Base-Inicial');
+      expect(tramo(20)).toBe('Nivel Inicial');
+      expect(tramo(179 / 3)).toBe('Desarrollo Intermedio');
+      expect(tramo(80)).toBe('Nivel Avanzado');
+      expect(tramo(100)).toBe('Nivel Avanzado');
     });
   });
 
-  test('nivel sin contenido retorna lista vacia', async () => {
-    await sembrar();
-    const res = await request(app).get('/quiz?level=1');
-    expect(res.body).toEqual({ success: true, quizzes: [] });
-  });
+  describe('GET /quiz y seed:quiz', () => {
+    test('GET /quiz devuelve los 6 tests ordenados, con pesos y tramos', async () => {
+      await sembrar();
+      const res = await request(app).get('/quiz');
+      expect(res.body.success).toBe(true);
+      expect(res.body.quizzes.map(q => [q.level, q.type])).toEqual([[1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2]]);
+      res.body.quizzes.forEach((quiz, i) => {
+        expect(quiz.blocks).toEqual(quizData.quizzes[i].blocks);
+        expect(quiz.tiers).toEqual(quizData.tiers);
+        expect(quiz.feedbackDraft).toBeUndefined();
+      });
+    });
 
-  test('nivel invalido retorna error', async () => {
-    const res = await request(app).get('/quiz?level=abc');
-    expect(res.body.success).toBe(false);
-    expect(res.body.error).toBe('Nivel inválido');
-  });
+    test('GET /quiz?level=1 devuelve los dos tipos del nivel 1', async () => {
+      await sembrar();
+      const res = await request(app).get('/quiz?level=1');
+      expect(res.body.quizzes.map(q => [q.level, q.type, q.title])).toEqual([[1, 1, 'Modelo de Negocio'], [1, 2, 'Empresa Rentable']]);
+    });
 
-  test('sin nivel retorna todos ordenados por nivel y tipo', async () => {
-    await sembrar();
-    await modelos().Quiz.create({ level: 1, type: 1, title: 'Otro' });
-    const res = await request(app).get('/quiz');
-    expect(res.body.quizzes.map(q => [q.level, q.type])).toEqual([[1, 1], [3, 1], [3, 2]]);
-  });
+    test('nivel sin contenido retorna lista vacia', async () => {
+      await sembrar();
+      const res = await request(app).get('/quiz?level=4');
+      expect(res.body).toEqual({ success: true, quizzes: [] });
+    });
 
-  test('el seed es idempotente y no toca otros documentos', async () => {
-    const { Quiz, Evaluation } = modelos();
-    await Quiz.create({ level: 1, type: 1, title: 'Otro' });
-    await Evaluation.create({ name: 'Arquitectura Nivel 1', career: 'Arquitectura' });
-    await sembrar();
-    await sembrar();
-    expect(await Quiz.countDocuments({ level: 3 })).toBe(2);
-    expect(await Quiz.countDocuments({ level: 1 })).toBe(1);
-    expect(await Evaluation.countDocuments()).toBe(1);
-  });
+    test('nivel invalido retorna error', async () => {
+      const res = await request(app).get('/quiz?level=abc');
+      expect(res.body.success).toBe(false);
+      expect(res.body.error).toBe('Nivel inválido');
+    });
 
-  test('el seed reemplaza un quiz que cambio en la base', async () => {
-    const { Quiz } = modelos();
-    await sembrar();
-    await Quiz.updateOne({ level: 3, type: 1 }, { title: 'Alterado', blocks: [] });
-    await sembrar();
-    const quiz = await Quiz.findOne({ level: 3, type: 1 }).lean();
-    expect(quiz.title).toBe(quizData[0].title);
-    expect(quiz.blocks).toEqual(quizData[0].blocks);
-  });
+    test('el seed es idempotente, conserva los _id y no toca otros documentos', async () => {
+      const { Quiz, Evaluation } = modelos();
+      // Un quiz con la forma vieja, como el que hay hoy en produccion
+      const viejo = await Quiz.collection.insertOne({ level: 3, type: 1, title: 'viejo', feedbackDraft: true, blocks: [] });
+      await Quiz.create({ level: 9, type: 1, title: 'Otro' });
+      await Evaluation.create({ name: 'Arquitectura Nivel 1', career: 'Arquitectura' });
 
-  test('cada pregunta tiene 4 opciones de 0 a 3 con retroalimentacion', () => {
-    for (const quiz of quizData) {
-      expect(typeof quiz.feedbackDraft).toBe('boolean');
-      for (const pregunta of quiz.blocks.flatMap(b => b.questions)) {
-        expect(pregunta.options.map(o => o.score)).toEqual([0, 1, 2, 3]);
-        pregunta.options.forEach(o => expect(o.feedback.trim()).not.toBe(''));
-      }
-    }
-  });
+      await sembrar();
+      const ids = async () => (await Quiz.find({ level: { $lte: 3 } }).sort({ level: 1, type: 1 }).lean()).map(q => String(q._id));
+      const primera = await ids();
+      await sembrar();
+      expect(await ids()).toEqual(primera);
+      expect(primera).toHaveLength(6);
 
-  test('los textos coinciden en orden con quiz_nivel3.txt', () => {
-    const lineas = fs.readFileSync(path.join(__dirname, '../seed/quiz_nivel3.txt'), 'utf8')
-      .split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-    const bloques = lineas.filter(l => l.startsWith('Bloque '))
-      .map(l => l.replace(/^Bloque /, '').replace(/ \(Preguntas.*\)$/, ''));
-    const textos = lineas.filter(l => !/^(Tipo \d+:|Enfoque:|Bloque )/.test(l));
+      const reemplazado = await Quiz.collection.findOne({ level: 3, type: 1 });
+      expect(String(reemplazado._id)).toBe(String(viejo.insertedId));
+      expect(reemplazado.title).toBe('Modelo de Negocio');
+      expect(reemplazado.feedbackDraft).toBeUndefined();
+      expect(await Quiz.countDocuments({ level: 9 })).toBe(1);
+      expect(await Evaluation.countDocuments()).toBe(1);
+    });
 
-    expect(quizData.flatMap(q => q.blocks.map(b => b.name))).toEqual(bloques);
-    expect(quizData.flatMap(q => q.blocks.flatMap(b => b.questions.flatMap(p => [p.text, ...p.options.map(o => o.text)]))))
-      .toEqual(textos);
+    test('el seed reemplaza un quiz que cambio en la base', async () => {
+      const { Quiz } = modelos();
+      await sembrar();
+      await Quiz.updateOne({ level: 3, type: 1 }, { title: 'Alterado', blocks: [], tiers: [] });
+      await sembrar();
+      const quiz = await Quiz.findOne({ level: 3, type: 1 }).lean();
+      expect(quiz.title).toBe(quizData.quizzes[4].title);
+      expect(quiz.blocks).toEqual(quizData.quizzes[4].blocks);
+      expect(quiz.tiers).toEqual(quizData.tiers);
+    });
   });
 });
 

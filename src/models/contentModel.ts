@@ -55,16 +55,27 @@ var TutorialSchema = new mongoose.Schema({
   cards: { type: [TutorialCardSchema], default: [] }
 }, { collection: 'tutorial' });
 
-// Quiz por nivel y tipo de proyecto. score va de 0 (nula) a 3 (optima); feedback explica la opcion.
+/* Quiz por nivel y tipo de proyecto (fuente: el PDF de ponderacion de Carlos).
+   score es el escalon de la opcion: 0 (nula), 1 y 2 (parciales) o 3 (optima). weight es lo
+   que vale la pregunta: 4 si es estandar, 5 si es estrategica. La opcion vale
+   score * weight / 3 puntos (0, 1.33, 2.67, 4 o 0, 1.67, 3.33, 5): se suma en tercios
+   enteros y el maximo de cada test es 300 tercios = 100 puntos. */
 var QuizOptionSchema = new mongoose.Schema({
-  text:     { type: String, required: true },
-  score:    { type: Number, required: true, min: 0, max: 3 },
-  feedback: { type: String, default: '' }
+  text:  { type: String, required: true },
+  score: { type: Number, required: true, min: 0, max: 3 }
 }, { _id: false });
 
 var QuizQuestionSchema = new mongoose.Schema({
   text:    { type: String, required: true },
+  weight:  { type: Number, required: true, enum: [4, 5] },
   options: { type: [QuizOptionSchema], default: [] }
+}, { _id: false });
+
+// Tramo de retroalimentacion: aplica desde min puntos hasta el min del siguiente tramo.
+var QuizTierSchema = new mongoose.Schema({
+  min:   { type: Number, required: true, min: 0, max: 100 },
+  title: { type: String, required: true },
+  text:  { type: String, required: true }
 }, { _id: false });
 
 var QuizBlockSchema = new mongoose.Schema({
@@ -78,8 +89,8 @@ var QuizSchema = new mongoose.Schema({
   title:         { type: String, required: true },
   summary:       { type: String, default: '' },
   focus:         { type: String, default: '' },
-  feedbackDraft: { type: Boolean, default: false },
-  blocks:        { type: [QuizBlockSchema], default: [] }
+  blocks:        { type: [QuizBlockSchema], default: [] },
+  tiers:         { type: [QuizTierSchema], default: [] }
 }, { collection: 'quizzes' });
 QuizSchema.index({ level: 1, type: 1 }, { unique: true });
 
