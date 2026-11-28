@@ -120,6 +120,8 @@ npm test
 
 Render publica `main` automáticamente. Las variables, CORS, el rollback y UptimeRobot están en [`DESPLIEGUE.md`](https://github.com/SostekMX/Sostek/blob/main/DESPLIEGUE.md), en el repo del frontend.
 
+**Migración planeada:** el próximo semestre el backend y la base pasan de Render y MongoDB Atlas a Supabase. Las cuentas actuales no se van a transferir. Quién da los accesos está en [`ACCESOS.md`](https://github.com/SostekMX/Sostek/blob/main/ACCESOS.md).
+
 ---
 
 ## 8. Dónde buscar si algo no tiene sentido

@@ -144,6 +144,7 @@ Contiene también los endpoints de contenido: evaluaciones, artículos, presenta
 | **Actualizar URL del frontend**: el frontend usa `REACT_APP_BACKEND_URL=https://sostek-backend.onrender.com`. | ✅ Hecho |
 | **Frontend en Vercel**: `https://sostek.vercel.app` es el oficial desde el 2026-06-17. `CORS_ORIGIN` lo deja pasar (verificado el 2026-11-24). | ✅ Activo |
 | **Sitio estático de Render** (`sostek-frontend.onrender.com`): quedó abandonado. Se sigue publicando con cada push a `main`, pero CORS no lo deja pasar, así que no carga contenido. Está pendiente de baja: ve `ACCESOS.md` en el repo del frontend. | ⚠️ Pendiente de baja |
+| **Migración a Supabase**: el próximo semestre este backend y la base pasan de Render y MongoDB Atlas a Supabase. Mientras tanto siguen en las cuentas actuales, que no se van a transferir. Ve `ACCESOS.md` en el repo del frontend. | 📅 Planeada |
 
 ---
 
